@@ -1,0 +1,288 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ─────────────────────────────────────────────── */
+:root {
+  /* Palette */
+  --ink:      #04060c;
+  --ink-1:    #070910;
+  --ink-2:    #0a0c16;
+  --ink-3:    #0d1020;
+  --wire-0:   #141726;
+  --wire-1:   #1c1f30;
+  --wire-2:   #272b3e;
+  --ash-0:    #e8eaf2;
+  --ash-1:    #636b84;
+  --ash-2:    #363c52;
+  --accent:     #4a6cf7;
+  --accent-glow:rgba(74,108,247,0.12);
+
+  /* Tailwind shadcn tokens (dark defaults) */
+  --background:         234 45% 5%;
+  --foreground:         228 20% 92%;
+  --card:               234 40% 6%;
+  --card-foreground:    228 20% 92%;
+  --popover:            234 40% 6%;
+  --popover-foreground: 228 20% 92%;
+  --primary:            40  52% 54%;
+  --primary-foreground: 234 45% 5%;
+  --secondary:          228 28% 10%;
+  --secondary-foreground:228 15% 75%;
+  --muted:              228 28% 9%;
+  --muted-foreground:   228 12% 45%;
+  --accent:             228 28% 10%;
+  --accent-foreground:  228 20% 92%;
+  --destructive:        0   55% 32%;
+  --destructive-foreground: 228 20% 92%;
+  --border:             228 28% 14%;
+  --input:              228 28% 14%;
+  --ring:               40  52% 54%;
+  --radius:             0rem;         /* Zero radius globally */
+}
+
+/* ─── Keyframes (global — needed for inline style animations) ────────────── */
+@keyframes reveal-up {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes reveal-in {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes spotlight {
+  0%   { opacity: 0; transform: translate(-72%, -62%) scale(0.5); }
+  100% { opacity: 1; transform: translate(-50%, -40%) scale(1); }
+}
+
+/* ─── Base Reset ─────────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--ink);
+    color: var(--ash-0);
+    font-family: var(--font-body), 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    overflow-x: hidden;
+    /* Subtle technical grid — the coordinate system feel */
+    background-image:
+      linear-gradient(var(--wire-0) 1px, transparent 1px),
+      linear-gradient(90deg, var(--wire-0) 1px, transparent 1px);
+    background-size: 80px 80px;
+    background-position: -1px -1px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar       { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--ink); }
+  ::-webkit-scrollbar-thumb { background: var(--wire-2); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  /* Selection */
+  ::selection {
+    background: rgba(74, 108, 247, 0.18);
+    color: var(--ash-0);
+  }
+}
+
+/* ─── Design System Utilities ────────────────────────────────────────────── */
+@layer utilities {
+
+  /* ── Labels (section markers, classifications) */
+  .sys-label {
+    font-family: var(--font-mono), monospace;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ── Section titles */
+  .sys-title {
+    font-family: var(--font-display), sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ash-0);
+    line-height: 0.93;
+  }
+
+  /* ── Body text */
+  .sys-body {
+    font-family: var(--font-body), sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--ash-1);
+    letter-spacing: 0.01em;
+  }
+
+  /* ── Buttons — primary (amber fill) */
+  .sys-btn-primary {
+    font-family: var(--font-mono), monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    background-color: var(--accent);
+    color: var(--ink);
+    border: 1px solid var(--accent);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sys-btn-primary:hover {
+    background-color: transparent;
+    color: var(--accent);
+  }
+
+  /* ── Buttons — outline (wire border) */
+  .sys-btn-outline {
+    font-family: var(--font-mono), monospace;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    background-color: transparent;
+    color: var(--ash-1);
+    border: 1px solid var(--wire-1);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sys-btn-outline:hover {
+    border-color: var(--wire-2);
+    color: var(--ash-0);
+  }
+
+  /* ── Wire border (normalized) */
+  .wire {
+    border: 1px solid var(--wire-1);
+  }
+
+  /* ── Rule (thin horizontal line) */
+  .rule {
+    width: 100%;
+    height: 1px;
+    background-color: var(--wire-0);
+  }
+
+  /* ── Rule with accent mark — left-anchored */
+  .rule-accent {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .rule-accent::before {
+    content: '';
+    width: 20px;
+    height: 2px;
+    background-color: var(--accent);
+    flex-shrink: 0;
+  }
+  .rule-accent::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: var(--wire-0);
+  }
+
+  /* ── Rule with accent mark — centered (symmetric lines on both sides) */
+  .rule-accent-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .rule-accent-center::before {
+    content: '';
+    width: 20px;
+    height: 2px;
+    background-color: var(--accent);
+    flex-shrink: 0;
+  }
+  .rule-accent-center::after {
+    content: '';
+    width: 20px;
+    height: 2px;
+    background-color: var(--accent);
+    flex-shrink: 0;
+    opacity: 0.35;
+  }
+
+  /* ── Section shell — consistent section spacing */
+  .sys-section {
+    padding: 96px 0;
+    border-top: 1px solid var(--wire-0);
+  }
+
+  /* ── Card surface */
+  .sys-card {
+    background-color: var(--ink-2);
+    border: 1px solid var(--wire-1);
+    transition: border-color 0.2s;
+  }
+  .sys-card:hover {
+    border-color: var(--wire-2);
+  }
+
+  /* ── Text hierarchy */
+  .text-primary   { color: var(--ash-0); }
+  .text-secondary { color: var(--ash-1); }
+  .text-tertiary  { color: var(--ash-2); }
+  .text-gold      { color: var(--accent); }
+
+  /* ── Loader */
+  .loader {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--wire-1);
+    border-top-color: var(--accent);
+    border-radius: 0;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ── Reveal animations */
+  .anim-reveal {
+    opacity: 0;
+    animation: reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+
+  /* ── Grid background for cards */
+  .grid-bg {
+    background-image:
+      linear-gradient(var(--wire-0) 1px, transparent 1px),
+      linear-gradient(90deg, var(--wire-0) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ── Grain texture overlay */
+  .grain::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9000;
+  }
+}
