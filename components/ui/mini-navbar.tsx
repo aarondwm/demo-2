@@ -242,7 +242,7 @@ export function Navbar() {
             >
               <a
                 href={group.href}
-                className={`relative flex items-center gap-1.5 h-full px-5 font-mono font-bold text-[15px] tracking-[0.18em] uppercase transition-colors duration-150 ${
+                className={`relative flex items-center gap-1.5 h-full px-5 font-mono font-bold text-[17px] tracking-[0.18em] uppercase transition-colors duration-150 ${
                   openIndex === i
                     ? "text-white bg-white/[0.03]"
                     : "text-white hover:text-white/80 hover:bg-white/[0.02]"
@@ -280,7 +280,7 @@ export function Navbar() {
         <div className="flex items-center gap-3 flex-shrink-0">
           <a
             href="#get-started"
-            className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase bg-white text-[#4a6cf7] font-bold border border-white/20 relative overflow-hidden"
+            className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase bg-white text-[#4a6cf7] font-bold border border-white/20 relative overflow-hidden rounded-md"
           >
             {/* Slide-in overlay with icon */}
             <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 bg-[#4a6cf7] text-white">
