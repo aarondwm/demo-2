@@ -186,11 +186,11 @@ const thirdColumn  = testimonials.slice(2, 4);
 /* ── Dashboard card (inside ContainerScroll) ─────────────────────────────── */
 function DashboardCard() {
   const rows = [
-    { org: "████████████",   industry: "Banking",    seniority: "C-Suite",  engagement: "High" },
-    { org: "██████████",     industry: "Investment", seniority: "Director", engagement: "High" },
-    { org: "████████",       industry: "Energy",     seniority: "VP",       engagement: "Med"  },
-    { org: "███████████",    industry: "Telecom",    seniority: "Manager",  engagement: "Med"  },
-    { org: "██████████████", industry: "Logistics",  seniority: "Analyst",  engagement: "—"    },
+    { org: "**********",   industry: "Banking",    seniority: "C-Suite",  engagement: "High" },
+    { org: "********",     industry: "Investment", seniority: "Director", engagement: "High" },
+    { org: "******",       industry: "Energy",     seniority: "VP",       engagement: "Med"  },
+    { org: "*********",    industry: "Telecom",    seniority: "Manager",  engagement: "Med"  },
+    { org: "************", industry: "Logistics",  seniority: "Analyst",  engagement: "—"    },
   ];
 
   return (
@@ -219,7 +219,7 @@ function DashboardCard() {
       {/* Table */}
       <div className="relative flex-1 overflow-hidden px-2">
         <div className="grid grid-cols-4 gap-0 px-4 py-2.5 border-b border-white/[0.05]">
-          {["Organisation", "Industry", "Seniority", "Engagement"].map((h) => (
+          {["Organization", "Industry", "Seniority", "Engagement"].map((h) => (
             <span key={h} className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "12px", color: "#5a6a84" }}>
               {h}
             </span>
@@ -422,8 +422,8 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-3">
             {[
-              { n: "01", title: "Secured Media Placement", body: "Your story, guaranteed in print. We lock in editorial coverage across the region's most-read publications — no pitching, no waiting, no maybe." },
-              { n: "02", title: "Targeted Distribution",   body: "Your content reaches the people who matter. We define the audience, set the filters, and make sure the right eyes see it — every time." },
+              { n: "01", title: "Secured Media Placement", body: "Your story, guaranteed in print. We lock in editorial coverage across the region's most-read publications." },
+              { n: "02", title: "Targeted Distribution",   body: "Your content reaches the people who matter, we make sure the right eyes see it — every time." },
               { n: "03", title: "Audience Intelligence",   body: "After every campaign, you find out who read it, what they do, and where they're from. Not estimates. Real people." },
             ].map(({ n, title, body }, i) => (
               <FeatureCard key={n} n={n} title={title} body={body} index={i} />
