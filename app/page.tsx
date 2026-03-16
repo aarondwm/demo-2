@@ -186,11 +186,11 @@ const thirdColumn  = testimonials.slice(2, 4);
 /* ── Dashboard card (inside ContainerScroll) ─────────────────────────────── */
 function DashboardCard() {
   const rows = [
-    { org: "**********",   industry: "Banking",    seniority: "C-Suite",  engagement: "High" },
-    { org: "********",     industry: "Investment", seniority: "Director", engagement: "High" },
-    { org: "******",       industry: "Energy",     seniority: "VP",       engagement: "Med"  },
-    { org: "*********",    industry: "Telecom",    seniority: "Manager",  engagement: "Med"  },
-    { org: "************", industry: "Logistics",  seniority: "Analyst",  engagement: "—"    },
+    { org: "**********",   industry: "Banking",    seniority: "C-Suite",  engagement: "2,847" },
+    { org: "********",     industry: "Investment", seniority: "Director", engagement: "1,392" },
+    { org: "******",       industry: "Energy",     seniority: "VP",       engagement: "934"   },
+    { org: "*********",    industry: "Telecom",    seniority: "Manager",  engagement: "611"   },
+    { org: "************", industry: "Logistics",  seniority: "Analyst",  engagement: "478"   },
   ];
 
   return (
@@ -234,13 +234,7 @@ function DashboardCard() {
             <span className="font-mono tracking-wider" style={{ fontSize: "14px", color: "rgba(255,255,255,0.55)" }}>{row.org}</span>
             <span className="font-mono tracking-[0.1em] uppercase" style={{ fontSize: "14px", color: "rgba(255,255,255,0.35)" }}>{row.industry}</span>
             <span className="font-mono tracking-[0.1em] uppercase" style={{ fontSize: "14px", color: "rgba(255,255,255,0.25)" }}>{row.seniority}</span>
-            <span className="font-mono tracking-[0.1em] uppercase" style={{
-              fontSize: "14px",
-              color:      row.engagement === "High" ? "rgba(255,255,255,0.90)"
-                        : row.engagement === "Med"  ? "rgba(255,255,255,0.45)"
-                        : "rgba(255,255,255,0.15)",
-              fontWeight: row.engagement === "High" ? 700 : 400,
-            }}>{row.engagement}</span>
+            <span className="font-mono" style={{ fontSize: "14px", color: "rgba(255,255,255,0.80)", fontWeight: 600, letterSpacing: "0.05em" }}>{row.engagement}</span>
           </div>
         ))}
       </div>
