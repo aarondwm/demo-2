@@ -271,7 +271,7 @@ function FeatureCard({
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setInView(true); obs.disconnect(); } },
+      ([entry]) => { setInView(entry.isIntersecting); },
       { threshold: 0.15 }
     );
     obs.observe(el);
@@ -279,7 +279,6 @@ function FeatureCard({
   }, []);
 
   const traceDelay = `${index * 0.15}s`;
-  const fadeDelay  = `${index * 0.15}s`;
 
   return (
     <div
@@ -312,14 +311,13 @@ function FeatureCard({
       {/* Inner mask — always present, permanently covers card interior so gradient never bleeds through */}
       <div aria-hidden className="absolute pointer-events-none" style={{ inset: "0.5px", background: "#12151c", zIndex: 1 }} />
 
-      {/* Content — fades in after trace rounds one corner */}
+      {/* Content — fades in/out with viewport */}
       <div
         className="relative"
         style={{
           zIndex: 2,
-          opacity: 0,
-          animation: inView ? "card-fade-in 0.3s ease-out forwards" : "none",
-          animationDelay: inView ? fadeDelay : "0s",
+          opacity: inView ? 1 : 0,
+          transition: "opacity 0.6s ease",
         }}
       >
         <div className="p-8 md:p-10 flex flex-col gap-5">
