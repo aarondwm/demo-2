@@ -317,7 +317,7 @@ function FeatureCard({
         style={{
           zIndex: 2,
           opacity: inView ? 1 : 0,
-          transition: "opacity 0.6s ease",
+          transition: "opacity 0.6s ease 1s",
         }}
       >
         <div className="p-8 md:p-10 flex flex-col gap-5">
