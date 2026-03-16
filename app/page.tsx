@@ -546,9 +546,9 @@ export default function Home() {
               maxHeight: "680px",
             }}
           >
-            <TestimonialsColumn testimonials={firstColumn}  duration={20} />
-            <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={25} />
-            <TestimonialsColumn testimonials={thirdColumn}  className="hidden lg:block" duration={22} />
+            <TestimonialsColumn testimonials={firstColumn}  duration={14} />
+            <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={17} />
+            <TestimonialsColumn testimonials={thirdColumn}  className="hidden lg:block" duration={15} />
           </div>
         </div>
       </section>
