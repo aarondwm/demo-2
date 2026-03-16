@@ -604,13 +604,6 @@ export default function Home() {
 
             <div className="p-10 md:p-14 grid md:grid-cols-2 gap-12 items-center">
               <div className="flex flex-col gap-6">
-                <h3
-                  className="font-display font-bold uppercase text-white"
-                  style={{ fontSize: "clamp(28px,3vw,48px)", letterSpacing: "0.05em", lineHeight: "0.95" }}
-                >
-                  Know Exactly<br />Who Engaged
-                </h3>
-
                 {/* Stats row */}
                 <div className="flex items-stretch divide-x divide-[#161c2c]">
                   {intelStats[displayItem].map(({ value, label }) => (
