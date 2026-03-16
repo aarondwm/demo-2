@@ -154,19 +154,19 @@ function HeroVideoBackground() {
 /* ── Testimonials ────────────────────────────────────────────────────────── */
 const testimonials: Testimonial[] = [
   {
-    text: "We'd tried to reach senior profiles before. Nothing worked at this scale. DWM got us in front of the right rooms and showed us exactly who responded. First campaign paid for itself.",
+    text: "I genuinely didn't believe it at first. They sent us a link to our article live on a real news site. Not a sponsored post, not a banner — an actual editorial piece. I forwarded it to the whole company.",
     image: "https://randomuser.me/api/portraits/men/32.jpg",
     name: "CEO",
     role: "Kuwait Real Estate Development",
   },
   {
-    text: "The reporting is what sold us. We don't just know our content ran — we know which companies saw it and at what level. That's what we needed to make the right internal decisions.",
+    text: "We've been trying to get press coverage for two years. DWM got us into three publications in one week. The calls we got after that were from people we'd been trying to reach for months.",
     image: "https://randomuser.me/api/portraits/women/44.jpg",
     name: "CFO",
     role: "GCC Telecommunications",
   },
   {
-    text: "Other campaigns gave us impression numbers. DWM gave us a breakdown of who engaged — by company and seniority — after week one. That's a different product entirely.",
+    text: "The reporting is what sold us. We don't just know our content ran — we know exactly who read it, what they do, and where they work. That's what we needed to make the right decisions.",
     image: "https://randomuser.me/api/portraits/men/58.jpg",
     name: "Head of Marketing",
     role: "Kuwait Investment Management",
@@ -177,11 +177,35 @@ const testimonials: Testimonial[] = [
     name: "Managing Director",
     role: "Regional Energy & Infrastructure",
   },
+  {
+    text: "My PR agency had been pitching journalists for months with nothing. DWM confirmed our placement before we even signed. That kind of certainty is rare.",
+    image: "https://randomuser.me/api/portraits/men/71.jpg",
+    name: "Founder",
+    role: "Gulf Technology Startup",
+  },
+  {
+    text: "Our story ran in four outlets simultaneously. We saw website traffic spike that same afternoon. People were reaching out saying they'd read about us. It felt like we'd actually arrived.",
+    image: "https://randomuser.me/api/portraits/women/29.jpg",
+    name: "Head of Communications",
+    role: "Saudi Arabia Financial Services",
+  },
+  {
+    text: "Other campaigns gave us impression numbers. DWM gave us names. After the first campaign we knew exactly which firms had read our content. That changes how you follow up completely.",
+    image: "https://randomuser.me/api/portraits/men/45.jpg",
+    name: "Business Development Director",
+    role: "UAE Infrastructure Group",
+  },
+  {
+    text: "I was sceptical — I'd heard 'guaranteed media' before and it always meant something small or obscure. These were real publications. People in our industry actually read them.",
+    image: "https://randomuser.me/api/portraits/women/53.jpg",
+    name: "Chief Marketing Officer",
+    role: "Bahrain Logistics & Trade",
+  },
 ];
 
-const firstColumn  = testimonials.slice(0, 2);
-const secondColumn = testimonials.slice(1, 3);
-const thirdColumn  = testimonials.slice(2, 4);
+const firstColumn  = [testimonials[0], testimonials[1], testimonials[4], testimonials[5]];
+const secondColumn = [testimonials[2], testimonials[3], testimonials[6]];
+const thirdColumn  = [testimonials[5], testimonials[7], testimonials[0], testimonials[3]];
 
 /* ── Dashboard card (inside ContainerScroll) ─────────────────────────────── */
 function DashboardCard({ engagement }: { engagement: string[] }) {
@@ -358,7 +382,7 @@ function FeatureCard({
         style={{
           zIndex: 2,
           opacity: inView ? 1 : 0,
-          transition: "opacity 0.6s ease 0.5s",
+          transition: "opacity 0.4s ease 0.2s",
         }}
       >
         <div className="p-8 md:p-10 flex flex-col gap-5">
@@ -561,13 +585,13 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-10 mb-12 items-end">
             <div>
               <div className="rule-accent mb-5">
-                <span className="sys-label" style={{ color: "#7a8598", fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>Sample Insights</span>
+                <span className="sys-label" style={{ color: "#7a8598", fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>Intelligence, Delivered</span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white"
                 style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
-                Sample<br />Insights
+                Know Exactly<br />Who Engaged
               </h2>
             </div>
             <p className="lg:max-w-sm lg:ml-auto" style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8" }}>
@@ -580,12 +604,11 @@ export default function Home() {
 
             <div className="p-10 md:p-14 grid md:grid-cols-2 gap-12 items-center">
               <div className="flex flex-col gap-6">
-                <span className="sys-label block" style={{ color: "#7a8598", fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>Audience Intelligence</span>
                 <h3
                   className="font-display font-bold uppercase text-white"
                   style={{ fontSize: "clamp(28px,3vw,48px)", letterSpacing: "0.05em", lineHeight: "0.95" }}
                 >
-                  Sample<br />Insights
+                  Know Exactly<br />Who Engaged
                 </h3>
 
                 {/* Stats row */}
@@ -658,7 +681,14 @@ export default function Home() {
             <span className="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-white/20 pointer-events-none" />
           </div>
 
-          <div className="mt-8 h-[420px] border border-white/[0.08]">
+          <div className="py-8 text-center border border-white/[0.08] border-t-0 border-b-0">
+            <span className="sys-label" style={{ fontSize: "20px" }}>
+              <span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>
+              Sample Insights
+            </span>
+          </div>
+
+          <div className="h-[420px] border border-white/[0.08] border-t-0">
             <DashboardCard engagement={tableEngagement[displayItem]} />
           </div>
 
