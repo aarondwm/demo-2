@@ -461,24 +461,18 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             {/* Left */}
             <div className="flex flex-col gap-8">
-              <div>
-                <div className="rule-accent mb-5">
-                  <span className="sys-label">Secured Media Placement</span>
-                </div>
-                <h2
-                  className="font-display font-bold uppercase"
-                  style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
-                >
-                  <span style={{ display: "block", color: "#ffffff" }}>Your Story.</span>
-                  <span style={{ display: "block", color: "#ffffff" }}>Guaranteed</span>
-                  <span style={{ display: "block", color: "#a0c4ff" }}>In Print.</span>
-                </h2>
+              <div className="rule-accent mb-5">
+                <span className="sys-label">Secured Media Placement</span>
               </div>
-              <HoverActionButton label="Request a Briefing" href="#get-started" />
-            </div>
+              <h2
+                className="font-display font-bold uppercase"
+                style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+              >
+                <span style={{ display: "block", color: "#ffffff" }}>Your Story.</span>
+                <span style={{ display: "block", color: "#ffffff" }}>Guaranteed</span>
+                <span style={{ display: "block", color: "#a0c4ff" }}>In Print.</span>
+              </h2>
 
-            {/* Right */}
-            <div className="flex flex-col gap-8">
               {/* Stat counters */}
               <div className="flex items-stretch divide-x divide-white/[0.06]">
                 {[
@@ -495,32 +489,30 @@ export default function Home() {
               <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8" }}>
                 We produce and place editorially-driven stories across a network of Gulf business and industry publications. Your content goes live — as a confirmed placement.
               </p>
+            </div>
 
-              {/* Divider */}
-              <div style={{ width: "100%", height: "1px", background: "#ffffff08", marginBottom: "8px" }} />
-
-              {/* 4-card grid */}
-              <div
-                className="grid grid-cols-2 md:grid-cols-4"
-                style={{ gap: "1px", background: "#ffffff08" }}
-              >
-                {[
-                  { n: "01", title: "Confirmed Placement", body: "Your content is placed, not pitched. Every partner publication is pre-contracted — your story runs." },
-                  { n: "02", title: "Gulf-Wide Network",   body: "Kuwait, UAE, Saudi Arabia, Bahrain, Qatar, Oman. Every major GCC market covered." },
-                  { n: "03", title: "Editorial Quality",   body: "Produced and formatted to editorial standard. It reads like news because it is." },
-                  { n: "04", title: "Timed & Controlled",  body: "You choose when it runs. We coordinate across every publication simultaneously." },
-                ].map(({ n, title, body }) => (
-                  <div
-                    key={n}
-                    className="flex flex-col gap-3 p-5"
-                    style={{ background: "#0a0a0a" }}
-                  >
-                    <span className="font-mono text-[10px] tracking-[0.25em]" style={{ color: "#3d4a5e" }}>{n}</span>
-                    <span className="font-display font-bold uppercase" style={{ fontSize: "11px", letterSpacing: "0.08em", color: "#e8e2d6" }}>{title}</span>
-                    <span style={{ color: "#5a6272", fontFamily: "var(--font-body), sans-serif", fontSize: "12px", lineHeight: "1.7" }}>{body}</span>
+            {/* Right — 4 card rows */}
+            <div className="flex flex-col" style={{ gap: "1px", background: "#ffffff08" }}>
+              {[
+                { n: "01", title: "Confirmed Placement", body: "Your content is placed, not pitched. Every partner publication is pre-contracted — your story runs." },
+                { n: "02", title: "Gulf-Wide Network",   body: "Kuwait, UAE, Saudi Arabia, Bahrain, Qatar, Oman. Every major GCC market covered." },
+                { n: "03", title: "Editorial Quality",   body: "Produced and formatted to editorial standard. It reads like news because it is." },
+                { n: "04", title: "Timed & Controlled",  body: "You choose when it runs. We coordinate across every publication simultaneously." },
+              ].map(({ n, title, body }) => (
+                <div
+                  key={n}
+                  className="flex items-start gap-6 px-6 py-5 transition-colors duration-200"
+                  style={{ background: "#0d0f14" }}
+                  onMouseEnter={e => (e.currentTarget.style.background = "#111520")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "#0d0f14")}
+                >
+                  <span className="font-mono text-[10px] tracking-[0.25em] flex-shrink-0 pt-1" style={{ color: "#2e3a4e" }}>{n}</span>
+                  <div className="flex flex-col gap-1.5">
+                    <span className="font-display font-bold uppercase" style={{ fontSize: "12px", letterSpacing: "0.1em", color: "#c8c4bc" }}>{title}</span>
+                    <span style={{ color: "#4a5568", fontFamily: "var(--font-body), sans-serif", fontSize: "13px", lineHeight: "1.7" }}>{body}</span>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
 
