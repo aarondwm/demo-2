@@ -168,7 +168,7 @@ function MobileMenu({ open, children }: { open: boolean; children: React.ReactNo
     <div
       id="mobile-menu"
       className="fixed left-0 right-0 bottom-0 z-40 bg-black/98 backdrop-blur-md border-t border-white/[0.08] flex flex-col overflow-hidden"
-      style={{ top: 92 }}
+      style={{ top: 64 }}
     >
       <div
         data-slot={open ? "open" : "closed"}
@@ -202,20 +202,11 @@ export function Navbar() {
     <header
       className={`fixed top-3 left-4 right-4 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-black/97 backdrop-blur-md border-b border-white/[0.08]"
-          : "bg-black/90 border-b border-white/[0.05]"
+          ? "bg-black/97 backdrop-blur-md border border-white/[0.08]"
+          : "bg-black/90 border border-white/[0.05]"
       }`}
-      style={{ borderRadius: "9999px" }}
+      style={{ borderRadius: "12px" }}
     >
-      {/* ── Classification strip ── */}
-      <div className="border-b border-white/[0.04] px-4 md:px-8 h-7 flex items-center justify-between">
-        <span className="font-mono text-[9px] tracking-[0.26em] uppercase text-white/10">
-          DIWANIYA MEDIA — PRECISION ADVERTISING &amp; MEDIA INTELLIGENCE
-        </span>
-        <span className="font-mono text-[9px] tracking-[0.22em] uppercase text-[#4a6cf7] opacity-40">
-          KUWAIT — GCC MARKET
-        </span>
-      </div>
 
       {/* ── Main nav row — max-w-7xl centered (header-3 max-w-5xl pattern) ── */}
       <div className="mx-auto w-full max-w-7xl px-4 md:px-8 h-16 flex items-center justify-between gap-6">
@@ -233,17 +224,17 @@ export function Navbar() {
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center h-full flex-1 justify-center">
+        <nav className="hidden lg:flex items-center flex-1 justify-center">
           {NAV_GROUPS.map((group, i) => (
             <div
               key={group.label}
-              className="relative h-full flex items-center"
+              className="relative flex items-center"
               onMouseEnter={() => group.items ? open(i) : undefined}
               onMouseLeave={group.items ? close : undefined}
             >
               <a
                 href={group.href}
-                className={`relative flex items-center gap-1.5 h-full px-5 font-mono font-bold text-[17px] tracking-[0.18em] uppercase transition-colors duration-150 ${
+                className={`relative flex items-center gap-1.5 py-5 px-5 font-mono font-bold text-[17px] tracking-[0.18em] uppercase transition-colors duration-150 ${
                   openIndex === i
                     ? "text-white bg-white/[0.03]"
                     : "text-white hover:text-white/80 hover:bg-white/[0.02]"
@@ -282,7 +273,7 @@ export function Navbar() {
           <a
             href="#get-started"
             className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase bg-white text-[#4a6cf7] font-bold border border-white/20 relative overflow-hidden"
-            style={{ borderRadius: "9999px" }}
+            style={{ borderRadius: "12px" }}
           >
             {/* Slide-in overlay with icon */}
             <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 bg-[#4a6cf7] text-white">
