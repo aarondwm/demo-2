@@ -416,7 +416,7 @@ export default function Home() {
               className="font-display font-bold uppercase text-white"
               style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
             >
-              We Run It.<br />You See Who Engaged.
+              Every Campaign.<br />Full Transparency.
             </h2>
           </div>
 
