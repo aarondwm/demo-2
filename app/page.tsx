@@ -501,15 +501,28 @@ export default function Home() {
               ].map(({ n, title, body }) => (
                 <div
                   key={n}
-                  className="flex items-start gap-6 px-6 py-5 transition-colors duration-200"
-                  style={{ background: "#0d0f14" }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "#111520")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "#0d0f14")}
+                  className="group flex items-start gap-6 px-6 cursor-default"
+                  style={{
+                    background: "#0d0f14",
+                    padding: "20px 24px",
+                    transition: "background 0.3s ease, padding 0.3s ease",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "#111827"; e.currentTarget.style.padding = "28px 24px"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "#0d0f14"; e.currentTarget.style.padding = "20px 24px"; }}
                 >
-                  <span className="font-mono text-[10px] tracking-[0.25em] flex-shrink-0 pt-1" style={{ color: "#2e3a4e" }}>{n}</span>
-                  <div className="flex flex-col gap-1.5">
-                    <span className="font-display font-bold uppercase" style={{ fontSize: "12px", letterSpacing: "0.1em", color: "#c8c4bc" }}>{title}</span>
-                    <span style={{ color: "#4a5568", fontFamily: "var(--font-body), sans-serif", fontSize: "13px", lineHeight: "1.7" }}>{body}</span>
+                  <span
+                    className="font-mono tracking-[0.25em] flex-shrink-0 pt-1 transition-all duration-300 group-hover:text-[#4a6cf7]"
+                    style={{ fontSize: "10px", color: "#2e3a4e" }}
+                  >{n}</span>
+                  <div className="flex flex-col gap-2">
+                    <span
+                      className="font-display font-bold uppercase transition-all duration-300 group-hover:text-white"
+                      style={{ fontSize: "12px", letterSpacing: "0.1em", color: "#c8c4bc" }}
+                    >{title}</span>
+                    <span
+                      className="transition-all duration-300 group-hover:text-[#9aa5b4]"
+                      style={{ color: "#4a5568", fontFamily: "var(--font-body), sans-serif", fontSize: "13px", lineHeight: "1.7" }}
+                    >{body}</span>
                   </div>
                 </div>
               ))}
