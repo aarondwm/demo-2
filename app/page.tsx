@@ -568,7 +568,7 @@ export default function Home() {
                   return (
                     <li
                       key={n}
-                      className="p-6 flex flex-col gap-3 cursor-default"
+                      className="p-6 flex flex-col gap-3 cursor-pointer"
                       onMouseEnter={() => setHoveredIntelItem(idx)}
                       onMouseLeave={() => setHoveredIntelItem(null)}
                       style={{
