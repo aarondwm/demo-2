@@ -275,12 +275,14 @@ export function Navbar() {
             className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase text-black font-bold relative overflow-hidden"
             style={{ borderRadius: "12px", transform: "translateZ(0)" }}
           >
-            {/* Slide-in overlay with Arabic letter */}
-            <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 bg-black text-white text-[22px]">
+            {/* Static white background */}
+            <span className="absolute inset-0 bg-white" />
+            {/* Black overlay slides in on top */}
+            <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 bg-black text-white text-[22px] z-10">
               د
             </span>
-            {/* Text slides out on hover */}
-            <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out group-hover:translate-x-full bg-white text-black">
+            {/* Text — fades out on hover, stays centered */}
+            <span className="absolute inset-0 flex items-center justify-center text-black transition-opacity duration-300 group-hover:opacity-0 z-20">
               Check Eligibility
             </span>
             {/* Invisible sizer keeps button width stable */}
