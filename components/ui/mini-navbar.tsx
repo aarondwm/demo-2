@@ -273,10 +273,10 @@ export function Navbar() {
           <a
             href="#get-started"
             className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase bg-white text-black font-bold relative overflow-hidden"
-            style={{ borderRadius: "12px" }}
+            style={{ borderRadius: "12px", transform: "translateZ(0)" }}
           >
             {/* Slide-in overlay with Arabic letter */}
-            <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 bg-black text-white text-[18px]">
+            <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 bg-black text-white text-[22px]">
               د
             </span>
             {/* Text slides out on hover */}
