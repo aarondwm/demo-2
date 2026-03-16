@@ -288,10 +288,10 @@ export function Navbar() {
             </span>
             {/* Text slides out on hover */}
             <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out group-hover:translate-x-full">
-              Request a Briefing
+              Check Eligibility
             </span>
             {/* Invisible sizer keeps button width stable */}
-            <span className="invisible px-7">Request a Briefing</span>
+            <span className="invisible px-7">Check Eligibility</span>
           </a>
 
           {/* Animated toggle (header-3 MenuToggleIcon) */}
