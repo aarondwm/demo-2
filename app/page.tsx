@@ -340,11 +340,16 @@ function FeatureCard({
 /* ── Page ────────────────────────────────────────────────────────────────── */
 export default function Home() {
   const [activeIntelItem, setActiveIntelItem] = useState(0);
+  const [intelVisible, setIntelVisible] = useState(true);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveIntelItem(i => (i + 1) % 8);
-    }, 4000);
+      setIntelVisible(false);
+      setTimeout(() => {
+        setActiveIntelItem(i => (i + 1) % 8);
+        setIntelVisible(true);
+      }, 400);
+    }, 3000);
     return () => clearInterval(timer);
   }, []);
 
@@ -508,20 +513,27 @@ export default function Home() {
                   return (
                     <li
                       key={n}
-                      className="p-6 flex flex-col gap-3 transition-all duration-500"
+                      className="p-6 flex flex-col gap-3"
                       style={{
-                        background: active ? "rgba(74,108,247,0.08)" : "rgba(255,255,255,0.02)",
-                        borderLeft: active ? "2px solid #4a6cf7" : "2px solid transparent",
-                        boxShadow: active ? "inset 0 0 24px rgba(74,108,247,0.07)" : "none",
+                        background: active && intelVisible ? "rgba(74,108,247,0.08)" : "rgba(255,255,255,0.02)",
+                        borderLeft: active && intelVisible ? "2px solid #4a6cf7" : "2px solid transparent",
+                        boxShadow: active && intelVisible ? "inset 0 0 24px rgba(74,108,247,0.07)" : "none",
+                        transition: "background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease",
                       }}
                     >
                       <span
-                        className="font-mono text-[10px] tracking-[0.2em] transition-colors duration-500"
-                        style={{ color: active ? "#4a6cf7" : "#2e3a4e" }}
+                        className="font-mono text-[10px] tracking-[0.2em]"
+                        style={{
+                          color: active && intelVisible ? "#4a6cf7" : "#2e3a4e",
+                          transition: "color 0.4s ease",
+                        }}
                       >{n}</span>
                       <span
-                        className="font-mono text-[11px] tracking-[0.12em] uppercase leading-relaxed transition-colors duration-500"
-                        style={{ color: active ? "#ffffff" : "#c8c0b0" }}
+                        className="font-mono text-[11px] tracking-[0.12em] uppercase leading-relaxed"
+                        style={{
+                          color: active && intelVisible ? "#ffffff" : "#c8c0b0",
+                          transition: "color 0.4s ease",
+                        }}
                       >
                         {label}
                       </span>
