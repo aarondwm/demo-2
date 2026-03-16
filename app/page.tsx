@@ -507,21 +507,21 @@ export default function Home() {
                     padding: "20px 24px",
                     transition: "background 0.3s ease, padding 0.3s ease",
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.background = "#111827"; e.currentTarget.style.padding = "28px 24px"; }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "#0f1729"; e.currentTarget.style.padding = "36px 28px"; }}
                   onMouseLeave={e => { e.currentTarget.style.background = "#0d0f14"; e.currentTarget.style.padding = "20px 24px"; }}
                 >
                   <span
-                    className="font-mono tracking-[0.25em] flex-shrink-0 pt-1 transition-all duration-300 group-hover:text-[#4a6cf7]"
-                    style={{ fontSize: "10px", color: "#2e3a4e" }}
+                    className="font-mono tracking-[0.25em] flex-shrink-0 pt-1 transition-all duration-300 group-hover:text-[#a0c4ff]"
+                    style={{ fontSize: "11px", color: "#2e3a4e" }}
                   >{n}</span>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-3">
                     <span
-                      className="font-display font-bold uppercase transition-all duration-300 group-hover:text-white"
-                      style={{ fontSize: "12px", letterSpacing: "0.1em", color: "#c8c4bc" }}
+                      className="font-display font-bold uppercase transition-all duration-300 group-hover:text-white group-hover:tracking-widest"
+                      style={{ fontSize: "13px", letterSpacing: "0.1em", color: "#7a8598" }}
                     >{title}</span>
                     <span
-                      className="transition-all duration-300 group-hover:text-[#9aa5b4]"
-                      style={{ color: "#4a5568", fontFamily: "var(--font-body), sans-serif", fontSize: "13px", lineHeight: "1.7" }}
+                      className="transition-all duration-300 group-hover:text-white/70"
+                      style={{ color: "#3a4255", fontFamily: "var(--font-body), sans-serif", fontSize: "13px", lineHeight: "1.7" }}
                     >{body}</span>
                   </div>
                 </div>
