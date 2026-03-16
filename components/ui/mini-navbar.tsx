@@ -284,18 +284,18 @@ export function Navbar() {
         <div className="flex items-center gap-3 flex-shrink-0">
           <a
             href="#get-started"
-            className="group hidden sm:inline-flex items-center h-11 px-7 font-mono text-[12px] tracking-[0.22em] uppercase bg-white text-[#4a6cf7] font-bold border border-white/20 relative overflow-hidden"
+            className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase bg-white text-[#4a6cf7] font-bold border border-white/20 relative overflow-hidden"
           >
             {/* Slide-in overlay with icon */}
-            <span className="absolute inset-0 flex items-center justify-center w-full h-full duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 bg-[#4a6cf7] text-white">
+            <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 bg-[#4a6cf7] text-white">
               <Send className="w-4 h-4" />
             </span>
             {/* Text slides out on hover */}
-            <span className="absolute flex items-center justify-center gap-2 w-full h-full transition-all duration-500 ease-out group-hover:translate-x-full">
+            <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out group-hover:translate-x-full">
               Request a Briefing
             </span>
             {/* Invisible sizer keeps button width stable */}
-            <span className="invisible">Request a Briefing</span>
+            <span className="invisible px-7">Request a Briefing</span>
           </a>
 
           {/* Animated toggle (header-3 MenuToggleIcon) */}
