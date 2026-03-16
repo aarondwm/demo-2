@@ -452,51 +452,75 @@ export default function Home() {
       </section>
 
       {/* ── 3. SECURED MEDIA PLACEMENT ───────────────────────────────────── */}
-      <section id="media-placement" className="sys-section">
+      <section id="media-placement" className="sys-section relative">
+        {/* Subtle top glow line */}
+        <div aria-hidden className="absolute top-0 left-0 right-0 pointer-events-none" style={{ height: "1px", background: "linear-gradient(90deg, transparent, #a0c4ff33, transparent)" }} />
+
         <div className="max-w-6xl mx-auto px-6 md:px-10">
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            {/* Left */}
             <div className="flex flex-col gap-8">
               <div>
                 <div className="rule-accent mb-5">
                   <span className="sys-label">Secured Media Placement</span>
                 </div>
                 <h2
-                  className="font-display font-bold uppercase text-white"
+                  className="font-display font-bold uppercase"
                   style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
                 >
-                  Your Story.<br />
-                  <span style={{ color: "var(--accent)" }}>Guaranteed</span><br />
-                  In Print.
+                  <span style={{ display: "block", color: "#ffffff" }}>Your Story.</span>
+                  <span style={{ display: "block", color: "#ffffff" }}>Guaranteed</span>
+                  <span style={{ display: "block", color: "#a0c4ff" }}>In Print.</span>
                 </h2>
               </div>
-              <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8" }}>
-                We have secured placements across the Gulf&apos;s most-read business and industry publications. When you run a campaign with us, your content goes live — not as a pitch, not as a request. As a confirmed placement.
-              </p>
               <HoverActionButton label="Request a Briefing" href="#get-started" />
             </div>
 
-            <div className="flex flex-col gap-3">
-              {[
-                { n: "01", title: "Confirmed Placement", body: "Your content is placed, not pitched. Every partner publication is pre-contracted — your story runs." },
-                { n: "02", title: "Gulf-Wide Network",   body: "Kuwait, UAE, Saudi Arabia, Bahrain, Qatar, Oman. We cover every major market in the region." },
-                { n: "03", title: "Editorial Quality",   body: "Content is produced and formatted to editorial standard. It reads like news because it is." },
-                { n: "04", title: "Timed & Controlled",  body: "You choose when it runs. We coordinate across every publication simultaneously." },
-              ].map(({ n, title, body }) => (
-                <div
-                  key={n}
-                  className="flex gap-6 p-6 border border-white/[0.05] bg-white/[0.01] hover:bg-white/[0.03] transition-colors duration-200"
-                >
-                  <span className="font-mono text-[10px] tracking-[0.25em] flex-shrink-0 mt-1" style={{ color: "#3d4a5e" }}>{n}</span>
-                  <div className="flex flex-col gap-2">
-                    <span
-                      className="font-display font-bold uppercase"
-                      style={{ fontSize: "13px", letterSpacing: "0.08em", color: "#e8e2d6" }}
-                    >{title}</span>
-                    <span style={{ color: "#5a6272", fontFamily: "var(--font-body), sans-serif", fontSize: "13px", lineHeight: "1.7" }}>{body}</span>
+            {/* Right */}
+            <div className="flex flex-col gap-8">
+              {/* Stat counters */}
+              <div className="flex items-stretch divide-x divide-white/[0.06]">
+                {[
+                  { value: "6",   label: "GCC Markets" },
+                  { value: "12+", label: "Publications" },
+                ].map(({ value, label }) => (
+                  <div key={label} className="flex flex-col gap-1 pr-8 first:pl-0 pl-8">
+                    <span className="font-display font-bold" style={{ fontSize: "28px", color: "#e8e2d6" }}>{value}</span>
+                    <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "#7a8598" }}>{label}</span>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8" }}>
+                We produce and place editorially-driven stories across a network of Gulf business and industry publications. Your content goes live — as a confirmed placement.
+              </p>
+
+              {/* Divider */}
+              <div style={{ width: "100%", height: "1px", background: "#ffffff08", marginBottom: "8px" }} />
+
+              {/* 4-card grid */}
+              <div
+                className="grid grid-cols-2 md:grid-cols-4"
+                style={{ gap: "1px", background: "#ffffff08" }}
+              >
+                {[
+                  { n: "01", title: "Confirmed Placement", body: "Your content is placed, not pitched. Every partner publication is pre-contracted — your story runs." },
+                  { n: "02", title: "Gulf-Wide Network",   body: "Kuwait, UAE, Saudi Arabia, Bahrain, Qatar, Oman. Every major GCC market covered." },
+                  { n: "03", title: "Editorial Quality",   body: "Produced and formatted to editorial standard. It reads like news because it is." },
+                  { n: "04", title: "Timed & Controlled",  body: "You choose when it runs. We coordinate across every publication simultaneously." },
+                ].map(({ n, title, body }) => (
+                  <div
+                    key={n}
+                    className="flex flex-col gap-3 p-5"
+                    style={{ background: "#0a0a0a" }}
+                  >
+                    <span className="font-mono text-[10px] tracking-[0.25em]" style={{ color: "#3d4a5e" }}>{n}</span>
+                    <span className="font-display font-bold uppercase" style={{ fontSize: "11px", letterSpacing: "0.08em", color: "#e8e2d6" }}>{title}</span>
+                    <span style={{ color: "#5a6272", fontFamily: "var(--font-body), sans-serif", fontSize: "12px", lineHeight: "1.7" }}>{body}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
