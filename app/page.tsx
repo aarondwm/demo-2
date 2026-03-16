@@ -251,6 +251,54 @@ function DashboardCard({ engagement }: { engagement: string[] }) {
   );
 }
 
+/* ── MediaCard (secured media placement rows) ───────────────────────────── */
+function MediaCard({ n, title, body }: { n: string; title: string; body: string }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: hovered ? "#0f1829" : "#0d0f14",
+        padding: hovered ? "32px 28px" : "20px 24px",
+        transition: "background 0.3s ease, padding 0.3s ease",
+        cursor: "default",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: "24px",
+      }}
+    >
+      <span style={{
+        fontFamily: "var(--font-mono), monospace",
+        fontSize: "11px",
+        letterSpacing: "0.25em",
+        flexShrink: 0,
+        paddingTop: "2px",
+        color: hovered ? "#a0c4ff" : "#2e3a4e",
+        transition: "color 0.3s ease",
+      }}>{n}</span>
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <span style={{
+          fontFamily: "var(--font-display), sans-serif",
+          fontWeight: 700,
+          textTransform: "uppercase",
+          fontSize: hovered ? "15px" : "13px",
+          letterSpacing: hovered ? "0.14em" : "0.1em",
+          color: hovered ? "#ffffff" : "#7a8598",
+          transition: "color 0.3s ease, font-size 0.3s ease, letter-spacing 0.3s ease",
+        }}>{title}</span>
+        <span style={{
+          fontFamily: "var(--font-body), sans-serif",
+          fontSize: hovered ? "14px" : "13px",
+          lineHeight: "1.75",
+          color: hovered ? "rgba(255,255,255,0.88)" : "#3a4255",
+          transition: "color 0.3s ease, font-size 0.3s ease",
+        }}>{body}</span>
+      </div>
+    </div>
+  );
+}
+
 /* ── FeatureCard (border trace + in-view fade) ───────────────────────────── */
 function FeatureCard({
   n, title, body, index,
@@ -499,32 +547,7 @@ export default function Home() {
                 { n: "03", title: "Editorial Quality",   body: "Produced and formatted to editorial standard. It reads like news because it is." },
                 { n: "04", title: "Timed & Controlled",  body: "You choose when it runs. We coordinate across every publication simultaneously." },
               ].map(({ n, title, body }) => (
-                <div
-                  key={n}
-                  className="group flex items-start gap-6 px-6 cursor-default"
-                  style={{
-                    background: "#0d0f14",
-                    padding: "20px 24px",
-                    transition: "background 0.3s ease, padding 0.3s ease",
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.background = "#0f1729"; e.currentTarget.style.padding = "36px 28px"; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = "#0d0f14"; e.currentTarget.style.padding = "20px 24px"; }}
-                >
-                  <span
-                    className="font-mono tracking-[0.25em] flex-shrink-0 pt-1 transition-all duration-300 group-hover:text-[#a0c4ff]"
-                    style={{ fontSize: "11px", color: "#2e3a4e" }}
-                  >{n}</span>
-                  <div className="flex flex-col gap-3">
-                    <span
-                      className="font-display font-bold uppercase transition-all duration-300 group-hover:text-white group-hover:tracking-widest"
-                      style={{ fontSize: "13px", letterSpacing: "0.1em", color: "#7a8598" }}
-                    >{title}</span>
-                    <span
-                      className="transition-all duration-300 group-hover:text-white/90"
-                      style={{ color: "#3a4255", fontFamily: "var(--font-body), sans-serif", fontSize: "13px", lineHeight: "1.7" }}
-                    >{body}</span>
-                  </div>
-                </div>
+                <MediaCard key={n} n={n} title={title} body={body} />
               ))}
             </div>
           </div>
