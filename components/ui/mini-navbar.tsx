@@ -92,11 +92,10 @@ const capabilitiesLinks: NavItem[] = [
 
 const NAV_GROUPS = [
   { label: "Home",         href: "#home" },
-  { label: "Methodology",  href: "#methodology", items: methodologyLinks },
-  { label: "Services",     href: "#services",    items: servicesLinks,    cols: 2 },
-  { label: "Intelligence", href: "#intelligence",items: intelligenceLinks },
-  { label: "Capabilities", href: "#capabilities",items: capabilitiesLinks,
-    cta: { label: "Request Access →", href: "#get-started" } },
+  { label: "Methodology",  href: "#methodology" },
+  { label: "Services",     href: "#services" },
+  { label: "Intelligence", href: "#intelligence" },
+  { label: "Capabilities", href: "#capabilities" },
 ];
 
 /* ── ListItem (adapted from header-3 pattern) ────────────────────────────── */
@@ -183,24 +182,17 @@ function MobileMenu({ open, children }: { open: boolean; children: React.ReactNo
 
 /* ── Main Navbar ─────────────────────────────────────────────────────────── */
 export function Navbar() {
-  const [openIndex, setOpenIndex]     = useState<number | null>(null);
-  const [mobileOpen, setMobileOpen]   = useState(false);
-  const [mobileSection, setMobileSection] = useState<number | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const scrolled = useScroll(10);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Body scroll lock when mobile menu is open (from header-3)
   React.useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  const open  = (i: number) => { if (closeTimer.current) clearTimeout(closeTimer.current); setOpenIndex(i); };
-  const close = ()          => { closeTimer.current = setTimeout(() => setOpenIndex(null), 140); };
-
   return (
     <header
-      className={`fixed top-3 left-4 right-4 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-4 right-4 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-black/97 backdrop-blur-md"
           : "bg-transparent"
@@ -225,46 +217,14 @@ export function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center flex-1 justify-center">
-          {NAV_GROUPS.map((group, i) => (
-            <div
+          {NAV_GROUPS.map((group) => (
+            <a
               key={group.label}
-              className="relative flex items-center"
-              onMouseEnter={() => group.items ? open(i) : undefined}
-              onMouseLeave={group.items ? close : undefined}
+              href={group.href}
+              className="py-5 px-5 font-mono font-bold text-[17px] tracking-[0.18em] uppercase text-white hover:text-white/70 transition-colors duration-150"
             >
-              <a
-                href={group.href}
-                className={`relative flex items-center gap-1.5 py-5 px-5 font-mono font-bold text-[17px] tracking-[0.18em] uppercase transition-colors duration-150 ${
-                  openIndex === i
-                    ? "text-white bg-white/[0.03]"
-                    : "text-white hover:text-white/80 hover:bg-white/[0.02]"
-                }`}
-              >
-                {group.label}
-                {group.items && (
-                  <svg
-                    className={`w-2.5 h-2.5 transition-transform duration-200 ${
-                      openIndex === i ? "rotate-180 text-[#4a6cf7]" : "text-white/10"
-                    }`}
-                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="square" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
-                  </svg>
-                )}
-                {openIndex === i && (
-                  <span className="absolute bottom-0 left-0 right-0 h-px bg-[#4a6cf7]" />
-                )}
-              </a>
-
-              {group.items && (
-                <DropdownPanel
-                  items={group.items}
-                  cols={group.cols}
-                  cta={group.cta}
-                  visible={openIndex === i}
-                />
-              )}
-            </div>
+              {group.label}
+            </a>
           ))}
         </nav>
 
@@ -305,64 +265,15 @@ export function Navbar() {
       {/* ── Mobile menu portal (header-3 createPortal pattern) ── */}
       <MobileMenu open={mobileOpen}>
         <nav className="flex flex-col divide-y divide-white/[0.05]">
-          {NAV_GROUPS.map((group, i) => (
-            <div key={group.label}>
-              <button
-                className="w-full flex items-center justify-between px-6 py-5 font-mono font-bold text-[15px] tracking-[0.2em] uppercase text-white hover:text-white/80 hover:bg-white/[0.02] transition-colors"
-                onClick={() => {
-                  if (!group.items) { setMobileOpen(false); return; }
-                  setMobileSection(mobileSection === i ? null : i);
-                }}
-              >
-                {group.label}
-                {group.items && (
-                  <svg
-                    className={`w-3 h-3 transition-transform duration-200 ${
-                      mobileSection === i ? "rotate-180 text-[#4a6cf7]" : "text-white/10"
-                    }`}
-                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="square" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
-                  </svg>
-                )}
-              </button>
-
-              {group.items && (
-                <div
-                  className={`overflow-hidden transition-all duration-200 bg-white/[0.01] ${
-                    mobileSection === i ? "max-h-[500px]" : "max-h-0"
-                  }`}
-                >
-                  <ul className="px-4 py-2 flex flex-col gap-1">
-                    {group.items.map((item) => (
-                      <li key={item.title}>
-                        <a
-                          href={item.href}
-                          className="flex items-center gap-3 px-2 py-3 group"
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          <item.icon className="w-4 h-4 text-white/10 group-hover:text-[#4a6cf7] transition-colors flex-shrink-0" />
-                          <span className="font-mono font-bold text-[13px] tracking-[0.14em] uppercase text-white group-hover:text-white/80 transition-colors">
-                            {item.title}
-                          </span>
-                        </a>
-                      </li>
-                    ))}
-                    {group.cta && (
-                      <li className="pt-2 border-t border-white/[0.04] mt-1 pb-1">
-                        <a
-                          href={group.cta.href}
-                          className="block py-2 font-mono text-[12px] tracking-[0.18em] uppercase text-[#4a6cf7]"
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          {group.cta.label}
-                        </a>
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              )}
-            </div>
+          {NAV_GROUPS.map((group) => (
+            <a
+              key={group.label}
+              href={group.href}
+              className="px-6 py-5 font-mono font-bold text-[15px] tracking-[0.2em] uppercase text-white hover:text-white/80 hover:bg-white/[0.02] transition-colors"
+              onClick={() => setMobileOpen(false)}
+            >
+              {group.label}
+            </a>
           ))}
 
           <div className="px-6 py-6">

@@ -517,8 +517,7 @@ export default function Home() {
                 style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
                 <span style={{ display: "block", color: "#ffffff" }}>Your Story.</span>
-                <span style={{ display: "block", color: "#ffffff" }}>Guaranteed</span>
-                <span style={{ display: "block", color: "#a0c4ff" }}>In Print.</span>
+                <span style={{ display: "block", color: "#4a6cf7" }}>Guaranteed Publishing.</span>
               </h2>
 
               {/* Stat counters */}
@@ -562,13 +561,13 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-10 mb-12 items-end">
             <div>
               <div className="rule-accent mb-5">
-                <span className="sys-label" style={{ color: "#7a8598", fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>Intelligence, Delivered</span>
+                <span className="sys-label" style={{ color: "#7a8598", fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>Sample Insights</span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white"
                 style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
-                Know Exactly<br />Who Engaged
+                Sample<br />Insights
               </h2>
             </div>
             <p className="lg:max-w-sm lg:ml-auto" style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8" }}>
@@ -586,7 +585,7 @@ export default function Home() {
                   className="font-display font-bold uppercase text-white"
                   style={{ fontSize: "clamp(28px,3vw,48px)", letterSpacing: "0.05em", lineHeight: "0.95" }}
                 >
-                  See Exactly<br />Who Engaged
+                  Sample<br />Insights
                 </h3>
 
                 {/* Stats row */}
@@ -659,15 +658,10 @@ export default function Home() {
             <span className="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-white/20 pointer-events-none" />
           </div>
 
-        </div>
-      </section>
-
-      {/* ── 4. CAMPAIGN INTELLIGENCE TABLE ───────────────────────────────── */}
-      <section className="sys-section">
-        <div className="max-w-6xl mx-auto px-6 md:px-10">
-          <div className="h-[420px] border border-white/[0.08]">
+          <div className="mt-8 h-[420px] border border-white/[0.08]">
             <DashboardCard engagement={tableEngagement[displayItem]} />
           </div>
+
         </div>
       </section>
 

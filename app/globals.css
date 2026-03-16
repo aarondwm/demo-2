@@ -15,6 +15,7 @@
   --ash-0:    #ffffff;
   --ash-1:    rgba(255,255,255,0.45);
   --ash-2:    rgba(255,255,255,0.2);
+  --blue:       #4a6cf7;
   --accent:     #4a6cf7;
   --accent-glow:rgba(74,108,247,0.12);
 
@@ -25,7 +26,7 @@
   --card-foreground:    228 20% 92%;
   --popover:            234 40% 6%;
   --popover-foreground: 228 20% 92%;
-  --primary:            40  52% 54%;
+  --primary:            228 89% 63%;
   --primary-foreground: 234 45% 5%;
   --secondary:          228 28% 10%;
   --secondary-foreground:228 15% 75%;
@@ -37,7 +38,7 @@
   --destructive-foreground: 228 20% 92%;
   --border:             228 28% 14%;
   --input:              228 28% 14%;
-  --ring:               40  52% 54%;
+  --ring:               228 89% 63%;
   --radius:             0rem;         /* Zero radius globally */
 }
 
@@ -93,7 +94,7 @@
   ::-webkit-scrollbar       { width: 3px; }
   ::-webkit-scrollbar-track { background: var(--ink); }
   ::-webkit-scrollbar-thumb { background: var(--wire-2); }
-  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+  ::-webkit-scrollbar-thumb:hover { background: #4a6cf7; }
 
   /* Selection */
   ::selection {
@@ -112,7 +113,7 @@
     font-weight: 400;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: #4a6cf7;
   }
 
   /* ── Section titles */
@@ -143,9 +144,9 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     padding: 12px 28px;
-    background-color: var(--accent);
+    background-color: #4a6cf7;
     color: var(--ink);
-    border: 1px solid var(--accent);
+    border: 1px solid #4a6cf7;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
     display: inline-flex;
@@ -154,7 +155,7 @@
   }
   .sys-btn-primary:hover {
     background-color: transparent;
-    color: var(--accent);
+    color: #4a6cf7;
   }
 
   /* ── Buttons — outline (wire border) */
@@ -201,7 +202,7 @@
     content: '';
     width: 20px;
     height: 2px;
-    background-color: var(--accent);
+    background-color: #4a6cf7;
     flex-shrink: 0;
   }
   .rule-accent::after {
@@ -222,14 +223,14 @@
     content: '';
     width: 20px;
     height: 2px;
-    background-color: var(--accent);
+    background-color: #4a6cf7;
     flex-shrink: 0;
   }
   .rule-accent-center::after {
     content: '';
     width: 20px;
     height: 2px;
-    background-color: var(--accent);
+    background-color: #4a6cf7;
     flex-shrink: 0;
     opacity: 0.35;
   }
@@ -254,14 +255,14 @@
   .text-primary   { color: var(--ash-0); }
   .text-secondary { color: var(--ash-1); }
   .text-tertiary  { color: var(--ash-2); }
-  .text-gold      { color: var(--accent); }
+  .text-gold      { color: #4a6cf7; }
 
   /* ── Loader */
   .loader {
     width: 28px;
     height: 28px;
     border: 1px solid var(--wire-1);
-    border-top-color: var(--accent);
+    border-top-color: #4a6cf7;
     border-radius: 0;
     animation: spin 1s linear infinite;
   }
@@ -285,7 +286,7 @@
 
   /* ── TextScramble dud characters */
   .dud {
-    color: var(--accent);
+    color: #4a6cf7;
     opacity: 0.6;
   }
 
