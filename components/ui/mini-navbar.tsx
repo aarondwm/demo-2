@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import {
   FileText, Users, Globe, BarChart2,
   Target, TrendingUp, Building2, Layers,
-  Crosshair, Shield, Zap, LucideIcon,
+  Crosshair, Shield, Zap, Send, LucideIcon,
 } from "lucide-react";
 
 /* ── useScroll hook (from header-3) ─────────────────────────────────────── */
@@ -284,12 +284,18 @@ export function Navbar() {
         <div className="flex items-center gap-3 flex-shrink-0">
           <a
             href="#get-started"
-            className="hidden sm:flex items-center gap-2 h-11 px-7 font-mono text-[12px] tracking-[0.22em] uppercase bg-white text-[#4a6cf7] font-bold hover:bg-white/90 transition-colors"
+            className="group hidden sm:inline-flex items-center h-11 px-7 font-mono text-[12px] tracking-[0.22em] uppercase bg-white text-[#4a6cf7] font-bold border border-white/20 relative overflow-hidden"
           >
-            Request a Briefing
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="square" strokeWidth="2.5" d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+            {/* Slide-in overlay with icon */}
+            <span className="absolute inset-0 flex items-center justify-center w-full h-full duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 bg-[#4a6cf7] text-white">
+              <Send className="w-4 h-4" />
+            </span>
+            {/* Text slides out on hover */}
+            <span className="absolute flex items-center justify-center gap-2 w-full h-full transition-all duration-500 ease-out group-hover:translate-x-full">
+              Request a Briefing
+            </span>
+            {/* Invisible sizer keeps button width stable */}
+            <span className="invisible">Request a Briefing</span>
           </a>
 
           {/* Animated toggle (header-3 MenuToggleIcon) */}
