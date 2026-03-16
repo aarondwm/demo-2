@@ -476,7 +476,7 @@ export default function Home() {
 
           <div className="mb-14">
             <div className="rule-accent mb-5">
-              <span className="sys-label" style={{ fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "8px", fontSize: "20px" }}>د</span>What We Do</span>
+              <span className="sys-label" style={{ fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>What We Do</span>
             </div>
             <h2
               className="font-display font-bold uppercase text-white"
@@ -510,7 +510,7 @@ export default function Home() {
             {/* Left */}
             <div className="flex flex-col gap-8">
               <div className="rule-accent mb-5">
-                <span className="sys-label" style={{ fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "8px", fontSize: "20px" }}>د</span>Secured Media Placement</span>
+                <span className="sys-label" style={{ fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>Secured Media Placement</span>
               </div>
               <h2
                 className="font-display font-bold uppercase"
@@ -562,7 +562,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-10 mb-12 items-end">
             <div>
               <div className="rule-accent mb-5">
-                <span className="sys-label" style={{ color: "#7a8598", fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "8px", fontSize: "20px" }}>د</span>Intelligence, Delivered</span>
+                <span className="sys-label" style={{ color: "#7a8598", fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>Intelligence, Delivered</span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white"
@@ -581,7 +581,7 @@ export default function Home() {
 
             <div className="p-10 md:p-14 grid md:grid-cols-2 gap-12 items-center">
               <div className="flex flex-col gap-6">
-                <span className="sys-label block" style={{ color: "#7a8598", fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "8px", fontSize: "20px" }}>د</span>Audience Intelligence</span>
+                <span className="sys-label block" style={{ color: "#7a8598", fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>Audience Intelligence</span>
                 <h3
                   className="font-display font-bold uppercase text-white"
                   style={{ fontSize: "clamp(28px,3vw,48px)", letterSpacing: "0.05em", lineHeight: "0.95" }}
@@ -676,7 +676,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="mb-14 text-center">
             <div className="rule-accent-center mb-5">
-              <span className="sys-label" style={{ fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "8px", fontSize: "20px" }}>د</span>Who We Work With</span>
+              <span className="sys-label" style={{ fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>Who We Work With</span>
             </div>
             <h2
               className="font-display font-bold uppercase text-white"
@@ -719,7 +719,7 @@ export default function Home() {
 
             <div className="relative z-10 max-w-2xl">
               <div className="rule-accent mb-7">
-                <span className="sys-label" style={{ fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "8px", fontSize: "20px" }}>د</span>Get Started</span>
+                <span className="sys-label" style={{ fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>Get Started</span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white mb-7"
