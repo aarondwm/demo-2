@@ -184,14 +184,13 @@ const secondColumn = testimonials.slice(1, 3);
 const thirdColumn  = testimonials.slice(2, 4);
 
 /* ── Dashboard card (inside ContainerScroll) ─────────────────────────────── */
-function DashboardCard() {
-  const rows = [
-    { org: "**********",   industry: "Banking",    seniority: "C-Suite",  engagement: "2,847" },
-    { org: "********",     industry: "Investment", seniority: "Director", engagement: "1,392" },
-    { org: "******",       industry: "Energy",     seniority: "VP",       engagement: "934"   },
-    { org: "*********",    industry: "Telecom",    seniority: "Manager",  engagement: "611"   },
-    { org: "************", industry: "Logistics",  seniority: "Analyst",  engagement: "478"   },
-  ];
+function DashboardCard({ engagement }: { engagement: string[] }) {
+  const orgs       = ["**********", "********", "******", "*********", "************"];
+  const industries = ["Banking", "Investment", "Energy", "Telecom", "Logistics"];
+  const seniorities= ["C-Suite", "Director", "VP", "Manager", "Analyst"];
+  const rows = orgs.map((org, i) => ({
+    org, industry: industries[i], seniority: seniorities[i], engagement: engagement[i],
+  }));
 
   return (
     <div className="relative w-full h-full flex flex-col overflow-hidden bg-black">
@@ -333,6 +332,31 @@ function FeatureCard({
 export default function Home() {
   const [activeIntelItem, setActiveIntelItem] = useState(0);
   const [intelVisible, setIntelVisible] = useState(true);
+  const [hoveredIntelItem, setHoveredIntelItem] = useState<number | null>(null);
+
+  const displayItem = hoveredIntelItem !== null ? hoveredIntelItem : activeIntelItem;
+
+  const intelStats = [
+    [{ value: "147", label: "Companies" },       { value: "23",   label: "Sectors" },       { value: "94%",  label: "Identified" }],
+    [{ value: "68%", label: "Senior Level" },     { value: "31%",  label: "C-Suite" },        { value: "8%",   label: "Board Level" }],
+    [{ value: "12",  label: "Industries" },       { value: "8",    label: "Verticals" },      { value: "47%",  label: "Finance & Banking" }],
+    [{ value: "100%",label: "White-Label" },      { value: "48hr", label: "Delivery" },       { value: "2",    label: "Export Formats" }],
+    [{ value: "4.2×",label: "Avg Return Rate" },  { value: "18%",  label: "Daily Active" },   { value: "62%",  label: "Weekly Active" }],
+    [{ value: "340+",label: "Titles Tracked" },   { value: "97%",  label: "Identified" },     { value: "3.1×", label: "Avg Views" }],
+    [{ value: "+24%",label: "WoW Growth" },       { value: "6wk",  label: "Tracked" },        { value: "89%",  label: "Retention" }],
+    [{ value: "34%", label: "Shared Audience" },  { value: "12",   label: "Competitors" },    { value: "2.4×", label: "Reach Advantage" }],
+  ];
+
+  const tableEngagement = [
+    ["2,847", "1,392", "934",  "611",  "478"],
+    ["1,204", "897",   "743",  "521",  "389"],
+    ["3,102", "1,847", "1,203","872",  "641"],
+    ["891",   "743",   "612",  "489",  "334"],
+    ["2,103", "1,648", "1,287","934",  "712"],
+    ["1,847", "1,203", "987",  "743",  "521"],
+    ["3,841", "2,910", "2,104","1,763","1,302"],
+    ["2,847", "2,103", "1,847","1,392","987"],
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -363,7 +387,7 @@ export default function Home() {
             style={{ animation: "reveal-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards" }}
           >
             <div className="rule-accent justify-center">
-              <span className="sys-label">GCC Digital Advertising & Audience Intelligence</span>
+              <span className="sys-label">Proprietary GCC Media & Insight Technology</span>
             </div>
           </div>
 
@@ -427,14 +451,66 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 3. AUDIENCE INTELLIGENCE ─────────────────────────────────────── */}
+      {/* ── 3. SECURED MEDIA PLACEMENT ───────────────────────────────────── */}
+      <section id="media-placement" className="sys-section">
+        <div className="max-w-6xl mx-auto px-6 md:px-10">
+
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="flex flex-col gap-8">
+              <div>
+                <div className="rule-accent mb-5">
+                  <span className="sys-label">Secured Media Placement</span>
+                </div>
+                <h2
+                  className="font-display font-bold uppercase text-white"
+                  style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+                >
+                  Your Story.<br />
+                  <span style={{ color: "var(--accent)" }}>Guaranteed</span><br />
+                  In Print.
+                </h2>
+              </div>
+              <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8" }}>
+                We have secured placements across the Gulf&apos;s most-read business and industry publications. When you run a campaign with us, your content goes live — not as a pitch, not as a request. As a confirmed placement.
+              </p>
+              <HoverActionButton label="Request a Briefing" href="#get-started" />
+            </div>
+
+            <div className="flex flex-col gap-3">
+              {[
+                { n: "01", title: "Confirmed Placement", body: "Your content is placed, not pitched. Every partner publication is pre-contracted — your story runs." },
+                { n: "02", title: "Gulf-Wide Network",   body: "Kuwait, UAE, Saudi Arabia, Bahrain, Qatar, Oman. We cover every major market in the region." },
+                { n: "03", title: "Editorial Quality",   body: "Content is produced and formatted to editorial standard. It reads like news because it is." },
+                { n: "04", title: "Timed & Controlled",  body: "You choose when it runs. We coordinate across every publication simultaneously." },
+              ].map(({ n, title, body }) => (
+                <div
+                  key={n}
+                  className="flex gap-6 p-6 border border-white/[0.05] bg-white/[0.01] hover:bg-white/[0.03] transition-colors duration-200"
+                >
+                  <span className="font-mono text-[10px] tracking-[0.25em] flex-shrink-0 mt-1" style={{ color: "#3d4a5e" }}>{n}</span>
+                  <div className="flex flex-col gap-2">
+                    <span
+                      className="font-display font-bold uppercase"
+                      style={{ fontSize: "13px", letterSpacing: "0.08em", color: "#e8e2d6" }}
+                    >{title}</span>
+                    <span style={{ color: "#5a6272", fontFamily: "var(--font-body), sans-serif", fontSize: "13px", lineHeight: "1.7" }}>{body}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── 4. AUDIENCE INTELLIGENCE ─────────────────────────────────────── */}
       <section id="intelligence" className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
 
           <div className="grid lg:grid-cols-2 gap-10 mb-12 items-end">
             <div>
               <div className="rule-accent mb-5">
-                <span className="sys-label" style={{ color: "#7a8598" }}>Secured Media Placement</span>
+                <span className="sys-label" style={{ color: "#7a8598" }}>Intelligence, Delivered</span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white"
@@ -463,12 +539,8 @@ export default function Home() {
 
                 {/* Stats row */}
                 <div className="flex items-stretch divide-x divide-[#161c2c]">
-                  {[
-                    { value: "147", label: "Companies" },
-                    { value: "68%", label: "Senior Level" },
-                    { value: "12",  label: "Industries" },
-                  ].map(({ value, label }) => (
-                    <div key={label} className="flex flex-col gap-1 pr-6 first:pl-0 pl-6">
+                  {intelStats[displayItem].map(({ value, label }) => (
+                    <div key={label} className="flex flex-col gap-1 pr-6 first:pl-0 pl-6" style={{ transition: "opacity 0.25s ease" }}>
                       <span className="font-display font-bold" style={{ fontSize: "22px", color: "#e8e2d6" }}>{value}</span>
                       <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "#c8c0b0" }}>{label}</span>
                     </div>
@@ -492,11 +564,13 @@ export default function Home() {
                   { n: "07", label: "Week-over-Week Engagement Trends" },
                   { n: "08", label: "Competitor Audience Overlap" },
                 ].map(({ n, label }, idx) => {
-                  const active = idx === activeIntelItem;
+                  const active = idx === displayItem;
                   return (
                     <li
                       key={n}
-                      className="p-6 flex flex-col gap-3"
+                      className="p-6 flex flex-col gap-3 cursor-default"
+                      onMouseEnter={() => setHoveredIntelItem(idx)}
+                      onMouseLeave={() => setHoveredIntelItem(null)}
                       style={{
                         background: active && intelVisible ? "rgba(74,108,247,0.08)" : "rgba(255,255,255,0.02)",
                         borderLeft: active && intelVisible ? "2px solid #4a6cf7" : "2px solid transparent",
@@ -540,7 +614,7 @@ export default function Home() {
       <section className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="h-[420px] border border-white/[0.08]">
-            <DashboardCard />
+            <DashboardCard engagement={tableEngagement[displayItem]} />
           </div>
         </div>
       </section>
