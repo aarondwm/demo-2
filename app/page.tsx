@@ -339,6 +339,15 @@ function FeatureCard({
 
 /* ── Page ────────────────────────────────────────────────────────────────── */
 export default function Home() {
+  const [activeIntelItem, setActiveIntelItem] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIntelItem(i => (i + 1) % 8);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <main className="relative min-h-screen bg-black grain">
 
@@ -494,14 +503,31 @@ export default function Home() {
                   { n: "06", label: "Individual Job Title Tracking" },
                   { n: "07", label: "Week-over-Week Engagement Trends" },
                   { n: "08", label: "Competitor Audience Overlap" },
-                ].map(({ n, label }) => (
-                  <li key={n} className="bg-white/[0.02] p-6 flex flex-col gap-3">
-                    <span className="font-mono text-[10px] tracking-[0.2em]" style={{ color: "#2e3a4e" }}>{n}</span>
-                    <span className="font-mono text-[11px] tracking-[0.12em] uppercase leading-relaxed" style={{ color: "#c8c0b0" }}>
-                      {label}
-                    </span>
-                  </li>
-                ))}
+                ].map(({ n, label }, idx) => {
+                  const active = idx === activeIntelItem;
+                  return (
+                    <li
+                      key={n}
+                      className="p-6 flex flex-col gap-3 transition-all duration-500"
+                      style={{
+                        background: active ? "rgba(74,108,247,0.08)" : "rgba(255,255,255,0.02)",
+                        borderLeft: active ? "2px solid #4a6cf7" : "2px solid transparent",
+                        boxShadow: active ? "inset 0 0 24px rgba(74,108,247,0.07)" : "none",
+                      }}
+                    >
+                      <span
+                        className="font-mono text-[10px] tracking-[0.2em] transition-colors duration-500"
+                        style={{ color: active ? "#4a6cf7" : "#2e3a4e" }}
+                      >{n}</span>
+                      <span
+                        className="font-mono text-[11px] tracking-[0.12em] uppercase leading-relaxed transition-colors duration-500"
+                        style={{ color: active ? "#ffffff" : "#c8c0b0" }}
+                      >
+                        {label}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 
