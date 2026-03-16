@@ -520,7 +520,7 @@ export default function Home() {
                       style={{ fontSize: "13px", letterSpacing: "0.1em", color: "#7a8598" }}
                     >{title}</span>
                     <span
-                      className="transition-all duration-300 group-hover:text-white/70"
+                      className="transition-all duration-300 group-hover:text-white/90"
                       style={{ color: "#3a4255", fontFamily: "var(--font-body), sans-serif", fontSize: "13px", lineHeight: "1.7" }}
                     >{body}</span>
                   </div>
