@@ -202,8 +202,8 @@ export function Navbar() {
     <header
       className={`fixed top-3 left-4 right-4 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-black/97 backdrop-blur-md border border-white"
-          : "bg-black/90 border border-transparent"
+          ? "bg-black/97 backdrop-blur-md border border-transparent"
+          : "bg-transparent border border-white"
       }`}
       style={{ borderRadius: "12px" }}
     >
