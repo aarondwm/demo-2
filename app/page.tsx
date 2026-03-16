@@ -231,14 +231,14 @@ function DashboardCard() {
             className="grid grid-cols-4 gap-0 px-4 border-b border-white/[0.04] hover:bg-white/[0.04] transition-colors duration-150"
             style={{ paddingTop: "14px", paddingBottom: "14px" }}
           >
-            <span className="font-mono tracking-wider" style={{ fontSize: "14px", color: "#1e2d4a" }}>{row.org}</span>
-            <span className="font-mono tracking-[0.1em] uppercase" style={{ fontSize: "14px", color: "#8a9bb8" }}>{row.industry}</span>
-            <span className="font-mono tracking-[0.1em] uppercase" style={{ fontSize: "14px", color: "#8a9bb8" }}>{row.seniority}</span>
+            <span className="font-mono tracking-wider" style={{ fontSize: "14px", color: "rgba(255,255,255,0.55)" }}>{row.org}</span>
+            <span className="font-mono tracking-[0.1em] uppercase" style={{ fontSize: "14px", color: "rgba(255,255,255,0.35)" }}>{row.industry}</span>
+            <span className="font-mono tracking-[0.1em] uppercase" style={{ fontSize: "14px", color: "rgba(255,255,255,0.25)" }}>{row.seniority}</span>
             <span className="font-mono tracking-[0.1em] uppercase" style={{
               fontSize: "14px",
-              color:      row.engagement === "High" ? "#e8e2d6"
-                        : row.engagement === "Med"  ? "#5a6a84"
-                        : "#3d4a5e",
+              color:      row.engagement === "High" ? "rgba(255,255,255,0.90)"
+                        : row.engagement === "Med"  ? "rgba(255,255,255,0.45)"
+                        : "rgba(255,255,255,0.15)",
               fontWeight: row.engagement === "High" ? 700 : 400,
             }}>{row.engagement}</span>
           </div>
@@ -416,7 +416,7 @@ export default function Home() {
               className="font-display font-bold uppercase text-white"
               style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
             >
-              Every Campaign.<br />Full Transparency.
+              We Run It.<br />You See Who Engaged.
             </h2>
           </div>
 
@@ -433,23 +433,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 3. CAMPAIGN INTELLIGENCE TABLE ───────────────────────────────── */}
-      <section className="sys-section">
-        <div className="max-w-6xl mx-auto px-6 md:px-10">
-          <div className="h-[420px] border border-white/[0.08]">
-            <DashboardCard />
-          </div>
-        </div>
-      </section>
-
-      {/* ── 4. AUDIENCE INTELLIGENCE ─────────────────────────────────────── */}
+      {/* ── 3. AUDIENCE INTELLIGENCE ─────────────────────────────────────── */}
       <section id="intelligence" className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
 
           <div className="grid lg:grid-cols-2 gap-10 mb-12 items-end">
             <div>
               <div className="rule-accent mb-5">
-                <span className="sys-label" style={{ color: "#7a8598" }}>Intelligence, Delivered</span>
+                <span className="sys-label" style={{ color: "#7a8598" }}>Secured Media Placement</span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white"
@@ -551,7 +542,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 4. WHO WE WORK WITH ──────────────────────────────────────────── */}
+      {/* ── 4. CAMPAIGN INTELLIGENCE TABLE ───────────────────────────────── */}
+      <section className="sys-section">
+        <div className="max-w-6xl mx-auto px-6 md:px-10">
+          <div className="h-[420px] border border-white/[0.08]">
+            <DashboardCard />
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. WHO WE WORK WITH ──────────────────────────────────────────── */}
       <section className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="mb-14 text-center">
