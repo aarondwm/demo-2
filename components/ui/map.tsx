@@ -43,7 +43,7 @@ export function WorldMap({
     () =>
       map.getSVG({
         radius:          0.22,
-        color:           "#1c1f30",
+        color:           "rgba(255,255,255,0.12)",
         shape:           "circle",
         backgroundColor: "transparent",
       }),
@@ -66,7 +66,7 @@ export function WorldMap({
 
   return (
     <div
-      className="w-full relative overflow-hidden border border-[#1c1f30]"
+      className="w-full relative overflow-hidden border border-white/[0.08]"
       style={{
         // Mask gradient fades at top & bottom
         maskImage:
@@ -79,8 +79,8 @@ export function WorldMap({
       {/* Classification corner marks */}
       <span className="absolute top-2 left-2   w-4 h-4 border-t border-l border-[#4a6cf7] z-10 pointer-events-none" />
       <span className="absolute top-2 right-2  w-4 h-4 border-t border-r border-[#4a6cf7] z-10 pointer-events-none" />
-      <span className="absolute bottom-2 left-2  w-4 h-4 border-b border-l border-[#363c52] z-10 pointer-events-none" />
-      <span className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-[#363c52] z-10 pointer-events-none" />
+      <span className="absolute bottom-2 left-2  w-4 h-4 border-b border-l border-white/20 z-10 pointer-events-none" />
+      <span className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-white/20 z-10 pointer-events-none" />
 
       {/* Single SVG — background map + connections, both sharing the same viewBox */}
       <svg
@@ -219,10 +219,10 @@ export function WorldMap({
 
       {/* Status bar — HTML overlay, outside SVG */}
       <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between pointer-events-none z-10">
-        <span className="font-mono text-[8px] tracking-[0.2em] uppercase text-[#363c52]">
+        <span className="font-mono text-[8px] tracking-[0.2em] uppercase text-white/20">
           LIVE NETWORK VIEW
         </span>
-        <span className="font-mono text-[8px] tracking-[0.2em] uppercase text-[#363c52]">
+        <span className="font-mono text-[8px] tracking-[0.2em] uppercase text-white/20">
           {dots.length} ACTIVE CONNECTIONS
         </span>
       </div>
@@ -234,7 +234,7 @@ export function WorldMap({
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
-            className="absolute bottom-8 left-4 z-20 px-3 py-2 border border-[#1c1f30] bg-[#070910]"
+            className="absolute bottom-8 left-4 z-20 px-3 py-2 border border-white/[0.08] bg-white/[0.02]"
           >
             <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#4a6cf7]">
               {hoveredLocation}

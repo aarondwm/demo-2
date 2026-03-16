@@ -69,17 +69,17 @@ export const Card = ({
     style={{
       rotateX: rotate,
       scale,
-      boxShadow: "0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px #1c1f30",
+      boxShadow: "0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08)",
     }}
-    className="max-w-5xl -mt-12 mx-auto h-[30rem] md:h-[40rem] w-full border border-[#1c1f30] p-2 bg-[#070910]"
+    className="max-w-5xl -mt-12 mx-auto h-[30rem] md:h-[40rem] w-full border border-white/[0.08] p-2 bg-white/[0.02]"
   >
     {/* Inner frame with grid */}
     <div className="h-full w-full overflow-hidden grid-bg relative">
       {/* Corner marks */}
       <span className="absolute top-2 left-2  w-3 h-3 border-t border-l border-[#4a6cf7]" />
       <span className="absolute top-2 right-2 w-3 h-3 border-t border-r border-[#4a6cf7]" />
-      <span className="absolute bottom-2 left-2  w-3 h-3 border-b border-l border-[#363c52]" />
-      <span className="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-[#363c52]" />
+      <span className="absolute bottom-2 left-2  w-3 h-3 border-b border-l border-white/20" />
+      <span className="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-white/20" />
       {children}
     </div>
   </motion.div>

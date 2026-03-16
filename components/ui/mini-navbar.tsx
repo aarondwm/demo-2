@@ -104,17 +104,17 @@ function ListItem({ title, description, icon: Icon, href }: NavItem) {
   return (
     <a
       href={href}
-      className="group flex items-start gap-3 px-3 py-3 bg-[#04060c] hover:bg-[#080b14] transition-colors"
+      className="group flex items-start gap-3 px-3 py-3 bg-black hover:bg-white/[0.03] transition-colors"
     >
-      <div className="flex-shrink-0 w-9 h-9 border border-[#1c1f30] flex items-center justify-center group-hover:border-[#4a6cf7]/40 transition-colors">
-        <Icon className="w-4 h-4 text-[#363c52] group-hover:text-[#4a6cf7] transition-colors" />
+      <div className="flex-shrink-0 w-9 h-9 border border-white/[0.08] flex items-center justify-center group-hover:border-[#4a6cf7]/40 transition-colors">
+        <Icon className="w-4 h-4 text-white/20 group-hover:text-[#4a6cf7] transition-colors" />
       </div>
       <div className="flex flex-col gap-0.5 min-w-0">
-        <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[#b0baca] group-hover:text-[#e8eaf2] transition-colors leading-tight">
+        <span className="font-mono font-bold text-[13px] tracking-[0.14em] uppercase text-white group-hover:text-white transition-colors leading-tight">
           {title}
         </span>
         {description && (
-          <span className="font-mono text-[9px] tracking-[0.06em] text-[#2e3347] group-hover:text-[#4a5268] transition-colors leading-relaxed">
+          <span className="font-mono text-[9px] tracking-[0.06em] text-white/10 group-hover:text-white/25 transition-colors leading-relaxed">
             {description}
           </span>
         )}
@@ -134,12 +134,12 @@ function DropdownPanel({
 }) {
   return (
     <div
-      className={`absolute top-full left-1/2 -translate-x-1/2 w-max min-w-[300px] bg-[#04060c] border border-[#1c1f30] z-50 transition-all duration-200 origin-top ${
+      className={`absolute top-full left-1/2 -translate-x-1/2 w-max min-w-[300px] bg-black border border-white/[0.08] z-50 transition-all duration-200 origin-top ${
         visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
       }`}
     >
       <div className="h-px w-full bg-[#4a6cf7] opacity-60" />
-      <ul className={`p-2 gap-px bg-[#0d1016] ${cols === 2 ? "grid grid-cols-2" : "flex flex-col"}`}>
+      <ul className={`p-2 gap-px bg-white/[0.04] ${cols === 2 ? "grid grid-cols-2" : "flex flex-col"}`}>
         {items.map((item) => (
           <li key={item.title}>
             <ListItem {...item} />
@@ -167,7 +167,7 @@ function MobileMenu({ open, children }: { open: boolean; children: React.ReactNo
   return createPortal(
     <div
       id="mobile-menu"
-      className="fixed left-0 right-0 bottom-0 z-40 bg-[#04060c]/98 backdrop-blur-md border-t border-[#1c1f30] flex flex-col overflow-hidden"
+      className="fixed left-0 right-0 bottom-0 z-40 bg-black/98 backdrop-blur-md border-t border-white/[0.08] flex flex-col overflow-hidden"
       style={{ top: 92 }}
     >
       <div
@@ -202,13 +202,13 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#04060c]/97 backdrop-blur-md border-b border-[#1c1f30]"
-          : "bg-[#04060c]/90 border-b border-[#141726]"
+          ? "bg-black/97 backdrop-blur-md border-b border-white/[0.08]"
+          : "bg-black/90 border-b border-white/[0.05]"
       }`}
     >
       {/* ── Classification strip ── */}
-      <div className="border-b border-[#0e1120] px-4 md:px-8 h-7 flex items-center justify-between">
-        <span className="font-mono text-[9px] tracking-[0.26em] uppercase text-[#2e3347]">
+      <div className="border-b border-white/[0.04] px-4 md:px-8 h-7 flex items-center justify-between">
+        <span className="font-mono text-[9px] tracking-[0.26em] uppercase text-white/10">
           DIWANIYA MEDIA — PRECISION ADVERTISING &amp; MEDIA INTELLIGENCE
         </span>
         <span className="font-mono text-[9px] tracking-[0.22em] uppercase text-[#4a6cf7] opacity-40">
@@ -222,15 +222,15 @@ export function Navbar() {
         {/* Logo block */}
         <a
           href="#home"
-          className="flex-shrink-0 flex items-center gap-3 border border-[#1c1f30] h-11 px-5 hover:border-[#4a6cf7]/40 transition-colors"
+          className="flex-shrink-0 flex items-center gap-3 border border-white/[0.08] h-11 px-5 hover:border-[#4a6cf7]/40 transition-colors"
         >
           <div className="grid grid-cols-2 gap-[4px]">
             <span className="w-[6px] h-[6px] bg-[#4a6cf7]" />
-            <span className="w-[6px] h-[6px] bg-[#2e3347]" />
-            <span className="w-[6px] h-[6px] bg-[#2e3347]" />
-            <span className="w-[6px] h-[6px] bg-[#2e3347]" />
+            <span className="w-[6px] h-[6px] bg-white/10" />
+            <span className="w-[6px] h-[6px] bg-white/10" />
+            <span className="w-[6px] h-[6px] bg-white/10" />
           </div>
-          <span className="font-display font-bold text-[17px] tracking-[0.3em] uppercase text-[#e8eaf2]">
+          <span className="font-display font-bold text-[17px] tracking-[0.3em] uppercase text-white">
             DWM
           </span>
         </a>
@@ -246,17 +246,17 @@ export function Navbar() {
             >
               <a
                 href={group.href}
-                className={`relative flex items-center gap-1.5 h-full px-5 font-mono text-[13px] tracking-[0.18em] uppercase transition-colors duration-150 ${
+                className={`relative flex items-center gap-1.5 h-full px-5 font-mono font-bold text-[15px] tracking-[0.18em] uppercase transition-colors duration-150 ${
                   openIndex === i
-                    ? "text-[#e8eaf2] bg-[#080b14]"
-                    : "text-[#545c72] hover:text-[#b0baca] hover:bg-[#070912]"
+                    ? "text-white bg-white/[0.03]"
+                    : "text-white hover:text-white/80 hover:bg-white/[0.02]"
                 }`}
               >
                 {group.label}
                 {group.items && (
                   <svg
                     className={`w-2.5 h-2.5 transition-transform duration-200 ${
-                      openIndex === i ? "rotate-180 text-[#4a6cf7]" : "text-[#2e3347]"
+                      openIndex === i ? "rotate-180 text-[#4a6cf7]" : "text-white/10"
                     }`}
                     fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   >
@@ -284,7 +284,7 @@ export function Navbar() {
         <div className="flex items-center gap-3 flex-shrink-0">
           <a
             href="#get-started"
-            className="hidden sm:flex items-center gap-2 h-11 px-7 font-mono text-[12px] tracking-[0.22em] uppercase bg-[#4a6cf7] text-[#04060c] font-bold hover:bg-[#3d5fe0] transition-colors"
+            className="hidden sm:flex items-center gap-2 h-11 px-7 font-mono text-[12px] tracking-[0.22em] uppercase bg-white text-[#4a6cf7] font-bold hover:bg-white/90 transition-colors"
           >
             Request a Briefing
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -294,7 +294,7 @@ export function Navbar() {
 
           {/* Animated toggle (header-3 MenuToggleIcon) */}
           <button
-            className="lg:hidden w-10 h-10 border border-[#1c1f30] flex items-center justify-center text-[#545c72] hover:text-[#e8eaf2] hover:border-[#4a6cf7]/40 transition-colors"
+            className="lg:hidden w-10 h-10 border border-white/[0.08] flex items-center justify-center text-white/30 hover:text-white hover:border-[#4a6cf7]/40 transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
@@ -307,11 +307,11 @@ export function Navbar() {
 
       {/* ── Mobile menu portal (header-3 createPortal pattern) ── */}
       <MobileMenu open={mobileOpen}>
-        <nav className="flex flex-col divide-y divide-[#0e1120]">
+        <nav className="flex flex-col divide-y divide-white/[0.05]">
           {NAV_GROUPS.map((group, i) => (
             <div key={group.label}>
               <button
-                className="w-full flex items-center justify-between px-6 py-5 font-mono text-[13px] tracking-[0.2em] uppercase text-[#545c72] hover:text-[#e8eaf2] hover:bg-[#070912] transition-colors"
+                className="w-full flex items-center justify-between px-6 py-5 font-mono font-bold text-[15px] tracking-[0.2em] uppercase text-white hover:text-white/80 hover:bg-white/[0.02] transition-colors"
                 onClick={() => {
                   if (!group.items) { setMobileOpen(false); return; }
                   setMobileSection(mobileSection === i ? null : i);
@@ -321,7 +321,7 @@ export function Navbar() {
                 {group.items && (
                   <svg
                     className={`w-3 h-3 transition-transform duration-200 ${
-                      mobileSection === i ? "rotate-180 text-[#4a6cf7]" : "text-[#2e3347]"
+                      mobileSection === i ? "rotate-180 text-[#4a6cf7]" : "text-white/10"
                     }`}
                     fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   >
@@ -332,7 +332,7 @@ export function Navbar() {
 
               {group.items && (
                 <div
-                  className={`overflow-hidden transition-all duration-200 bg-[#020408] ${
+                  className={`overflow-hidden transition-all duration-200 bg-white/[0.01] ${
                     mobileSection === i ? "max-h-[500px]" : "max-h-0"
                   }`}
                 >
@@ -344,15 +344,15 @@ export function Navbar() {
                           className="flex items-center gap-3 px-2 py-3 group"
                           onClick={() => setMobileOpen(false)}
                         >
-                          <item.icon className="w-4 h-4 text-[#2e3347] group-hover:text-[#4a6cf7] transition-colors flex-shrink-0" />
-                          <span className="font-mono text-[12px] tracking-[0.14em] uppercase text-[#454d62] group-hover:text-[#b0baca] transition-colors">
+                          <item.icon className="w-4 h-4 text-white/10 group-hover:text-[#4a6cf7] transition-colors flex-shrink-0" />
+                          <span className="font-mono font-bold text-[13px] tracking-[0.14em] uppercase text-white group-hover:text-white/80 transition-colors">
                             {item.title}
                           </span>
                         </a>
                       </li>
                     ))}
                     {group.cta && (
-                      <li className="pt-2 border-t border-[#0e1120] mt-1 pb-1">
+                      <li className="pt-2 border-t border-white/[0.04] mt-1 pb-1">
                         <a
                           href={group.cta.href}
                           className="block py-2 font-mono text-[12px] tracking-[0.18em] uppercase text-[#4a6cf7]"

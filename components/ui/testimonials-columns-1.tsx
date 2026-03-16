@@ -39,7 +39,7 @@ export const TestimonialsColumn = (props: {
                 </p>
 
                 {/* Divider */}
-                <div className="h-px w-full bg-[#1c1f30]" />
+                <div className="h-px w-full bg-white/[0.08]" />
 
                 {/* Attribution — centered column */}
                 <div className="flex flex-col items-center gap-2">
@@ -51,10 +51,10 @@ export const TestimonialsColumn = (props: {
                     className="h-8 w-8 rounded-full object-cover grayscale opacity-60"
                   />
                   <div className="flex flex-col items-center gap-0.5">
-                    <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#e8eaf2]">
+                    <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-white">
                       {name}
                     </div>
-                    <div className="font-mono text-[9px] tracking-[0.18em] uppercase text-[#363c52]">
+                    <div className="font-mono text-[9px] tracking-[0.18em] uppercase text-white/20">
                       {role}
                     </div>
                   </div>

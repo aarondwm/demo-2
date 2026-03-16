@@ -5,16 +5,16 @@
 /* ─── CSS Custom Properties ─────────────────────────────────────────────── */
 :root {
   /* Palette */
-  --ink:      #04060c;
-  --ink-1:    #070910;
-  --ink-2:    #0a0c16;
-  --ink-3:    #0d1020;
-  --wire-0:   #141726;
-  --wire-1:   #1c1f30;
-  --wire-2:   #272b3e;
-  --ash-0:    #e8eaf2;
-  --ash-1:    #636b84;
-  --ash-2:    #363c52;
+  --ink:      #050505;
+  --ink-1:    #080808;
+  --ink-2:    #0a0a0a;
+  --ink-3:    #0d0d0d;
+  --wire-0:   rgba(255,255,255,0.05);
+  --wire-1:   rgba(255,255,255,0.08);
+  --wire-2:   rgba(255,255,255,0.13);
+  --ash-0:    #ffffff;
+  --ash-1:    rgba(255,255,255,0.45);
+  --ash-2:    rgba(255,255,255,0.2);
   --accent:     #4a6cf7;
   --accent-glow:rgba(74,108,247,0.12);
 
@@ -42,6 +42,14 @@
 }
 
 /* ─── Keyframes (global — needed for inline style animations) ────────────── */
+@keyframes card-trace {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+@keyframes card-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 @keyframes reveal-up {
   0%   { opacity: 0; transform: translateY(20px); }
   100% { opacity: 1; transform: translateY(0); }
@@ -273,6 +281,12 @@
       linear-gradient(var(--wire-0) 1px, transparent 1px),
       linear-gradient(90deg, var(--wire-0) 1px, transparent 1px);
     background-size: 40px 40px;
+  }
+
+  /* ── TextScramble dud characters */
+  .dud {
+    color: var(--accent);
+    opacity: 0.6;
   }
 
   /* ── Grain texture overlay */
