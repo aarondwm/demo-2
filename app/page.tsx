@@ -383,15 +383,6 @@ export default function Home() {
           </h1>
 
           <div
-            className="opacity-0 text-center"
-            style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.5s forwards" }}
-          >
-            <p className="sys-body">
-              We run your campaigns. After each one, you get a full breakdown of who engaged — by company, seniority, and industry.
-            </p>
-          </div>
-
-          <div
             className="flex flex-col items-center gap-4 opacity-0 pb-4"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
