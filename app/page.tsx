@@ -348,8 +348,8 @@ export default function Home() {
       setTimeout(() => {
         setActiveIntelItem(i => (i + 1) % 8);
         setIntelVisible(true);
-      }, 400);
-    }, 3000);
+      }, 250);
+    }, 4500);
     return () => clearInterval(timer);
   }, []);
 
@@ -518,21 +518,22 @@ export default function Home() {
                         background: active && intelVisible ? "rgba(74,108,247,0.08)" : "rgba(255,255,255,0.02)",
                         borderLeft: active && intelVisible ? "2px solid #4a6cf7" : "2px solid transparent",
                         boxShadow: active && intelVisible ? "inset 0 0 24px rgba(74,108,247,0.07)" : "none",
-                        transition: "background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease",
+                        transition: "background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease",
                       }}
                     >
                       <span
                         className="font-mono text-[10px] tracking-[0.2em]"
                         style={{
                           color: active && intelVisible ? "#4a6cf7" : "#2e3a4e",
-                          transition: "color 0.4s ease",
+                          transition: "color 0.25s ease",
                         }}
                       >{n}</span>
                       <span
-                        className="font-mono text-[11px] tracking-[0.12em] uppercase leading-relaxed"
+                        className="font-mono tracking-[0.12em] uppercase leading-relaxed"
                         style={{
+                          fontSize: active && intelVisible ? "13px" : "11px",
                           color: active && intelVisible ? "#ffffff" : "#c8c0b0",
-                          transition: "color 0.4s ease",
+                          transition: "color 0.25s ease, font-size 0.25s ease",
                         }}
                       >
                         {label}
