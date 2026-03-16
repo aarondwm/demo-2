@@ -28,8 +28,8 @@ class TextScramble {
     for (let i = 0; i < length; i++) {
       const from  = oldText[i] || "";
       const to    = newText[i] || "";
-      const start = Math.floor(Math.random() * 50);
-      const end   = start + Math.floor(Math.random() * 50);
+      const start = Math.floor(Math.random() * 30);
+      const end   = start + Math.floor(Math.random() * 30);
       this.queue.push({ from, to, start, end });
     }
     cancelAnimationFrame(this.frameRequest);
@@ -89,7 +89,7 @@ function ScrambledLine({
 
     const run = () => {
       scrambler.setText(text).then(() => {
-        loopTimer = setTimeout(run, 3500);
+        loopTimer = setTimeout(run, 2500);
       });
     };
 

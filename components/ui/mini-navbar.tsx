@@ -202,8 +202,8 @@ export function Navbar() {
     <header
       className={`fixed top-3 left-4 right-4 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-black/97 backdrop-blur-md border border-transparent"
-          : "bg-transparent border border-white"
+          ? "bg-black/97 backdrop-blur-md"
+          : "bg-transparent"
       }`}
       style={{ borderRadius: "12px" }}
     >
@@ -272,12 +272,12 @@ export function Navbar() {
         <div className="flex items-center gap-3 flex-shrink-0">
           <a
             href="#get-started"
-            className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase bg-white text-[#4a6cf7] font-bold border border-white/20 relative overflow-hidden"
+            className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase bg-white text-black font-bold relative overflow-hidden"
             style={{ borderRadius: "12px" }}
           >
-            {/* Slide-in overlay with icon */}
-            <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 bg-[#4a6cf7] text-white">
-              <Send className="w-4 h-4" />
+            {/* Slide-in overlay with Arabic letter */}
+            <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 bg-black text-white text-[18px]">
+              د
             </span>
             {/* Text slides out on hover */}
             <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out group-hover:translate-x-full">
