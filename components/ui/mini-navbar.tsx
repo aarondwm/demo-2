@@ -222,17 +222,13 @@ export function Navbar() {
         {/* Logo block */}
         <a
           href="#home"
-          className="flex-shrink-0 flex items-center gap-3 border border-white/[0.08] h-11 px-5 hover:border-[#4a6cf7]/40 transition-colors"
+          className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity"
         >
-          <div className="grid grid-cols-2 gap-[4px]">
-            <span className="w-[6px] h-[6px] bg-[#4a6cf7]" />
-            <span className="w-[6px] h-[6px] bg-white/10" />
-            <span className="w-[6px] h-[6px] bg-white/10" />
-            <span className="w-[6px] h-[6px] bg-white/10" />
-          </div>
-          <span className="font-display font-bold text-[17px] tracking-[0.3em] uppercase text-white">
-            DWM
-          </span>
+          <img
+            src="/D*M website.png"
+            alt="DWM"
+            className="h-10 w-auto"
+          />
         </a>
 
         {/* Desktop nav */}
