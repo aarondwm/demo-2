@@ -422,9 +422,9 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-3">
             {[
-              { n: "01", title: "Targeted Distribution",   body: "We put your campaigns in front of the right companies. Filtered by industry, seniority, and role. No wasted reach." },
-              { n: "02", title: "Audience Intelligence",   body: "After every campaign, you get a full breakdown of who engaged — by company, title, and seniority. The data is yours." },
-              { n: "03", title: "Boardroom-Ready Reports", body: "Clean, DWM-branded exports you can put in front of leadership. Built for decisions, not dashboards." },
+              { n: "01", title: "Secured Media Placement", body: "Your story, guaranteed in print. We lock in editorial coverage across the region's most-read publications — no pitching, no waiting, no maybe." },
+              { n: "02", title: "Targeted Distribution",   body: "Your content reaches the people who matter. We define the audience, set the filters, and make sure the right eyes see it — every time." },
+              { n: "03", title: "Audience Intelligence",   body: "After every campaign, you find out who read it, what they do, and where they're from. Not estimates. Real people." },
             ].map(({ n, title, body }, i) => (
               <FeatureCard key={n} n={n} title={title} body={body} index={i} />
             ))}

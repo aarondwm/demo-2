@@ -272,7 +272,7 @@ export function Navbar() {
         <div className="flex items-center gap-3 flex-shrink-0">
           <a
             href="#get-started"
-            className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase bg-white text-black font-bold relative overflow-hidden"
+            className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase text-black font-bold relative overflow-hidden"
             style={{ borderRadius: "12px", transform: "translateZ(0)" }}
           >
             {/* Slide-in overlay with Arabic letter */}
@@ -280,7 +280,7 @@ export function Navbar() {
               د
             </span>
             {/* Text slides out on hover */}
-            <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out group-hover:translate-x-full">
+            <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out group-hover:translate-x-full bg-white text-black">
               Check Eligibility
             </span>
             {/* Invisible sizer keeps button width stable */}
