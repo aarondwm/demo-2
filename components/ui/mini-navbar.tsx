@@ -205,7 +205,7 @@ export function Navbar() {
           ? "bg-black/97 backdrop-blur-md border-b border-white/[0.08]"
           : "bg-black/90 border-b border-white/[0.05]"
       }`}
-      style={{ borderRadius: "18px" }}
+      style={{ borderRadius: "9999px" }}
     >
       {/* ── Classification strip ── */}
       <div className="border-b border-white/[0.04] px-4 md:px-8 h-7 flex items-center justify-between">
@@ -282,7 +282,7 @@ export function Navbar() {
           <a
             href="#get-started"
             className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase bg-white text-[#4a6cf7] font-bold border border-white/20 relative overflow-hidden"
-            style={{ borderRadius: "18px" }}
+            style={{ borderRadius: "9999px" }}
           >
             {/* Slide-in overlay with icon */}
             <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 bg-[#4a6cf7] text-white">
