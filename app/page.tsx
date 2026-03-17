@@ -578,6 +578,23 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── 3b. AUDIENCE SELECTION MAP ───────────────────────────────────── */}
+      <section className="sys-section">
+        <div className="max-w-6xl mx-auto px-6 md:px-10">
+          <div className="flex items-center mb-8">
+            <span className="sys-label" style={{ fontSize: "13px" }}>
+              <img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
+              Audience Selection
+            </span>
+          </div>
+          <iframe
+            src="/dwm-gcc-map.html"
+            style={{ width: "100%", height: "620px", border: "none" }}
+            title="GCC Audience Map"
+          />
+        </div>
+      </section>
+
       {/* ── 4. AUDIENCE INTELLIGENCE ─────────────────────────────────────── */}
       <section id="intelligence" className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
