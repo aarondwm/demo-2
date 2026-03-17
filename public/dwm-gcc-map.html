@@ -205,16 +205,24 @@ body{min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
 .data-panel{
   position:absolute;
   right:0;top:0;bottom:0;
-  width:380px;
-  background:rgba(5,5,5,0.97);
+  width:360px;
+  background:rgba(5,5,5,0.96);
   border-left:1px solid var(--border);
-  overflow-y:auto;overflow-x:hidden;
+  overflow:hidden;
   transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),opacity 0.3s ease;
   display:flex;flex-direction:column;
   z-index:20;
-  backdrop-filter:blur(12px);
+  backdrop-filter:blur(16px);
+  /* Let mouse events pass through to the map underneath */
+  pointer-events:none;
 }
-.data-panel.collapsed{transform:translateX(100%);opacity:0;pointer-events:none;}
+.data-panel.collapsed{transform:translateX(100%);opacity:0;}
+/* Re-enable pointer events only on scrollable content */
+.data-panel-inner{
+  pointer-events:auto;
+  overflow-y:auto;overflow-x:hidden;
+  flex:1;display:flex;flex-direction:column;
+}
 
 /* Panel scan line */
 .panel-scan{
@@ -552,10 +560,12 @@ body{min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
 
   <div class="data-panel collapsed" id="dataPanel">
     <div class="panel-scan" id="panelScan"></div>
-    <div id="panelContent">
-      <div class="panel-empty">
-        <div class="panel-empty-icon">◎</div>
-        <div class="panel-empty-text">HOVER GCC TERRITORY<br>FOR AUDIENCE DEMOGRAPHICS</div>
+    <div class="data-panel-inner">
+      <div id="panelContent">
+        <div class="panel-empty">
+          <div class="panel-empty-icon">◎</div>
+          <div class="panel-empty-text">HOVER GCC TERRITORY<br>FOR AUDIENCE DEMOGRAPHICS</div>
+        </div>
       </div>
     </div>
   </div>
@@ -832,9 +842,8 @@ function collapsePanel() {
   }, 400);
 }
 
-// Keep panel open when mouse is over it
-panel.addEventListener('mouseenter', cancelClose);
-panel.addEventListener('mouseleave', scheduleClose);
+// Close panel when mouse leaves the entire map area
+document.querySelector('.main').addEventListener('mouseleave', scheduleClose);
 
 // Typing effect
 function typeText(el, text, speed, callback) {
@@ -1041,7 +1050,7 @@ gccPaths.forEach(path => {
   path.addEventListener('mouseleave', () => {
     tooltip.classList.remove('show');
     tooltipVisible = false;
-    scheduleClose();
+    // Panel stays open — close only fires when leaving .main entirely
   });
 });
 
