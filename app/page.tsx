@@ -488,6 +488,7 @@ export default function Home() {
             className="flex flex-col items-center gap-4 opacity-0 pb-4"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
+            <HoverActionButton label="Request a Briefing" href="#get-started" className="text-[13px]" />
             <HoverActionButton label="How It Works" href="#what-we-do" variant="white" direction="vertical" className="text-[13px]" />
           </div>
         </div>
@@ -584,7 +585,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-10 mb-12 items-end">
             <div>
               <div className="flex items-center mb-5">
-                <span className="sys-label" style={{ color: "#7a8598", fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Intelligence, Delivered</span>
+                <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Intelligence, Delivered</span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white"
@@ -603,7 +604,7 @@ export default function Home() {
 
             <div className="p-10 md:p-14 grid md:grid-cols-2 gap-12 items-center">
               <div className="flex flex-col gap-6">
-                <p className="font-mono uppercase" style={{ fontSize: "20px", letterSpacing: "0.25em", color: "#4a6cf7" }}>Engagement Breakdowns</p>
+                <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Engagement Breakdowns</span>
 
                 {/* Stats row */}
                 <div className="flex items-stretch divide-x divide-[#161c2c]">
