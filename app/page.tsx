@@ -499,12 +499,12 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 md:px-10">
 
           <div className="mb-14">
-            <div className="rule-accent mb-5">
+            <div className="flex items-center mb-5">
               <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />What We Do</span>
             </div>
             <h2
               className="font-display font-bold uppercase text-white"
-              style={{ fontSize: "clamp(28px,4vw,48px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+              style={{ fontSize: "clamp(22px,3vw,38px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
             >
               We Run It.<br />You See Who Engaged.
             </h2>
@@ -533,12 +533,12 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             {/* Left */}
             <div className="flex flex-col gap-8">
-              <div className="rule-accent mb-5">
+              <div className="flex items-center mb-5">
                 <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Secured Media Placement</span>
               </div>
               <h2
                 className="font-display font-bold uppercase"
-                style={{ fontSize: "clamp(28px,4vw,48px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+                style={{ fontSize: "clamp(22px,3vw,38px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
                 <span style={{ display: "block", color: "#ffffff" }}>Your Story.</span>
                 <span style={{ display: "block", color: "#4a6cf7" }}>Guaranteed Publishing.</span>
@@ -584,12 +584,12 @@ export default function Home() {
 
           <div className="grid lg:grid-cols-2 gap-10 mb-12 items-end">
             <div>
-              <div className="rule-accent mb-5">
+              <div className="flex items-center mb-5">
                 <span className="sys-label" style={{ color: "#7a8598", fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Intelligence, Delivered</span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white"
-                style={{ fontSize: "clamp(28px,4vw,48px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+                style={{ fontSize: "clamp(22px,3vw,38px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
                 Know Exactly<br />Who Engaged
               </h2>
@@ -692,12 +692,12 @@ export default function Home() {
       <section className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="mb-14 text-center">
-            <div className="rule-accent-center mb-5">
+            <div className="flex items-center justify-center mb-5">
               <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Who We Work With</span>
             </div>
             <h2
               className="font-display font-bold uppercase text-white"
-              style={{ fontSize: "clamp(28px,4vw,48px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+              style={{ fontSize: "clamp(22px,3vw,38px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
             >
               In Their<br />Own Words
             </h2>
@@ -735,12 +735,12 @@ export default function Home() {
             <span className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-white/20" />
 
             <div className="relative z-10 max-w-2xl">
-              <div className="rule-accent mb-7">
+              <div className="flex items-center mb-7">
                 <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Get Started</span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white mb-7"
-                style={{ fontSize: "clamp(32px,5.5vw,68px)", letterSpacing: "0.03em", lineHeight: "0.90" }}
+                style={{ fontSize: "clamp(26px,4.5vw,56px)", letterSpacing: "0.03em", lineHeight: "0.90" }}
               >
                 Start with<br />a Briefing.<br />
                 <span style={{ color: "var(--accent)" }}>See What Returns.</span>
