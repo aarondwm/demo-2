@@ -455,7 +455,7 @@ export default function Home() {
         {/* Hero content sits above the videos */}
         <div className="relative z-10 flex flex-col items-center px-6 py-24 md:py-36 gap-6">
           <div
-            className="opacity-0"
+            className="opacity-0 mb-6"
             style={{ animation: "reveal-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards" }}
           >
             <div className="flex items-center justify-center">
@@ -485,7 +485,7 @@ export default function Home() {
           </h1>
 
           <div
-            className="flex flex-col items-center gap-4 opacity-0 pb-4"
+            className="flex flex-col items-center gap-4 opacity-0 pb-4 mt-10"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
             <HoverActionButton label="Request a Briefing" href="#get-started" className="text-[13px]" />
