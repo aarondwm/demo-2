@@ -488,8 +488,8 @@ export default function Home() {
             className="flex flex-row items-center gap-6 opacity-0 mt-20 mb-20"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
-            <HoverActionButton label="Request a Briefing" href="#get-started" className="text-[15px] font-bold rounded-2xl py-6 px-16" />
-            <HoverActionButton label="How It Works" href="#what-we-do" variant="white" direction="vertical" className="text-[15px] font-bold rounded-2xl py-6 px-16" />
+            <HoverActionButton label="Request a Briefing" href="#get-started" className="text-[15px] font-bold rounded-2xl py-6 w-64" />
+            <HoverActionButton label="How It Works" href="#what-we-do" variant="white" direction="vertical" className="text-[15px] font-bold rounded-2xl py-6 w-64" />
           </div>
         </div>
       </section>
