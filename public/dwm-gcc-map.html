@@ -205,8 +205,8 @@ body{height:100%;display:flex;flex-direction:column;overflow:hidden}
 .data-panel{
   position:absolute;
   bottom:0;left:0;right:0;
-  height:235px;
-  background:rgba(5,5,5,0.96);
+  height:360px;
+  background:rgba(5,5,5,0.97);
   border-top:1px solid var(--border);
   transform:translateY(100%);
   transition:transform 0.45s cubic-bezier(0.16,1,0.3,1),opacity 0.3s ease;
@@ -220,29 +220,53 @@ body{height:100%;display:flex;flex-direction:column;overflow:hidden}
 
 /* Top fade so panel blends into map */
 .data-panel::before{
-  content:'';position:absolute;top:-32px;left:0;right:0;height:32px;
-  background:linear-gradient(to bottom,transparent,rgba(5,5,5,0.7));
+  content:'';position:absolute;top:-36px;left:0;right:0;height:36px;
+  background:linear-gradient(to bottom,transparent,rgba(5,5,5,0.8));
   pointer-events:none;
 }
 
 /* Bottom-panel grid layout */
 .bp-header{
   display:flex;align-items:center;justify-content:space-between;
-  padding:10px 24px;border-bottom:1px solid var(--border);flex-shrink:0;
-  gap:24px;
+  padding:9px 22px;border-bottom:1px solid var(--border);flex-shrink:0;
+  gap:24px;height:46px;box-sizing:border-box;
 }
-.bp-header-left{display:flex;align-items:center;gap:14px}
+.bp-header-left{display:flex;align-items:center;gap:12px}
 .bp-header-right{display:flex;flex-direction:column;align-items:flex-end;gap:1px;flex-shrink:0}
 .bp-cols{
   display:grid;grid-template-columns:1fr 1fr 1fr;
   flex:1;overflow:hidden;
 }
 .bp-col{
-  padding:10px 18px;
+  padding:10px 16px;
   border-right:1px solid var(--border);
-  overflow-y:auto;
+  overflow:hidden;
 }
 .bp-col:last-child{border-right:none}
+
+/* Compact row sizing inside bottom panel */
+.bp-col .panel-section-title{font-size:9px;letter-spacing:0.14em;margin-bottom:6px}
+.bp-col .data-row{padding:3px 0;border-bottom:none}
+.bp-col .data-role{font-size:10px}
+.bp-col .data-count{font-size:10px}
+.bp-col .data-bar-wrap{height:2px;width:40px}
+.bp-col .dept-row{padding:3px 0}
+.bp-col .dept-name{font-size:9px;width:60px}
+.bp-col .dept-bar-wrap{height:3px}
+.bp-col .dept-pct{font-size:9px}
+.bp-col .demo-block-title{font-size:9px;margin-bottom:4px}
+.bp-col .demo-bar-row{padding:3px 0}
+.bp-col .demo-label{font-size:10px;width:46px}
+.bp-col .demo-pct{font-size:10px}
+.bp-col .demo-bar-bg{height:4px}
+.bp-col .gender-row{height:8px;margin-top:4px}
+.bp-col .gender-labels{margin-top:5px}
+.bp-col .gender-label{font-size:10px}
+.bp-col .nat-row{height:8px;margin-top:4px}
+.bp-col .nat-labels{margin-top:5px}
+.bp-col .nat-label{font-size:10px}
+.bp-col [style*="margin-bottom:12px"]{margin-bottom:8px!important}
+.bp-col [style*="margin-top:12px"]{margin-top:8px!important}
 
 /* Panel scan line */
 .panel-scan{
@@ -925,7 +949,7 @@ function renderPanel(country) {
       </div>
       <div class="bp-header-right">
         <div class="panel-total-label">TOTAL REACHABLE AUDIENCE</div>
-        <div class="panel-total-value" id="panelCounter" style="font-size:28px;text-shadow:0 0 24px rgba(74,108,247,0.4)">0</div>
+        <div class="panel-total-value" id="panelCounter" style="font-size:22px;line-height:1;text-shadow:0 0 20px rgba(74,108,247,0.4)">0</div>
         <div class="panel-total-sub">${d.popPct}% OF NATIONAL POPULATION</div>
       </div>
     </div>
