@@ -604,6 +604,8 @@ export default function Home() {
 
             <div className="p-10 md:p-14 grid md:grid-cols-2 gap-12 items-center">
               <div className="flex flex-col gap-6">
+                <p className="font-mono uppercase" style={{ fontSize: "10px", letterSpacing: "0.25em", color: "#4a6cf7" }}>Engagement Breakdowns</p>
+
                 {/* Stats row */}
                 <div className="flex items-stretch divide-x divide-[#161c2c]">
                   {intelStats[displayItem].map(({ value, label }) => (
