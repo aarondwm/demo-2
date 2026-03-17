@@ -512,7 +512,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-3">
             {[
-              { n: "01", title: "Secured Media Placement", body: "Your story, guaranteed in print. We lock in editorial coverage across the region's most-read publications." },
+              { n: "01", title: "Secured Media Placement", body: "Your story, guaranteed publishing. We lock in editorial coverage across the region's most-read publications." },
               { n: "02", title: "Targeted Distribution",   body: "Your content reaches the people who matter, we make sure the right eyes see it — every time." },
               { n: "03", title: "Audience Intelligence",   body: "After every campaign, you find out who read it, what they do, and where they're from. Not estimates. Real people." },
             ].map(({ n, title, body }, i) => (
@@ -595,7 +595,7 @@ export default function Home() {
               </h2>
             </div>
             <p className="lg:max-w-sm lg:ml-auto" style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8" }}>
-              Other agencies show you impressions. We show you names, companies, seniority levels, and industries — after every campaign.
+              Other agencies show you impressions. We show you exactly who read it
             </p>
           </div>
 
