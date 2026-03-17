@@ -500,11 +500,11 @@ export default function Home() {
 
           <div className="mb-14">
             <div className="rule-accent mb-5">
-              <span className="sys-label" style={{ fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>What We Do</span>
+              <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />What We Do</span>
             </div>
             <h2
               className="font-display font-bold uppercase text-white"
-              style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+              style={{ fontSize: "clamp(28px,4vw,48px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
             >
               We Run It.<br />You See Who Engaged.
             </h2>
@@ -534,11 +534,11 @@ export default function Home() {
             {/* Left */}
             <div className="flex flex-col gap-8">
               <div className="rule-accent mb-5">
-                <span className="sys-label" style={{ fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>Secured Media Placement</span>
+                <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Secured Media Placement</span>
               </div>
               <h2
                 className="font-display font-bold uppercase"
-                style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+                style={{ fontSize: "clamp(28px,4vw,48px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
                 <span style={{ display: "block", color: "#ffffff" }}>Your Story.</span>
                 <span style={{ display: "block", color: "#4a6cf7" }}>Guaranteed Publishing.</span>
@@ -585,11 +585,11 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-10 mb-12 items-end">
             <div>
               <div className="rule-accent mb-5">
-                <span className="sys-label" style={{ color: "#7a8598", fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>Intelligence, Delivered</span>
+                <span className="sys-label" style={{ color: "#7a8598", fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Intelligence, Delivered</span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white"
-                style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+                style={{ fontSize: "clamp(28px,4vw,48px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
                 Know Exactly<br />Who Engaged
               </h2>
@@ -676,7 +676,7 @@ export default function Home() {
 
           <div className="py-8 text-center border border-white/[0.08] border-t-0 border-b-0">
             <span className="sys-label" style={{ fontSize: "20px" }}>
-              <span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>
+              <img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
               Sample Insights
             </span>
           </div>
@@ -693,11 +693,11 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="mb-14 text-center">
             <div className="rule-accent-center mb-5">
-              <span className="sys-label" style={{ fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>Who We Work With</span>
+              <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Who We Work With</span>
             </div>
             <h2
               className="font-display font-bold uppercase text-white"
-              style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+              style={{ fontSize: "clamp(28px,4vw,48px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
             >
               In Their<br />Own Words
             </h2>
@@ -736,11 +736,11 @@ export default function Home() {
 
             <div className="relative z-10 max-w-2xl">
               <div className="rule-accent mb-7">
-                <span className="sys-label" style={{ fontSize: "20px" }}><span style={{ color: "#ffffff", marginRight: "16px", fontSize: "20px" }}>د</span>Get Started</span>
+                <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Get Started</span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white mb-7"
-                style={{ fontSize: "clamp(40px,6.5vw,84px)", letterSpacing: "0.03em", lineHeight: "0.90" }}
+                style={{ fontSize: "clamp(32px,5.5vw,68px)", letterSpacing: "0.03em", lineHeight: "0.90" }}
               >
                 Start with<br />a Briefing.<br />
                 <span style={{ color: "var(--accent)" }}>See What Returns.</span>
