@@ -95,7 +95,8 @@ const NAV_GROUPS = [
   { label: "Methodology",  href: "#methodology" },
   { label: "Services",     href: "#services" },
   { label: "Intelligence", href: "#intelligence" },
-  { label: "Capabilities", href: "#capabilities" },
+  { label: "Reviews",      href: "#reviews" },
+  { label: "Contact",      href: "#get-started" },
 ];
 
 /* ── ListItem (adapted from header-3 pattern) ────────────────────────────── */

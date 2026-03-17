@@ -691,7 +691,7 @@ export default function Home() {
       </section>
 
       {/* ── 5. WHO WE WORK WITH ──────────────────────────────────────────── */}
-      <section className="sys-section">
+      <section id="reviews" className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="mb-14 text-center">
             <div className="flex items-center justify-center mb-5">
