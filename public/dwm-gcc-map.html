@@ -205,7 +205,7 @@ body{height:100%;display:flex;flex-direction:column;overflow:hidden}
 .data-panel{
   position:absolute;
   bottom:0;left:0;right:0;
-  height:360px;
+  height:310px;
   background:rgba(5,5,5,0.97);
   border-top:1px solid var(--border);
   transform:translateY(100%);
@@ -228,8 +228,8 @@ body{height:100%;display:flex;flex-direction:column;overflow:hidden}
 /* Bottom-panel grid layout */
 .bp-header{
   display:flex;align-items:center;justify-content:space-between;
-  padding:9px 22px;border-bottom:1px solid var(--border);flex-shrink:0;
-  gap:24px;height:46px;box-sizing:border-box;
+  padding:8px 22px;border-bottom:1px solid var(--border);flex-shrink:0;
+  gap:24px;height:42px;box-sizing:border-box;
 }
 .bp-header-left{display:flex;align-items:center;gap:12px}
 .bp-header-right{display:flex;flex-direction:column;align-items:flex-end;gap:1px;flex-shrink:0}
@@ -245,28 +245,28 @@ body{height:100%;display:flex;flex-direction:column;overflow:hidden}
 .bp-col:last-child{border-right:none}
 
 /* Compact row sizing inside bottom panel */
-.bp-col .panel-section-title{font-size:9px;letter-spacing:0.14em;margin-bottom:6px}
-.bp-col .data-row{padding:3px 0;border-bottom:none}
+.bp-col .panel-section-title{font-size:9px;letter-spacing:0.14em;margin-bottom:5px}
+.bp-col .data-row{padding:2px 0;border-bottom:none}
 .bp-col .data-role{font-size:10px}
 .bp-col .data-count{font-size:10px}
-.bp-col .data-bar-wrap{height:2px;width:40px}
-.bp-col .dept-row{padding:3px 0}
-.bp-col .dept-name{font-size:9px;width:60px}
+.bp-col .data-bar-wrap{height:2px;width:36px}
+.bp-col .dept-row{padding:2px 0}
+.bp-col .dept-name{font-size:9px;width:58px}
 .bp-col .dept-bar-wrap{height:3px}
 .bp-col .dept-pct{font-size:9px}
-.bp-col .demo-block-title{font-size:9px;margin-bottom:4px}
-.bp-col .demo-bar-row{padding:3px 0}
-.bp-col .demo-label{font-size:10px;width:46px}
+.bp-col .demo-block-title{font-size:9px;margin-bottom:3px}
+.bp-col .demo-bar-row{padding:2px 0}
+.bp-col .demo-label{font-size:10px;width:44px}
 .bp-col .demo-pct{font-size:10px}
-.bp-col .demo-bar-bg{height:4px}
-.bp-col .gender-row{height:8px;margin-top:4px}
-.bp-col .gender-labels{margin-top:5px}
+.bp-col .demo-bar-bg{height:3px}
+.bp-col .gender-row{height:7px;margin-top:3px}
+.bp-col .gender-labels{margin-top:4px;margin-bottom:6px}
 .bp-col .gender-label{font-size:10px}
-.bp-col .nat-row{height:8px;margin-top:4px}
-.bp-col .nat-labels{margin-top:5px}
+.bp-col .nat-row{height:7px;margin-top:3px}
+.bp-col .nat-labels{margin-top:4px;margin-bottom:6px}
 .bp-col .nat-label{font-size:10px}
-.bp-col [style*="margin-bottom:12px"]{margin-bottom:8px!important}
-.bp-col [style*="margin-top:12px"]{margin-top:8px!important}
+.bp-col [style*="margin-bottom:12px"]{margin-bottom:6px!important}
+.bp-col [style*="margin-top:12px"]{margin-top:6px!important}
 
 /* Panel scan line */
 .panel-scan{
@@ -989,18 +989,18 @@ function renderPanel(country) {
             </div>`).join('')}
         </div>
       </div>
-      <!-- Col 2: Seniority + Departments -->
+      <!-- Col 2: Seniority only -->
       <div class="bp-col">
         <div class="panel-section-title">B2B Seniority</div>
         ${rolesHTML}
-        <div class="panel-section-title" style="margin-top:12px">Department Breakdown</div>
-        ${deptHTML}
       </div>
-      <!-- Col 3: Industries + Companies -->
+      <!-- Col 3: Industries + Dept Breakdown + Companies -->
       <div class="bp-col">
         <div class="panel-section-title">Industry Concentration</div>
         ${industryHTML}
-        <div class="panel-section-title" style="margin-top:12px">Top Companies Reached</div>
+        <div class="panel-section-title" style="margin-top:6px">Department Breakdown</div>
+        ${deptHTML}
+        <div class="panel-section-title" style="margin-top:6px">Top Companies</div>
         <div class="company-tags">${companiesHTML}</div>
       </div>
     </div>
