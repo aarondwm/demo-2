@@ -676,15 +676,25 @@ export default function Home() {
             <span className="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-white/20 pointer-events-none" />
           </div>
 
-          <div className="py-8 text-center border border-white/[0.08] border-t-0 border-b-0">
-            <span className="sys-label" style={{ fontSize: "20px" }}>
-              <img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
-              Sample Insights
-            </span>
-          </div>
+          <div
+            style={{
+              opacity: hoveredIntelItem !== null ? 1 : 0,
+              maxHeight: hoveredIntelItem !== null ? "600px" : "0px",
+              overflow: "hidden",
+              transition: "opacity 0.3s ease, max-height 0.4s ease",
+              pointerEvents: hoveredIntelItem !== null ? "auto" : "none",
+            }}
+          >
+            <div className="py-8 text-center border border-white/[0.08] border-t-0 border-b-0">
+              <span className="sys-label" style={{ fontSize: "20px" }}>
+                <img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
+                Sample Insights
+              </span>
+            </div>
 
-          <div className="h-[420px] border border-white/[0.08] border-t-0">
-            <DashboardCard engagement={tableEngagement[displayItem]} />
+            <div className="h-[420px] border border-white/[0.08] border-t-0">
+              <DashboardCard engagement={tableEngagement[displayItem]} />
+            </div>
           </div>
 
         </div>
