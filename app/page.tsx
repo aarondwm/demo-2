@@ -9,14 +9,16 @@ import { HoverActionButton } from "@/components/ui/hover-action-button";
 /* ── TextScramble (from Heroeffect.txt — scrambled character reveal) ──────── */
 class TextScramble {
   private el: HTMLElement;
-  private chars = "!<>-_\\/[]{}—=+*^?#";
+  private chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   private queue: Array<{ from: string; to: string; start: number; end: number; char?: string }> = [];
   private frame = 0;
   private frameRequest = 0;
   private resolve: () => void = () => {};
+  private speed: number;
 
-  constructor(el: HTMLElement) {
+  constructor(el: HTMLElement, speed = 30) {
     this.el = el;
+    this.speed = speed;
     this.update = this.update.bind(this);
   }
 
@@ -28,8 +30,8 @@ class TextScramble {
     for (let i = 0; i < length; i++) {
       const from  = oldText[i] || "";
       const to    = newText[i] || "";
-      const start = Math.floor(Math.random() * 30);
-      const end   = start + Math.floor(Math.random() * 30);
+      const start = Math.floor(Math.random() * this.speed);
+      const end   = start + Math.floor(Math.random() * this.speed);
       this.queue.push({ from, to, start, end });
     }
     cancelAnimationFrame(this.frameRequest);
@@ -105,6 +107,36 @@ function ScrambledLine({
       {/* empty — scrambler writes into innerHTML */}
     </span>
   );
+}
+
+/* ── ScrambleOnView — fires once when element enters viewport, faster speed ── */
+function ScrambleOnView({
+  text, delay = 0, className, style,
+}: {
+  text: string; delay?: number; className?: string; style?: React.CSSProperties;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const hasRun = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let t: ReturnType<typeof setTimeout>;
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !hasRun.current) {
+        hasRun.current = true;
+        t = setTimeout(() => {
+          el.innerHTML = "";
+          new TextScramble(el, 14).setText(text);
+        }, delay);
+        obs.disconnect();
+      }
+    }, { threshold: 0.05 });
+    obs.observe(el);
+    return () => { obs.disconnect(); clearTimeout(t); };
+  }, [text, delay]);
+
+  return <span ref={ref} className={className} style={style}>{text}</span>;
 }
 
 const HERO_VIDEOS = [
@@ -391,9 +423,11 @@ function FeatureCard({
             className="font-display font-bold uppercase"
             style={{ fontSize: "clamp(20px,2vw,28px)", letterSpacing: "0.05em", lineHeight: "1", color: "#e8e2d6" }}
           >
-            {title}
+            <ScrambleOnView text={title} delay={index * 120 + 100} />
           </h3>
-          <p className="text-[13px] leading-[1.8]" style={{ color: "#5a6272" }}>{body}</p>
+          <p className="text-[13px] leading-[1.8]" style={{ color: "#5a6272" }}>
+            <ScrambleOnView text={body} delay={index * 120 + 300} />
+          </p>
         </div>
       </div>
     </div>
@@ -500,13 +534,17 @@ export default function Home() {
 
           <div className="mb-14">
             <div className="flex items-center mb-5">
-              <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />What We Do</span>
+              <span className="sys-label" style={{ fontSize: "13px" }}>
+                <img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
+                <ScrambleOnView text="What We Do" delay={0} />
+              </span>
             </div>
             <h2
               className="font-display font-bold uppercase text-white"
               style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
             >
-              We Run It.<br />You See Who Engaged.
+              <ScrambleOnView text="We Run It." delay={120} style={{ display: "block" }} />
+              <ScrambleOnView text="You See Who Engaged." delay={320} style={{ display: "block" }} />
             </h2>
           </div>
 
