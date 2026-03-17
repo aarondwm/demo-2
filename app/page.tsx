@@ -589,7 +589,8 @@ export default function Home() {
           </div>
           <iframe
             src="/dwm-gcc-map.html"
-            style={{ width: "100%", height: "1020px", border: "none" }}
+            scrolling="no"
+            style={{ width: "100%", height: "680px", border: "none", display: "block" }}
             title="GCC Audience Map"
           />
         </div>
