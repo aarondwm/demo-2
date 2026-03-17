@@ -758,16 +758,8 @@ export default function Home() {
       <footer className="border-t border-white/[0.05]">
         <div className="max-w-6xl mx-auto px-6 md:px-10 py-14 grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-10">
           <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-3">
-              <div className="grid grid-cols-2 gap-[5px]">
-                <span className="w-1.5 h-1.5 bg-[#4a6cf7]" />
-                <span className="w-1.5 h-1.5 bg-white/20" />
-                <span className="w-1.5 h-1.5 bg-white/20" />
-                <span className="w-1.5 h-1.5 bg-white/20" />
-              </div>
-              <span className="font-display font-bold text-[14px] tracking-[0.3em] uppercase text-white">
-                DIWANIYA MEDIA
-              </span>
+            <div className="flex items-center">
+              <img src="/D*M website.png" alt="DWM" className="h-10 w-auto" />
             </div>
             <p className="sys-body text-[13px] max-w-xs">
               We run campaigns. You see exactly who engaged.
