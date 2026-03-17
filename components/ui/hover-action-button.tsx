@@ -54,7 +54,7 @@ export const HoverActionButton = ({
       {/* Background fill */}
       <span
         className={cn(
-          "absolute left-[20%] top-[40%] h-2 w-2 scale-[1] bg-white/10 transition-all duration-300 group-hover:left-[0%] group-hover:top-[0%] group-hover:h-full group-hover:w-full group-hover:scale-[1.8] pointer-events-none",
+          "absolute left-[20%] top-[40%] h-2 w-2 scale-[1] bg-transparent transition-all duration-300 group-hover:left-[0%] group-hover:top-[0%] group-hover:h-full group-hover:w-full group-hover:scale-[1.8] pointer-events-none",
           fillClass
         )}
       />

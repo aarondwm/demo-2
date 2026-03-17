@@ -488,7 +488,6 @@ export default function Home() {
             className="flex flex-col items-center gap-4 opacity-0 pb-4"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
-            <HoverActionButton label="Request a Briefing" href="#get-started" className="text-[13px]" />
             <HoverActionButton label="How It Works" href="#what-we-do" variant="white" direction="vertical" className="text-[13px]" />
           </div>
         </div>
@@ -604,7 +603,7 @@ export default function Home() {
 
             <div className="p-10 md:p-14 grid md:grid-cols-2 gap-12 items-center">
               <div className="flex flex-col gap-6">
-                <p className="font-mono uppercase" style={{ fontSize: "10px", letterSpacing: "0.25em", color: "#4a6cf7" }}>Engagement Breakdowns</p>
+                <p className="font-mono uppercase" style={{ fontSize: "20px", letterSpacing: "0.25em", color: "#4a6cf7" }}>Engagement Breakdowns</p>
 
                 {/* Stats row */}
                 <div className="flex items-stretch divide-x divide-[#161c2c]">
