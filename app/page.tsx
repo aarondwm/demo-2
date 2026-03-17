@@ -485,7 +485,7 @@ export default function Home() {
           </h1>
 
           <div
-            className="flex flex-col items-center gap-4 opacity-0 pb-4 mt-10"
+            className="flex flex-col items-center gap-8 opacity-0 pb-4 mt-20"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
             <HoverActionButton label="Request a Briefing" href="#get-started" className="text-[13px]" />
@@ -764,7 +764,7 @@ export default function Home() {
               <img src="/D*M website.png" alt="DWM" className="h-10 w-auto" />
             </div>
             <p className="sys-body text-[13px] max-w-xs">
-              We run campaigns. You see exactly who engaged.
+              Right Story. Right Audience. Real Impact.
             </p>
           </div>
 
