@@ -458,7 +458,7 @@ export default function Home() {
             className="opacity-0"
             style={{ animation: "reveal-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards" }}
           >
-            <div className="rule-accent justify-center">
+            <div className="flex items-center justify-center">
               <span className="sys-label">Proprietary GCC Media & Insight Technology</span>
             </div>
           </div>
@@ -504,7 +504,7 @@ export default function Home() {
             </div>
             <h2
               className="font-display font-bold uppercase text-white"
-              style={{ fontSize: "clamp(22px,3vw,38px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+              style={{ fontSize: "clamp(18px,2.5vw,30px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
             >
               We Run It.<br />You See Who Engaged.
             </h2>
@@ -538,7 +538,7 @@ export default function Home() {
               </div>
               <h2
                 className="font-display font-bold uppercase"
-                style={{ fontSize: "clamp(22px,3vw,38px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+                style={{ fontSize: "clamp(18px,2.5vw,30px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
                 <span style={{ display: "block", color: "#ffffff" }}>Your Story.</span>
                 <span style={{ display: "block", color: "#4a6cf7" }}>Guaranteed Publishing.</span>
@@ -589,7 +589,7 @@ export default function Home() {
               </div>
               <h2
                 className="font-display font-bold uppercase text-white"
-                style={{ fontSize: "clamp(22px,3vw,38px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+                style={{ fontSize: "clamp(18px,2.5vw,30px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
                 Know Exactly<br />Who Engaged
               </h2>
@@ -697,7 +697,7 @@ export default function Home() {
             </div>
             <h2
               className="font-display font-bold uppercase text-white"
-              style={{ fontSize: "clamp(22px,3vw,38px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+              style={{ fontSize: "clamp(18px,2.5vw,30px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
             >
               In Their<br />Own Words
             </h2>
@@ -740,7 +740,7 @@ export default function Home() {
               </div>
               <h2
                 className="font-display font-bold uppercase text-white mb-7"
-                style={{ fontSize: "clamp(26px,4.5vw,56px)", letterSpacing: "0.03em", lineHeight: "0.90" }}
+                style={{ fontSize: "clamp(20px,3.5vw,44px)", letterSpacing: "0.03em", lineHeight: "0.90" }}
               >
                 Start with<br />a Briefing.<br />
                 <span style={{ color: "var(--accent)" }}>See What Returns.</span>
