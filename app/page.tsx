@@ -748,7 +748,7 @@ export default function Home() {
                 <span style={{ color: "var(--accent)" }}>See What Returns.</span>
               </h2>
               <p className="sys-body max-w-lg mb-10">
-                Book a briefing. We&apos;ll walk you through what we&apos;d run, who we&apos;d reach, and what the data looks like after.
+                Book a briefing. We&apos;ll walk you through what we&apos;d run, who we&apos;d reach, and whether you&apos;re eligible.
               </p>
               <HoverActionButton label="Request a Briefing" href="#" />
             </div>
