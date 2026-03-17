@@ -455,7 +455,7 @@ export default function Home() {
         {/* Hero content sits above the videos */}
         <div className="relative z-10 flex flex-col items-center px-6 py-24 md:py-36 gap-6">
           <div
-            className="opacity-0"
+            className="opacity-0 mb-3"
             style={{ animation: "reveal-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards" }}
           >
             <div className="flex items-center justify-center">
@@ -595,7 +595,7 @@ export default function Home() {
               </h2>
             </div>
             <p className="lg:max-w-sm lg:ml-auto" style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8" }}>
-              Other agencies show you impressions. We show you exactly who read it
+              Other agencies show you impressions. We show you exactly who read it.
             </p>
           </div>
 
