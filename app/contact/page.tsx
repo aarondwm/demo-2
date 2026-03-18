@@ -17,7 +17,7 @@ export default function ContactPage() {
   };
 
   const inputClass =
-    "w-full bg-transparent border border-white/[0.15] px-4 py-3 font-mono text-[13px] tracking-[0.06em] text-white placeholder:text-white/20 focus:outline-none focus:border-[#4a6cf7]/50 transition-colors";
+    "w-full bg-transparent border border-white/[0.35] px-4 py-3 font-mono text-[13px] tracking-[0.06em] text-white placeholder:text-white focus:outline-none focus:border-[#4a6cf7]/50 transition-colors";
 
   return (
     <main className="min-h-screen bg-[#04060c] text-white">
@@ -36,7 +36,7 @@ export default function ContactPage() {
             <span style={{ color: "#4a6cf7" }}>Briefing.</span>
           </h1>
           <p className="font-mono text-[13px] tracking-[0.04em] text-white/30 leading-relaxed max-w-md mb-12">
-            We&apos;ll be in touch if there&apos;s a fit.
+            We&apos;ll be in touch if you&apos;re a fit.
           </p>
 
           {submitted ? (
@@ -62,7 +62,7 @@ export default function ContactPage() {
                   value={form.name}
                   onChange={handleChange}
                   className={inputClass}
-                  style={{ boxShadow: "0 0 12px rgba(255,255,255,0.03)" }}
+                  style={{ boxShadow: "0 0 16px rgba(255,255,255,0.06)" }}
                 />
                 <input
                   type="email"
@@ -72,7 +72,7 @@ export default function ContactPage() {
                   value={form.email}
                   onChange={handleChange}
                   className={inputClass}
-                  style={{ boxShadow: "0 0 12px rgba(255,255,255,0.03)" }}
+                  style={{ boxShadow: "0 0 16px rgba(255,255,255,0.06)" }}
                 />
               </div>
               <input
@@ -82,7 +82,7 @@ export default function ContactPage() {
                 value={form.company}
                 onChange={handleChange}
                 className={inputClass}
-                style={{ boxShadow: "0 0 12px rgba(255,255,255,0.03)" }}
+                style={{ boxShadow: "0 0 16px rgba(255,255,255,0.06)" }}
               />
               <textarea
                 name="message"
@@ -91,7 +91,7 @@ export default function ContactPage() {
                 value={form.message}
                 onChange={handleChange}
                 className={`${inputClass} resize-none`}
-                style={{ boxShadow: "0 0 12px rgba(255,255,255,0.03)" }}
+                style={{ boxShadow: "0 0 16px rgba(255,255,255,0.06)" }}
               />
               <button
                 type="submit"
