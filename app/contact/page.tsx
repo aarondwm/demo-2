@@ -95,9 +95,21 @@ export default function ContactPage() {
               />
               <button
                 type="submit"
-                className="self-start font-mono text-[11px] font-bold tracking-[0.2em] uppercase bg-[#4a6cf7] text-black px-10 py-4 hover:bg-[#5a7cff] transition-colors"
+                className="group self-start relative inline-flex items-center h-12 font-mono text-[12px] tracking-[0.22em] uppercase font-bold overflow-hidden"
+                style={{ borderRadius: "12px", transform: "translateZ(0)" }}
               >
-                Submit
+                {/* Static blue background */}
+                <span className="absolute inset-0 bg-[#4a6cf7]" />
+                {/* White overlay slides in on hover */}
+                <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10 bg-white">
+                  <img src="/D*M website.png" alt="DWM" className="h-6 w-auto" />
+                </span>
+                {/* Text — fades out on hover, stays centered */}
+                <span className="absolute inset-0 flex items-center justify-center text-white transition-opacity duration-300 group-hover:opacity-0 z-20">
+                  Submit
+                </span>
+                {/* Invisible sizer */}
+                <span className="invisible px-10">Submit</span>
               </button>
             </form>
           )}
