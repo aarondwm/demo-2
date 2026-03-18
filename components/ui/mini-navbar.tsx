@@ -238,9 +238,9 @@ export function Navbar() {
           >
             {/* Static white background */}
             <span className="absolute inset-0 bg-white" />
-            {/* Black overlay slides in on top */}
-            <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 text-white text-[22px] z-10" style={{ background: "#4a6cf7", fontFamily: "'Neue Montreal', sans-serif", fontWeight: 700 }}>
-              د
+            {/* Blue overlay slides in on hover */}
+            <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>
+              <img src="/D*M website.png" alt="DWM" className="h-6 w-auto" style={{ mixBlendMode: "screen" }} />
             </span>
             {/* Text — fades out on hover, stays centered */}
             <span className="absolute inset-0 flex items-center justify-center text-black transition-opacity duration-300 group-hover:opacity-0 z-20">

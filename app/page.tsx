@@ -116,7 +116,7 @@ function ScrambledLine({
   }, [text, delay, loopInterval]);
 
   return (
-    <span ref={ref} className={className} style={{ display: "block", ...style }}>
+    <span ref={ref} className={className} style={{ display: "block", opacity: 0, ...style }}>
       {text}
     </span>
   );
