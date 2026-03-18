@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Navbar }          from "@/components/ui/mini-navbar";
 import { Spotlight }       from "@/components/ui/spotlight";
 import { TestimonialsColumn, type Testimonial } from "@/components/ui/testimonials-columns-1";
@@ -379,6 +379,7 @@ function FeatureCard({
   const ref  = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   const [bodyVisible, setBodyVisible] = useState(false);
+  const handleTitleDone = useCallback(() => setBodyVisible(true), []);
 
   useEffect(() => {
     const el = ref.current;
@@ -439,7 +440,7 @@ function FeatureCard({
             className="font-display font-bold uppercase"
             style={{ fontSize: "clamp(20px,2vw,28px)", letterSpacing: "0.05em", lineHeight: "1", color: "#e8e2d6" }}
           >
-            <ScrambleOnView text={title} delay={index * 120 + 100} onDone={() => setBodyVisible(true)} />
+            <ScrambleOnView text={title} delay={100} onDone={handleTitleDone} />
           </h3>
           <p
             className="text-[13px] leading-[1.8]"
