@@ -357,7 +357,7 @@ function MediaCard({ n, title, body }: { n: string; title: string; body: string 
           letterSpacing: hovered ? "0.14em" : "0.1em",
           color: hovered ? "#ffffff" : "#7a8598",
           transition: "color 0.3s ease, font-size 0.3s ease, letter-spacing 0.3s ease",
-        }}>{title}</span>
+        }}><ScrambleOnView text={title} delay={0} style={{ display: "inline" }} /></span>
         <span style={{
           fontFamily: "var(--font-body), sans-serif",
           fontSize: hovered ? "14px" : "13px",
@@ -459,6 +459,12 @@ export default function Home() {
   const [activeIntelItem, setActiveIntelItem] = useState(0);
   const [intelVisible, setIntelVisible] = useState(true);
   const [hoveredIntelItem, setHoveredIntelItem] = useState<number | null>(null);
+  const [sec3BodyVisible,  setSec3BodyVisible]  = useState(false);
+  const [sec4BodyVisible,  setSec4BodyVisible]  = useState(false);
+  const [secCtaBodyVisible,setSecCtaBodyVisible]= useState(false);
+  const sec3BodyDone   = useCallback(() => setSec3BodyVisible(true),   []);
+  const sec4BodyDone   = useCallback(() => setSec4BodyVisible(true),   []);
+  const secCtaBodyDone = useCallback(() => setSecCtaBodyVisible(true), []);
 
   const displayItem = hoveredIntelItem !== null ? hoveredIntelItem : activeIntelItem;
 
@@ -595,14 +601,14 @@ export default function Home() {
             {/* Left */}
             <div className="flex flex-col gap-8">
               <div className="flex items-center mb-5">
-                <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Secured Media Placement</span>
+                <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Secured Media Placement" delay={0} style={{ display: "inline" }} /></span>
               </div>
               <h2
                 className="font-display font-bold uppercase"
                 style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
-                <span style={{ display: "block", color: "#ffffff" }}>Your Story.</span>
-                <span style={{ display: "block", color: "#4a6cf7" }}>Guaranteed Publishing.</span>
+                <ScrambleOnView text="Your Story." delay={0} style={{ display: "block", color: "#ffffff" }} />
+                <ScrambleOnView text="Guaranteed Publishing." delay={150} style={{ display: "block", color: "#4a6cf7" }} onDone={sec3BodyDone} />
               </h2>
 
               {/* Stat counters */}
@@ -618,7 +624,7 @@ export default function Home() {
                 ))}
               </div>
 
-              <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8" }}>
+              <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec3BodyVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
                 We produce and place editorially-driven stories across a network of Gulf business and industry publications. Your content goes live — as a confirmed placement.
               </p>
             </div>
@@ -645,7 +651,7 @@ export default function Home() {
           <div className="flex items-center mb-8">
             <span className="sys-label" style={{ fontSize: "13px" }}>
               <img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
-              Audience Selection
+              <ScrambleOnView text="Audience Selection" delay={0} style={{ display: "inline" }} />
             </span>
           </div>
           <iframe
@@ -664,16 +670,17 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-10 mb-12 items-end">
             <div>
               <div className="flex items-center mb-5">
-                <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Intelligence, Delivered</span>
+                <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Intelligence, Delivered" delay={0} style={{ display: "inline" }} /></span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white"
                 style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
-                Know Exactly<br />Who Engaged
+                <ScrambleOnView text="Know Exactly" delay={0} style={{ display: "block" }} />
+                <ScrambleOnView text="Who Engaged" delay={150} style={{ display: "block" }} onDone={sec4BodyDone} />
               </h2>
             </div>
-            <p className="lg:max-w-sm lg:ml-auto" style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8" }}>
+            <p className="lg:max-w-sm lg:ml-auto" style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4BodyVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
               Other agencies show you impressions. We show you exactly who read it.
             </p>
           </div>
@@ -683,7 +690,7 @@ export default function Home() {
 
             <div className="p-10 md:p-14 grid md:grid-cols-2 gap-12 items-center">
               <div className="flex flex-col gap-6">
-                <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Engagement Breakdowns</span>
+                <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Engagement Breakdowns" delay={0} style={{ display: "inline" }} /></span>
 
                 {/* Stats row */}
                 <div className="flex items-stretch divide-x divide-[#161c2c]">
@@ -784,13 +791,14 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="mb-14 text-center">
             <div className="flex items-center justify-center mb-5">
-              <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Who We Work With</span>
+              <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Who We Work With" delay={0} style={{ display: "inline" }} /></span>
             </div>
             <h2
               className="font-display font-bold uppercase text-white"
               style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
             >
-              In Their<br />Own Words
+              <ScrambleOnView text="In Their" delay={0} style={{ display: "block" }} />
+              <ScrambleOnView text="Own Words" delay={150} style={{ display: "block" }} />
             </h2>
           </div>
 
@@ -827,16 +835,17 @@ export default function Home() {
 
             <div className="relative z-10 max-w-2xl">
               <div className="flex items-center mb-7">
-                <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />Get Started</span>
+                <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Get Started" delay={0} style={{ display: "inline" }} /></span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white mb-7"
                 style={{ fontSize: "clamp(40px,6.5vw,84px)", letterSpacing: "0.03em", lineHeight: "0.90" }}
               >
-                Start with<br />a Briefing.<br />
-                <span style={{ color: "var(--accent)" }}>See What Returns.</span>
+                <ScrambleOnView text="Start with" delay={0} style={{ display: "block" }} />
+                <ScrambleOnView text="a Briefing." delay={150} style={{ display: "block" }} />
+                <ScrambleOnView text="See What Returns." delay={300} style={{ display: "block", color: "var(--accent)" }} onDone={secCtaBodyDone} />
               </h2>
-              <p className="sys-body max-w-lg mb-10">
+              <p className="sys-body max-w-lg mb-10" style={{ opacity: secCtaBodyVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
                 Book a briefing. We&apos;ll walk you through what we&apos;d run, who we&apos;d reach, and whether you&apos;re eligible.
               </p>
               <HoverActionButton label="Request a Briefing" href="#" />
@@ -853,7 +862,7 @@ export default function Home() {
               <img src="/D*M website.png" alt="DWM" className="h-10 w-auto" />
             </div>
             <p className="sys-body text-[13px] max-w-xs">
-              Right Story. Right Audience. Real Impact.
+              <ScrambleOnView text="Right Story. Right Audience. Real Impact." delay={0} style={{ display: "inline" }} />
             </p>
           </div>
 
@@ -863,7 +872,7 @@ export default function Home() {
             { heading: "Resources", links: ["Case Studies", "Insights", "FAQ", "Support"] },
           ].map((col) => (
             <div key={col.heading} className="flex flex-col gap-4">
-              <span className="sys-label text-white/20">{col.heading}</span>
+              <span className="sys-label text-white/20"><ScrambleOnView text={col.heading} delay={0} style={{ display: "inline" }} /></span>
               <ul className="flex flex-col gap-3">
                 {col.links.map((link) => (
                   <li key={link}>
