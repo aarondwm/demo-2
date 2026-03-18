@@ -680,12 +680,25 @@ export default function Home() {
               <ScrambleOnView text="Audience Selection" delay={0} style={{ display: "inline" }} />
             </span>
           </div>
-          <iframe
-            src="/dwm-gcc-map.html"
-            scrolling="no"
-            style={{ width: "100%", height: "860px", border: "none", display: "block" }}
-            title="GCC Audience Map"
-          />
+          <div style={{
+            position: "relative",
+            borderRadius: "4px",
+            border: "1px solid rgba(74,108,247,0.18)",
+            boxShadow: "0 0 0 1px rgba(74,108,247,0.06), 0 0 60px rgba(74,108,247,0.10), inset 0 0 40px rgba(4,13,28,0.6)",
+            overflow: "hidden",
+          }}>
+            {/* Atmospheric glow — centred on the Gulf */}
+            <div aria-hidden style={{
+              position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1,
+              background: "radial-gradient(ellipse 55% 50% at 62% 52%, rgba(74,108,247,0.08) 0%, transparent 70%)",
+            }} />
+            <iframe
+              src="/dwm-gcc-map.html"
+              scrolling="no"
+              style={{ width: "100%", height: "860px", border: "none", display: "block", position: "relative", zIndex: 0 }}
+              title="GCC Audience Map"
+            />
+          </div>
         </div>
       </section>
 
