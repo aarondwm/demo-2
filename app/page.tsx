@@ -375,8 +375,9 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
           fontSize: hovered ? "15px" : "13px",
           letterSpacing: hovered ? "0.14em" : "0.1em",
           color: hovered ? "#ffffff" : "#7a8598",
-          transition: "color 0.3s ease, font-size 0.3s ease, letter-spacing 0.3s ease",
-        }} style={{ opacity: visible ? 1 : 0, transition: `opacity 0.5s ease ${0.05 + index * 0.1}s, color 0.3s ease, font-size 0.3s ease, letter-spacing 0.3s ease` }}>{title}</span>
+          opacity: visible ? 1 : 0,
+          transition: `opacity 0.5s ease ${0.05 + index * 0.1}s, color 0.3s ease, font-size 0.3s ease, letter-spacing 0.3s ease`,
+        }}>{title}</span>
         <span style={{
           fontFamily: "var(--font-body), sans-serif",
           fontSize: hovered ? "14px" : "13px",

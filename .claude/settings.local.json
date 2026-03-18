@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npm install:*)",
       "Read(//usr/local/bin/**)",
-      "Read(//Users/aaron/.nvm/versions/**)"
+      "Read(//Users/aaron/.nvm/versions/**)",
+      "Bash(npm run:*)"
     ]
   }
 }
