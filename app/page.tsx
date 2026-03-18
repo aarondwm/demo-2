@@ -482,9 +482,13 @@ export default function Home() {
   const [sec3BodyVisible,  setSec3BodyVisible]  = useState(false);
   const [sec4BodyVisible,  setSec4BodyVisible]  = useState(false);
   const [secCtaBodyVisible,setSecCtaBodyVisible]= useState(false);
-  const sec3BodyDone   = useCallback(() => setSec3BodyVisible(true),   []);
-  const sec4BodyDone   = useCallback(() => setSec4BodyVisible(true),   []);
-  const secCtaBodyDone = useCallback(() => setSecCtaBodyVisible(true), []);
+  const [intelStatsVisible, setIntelStatsVisible] = useState(false);
+  const sec3BodyDone      = useCallback(() => setSec3BodyVisible(true),    []);
+  const sec4BodyDone      = useCallback(() => setSec4BodyVisible(true),    []);
+  const secCtaBodyDone    = useCallback(() => setSecCtaBodyVisible(true),  []);
+  const intelBoxesDone    = useCallback(() => setIntelStatsVisible(true),  []);
+  const [testimonialsVisible, setTestimonialsVisible] = useState(false);
+  const testimonialsDone  = useCallback(() => setTestimonialsVisible(true), []);
 
   const displayItem = hoveredIntelItem !== null ? hoveredIntelItem : activeIntelItem;
 
@@ -632,7 +636,7 @@ export default function Home() {
               </h2>
 
               {/* Stat counters */}
-              <div className="flex items-stretch divide-x divide-white/[0.06]">
+              <div className="flex items-stretch divide-x divide-white/[0.06]" style={{ opacity: sec3BodyVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
                 {[
                   { value: "6",   label: "GCC Markets" },
                   { value: "12+", label: "Publications" },
@@ -713,7 +717,7 @@ export default function Home() {
                 <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Engagement Breakdowns" delay={0} style={{ display: "inline" }} /></span>
 
                 {/* Stats row */}
-                <div className="flex items-stretch divide-x divide-[#161c2c]">
+                <div className="flex items-stretch divide-x divide-[#161c2c]" style={{ opacity: intelStatsVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
                   {intelStats[displayItem].map(({ value, label }) => (
                     <div key={label} className="flex flex-col gap-1 pr-6 first:pl-0 pl-6" style={{ transition: "opacity 0.25s ease" }}>
                       <span className="font-display font-bold" style={{ fontSize: "22px", color: "#e8e2d6" }}>
@@ -772,7 +776,7 @@ export default function Home() {
                           transition: "color 0.25s ease, font-size 0.25s ease",
                         }}
                       >
-                        <ScrambleOnView text={label} delay={idx * 60} style={{ display: "inline" }} />
+                        <ScrambleOnView text={label} delay={idx * 60} style={{ display: "inline" }} onDone={idx === 7 ? intelBoxesDone : undefined} />
                       </span>
                     </li>
                   );
@@ -822,7 +826,7 @@ export default function Home() {
               style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
             >
               <ScrambleOnView text="In Their" delay={0} style={{ display: "block" }} />
-              <ScrambleOnView text="Own Words" delay={150} style={{ display: "block" }} />
+              <ScrambleOnView text="Own Words" delay={150} style={{ display: "block" }} onDone={testimonialsDone} />
             </h2>
           </div>
 
@@ -832,6 +836,8 @@ export default function Home() {
               maskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
               WebkitMaskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
               maxHeight: "680px",
+              opacity: testimonialsVisible ? 1 : 0,
+              transition: "opacity 0.8s ease",
             }}
           >
             <TestimonialsColumn testimonials={firstColumn}  duration={14} />
