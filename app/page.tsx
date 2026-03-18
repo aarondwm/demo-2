@@ -522,8 +522,8 @@ export default function Home() {
             className="flex flex-row items-center gap-6 opacity-0 mt-20 mb-20"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
-            <HoverActionButton label="Request a Briefing" href="#get-started" variant="white" className="text-[15px] font-bold rounded-2xl py-7 w-80 !bg-transparent" />
-            <HoverActionButton label="How It Works" href="#what-we-do" variant="white" direction="vertical" className="text-[15px] font-bold rounded-2xl py-7 w-80 !bg-transparent" />
+            <HoverActionButton label="Request a Briefing" href="#get-started" variant="white" className="text-[15px] font-bold rounded-2xl py-7 w-80" style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderColor: "rgba(255,255,255,0.10)" }} />
+            <HoverActionButton label="How It Works" href="#what-we-do" variant="white" direction="vertical" className="text-[15px] font-bold rounded-2xl py-7 w-80" style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderColor: "rgba(255,255,255,0.10)" }} />
           </div>
         </div>
       </section>
