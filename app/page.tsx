@@ -683,8 +683,8 @@ export default function Home() {
           <div style={{
             position: "relative",
             borderRadius: "4px",
-            border: "1px solid rgba(74,108,247,0.18)",
-            boxShadow: "0 0 0 1px rgba(74,108,247,0.06), 0 0 60px rgba(74,108,247,0.10), inset 0 0 40px rgba(4,13,28,0.6)",
+            border: "1px solid rgba(74,108,247,0.30)",
+            boxShadow: "0 0 0 1px rgba(74,108,247,0.06), 0 0 40px rgba(74,108,247,0.18), 0 0 80px rgba(74,108,247,0.08), inset 0 0 40px rgba(4,13,28,0.6)",
             overflow: "hidden",
           }}>
             {/* Atmospheric glow — centred on the Gulf */}
