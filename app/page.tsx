@@ -513,6 +513,7 @@ export default function Home() {
   const [sec3BodyVisible,   setSec3BodyVisible]   = useState(false);
   const [sec4BodyVisible,   setSec4BodyVisible]   = useState(false);
   const [sec5BodyVisible,   setSec5BodyVisible]   = useState(false);
+  const [secMapVisible,     setSecMapVisible]     = useState(false);
   const sec2Done     = useCallback(() => setSec2Visible(true),     []);
   const sec3Done     = useCallback(() => setSec3Visible(true),     []);
   const sec4Done     = useCallback(() => setSec4Visible(true),     []);
@@ -522,6 +523,7 @@ export default function Home() {
   const sec3BodyDone = useCallback(() => setSec3BodyVisible(true), []);
   const sec4BodyDone = useCallback(() => setSec4BodyVisible(true), []);
   const sec5BodyDone = useCallback(() => setSec5BodyVisible(true), []);
+  const secMapDone   = useCallback(() => setSecMapVisible(true),   []);
 
   const displayItem = hoveredIntelItem !== null ? hoveredIntelItem : activeIntelItem;
 
@@ -703,14 +705,24 @@ export default function Home() {
       </section>
 
       {/* ── 3b. AUDIENCE SELECTION MAP ───────────────────────────────────── */}
-      <section className="sys-section">
+      <section id="audience-selection" className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
-          <div className="flex items-center mb-8">
+          <div className="flex items-center mb-7">
             <span className="sys-label" style={{ fontSize: "13px" }}>
               <img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
-              <ScrambleOnView text="Audience Selection" delay={0} style={{ display: "inline" }} />
+              <ScrambleOnView text="Audience Selection" delay={0} style={{ display: "inline" }} onDone={secMapDone} />
             </span>
           </div>
+          <h2
+            className="font-display font-bold uppercase text-white mb-4"
+            style={{ fontSize: "clamp(40px,6.5vw,84px)", letterSpacing: "0.03em", lineHeight: "0.90" }}
+          >
+            <span style={{ display: "block", opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>Target Anyone.</span>
+            <span style={{ display: "block", color: "#4a6cf7", opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.12s" }}>Anywhere.</span>
+          </h2>
+          <p className="sys-body max-w-lg mb-10" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s" }}>
+            Our proprietary technology allows us to ensure anyone you want to read the story, reads it.
+          </p>
           <div style={{
             position: "relative",
             borderRadius: "4px",
