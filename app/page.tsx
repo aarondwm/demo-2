@@ -940,18 +940,19 @@ export default function Home() {
           <div className="flex flex-col gap-4">
             <img src="/D*M website.png" alt="DWM" className="h-9 w-auto self-start" />
             <p className="font-mono text-[11px] tracking-[0.08em] text-white/25 max-w-xs leading-relaxed">
-              GCC-focused media placement and audience intelligence.
+              Proprietary GCC Media &amp; Insight Technology
             </p>
           </div>
 
           {[
             { heading: "Services", links: [
+              { label: "Our Aim", href: "#what-we-do" },
               { label: "Media Placement", href: "#media-placement" },
-              { label: "Targeting", href: "#what-we-do" },
+              { label: "Targeting", href: "#audience-selection" },
               { label: "Audience Insights", href: "#intelligence" },
             ]},
             { heading: "Company", links: [
-              { label: "About", href: "#" },
+              { label: "Home", href: "#home" },
               { label: "Contact", href: "#get-started" },
               { label: "Reviews", href: "#reviews" },
             ]},
