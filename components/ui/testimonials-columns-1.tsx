@@ -31,10 +31,11 @@ export const TestimonialsColumn = (props: {
             {props.testimonials.map(({ text, image, name, role }, i) => (
               <div
                 key={i}
-                className="sys-card p-7 max-w-[300px] w-full flex flex-col items-center gap-5 text-center"
+                className="p-7 max-w-[300px] w-full flex flex-col items-center gap-5 text-center"
+                style={{ background: "rgba(74,108,247,0.06)", border: "1px solid rgba(74,108,247,0.18)", boxShadow: "0 0 24px rgba(74,108,247,0.06) inset" }}
               >
                 {/* Quote */}
-                <p className="sys-body text-[13px] leading-[1.75]">
+                <p className="sys-body text-[13px] leading-[1.75] text-white/80">
                   &ldquo;{text}&rdquo;
                 </p>
 

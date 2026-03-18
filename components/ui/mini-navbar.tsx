@@ -222,7 +222,7 @@ export function Navbar() {
             <a
               key={group.label}
               href={group.href}
-              className="py-5 px-5 font-mono font-bold text-[17px] tracking-[0.18em] uppercase text-white hover:text-white/70 transition-colors duration-150"
+              className="py-5 px-3 font-mono font-bold text-[12px] tracking-[0.12em] uppercase text-white hover:text-white/70 transition-colors duration-150 whitespace-nowrap"
             >
               {group.label}
             </a>
