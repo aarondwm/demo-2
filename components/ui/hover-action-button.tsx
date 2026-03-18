@@ -83,9 +83,9 @@ export const HoverActionButton = ({
   /* Re-fire when hover ends (default label slides back in) */
   const handleMouseLeave = useCallback(() => {
     if (scramble && scrambleRef.current && sizerText) {
-      runScramble(scrambleRef.current, sizerText, scrambleStep);
+      runScramble(scrambleRef.current, sizerText, scrambleStep / 2);
     }
-  }, [scramble, sizerText]);
+  }, [scramble, sizerText, scrambleStep]);
 
   return (
     <a
