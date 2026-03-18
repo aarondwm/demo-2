@@ -154,6 +154,23 @@ function ScrambleOnView({
   return <span ref={ref} className={className} style={style}>{text}</span>;
 }
 
+/* ── ScrambleOnTrigger — re-scrambles every time `trigger` changes ─────── */
+function ScrambleOnTrigger({
+  text, trigger, className, style,
+}: {
+  text: string; trigger: number | string; className?: string; style?: React.CSSProperties;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.opacity = "1";
+    el.innerHTML = "";
+    new TextScramble(el, 14, true).setText(text);
+  }, [text, trigger]);
+  return <span ref={ref} className={className} style={style}>{text}</span>;
+}
+
 const HERO_VIDEOS = [
   "https://videos.files.wordpress.com/PG2Rvigf/5727833-uhd_3840_2160_30fps.mp4",
   "https://videos.files.wordpress.com/hBSfaNz4/13153068_1440_2560_30fps.mp4",
@@ -325,6 +342,8 @@ function DashboardCard({ engagement }: { engagement: string[] }) {
 /* ── MediaCard (secured media placement rows) ───────────────────────────── */
 function MediaCard({ n, title, body }: { n: string; title: string; body: string }) {
   const [hovered, setHovered] = useState(false);
+  const [bodyVisible, setBodyVisible] = useState(false);
+  const handleTitleDone = useCallback(() => setBodyVisible(true), []);
   return (
     <div
       onMouseEnter={() => setHovered(true)}
@@ -357,13 +376,14 @@ function MediaCard({ n, title, body }: { n: string; title: string; body: string 
           letterSpacing: hovered ? "0.14em" : "0.1em",
           color: hovered ? "#ffffff" : "#7a8598",
           transition: "color 0.3s ease, font-size 0.3s ease, letter-spacing 0.3s ease",
-        }}><ScrambleOnView text={title} delay={0} style={{ display: "inline" }} /></span>
+        }}><ScrambleOnView text={title} delay={0} onDone={handleTitleDone} style={{ display: "inline" }} /></span>
         <span style={{
           fontFamily: "var(--font-body), sans-serif",
           fontSize: hovered ? "14px" : "13px",
           lineHeight: "1.75",
           color: hovered ? "rgba(255,255,255,0.88)" : "#3a4255",
-          transition: "color 0.3s ease, font-size 0.3s ease",
+          opacity: bodyVisible ? 1 : 0,
+          transition: "color 0.3s ease, font-size 0.3s ease, opacity 0.6s ease",
         }}>{body}</span>
       </div>
     </div>
@@ -696,8 +716,12 @@ export default function Home() {
                 <div className="flex items-stretch divide-x divide-[#161c2c]">
                   {intelStats[displayItem].map(({ value, label }) => (
                     <div key={label} className="flex flex-col gap-1 pr-6 first:pl-0 pl-6" style={{ transition: "opacity 0.25s ease" }}>
-                      <span className="font-display font-bold" style={{ fontSize: "22px", color: "#e8e2d6" }}>{value}</span>
-                      <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "#c8c0b0" }}>{label}</span>
+                      <span className="font-display font-bold" style={{ fontSize: "22px", color: "#e8e2d6" }}>
+                        <ScrambleOnTrigger text={value} trigger={displayItem} style={{ display: "inline" }} />
+                      </span>
+                      <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "#c8c0b0" }}>
+                        <ScrambleOnTrigger text={label} trigger={displayItem} style={{ display: "inline" }} />
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -748,7 +772,7 @@ export default function Home() {
                           transition: "color 0.25s ease, font-size 0.25s ease",
                         }}
                       >
-                        {label}
+                        <ScrambleOnView text={label} delay={idx * 60} style={{ display: "inline" }} />
                       </span>
                     </li>
                   );
