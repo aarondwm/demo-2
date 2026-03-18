@@ -5,10 +5,10 @@ import { ArrowRight, ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /* Inline sequential scrambler — same algorithm as TextScramble in page.tsx */
-function runScramble(el: HTMLElement, text: string) {
+function runScramble(el: HTMLElement, text: string, step = 4) {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   type Q = { to: string; start: number; end: number; char?: string };
-  const queue: Q[] = Array.from(text).map((to, i) => ({ to, start: i * 4, end: i * 4 + 6 }));
+  const queue: Q[] = Array.from(text).map((to, i) => ({ to, start: Math.round(i * step), end: Math.round(i * step) + 6 }));
   let frame = 0;
   let raf = 0;
   const tick = () => {
@@ -39,6 +39,7 @@ interface HoverActionButtonProps {
   label?: React.ReactNode;
   labelText?: string;
   scramble?: boolean;
+  scrambleStep?: number;
   href?: string;
   className?: string;
   style?: React.CSSProperties;
@@ -50,6 +51,7 @@ export const HoverActionButton = ({
   label = "Button",
   labelText,
   scramble = false,
+  scrambleStep = 4,
   href = "#",
   className,
   style,
@@ -73,7 +75,7 @@ export const HoverActionButton = ({
   /* Fire once on mount */
   useEffect(() => {
     if (scramble && scrambleRef.current && sizerText) {
-      runScramble(scrambleRef.current, sizerText);
+      runScramble(scrambleRef.current, sizerText, scrambleStep);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -81,7 +83,7 @@ export const HoverActionButton = ({
   /* Re-fire when hover ends (default label slides back in) */
   const handleMouseLeave = useCallback(() => {
     if (scramble && scrambleRef.current && sizerText) {
-      runScramble(scrambleRef.current, sizerText);
+      runScramble(scrambleRef.current, sizerText, scrambleStep);
     }
   }, [scramble, sizerText]);
 
