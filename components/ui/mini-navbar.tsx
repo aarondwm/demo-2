@@ -93,7 +93,7 @@ const capabilitiesLinks: NavItem[] = [
 const NAV_GROUPS = [
   { label: "Home",       href: "#home" },
   { label: "Placement",  href: "#media-placement" },
-  { label: "Targetting", href: "#what-we-do" },
+  { label: "Targeting", href: "#what-we-do" },
   { label: "Insights",   href: "#intelligence" },
   { label: "Reviews",    href: "#reviews" },
   { label: "Contact",    href: "#get-started" },
