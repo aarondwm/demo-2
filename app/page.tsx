@@ -936,52 +936,17 @@ export default function Home() {
 
       {/* ── FOOTER ───────────────────────────────────────────────────────── */}
       <footer className="border-t border-white/[0.05]">
-        <div className="max-w-6xl mx-auto px-6 md:px-10 py-14 grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-10">
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center">
-              <img src="/D*M website.png" alt="DWM" className="h-10 w-auto" />
-            </div>
-            <p className="sys-body text-[13px] max-w-xs">
-              Right Story. Right Audience. Real Impact.
-            </p>
-          </div>
-
-          {[
-            { heading: "Services",  links: ["Targeted Distribution", "Audience Intelligence", "Campaign Reporting", "Media Strategy"] },
-            { heading: "Company",   links: ["About", "Careers", "Work With Us", "Contact"] },
-            { heading: "Resources", links: ["Case Studies", "Insights", "FAQ", "Support"] },
-          ].map((col) => (
-            <div key={col.heading} className="flex flex-col gap-4">
-              <span className="sys-label text-white/20">{col.heading}</span>
-              <ul className="flex flex-col gap-3">
-                {col.links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="font-mono text-[11px] tracking-[0.15em] uppercase text-white/40 hover:text-white transition-colors duration-200">
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="border-t border-white/[0.05] px-6 md:px-10 py-5">
-          <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-[#4a6cf7] animate-pulse" />
-              <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/20">Kuwait</span>
-            </div>
-            <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/20">
-              © 2026 Diwaniya Media (DWM). All rights reserved.
-            </span>
-            <div className="flex items-center gap-6">
-              {["Privacy Policy", "Terms of Service"].map((item) => (
-                <a key={item} href="#" className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/20 hover:text-white/40 transition-colors">
-                  {item}
-                </a>
-              ))}
-            </div>
+        <div className="max-w-6xl mx-auto px-6 md:px-10 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/20">
+            © 2026 Diwaniya Media. All rights reserved.
+          </span>
+          <div className="flex items-center gap-6">
+            <a href="/privacy-policy" className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/20 hover:text-white/40 transition-colors">
+              Privacy Policy
+            </a>
+            <a href="/terms-and-conditions" className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/20 hover:text-white/40 transition-colors">
+              Terms &amp; Conditions
+            </a>
           </div>
         </div>
       </footer>
