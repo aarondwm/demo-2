@@ -91,12 +91,12 @@ const capabilitiesLinks: NavItem[] = [
 ];
 
 const NAV_GROUPS = [
-  { label: "Home",         href: "#home" },
-  { label: "Methodology",  href: "#methodology" },
-  { label: "Services",     href: "#services" },
-  { label: "Intelligence", href: "#intelligence" },
-  { label: "Reviews",      href: "#reviews" },
-  { label: "Contact",      href: "#get-started" },
+  { label: "Home",              href: "#home" },
+  { label: "Media Placement",   href: "#media-placement" },
+  { label: "Targeting",         href: "#what-we-do" },
+  { label: "Audience Insights", href: "#intelligence" },
+  { label: "Reviews",           href: "#reviews" },
+  { label: "Contact",           href: "#get-started" },
 ];
 
 /* ── ListItem (adapted from header-3 pattern) ────────────────────────────── */

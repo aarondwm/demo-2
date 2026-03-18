@@ -342,10 +342,8 @@ function DashboardCard({ engagement }: { engagement: string[] }) {
 }
 
 /* ── MediaCard (secured media placement rows) ───────────────────────────── */
-function MediaCard({ n, title, body }: { n: string; title: string; body: string }) {
+function MediaCard({ n, title, body, index, visible }: { n: string; title: string; body: string; index: number; visible: boolean }) {
   const [hovered, setHovered] = useState(false);
-  const [bodyVisible, setBodyVisible] = useState(false);
-  const handleTitleDone = useCallback(() => setBodyVisible(true), []);
   return (
     <div
       onMouseEnter={() => setHovered(true)}
@@ -378,14 +376,14 @@ function MediaCard({ n, title, body }: { n: string; title: string; body: string 
           letterSpacing: hovered ? "0.14em" : "0.1em",
           color: hovered ? "#ffffff" : "#7a8598",
           transition: "color 0.3s ease, font-size 0.3s ease, letter-spacing 0.3s ease",
-        }}><ScrambleOnView text={title} delay={0} onDone={handleTitleDone} style={{ display: "inline" }} /></span>
+        }} style={{ opacity: visible ? 1 : 0, transition: `opacity 0.5s ease ${0.05 + index * 0.1}s, color 0.3s ease, font-size 0.3s ease, letter-spacing 0.3s ease` }}>{title}</span>
         <span style={{
           fontFamily: "var(--font-body), sans-serif",
           fontSize: hovered ? "14px" : "13px",
           lineHeight: "1.75",
           color: hovered ? "rgba(255,255,255,0.88)" : "#3a4255",
-          opacity: bodyVisible ? 1 : 0,
-          transition: "color 0.3s ease, font-size 0.3s ease, opacity 0.6s ease",
+          opacity: visible ? 1 : 0,
+          transition: `opacity 0.5s ease ${0.25 + index * 0.1}s, color 0.3s ease, font-size 0.3s ease`,
         }}>{body}</span>
       </div>
     </div>
@@ -394,14 +392,12 @@ function MediaCard({ n, title, body }: { n: string; title: string; body: string 
 
 /* ── FeatureCard (border trace + in-view fade) ───────────────────────────── */
 function FeatureCard({
-  n, title, body, index,
+  n, title, body, index, visible,
 }: {
-  n: string; title: string; body: string; index: number;
+  n: string; title: string; body: string; index: number; visible: boolean;
 }) {
   const ref  = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
-  const [bodyVisible, setBodyVisible] = useState(false);
-  const handleTitleDone = useCallback(() => setBodyVisible(true), []);
 
   useEffect(() => {
     const el = ref.current;
@@ -460,13 +456,13 @@ function FeatureCard({
           <span className="font-mono text-[10px] tracking-[0.25em] font-light" style={{ color: "#3d4a5e" }}>{n}</span>
           <h3
             className="font-display font-bold uppercase"
-            style={{ fontSize: "clamp(20px,2vw,28px)", letterSpacing: "0.05em", lineHeight: "1", color: "#e8e2d6" }}
+            style={{ fontSize: "clamp(20px,2vw,28px)", letterSpacing: "0.05em", lineHeight: "1", color: "#e8e2d6", opacity: visible ? 1 : 0, transition: `opacity 0.5s ease ${0.05 + index * 0.1}s` }}
           >
-            <ScrambleOnView text={title} delay={100} onDone={handleTitleDone} />
+            {title}
           </h3>
           <p
             className="text-[13px] leading-[1.8]"
-            style={{ color: "#5a6272", opacity: bodyVisible ? 1 : 0, transition: "opacity 0.6s ease" }}
+            style={{ color: "#5a6272", opacity: visible ? 1 : 0, transition: `opacity 0.5s ease ${0.25 + index * 0.1}s` }}
           >
             {body}
           </p>
@@ -481,16 +477,16 @@ export default function Home() {
   const [activeIntelItem, setActiveIntelItem] = useState(0);
   const [intelVisible, setIntelVisible] = useState(true);
   const [hoveredIntelItem, setHoveredIntelItem] = useState<number | null>(null);
-  const [sec3BodyVisible,  setSec3BodyVisible]  = useState(false);
-  const [sec4BodyVisible,  setSec4BodyVisible]  = useState(false);
-  const [secCtaBodyVisible,setSecCtaBodyVisible]= useState(false);
-  const [intelStatsVisible, setIntelStatsVisible] = useState(false);
-  const sec3BodyDone      = useCallback(() => setSec3BodyVisible(true),    []);
-  const sec4BodyDone      = useCallback(() => setSec4BodyVisible(true),    []);
-  const secCtaBodyDone    = useCallback(() => setSecCtaBodyVisible(true),  []);
-  const intelBoxesDone    = useCallback(() => setIntelStatsVisible(true),  []);
-  const [testimonialsVisible, setTestimonialsVisible] = useState(false);
-  const testimonialsDone  = useCallback(() => setTestimonialsVisible(true), []);
+  const [sec2Visible,       setSec2Visible]       = useState(false);
+  const [sec3Visible,       setSec3Visible]       = useState(false);
+  const [sec4Visible,       setSec4Visible]       = useState(false);
+  const [sec5Visible,       setSec5Visible]       = useState(false);
+  const [secCtaVisible,     setSecCtaVisible]     = useState(false);
+  const sec2Done   = useCallback(() => setSec2Visible(true),   []);
+  const sec3Done   = useCallback(() => setSec3Visible(true),   []);
+  const sec4Done   = useCallback(() => setSec4Visible(true),   []);
+  const sec5Done   = useCallback(() => setSec5Visible(true),   []);
+  const secCtaDone = useCallback(() => setSecCtaVisible(true), []);
 
   const displayItem = hoveredIntelItem !== null ? hoveredIntelItem : activeIntelItem;
 
@@ -591,15 +587,15 @@ export default function Home() {
             <div className="flex items-center mb-5">
               <span className="sys-label" style={{ fontSize: "13px" }}>
                 <img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
-                <ScrambleOnView text="What We Do" delay={0} />
+                <ScrambleOnView text="What We Do" delay={0} onDone={sec2Done} />
               </span>
             </div>
             <h2
               className="font-display font-bold uppercase text-white"
               style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
             >
-              <ScrambleOnView text="We Run It." delay={120} style={{ display: "block" }} />
-              <ScrambleOnView text="You See Who Engaged." delay={320} style={{ display: "block" }} />
+              <span style={{ display: "block", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.05s" }}>We Run It.</span>
+              <span style={{ display: "block", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.2s" }}>You See Who Engaged.</span>
             </h2>
           </div>
 
@@ -609,7 +605,7 @@ export default function Home() {
               { n: "02", title: "Targeted Distribution",   body: "Your content reaches the people who matter, we make sure the right eyes see it — every time." },
               { n: "03", title: "Audience Intelligence",   body: "After every campaign, you find out who read it, what they do, and where they're from. Not estimates. Real people." },
             ].map(({ n, title, body }, i) => (
-              <FeatureCard key={n} n={n} title={title} body={body} index={i} />
+              <FeatureCard key={n} n={n} title={title} body={body} index={i} visible={sec2Visible} />
             ))}
           </div>
 
@@ -627,30 +623,30 @@ export default function Home() {
             {/* Left */}
             <div className="flex flex-col gap-8">
               <div className="flex items-center mb-5">
-                <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Secured Media Placement" delay={0} style={{ display: "inline" }} /></span>
+                <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Secured Media Placement" delay={0} style={{ display: "inline" }} onDone={sec3Done} /></span>
               </div>
               <h2
                 className="font-display font-bold uppercase"
                 style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
-                <ScrambleOnView text="Your Story." delay={0} style={{ display: "block", color: "#ffffff" }} />
-                <ScrambleOnView text="Guaranteed Publishing." delay={150} style={{ display: "block", color: "#4a6cf7" }} onDone={sec3BodyDone} />
+                <span style={{ display: "block", color: "#ffffff", opacity: sec3Visible ? 1 : 0, transition: "opacity 0.5s ease 0.05s" }}>Your Story.</span>
+                <span style={{ display: "block", color: "#4a6cf7", opacity: sec3Visible ? 1 : 0, transition: "opacity 0.5s ease 0.2s" }}>Guaranteed Publishing.</span>
               </h2>
 
               {/* Stat counters */}
-              <div className="flex items-stretch divide-x divide-white/[0.06]" style={{ opacity: sec3BodyVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
+              <div className="flex items-stretch divide-x divide-white/[0.06]" style={{ opacity: sec3Visible ? 1 : 0, transition: "opacity 0.5s ease 0.35s" }}>
                 {[
                   { value: "6",   label: "GCC Markets" },
                   { value: "12+", label: "Publications" },
                 ].map(({ value, label }) => (
                   <div key={label} className="flex flex-col gap-1 pr-8 first:pl-0 pl-8">
-                    <span className="font-display font-bold" style={{ fontSize: "28px", color: "#e8e2d6" }}><ScrambleOnView text={value} delay={0} style={{ display: "inline" }} /></span>
+                    <span className="font-display font-bold" style={{ fontSize: "28px", color: "#e8e2d6" }}>{value}</span>
                     <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "#7a8598" }}>{label}</span>
                   </div>
                 ))}
               </div>
 
-              <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec3BodyVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
+              <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec3Visible ? 1 : 0, transition: "opacity 0.5s ease 0.5s" }}>
                 We produce and place editorially-driven stories across a network of Gulf business and industry publications. Your content goes live — as a confirmed placement.
               </p>
             </div>
@@ -662,8 +658,8 @@ export default function Home() {
                 { n: "02", title: "Gulf-Wide Network",   body: "Kuwait, UAE, Saudi Arabia, Bahrain, Qatar, Oman. Every major GCC market covered." },
                 { n: "03", title: "Editorial Quality",   body: "Produced and formatted to editorial standard. It reads like news because it is." },
                 { n: "04", title: "Timed & Controlled",  body: "You choose when it runs. We coordinate across every publication simultaneously." },
-              ].map(({ n, title, body }) => (
-                <MediaCard key={n} n={n} title={title} body={body} />
+              ].map(({ n, title, body }, i) => (
+                <MediaCard key={n} n={n} title={title} body={body} index={i} visible={sec3Visible} />
               ))}
             </div>
           </div>
@@ -709,17 +705,17 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-10 mb-12 items-end">
             <div>
               <div className="flex items-center mb-5">
-                <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Intelligence, Delivered" delay={0} style={{ display: "inline" }} /></span>
+                <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Intelligence, Delivered" delay={0} style={{ display: "inline" }} onDone={sec4Done} /></span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white"
                 style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
-                <ScrambleOnView text="Know Exactly" delay={0} style={{ display: "block" }} />
-                <ScrambleOnView text="Who Engaged" delay={150} style={{ display: "block" }} onDone={sec4BodyDone} />
+                <span style={{ display: "block", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.5s ease 0.05s" }}>Know Exactly</span>
+                <span style={{ display: "block", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.5s ease 0.2s" }}>Who Engaged</span>
               </h2>
             </div>
-            <p className="lg:max-w-sm lg:ml-auto" style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4BodyVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
+            <p className="lg:max-w-sm lg:ml-auto" style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.5s ease 0.35s" }}>
               Other agencies show you impressions. We show you exactly who read it.
             </p>
           </div>
@@ -732,7 +728,7 @@ export default function Home() {
                 <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Engagement Breakdowns" delay={0} style={{ display: "inline" }} /></span>
 
                 {/* Stats row */}
-                <div className="flex items-stretch divide-x divide-[#161c2c]" style={{ opacity: intelStatsVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
+                <div className="flex items-stretch divide-x divide-[#161c2c]" style={{ opacity: sec4Visible ? 1 : 0, transition: "opacity 0.5s ease 0.7s" }}>
                   {intelStats[displayItem].map(({ value, label }, i) => (
                     <div key={i} className="flex flex-col gap-1 pr-6 first:pl-0 pl-6" style={{ transition: "opacity 0.25s ease" }}>
                       <span className="font-display font-bold" style={{ fontSize: "22px", color: "#e8e2d6" }}>
@@ -745,7 +741,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: intelStatsVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
+                <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.5s ease 0.85s" }}>
                   Exportable. Presentable. Boardroom-ready.
                 </p>
                 <HoverActionButton label="Request a Briefing" href="#get-started" className="mt-2" />
@@ -791,7 +787,7 @@ export default function Home() {
                           transition: "color 0.25s ease, font-size 0.25s ease",
                         }}
                       >
-                        <ScrambleOnView text={label} delay={idx * 60} style={{ display: "inline" }} onDone={idx === 7 ? intelBoxesDone : undefined} />
+                        <span style={{ opacity: sec4Visible ? 1 : 0, transition: `opacity 0.4s ease ${0.35 + idx * 0.05}s` }}>{label}</span>
                       </span>
                     </li>
                   );
@@ -834,30 +830,34 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="mb-14 text-center">
             <div className="flex items-center justify-center mb-5">
-              <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Who We Work With" delay={0} style={{ display: "inline" }} /></span>
+              <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Who We Work With" delay={0} style={{ display: "inline" }} onDone={sec5Done} /></span>
             </div>
             <h2
               className="font-display font-bold uppercase text-white"
               style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
             >
-              <ScrambleOnView text="In Their" delay={0} style={{ display: "block" }} />
-              <ScrambleOnView text="Own Words" delay={150} style={{ display: "block" }} onDone={testimonialsDone} />
+              <span style={{ display: "block", opacity: sec5Visible ? 1 : 0, transition: "opacity 0.5s ease 0.05s" }}>In Their</span>
+              <span style={{ display: "block", opacity: sec5Visible ? 1 : 0, transition: "opacity 0.5s ease 0.2s" }}>Own Words</span>
             </h2>
           </div>
 
+          <div className="relative">
+            {/* Blue tint gradient overlay */}
+            <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(74,108,247,0.06) 0%, transparent 40%, transparent 60%, rgba(74,108,247,0.06) 100%)", pointerEvents: "none", zIndex: 10 }} />
           <div
             className="flex justify-center gap-4 overflow-hidden"
             style={{
               maskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
               WebkitMaskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
               maxHeight: "680px",
-              opacity: testimonialsVisible ? 1 : 0,
+              opacity: sec5Visible ? 1 : 0,
               transition: "opacity 0.8s ease",
             }}
           >
             <TestimonialsColumn testimonials={firstColumn}  duration={14} />
             <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={17} />
             <TestimonialsColumn testimonials={thirdColumn}  className="hidden lg:block" duration={15} />
+          </div>
           </div>
         </div>
       </section>
@@ -880,17 +880,17 @@ export default function Home() {
 
             <div className="relative z-10 max-w-2xl">
               <div className="flex items-center mb-7">
-                <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Get Started" delay={0} style={{ display: "inline" }} /></span>
+                <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Get Started" delay={0} style={{ display: "inline" }} onDone={secCtaDone} /></span>
               </div>
               <h2
                 className="font-display font-bold uppercase text-white mb-7"
                 style={{ fontSize: "clamp(40px,6.5vw,84px)", letterSpacing: "0.03em", lineHeight: "0.90" }}
               >
-                <ScrambleOnView text="Start with" delay={0} style={{ display: "block" }} />
-                <ScrambleOnView text="a Briefing." delay={150} style={{ display: "block" }} />
-                <ScrambleOnView text="See What Returns." delay={300} style={{ display: "block", color: "var(--accent)" }} onDone={secCtaBodyDone} />
+                <span style={{ display: "block", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.5s ease 0.05s" }}>Start with</span>
+                <span style={{ display: "block", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.5s ease 0.15s" }}>a Briefing.</span>
+                <span style={{ display: "block", color: "var(--accent)", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.5s ease 0.25s" }}>See What Returns.</span>
               </h2>
-              <p className="sys-body max-w-lg mb-10" style={{ opacity: secCtaBodyVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
+              <p className="sys-body max-w-lg mb-10" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.5s ease 0.4s" }}>
                 Book a briefing. We&apos;ll walk you through what we&apos;d run, who we&apos;d reach, and whether you&apos;re eligible.
               </p>
               <HoverActionButton label="Request a Briefing" href="#" />
@@ -907,7 +907,7 @@ export default function Home() {
               <img src="/D*M website.png" alt="DWM" className="h-10 w-auto" />
             </div>
             <p className="sys-body text-[13px] max-w-xs">
-              <ScrambleOnView text="Right Story. Right Audience. Real Impact." delay={0} style={{ display: "inline" }} />
+              Right Story. Right Audience. Real Impact.
             </p>
           </div>
 
@@ -917,7 +917,7 @@ export default function Home() {
             { heading: "Resources", links: ["Case Studies", "Insights", "FAQ", "Support"] },
           ].map((col) => (
             <div key={col.heading} className="flex flex-col gap-4">
-              <span className="sys-label text-white/20"><ScrambleOnView text={col.heading} delay={0} style={{ display: "inline" }} /></span>
+              <span className="sys-label text-white/20">{col.heading}</span>
               <ul className="flex flex-col gap-3">
                 {col.links.map((link) => (
                   <li key={link}>
