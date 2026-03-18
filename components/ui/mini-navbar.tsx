@@ -193,11 +193,16 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent`}
+      className={`fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-full ${
+        scrolled
+          ? "bg-black/97 backdrop-blur-md"
+          : "bg-transparent"
+      }`}
+      style={{ maxWidth: "1360px" }}
     >
 
       {/* ── Main nav row — max-w-7xl centered (header-3 max-w-5xl pattern) ── */}
-      <div className="mx-auto w-full max-w-7xl px-4 md:px-8 h-16 flex items-center justify-between gap-6">
+      <div className="mx-auto w-full px-6 md:px-10 h-16 flex items-center justify-between gap-6">
 
         {/* Logo block */}
         <a
