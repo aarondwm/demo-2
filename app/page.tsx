@@ -638,7 +638,7 @@ export default function Home() {
                   { value: "12+", label: "Publications" },
                 ].map(({ value, label }) => (
                   <div key={label} className="flex flex-col gap-1 pr-8 first:pl-0 pl-8">
-                    <span className="font-display font-bold" style={{ fontSize: "28px", color: "#e8e2d6" }}>{value}</span>
+                    <span className="font-display font-bold" style={{ fontSize: "28px", color: "#e8e2d6" }}><ScrambleOnView text={value} delay={0} style={{ display: "inline" }} /></span>
                     <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "#7a8598" }}>{label}</span>
                   </div>
                 ))}
@@ -720,14 +720,14 @@ export default function Home() {
                         <ScrambleOnTrigger text={value} trigger={displayItem} style={{ display: "inline" }} />
                       </span>
                       <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "#c8c0b0" }}>
-                        <ScrambleOnTrigger text={label} trigger={displayItem} style={{ display: "inline" }} />
+                        {label}
                       </span>
                     </div>
                   ))}
                 </div>
 
                 <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8" }}>
-                  Exportable. Presentable. Boardroom-ready.
+                  <ScrambleOnView text="Exportable. Presentable. Boardroom-ready." delay={0} style={{ display: "inline" }} />
                 </p>
                 <HoverActionButton label="Request a Briefing" href="#get-started" className="mt-2" />
               </div>
