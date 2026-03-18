@@ -17,7 +17,7 @@ export default function ContactPage() {
   };
 
   const inputClass =
-    "w-full bg-transparent border border-white/[0.35] px-4 py-3 font-mono text-[13px] tracking-[0.06em] text-white placeholder:text-white focus:outline-none focus:border-[#4a6cf7]/50 transition-colors";
+    "w-full bg-transparent border border-white/[0.35] px-4 py-3 font-mono text-[13px] tracking-[0.06em] text-white placeholder:text-white/50 focus:outline-none focus:border-[#4a6cf7]/50 transition-colors";
 
   return (
     <main className="min-h-screen bg-[#04060c] text-white">
@@ -35,7 +35,7 @@ export default function ContactPage() {
             Request a<br />
             <span style={{ color: "#4a6cf7" }}>Briefing.</span>
           </h1>
-          <p className="font-mono text-[13px] tracking-[0.04em] text-white/30 leading-relaxed max-w-md mb-12">
+          <p className="font-mono text-[13px] tracking-[0.04em] text-white leading-relaxed max-w-md mb-12">
             We&apos;ll be in touch if you&apos;re a fit.
           </p>
 
