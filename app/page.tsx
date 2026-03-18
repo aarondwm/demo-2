@@ -95,7 +95,7 @@ function ScrambledLine({
     const el = ref.current;
     if (!el) return;
     el.innerHTML = "";
-    const scrambler = new TextScramble(el);
+    const scrambler = new TextScramble(el, 30, true);
     let loopTimer: ReturnType<typeof setTimeout>;
 
     const run = () => {
@@ -502,7 +502,7 @@ export default function Home() {
             style={{ animation: "reveal-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards" }}
           >
             <div className="flex items-center justify-center">
-              <span className="sys-label">Proprietary GCC Media & Insight Technology</span>
+              <span className="sys-label"><ScrambledLine text="Proprietary GCC Media & Insight Technology" delay={0} style={{ display: "inline" }} /></span>
             </div>
           </div>
 
