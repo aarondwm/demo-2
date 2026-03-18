@@ -91,12 +91,12 @@ const capabilitiesLinks: NavItem[] = [
 ];
 
 const NAV_GROUPS = [
-  { label: "Home",              href: "#home" },
-  { label: "Media Placement",   href: "#media-placement" },
-  { label: "Targeting",         href: "#what-we-do" },
-  { label: "Audience Insights", href: "#intelligence" },
-  { label: "Reviews",           href: "#reviews" },
-  { label: "Contact",           href: "#get-started" },
+  { label: "Home",       href: "#home" },
+  { label: "Placement",  href: "#media-placement" },
+  { label: "Targetting", href: "#what-we-do" },
+  { label: "Insights",   href: "#intelligence" },
+  { label: "Reviews",    href: "#reviews" },
+  { label: "Contact",    href: "#get-started" },
 ];
 
 /* ── ListItem (adapted from header-3 pattern) ────────────────────────────── */
@@ -222,7 +222,7 @@ export function Navbar() {
             <a
               key={group.label}
               href={group.href}
-              className="py-5 px-3 font-mono font-bold text-[12px] tracking-[0.12em] uppercase text-white hover:text-white/70 transition-colors duration-150 whitespace-nowrap"
+              className="py-5 px-5 font-mono font-bold text-[13px] tracking-[0.18em] uppercase text-white hover:text-white/70 transition-colors duration-150 whitespace-nowrap"
             >
               {group.label}
             </a>
