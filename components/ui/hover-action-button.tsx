@@ -5,7 +5,8 @@ import { ArrowRight, ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface HoverActionButtonProps {
-  label?: string;
+  label?: React.ReactNode;
+  labelText?: string;
   href?: string;
   className?: string;
   style?: React.CSSProperties;
@@ -15,12 +16,14 @@ interface HoverActionButtonProps {
 
 export const HoverActionButton = ({
   label = "Button",
+  labelText,
   href = "#",
   className,
   style,
   variant = "blue",
   direction = "horizontal",
 }: HoverActionButtonProps = {}) => {
+  const sizerText = labelText ?? (typeof label === "string" ? label : "");
   const fillClass  = variant === "white" ? "group-hover:bg-white"    : "group-hover:bg-[#4a6cf7]";
   const textHover  = variant === "white" ? "text-black"               : "text-white";
   const borderBase = variant === "white" ? "border-white/40 bg-black" : "border-white/20 bg-black";
@@ -47,7 +50,7 @@ export const HoverActionButton = ({
     >
       {/* Invisible sizer */}
       <span className="invisible flex items-center gap-3" aria-hidden>
-        {label}
+        {sizerText}
         <Arrow className="w-4 h-4 flex-shrink-0" />
       </span>
 
@@ -71,7 +74,7 @@ export const HoverActionButton = ({
         enterTo,
         textHover
       )}>
-        <span>{label}</span>
+        <span>{sizerText}</span>
         <Arrow className="w-4 h-4 flex-shrink-0" />
       </span>
     </a>

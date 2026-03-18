@@ -83,24 +83,28 @@ function ScrambledLine({
   delay = 0,
   className,
   style,
+  loopInterval = 2500,
 }: {
   text: string;
   delay?: number;
   className?: string;
   style?: React.CSSProperties;
+  loopInterval?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    el.innerHTML = "";
+    el.style.opacity = "0";
     const scrambler = new TextScramble(el, 30, true);
     let loopTimer: ReturnType<typeof setTimeout>;
 
     const run = () => {
+      el.style.opacity = "1";
+      el.innerHTML = "";
       scrambler.setText(text).then(() => {
-        loopTimer = setTimeout(run, 2500);
+        loopTimer = setTimeout(run, loopInterval);
       });
     };
 
@@ -109,20 +113,20 @@ function ScrambledLine({
       clearTimeout(initTimer);
       clearTimeout(loopTimer);
     };
-  }, [text, delay]);
+  }, [text, delay, loopInterval]);
 
   return (
     <span ref={ref} className={className} style={{ display: "block", ...style }}>
-      {/* empty — scrambler writes into innerHTML */}
+      {text}
     </span>
   );
 }
 
 /* ── ScrambleOnView — fires once when element enters viewport, faster speed ── */
 function ScrambleOnView({
-  text, delay = 0, className, style,
+  text, delay = 0, className, style, onDone,
 }: {
-  text: string; delay?: number; className?: string; style?: React.CSSProperties;
+  text: string; delay?: number; className?: string; style?: React.CSSProperties; onDone?: () => void;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const hasRun = useRef(false);
@@ -130,20 +134,22 @@ function ScrambleOnView({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    el.style.opacity = "0";
     let t: ReturnType<typeof setTimeout>;
     const obs = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && !hasRun.current) {
         hasRun.current = true;
         t = setTimeout(() => {
+          el.style.opacity = "1";
           el.innerHTML = "";
-          new TextScramble(el, 14, true).setText(text);
+          new TextScramble(el, 14, true).setText(text).then(() => onDone?.());
         }, delay);
         obs.disconnect();
       }
     }, { threshold: 0.05 });
     obs.observe(el);
     return () => { obs.disconnect(); clearTimeout(t); };
-  }, [text, delay]);
+  }, [text, delay, onDone]);
 
   return <span ref={ref} className={className} style={style}>{text}</span>;
 }
@@ -372,6 +378,7 @@ function FeatureCard({
 }) {
   const ref  = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
+  const [bodyVisible, setBodyVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -432,10 +439,13 @@ function FeatureCard({
             className="font-display font-bold uppercase"
             style={{ fontSize: "clamp(20px,2vw,28px)", letterSpacing: "0.05em", lineHeight: "1", color: "#e8e2d6" }}
           >
-            <ScrambleOnView text={title} delay={index * 120 + 100} />
+            <ScrambleOnView text={title} delay={index * 120 + 100} onDone={() => setBodyVisible(true)} />
           </h3>
-          <p className="text-[13px] leading-[1.8]" style={{ color: "#5a6272" }}>
-            <ScrambleOnView text={body} delay={index * 120 + 300} />
+          <p
+            className="text-[13px] leading-[1.8]"
+            style={{ color: "#5a6272", opacity: bodyVisible ? 1 : 0, transition: "opacity 0.6s ease" }}
+          >
+            {body}
           </p>
         </div>
       </div>
@@ -502,7 +512,7 @@ export default function Home() {
             style={{ animation: "reveal-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards" }}
           >
             <div className="flex items-center justify-center">
-              <span className="sys-label"><ScrambledLine text="Proprietary GCC Media & Insight Technology" delay={0} style={{ display: "inline" }} /></span>
+              <span className="sys-label"><ScrambleOnView text="Proprietary GCC Media & Insight Technology" delay={0} style={{ display: "inline" }} /></span>
             </div>
           </div>
 
@@ -513,16 +523,19 @@ export default function Home() {
             <ScrambledLine
               text="RIGHT STORY."
               delay={300}
+              loopInterval={8000}
               className="text-white"
             />
             <ScrambledLine
               text="RIGHT AUDIENCE."
               delay={700}
+              loopInterval={8000}
               style={{ color: "var(--accent)" }}
             />
             <ScrambledLine
               text="REAL IMPACT."
               delay={1100}
+              loopInterval={8000}
               className="text-white"
             />
           </h1>
@@ -531,8 +544,8 @@ export default function Home() {
             className="flex flex-row items-center gap-6 opacity-0 mt-20 mb-20"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
-            <HoverActionButton label="Request a Briefing" href="#get-started" variant="white" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "rgba(255,255,255,0.10)", backdropFilter: "blur(40px) saturate(180%) brightness(1.15)", WebkitBackdropFilter: "blur(40px) saturate(180%) brightness(1.15)", borderColor: "rgba(255,255,255,0.22)", boxShadow: "0 0 0 1px rgba(255,255,255,0.10) inset, 0 2px 24px rgba(255,255,255,0.04) inset, 0 12px 40px rgba(0,0,0,0.35)" }} />
-            <HoverActionButton label="How It Works" href="#what-we-do" variant="white" direction="vertical" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "rgba(255,255,255,0.10)", backdropFilter: "blur(40px) saturate(180%) brightness(1.15)", WebkitBackdropFilter: "blur(40px) saturate(180%) brightness(1.15)", borderColor: "rgba(255,255,255,0.22)", boxShadow: "0 0 0 1px rgba(255,255,255,0.10) inset, 0 2px 24px rgba(255,255,255,0.04) inset, 0 12px 40px rgba(0,0,0,0.35)" }} />
+            <HoverActionButton labelText="Request a Briefing" label={<ScrambledLine text="Request a Briefing" delay={1400} style={{ display: "inline" }} />} href="#get-started" variant="white" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "rgba(255,255,255,0.10)", backdropFilter: "blur(40px) saturate(180%) brightness(1.15)", WebkitBackdropFilter: "blur(40px) saturate(180%) brightness(1.15)", borderColor: "rgba(255,255,255,0.22)", boxShadow: "0 0 0 1px rgba(255,255,255,0.10) inset, 0 2px 24px rgba(255,255,255,0.04) inset, 0 12px 40px rgba(0,0,0,0.35)" }} />
+            <HoverActionButton labelText="How It Works" label={<ScrambledLine text="How It Works" delay={1700} style={{ display: "inline" }} />} href="#what-we-do" variant="white" direction="vertical" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "rgba(255,255,255,0.10)", backdropFilter: "blur(40px) saturate(180%) brightness(1.15)", WebkitBackdropFilter: "blur(40px) saturate(180%) brightness(1.15)", borderColor: "rgba(255,255,255,0.22)", boxShadow: "0 0 0 1px rgba(255,255,255,0.10) inset, 0 2px 24px rgba(255,255,255,0.04) inset, 0 12px 40px rgba(0,0,0,0.35)" }} />
           </div>
         </div>
       </section>
