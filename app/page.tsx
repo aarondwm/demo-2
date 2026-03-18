@@ -640,7 +640,7 @@ export default function Home() {
               { n: "02", title: "Targeted Distribution",   body: "Your content reaches the people who matter, we make sure the right eyes see it — every time." },
               { n: "03", title: "Audience Intelligence",   body: "After every campaign, you find out who read it, what they do, and where they're from. Not estimates. Real people." },
             ].map(({ n, title, body }, i) => (
-              <FeatureCard key={n} n={n} title={title} body={body} index={i} visible={sec2BodyVisible} />
+              <FeatureCard key={n} n={n} title={title} body={body} index={i} visible={sec2Visible} />
             ))}
           </div>
 
@@ -669,7 +669,7 @@ export default function Home() {
               </h2>
 
               {/* Stat counters */}
-              <div className="flex items-stretch divide-x divide-white/[0.06]" style={{ opacity: sec3BodyVisible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
+              <div className="flex items-stretch divide-x divide-white/[0.06]" style={{ opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
                 {[
                   { value: "6",   label: "GCC Markets" },
                   { value: "12+", label: "Publications" },
@@ -681,7 +681,7 @@ export default function Home() {
                 ))}
               </div>
 
-              <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec3BodyVisible ? 1 : 0, transition: "opacity 0.35s ease 0.15s" }}>
+              <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s" }}>
                 We produce and place editorially-driven stories across a network of Gulf business and industry publications. Your content goes live — as a confirmed placement.
               </p>
             </div>
@@ -694,7 +694,7 @@ export default function Home() {
                 { n: "03", title: "Editorial Quality",   body: "Produced and formatted to editorial standard. It reads like news because it is." },
                 { n: "04", title: "Timed & Controlled",  body: "You choose when it runs. We coordinate across every publication simultaneously." },
               ].map(({ n, title, body }, i) => (
-                <MediaCard key={n} n={n} title={title} body={body} index={i} visible={sec3BodyVisible} />
+                <MediaCard key={n} n={n} title={title} body={body} index={i} visible={sec3Visible} />
               ))}
             </div>
           </div>
@@ -750,7 +750,7 @@ export default function Home() {
                 <ScrambleOnSignal text="Who Engaged" signal={sec4Visible} onDone={sec4BodyDone} style={{ color: "#ffffff" }} />
               </h2>
             </div>
-            <p className="lg:max-w-sm lg:ml-auto" style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4BodyVisible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
+            <p className="lg:max-w-sm lg:ml-auto" style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
               Other agencies show you impressions. We show you exactly who read it.
             </p>
           </div>
@@ -763,7 +763,7 @@ export default function Home() {
                 <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Engagement Breakdowns" delay={0} style={{ display: "inline" }} /></span>
 
                 {/* Stats row */}
-                <div className="flex items-stretch divide-x divide-[#161c2c]" style={{ opacity: sec4BodyVisible ? 1 : 0, transition: "opacity 0.35s ease 0.1s" }}>
+                <div className="flex items-stretch divide-x divide-[#161c2c]" style={{ opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.1s" }}>
                   {intelStats[displayItem].map(({ value, label }, i) => (
                     <div key={i} className="flex flex-col gap-1 pr-6 first:pl-0 pl-6" style={{ transition: "opacity 0.25s ease" }}>
                       <span className="font-display font-bold" style={{ fontSize: "22px", color: "#e8e2d6" }}>
@@ -776,7 +776,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4BodyVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
+                <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
                   Exportable. Presentable. Boardroom-ready.
                 </p>
                 <HoverActionButton label="Request a Briefing" href="#get-started" className="mt-2" />
@@ -822,7 +822,7 @@ export default function Home() {
                           transition: "color 0.25s ease, font-size 0.25s ease",
                         }}
                       >
-                        <span style={{ opacity: sec4BodyVisible ? 1 : 0, transition: `opacity 0.35s ease ${0.05 + idx * 0.03}s` }}>{label}</span>
+                        <span style={{ opacity: sec4Visible ? 1 : 0, transition: `opacity 0.35s ease ${0.05 + idx * 0.03}s` }}>{label}</span>
                       </span>
                     </li>
                   );
@@ -885,7 +885,7 @@ export default function Home() {
               maskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
               WebkitMaskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
               maxHeight: "680px",
-              opacity: sec5BodyVisible ? 1 : 0,
+              opacity: sec5Visible ? 1 : 0,
               transition: "opacity 0.5s ease",
             }}
           >
