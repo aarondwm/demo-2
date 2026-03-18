@@ -608,7 +608,7 @@ export default function Home() {
             className="flex flex-row items-center gap-6 opacity-0 mt-20 mb-20"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
-            <HoverActionButton labelText="Request a Briefing" scramble href="#get-started" variant="white" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "rgba(255,255,255,0.10)", backdropFilter: "blur(40px) saturate(180%) brightness(1.15)", WebkitBackdropFilter: "blur(40px) saturate(180%) brightness(1.15)", borderColor: "rgba(255,255,255,0.22)", boxShadow: "0 0 0 1px rgba(255,255,255,0.10) inset, 0 2px 24px rgba(255,255,255,0.04) inset, 0 12px 40px rgba(0,0,0,0.35)" }} />
+            <HoverActionButton labelText="Request a Briefing" scramble href="/contact" variant="white" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "rgba(255,255,255,0.10)", backdropFilter: "blur(40px) saturate(180%) brightness(1.15)", WebkitBackdropFilter: "blur(40px) saturate(180%) brightness(1.15)", borderColor: "rgba(255,255,255,0.22)", boxShadow: "0 0 0 1px rgba(255,255,255,0.10) inset, 0 2px 24px rgba(255,255,255,0.04) inset, 0 12px 40px rgba(0,0,0,0.35)" }} />
             <HoverActionButton labelText="How It Works" scramble scrambleStep={6.2} href="#what-we-do" variant="white" direction="vertical" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "rgba(255,255,255,0.10)", backdropFilter: "blur(40px) saturate(180%) brightness(1.15)", WebkitBackdropFilter: "blur(40px) saturate(180%) brightness(1.15)", borderColor: "rgba(255,255,255,0.22)", boxShadow: "0 0 0 1px rgba(255,255,255,0.10) inset, 0 2px 24px rgba(255,255,255,0.04) inset, 0 12px 40px rgba(0,0,0,0.35)" }} />
           </div>
         </div>
@@ -779,7 +779,7 @@ export default function Home() {
                 <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
                   Exportable. Presentable. Boardroom-ready.
                 </p>
-                <HoverActionButton label="Request a Briefing" href="#get-started" className="mt-2" />
+                <HoverActionButton label="Request a Briefing" href="/contact" className="mt-2" />
               </div>
 
               <ul className="grid grid-cols-2 gap-px border border-[#161c2c]" style={{ backgroundColor: "#161c2c" }}>
@@ -928,7 +928,7 @@ export default function Home() {
               <p className="sys-body max-w-lg mb-10" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
                 Book a briefing. We&apos;ll walk you through what we&apos;d run, who we&apos;d reach, and whether you&apos;re eligible.
               </p>
-              <HoverActionButton label="Request a Briefing" href="#" />
+              <HoverActionButton label="Request a Briefing" href="/contact" />
             </div>
           </div>
         </div>

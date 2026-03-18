@@ -193,12 +193,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-4 right-4 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-black/97 backdrop-blur-md"
-          : "bg-transparent"
-      }`}
-      style={{ borderRadius: "12px" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent`}
     >
 
       {/* ── Main nav row — max-w-7xl centered (header-3 max-w-5xl pattern) ── */}
@@ -232,7 +227,7 @@ export function Navbar() {
         {/* CTA + mobile toggle */}
         <div className="flex items-center gap-3 flex-shrink-0">
           <a
-            href="#get-started"
+            href="/contact"
             className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase text-black font-bold relative overflow-hidden"
             style={{ borderRadius: "12px", transform: "translateZ(0)" }}
           >
@@ -279,7 +274,7 @@ export function Navbar() {
 
           <div className="px-6 py-6">
             <a
-              href="#get-started"
+              href="/contact"
               className="flex items-center justify-center gap-2 h-12 font-mono text-[12px] tracking-[0.22em] uppercase bg-[#4a6cf7] text-[#04060c] font-bold"
               onClick={() => setMobileOpen(false)}
             >
