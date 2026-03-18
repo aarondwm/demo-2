@@ -720,8 +720,8 @@ export default function Home() {
 
                 {/* Stats row */}
                 <div className="flex items-stretch divide-x divide-[#161c2c]" style={{ opacity: intelStatsVisible ? 1 : 0, transition: "opacity 0.6s ease" }}>
-                  {intelStats[displayItem].map(({ value, label }) => (
-                    <div key={label} className="flex flex-col gap-1 pr-6 first:pl-0 pl-6" style={{ transition: "opacity 0.25s ease" }}>
+                  {intelStats[displayItem].map(({ value, label }, i) => (
+                    <div key={i} className="flex flex-col gap-1 pr-6 first:pl-0 pl-6" style={{ transition: "opacity 0.25s ease" }}>
                       <span className="font-display font-bold" style={{ fontSize: "22px", color: "#e8e2d6" }}>
                         <ScrambleOnTrigger text={value} trigger={displayItem} style={{ display: "inline" }} />
                       </span>
