@@ -15,10 +15,12 @@ class TextScramble {
   private frameRequest = 0;
   private resolve: () => void = () => {};
   private speed: number;
+  private sequential: boolean;
 
-  constructor(el: HTMLElement, speed = 30) {
+  constructor(el: HTMLElement, speed = 30, sequential = false) {
     this.el = el;
     this.speed = speed;
+    this.sequential = sequential;
     this.update = this.update.bind(this);
   }
 
@@ -30,8 +32,15 @@ class TextScramble {
     for (let i = 0; i < length; i++) {
       const from  = oldText[i] || "";
       const to    = newText[i] || "";
-      const start = Math.floor(Math.random() * this.speed);
-      const end   = start + Math.floor(Math.random() * this.speed);
+      let start: number, end: number;
+      if (this.sequential) {
+        // each letter starts after the previous one resolves: strict left-to-right
+        start = i * 4;
+        end   = start + 6;
+      } else {
+        start = Math.floor(Math.random() * this.speed);
+        end   = start + Math.floor(Math.random() * this.speed);
+      }
       this.queue.push({ from, to, start, end });
     }
     cancelAnimationFrame(this.frameRequest);
@@ -127,7 +136,7 @@ function ScrambleOnView({
         hasRun.current = true;
         t = setTimeout(() => {
           el.innerHTML = "";
-          new TextScramble(el, 14).setText(text);
+          new TextScramble(el, 14, true).setText(text);
         }, delay);
         obs.disconnect();
       }
@@ -522,8 +531,8 @@ export default function Home() {
             className="flex flex-row items-center gap-6 opacity-0 mt-20 mb-20"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
-            <HoverActionButton label="Request a Briefing" href="#get-started" variant="white" className="text-[15px] font-bold rounded-2xl py-7 w-80" style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderColor: "rgba(255,255,255,0.10)" }} />
-            <HoverActionButton label="How It Works" href="#what-we-do" variant="white" direction="vertical" className="text-[15px] font-bold rounded-2xl py-7 w-80" style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderColor: "rgba(255,255,255,0.10)" }} />
+            <HoverActionButton label="Request a Briefing" href="#get-started" variant="white" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "rgba(255,255,255,0.10)", backdropFilter: "blur(40px) saturate(180%) brightness(1.15)", WebkitBackdropFilter: "blur(40px) saturate(180%) brightness(1.15)", borderColor: "rgba(255,255,255,0.22)", boxShadow: "0 0 0 1px rgba(255,255,255,0.10) inset, 0 2px 24px rgba(255,255,255,0.04) inset, 0 12px 40px rgba(0,0,0,0.35)" }} />
+            <HoverActionButton label="How It Works" href="#what-we-do" variant="white" direction="vertical" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "rgba(255,255,255,0.10)", backdropFilter: "blur(40px) saturate(180%) brightness(1.15)", WebkitBackdropFilter: "blur(40px) saturate(180%) brightness(1.15)", borderColor: "rgba(255,255,255,0.22)", boxShadow: "0 0 0 1px rgba(255,255,255,0.10) inset, 0 2px 24px rgba(255,255,255,0.04) inset, 0 12px 40px rgba(0,0,0,0.35)" }} />
           </div>
         </div>
       </section>
