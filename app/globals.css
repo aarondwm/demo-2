@@ -288,7 +288,29 @@
   /* ── Section shell — consistent section spacing */
   .sys-section {
     padding: 96px 0;
-    border-top: 1px solid var(--wire-0);
+    border-top: none;
+    position: relative;
+  }
+  .sys-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12) 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.12) 70%, transparent);
+    pointer-events: none;
+  }
+  .sys-section::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 15%;
+    right: 15%;
+    height: 9px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04) 30%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.04) 70%, transparent);
+    filter: blur(4px);
+    pointer-events: none;
   }
 
   /* ── Card surface */
@@ -350,4 +372,14 @@
     pointer-events: none;
     z-index: 9000;
   }
+}
+
+/* ── Page transition wipe ─────────────────────────────────────────────── */
+@keyframes wipeIn {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0%); }
+}
+@keyframes wipeOut {
+  from { transform: translateX(0%); }
+  to   { transform: translateX(100%); }
 }
