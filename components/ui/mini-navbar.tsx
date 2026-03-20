@@ -91,12 +91,12 @@ const capabilitiesLinks: NavItem[] = [
 ];
 
 const NAV_GROUPS = [
-  { label: "Home",       href: "#home" },
-  { label: "Placement",  href: "#media-placement" },
-  { label: "Targeting", href: "#what-we-do" },
-  { label: "Insights",   href: "#intelligence" },
-  { label: "Reviews",    href: "#reviews" },
-  { label: "Contact",    href: "#get-started" },
+  { label: "Home",       href: "/#home" },
+  { label: "Placement",  href: "/#media-placement" },
+  { label: "Targeting", href: "/#what-we-do" },
+  { label: "Insights",   href: "/#intelligence" },
+  { label: "Reviews",    href: "/#reviews" },
+  { label: "Contact",    href: "/#get-started" },
 ];
 
 /* ── ListItem (adapted from header-3 pattern) ────────────────────────────── */
@@ -206,7 +206,7 @@ export function Navbar() {
 
         {/* Logo block */}
         <a
-          href="#home"
+          href="/"
           className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity"
         >
           <img
