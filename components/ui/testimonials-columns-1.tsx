@@ -55,7 +55,7 @@ export const TestimonialsColumn = (props: {
                     <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-white">
                       {name}
                     </div>
-                    <div className="font-mono text-[9px] tracking-[0.18em] uppercase text-white/20">
+                    <div className="font-mono text-[9px] tracking-[0.18em] uppercase text-white/60">
                       {role}
                     </div>
                   </div>

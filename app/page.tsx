@@ -360,7 +360,7 @@ function DashboardCard({ engagement }: { engagement: string[] }) {
         </span>
         <div className="flex items-center gap-1.5">
           <span className="w-1 h-1 bg-[#4a6cf7]" />
-          <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/20">RESTRICTED</span>
+          <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/50">RESTRICTED</span>
         </div>
       </div>
     </div>
@@ -683,7 +683,7 @@ export default function Home() {
                 ))}
               </div>
 
-              <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s" }}>
+              <p style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s" }}>
                 We produce and place editorially-driven stories across a network of Gulf business and industry publications. Your content goes live — as a confirmed placement.
               </p>
             </div>
@@ -707,22 +707,24 @@ export default function Home() {
       {/* ── 3b. AUDIENCE SELECTION MAP ───────────────────────────────────── */}
       <section id="audience-selection" className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
-          <div className="flex items-center mb-7">
-            <span className="sys-label" style={{ fontSize: "13px" }}>
-              <img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
-              <ScrambleOnView text="Audience Selection" delay={0} style={{ display: "inline" }} onDone={secMapDone} />
-            </span>
+          <div className="mb-14">
+            <div className="flex items-center mb-5">
+              <span className="sys-label" style={{ fontSize: "13px" }}>
+                <img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
+                <ScrambleOnView text="Audience Selection" delay={0} style={{ display: "inline" }} onDone={secMapDone} />
+              </span>
+            </div>
+            <h2
+              className="font-display font-bold uppercase text-white"
+              style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
+            >
+              <span style={{ display: "block", opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>Target Anyone.</span>
+              <span style={{ display: "block", color: "#4a6cf7", opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.12s" }}>Anywhere.</span>
+            </h2>
+            <p className="sys-body max-w-lg mt-6" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s" }}>
+              Our proprietary technology allows us to ensure anyone you want to read the story, reads it.
+            </p>
           </div>
-          <h2
-            className="font-display font-bold uppercase text-white mb-4"
-            style={{ fontSize: "clamp(40px,6.5vw,84px)", letterSpacing: "0.03em", lineHeight: "0.90" }}
-          >
-            <span style={{ display: "block", opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>Target Anyone.</span>
-            <span style={{ display: "block", color: "#4a6cf7", opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.12s" }}>Anywhere.</span>
-          </h2>
-          <p className="sys-body max-w-lg mb-10" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s" }}>
-            Our proprietary technology allows us to ensure anyone you want to read the story, reads it.
-          </p>
           <div style={{
             position: "relative",
             borderRadius: "4px",
@@ -749,7 +751,7 @@ export default function Home() {
       <section id="intelligence" className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
 
-          <div className="grid lg:grid-cols-2 gap-10 mb-12 items-end">
+          <div className="grid lg:grid-cols-2 gap-10 mb-14 items-end">
             <div>
               <div className="flex items-center mb-5">
                 <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Intelligence, Delivered" delay={0} style={{ display: "inline" }} onDone={sec4Done} /></span>
@@ -762,7 +764,7 @@ export default function Home() {
                 <ScrambleOnSignal text="Who Engaged" signal={sec4Visible} onDone={sec4BodyDone} style={{ color: "#ffffff" }} />
               </h2>
             </div>
-            <p className="lg:max-w-sm lg:ml-auto" style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
+            <p className="lg:max-w-sm lg:ml-auto" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
               Other agencies show you impressions. We show you exactly who read it.
             </p>
           </div>
@@ -781,14 +783,14 @@ export default function Home() {
                       <span className="font-display font-bold" style={{ fontSize: "22px", color: "#e8e2d6" }}>
                         <ScrambleOnTrigger text={value} trigger={displayItem} style={{ display: "inline" }} />
                       </span>
-                      <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "#c8c0b0" }}>
+                      <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.7)" }}>
                         {label}
                       </span>
                     </div>
                   ))}
                 </div>
 
-                <p style={{ color: "#c8c0b0", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
+                <p style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
                   Exportable. Presentable. Boardroom-ready.
                 </p>
                 <HoverActionButton label="Request a Briefing" href="/contact" className="mt-2" />
@@ -926,11 +928,11 @@ export default function Home() {
             <span className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-white/20" />
 
             <div className="relative z-10 max-w-2xl">
-              <div className="flex items-center mb-7">
+              <div className="flex items-center mb-5">
                 <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Get Started" delay={0} style={{ display: "inline" }} onDone={secCtaDone} /></span>
               </div>
               <h2
-                className="font-display font-bold uppercase text-white mb-7"
+                className="font-display font-bold uppercase text-white mb-5"
                 style={{ fontSize: "clamp(40px,6.5vw,84px)", letterSpacing: "0.03em", lineHeight: "0.90" }}
               >
                 <span style={{ display: "block", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>Start with</span>
@@ -951,7 +953,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 md:px-10 py-14 grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-10">
           <div className="flex flex-col gap-4">
             <img src="/D*M website.png" alt="DWM" className="h-9 w-auto self-start" />
-            <p className="font-mono text-[11px] tracking-[0.08em] text-white/25 max-w-xs leading-relaxed">
+            <p className="font-mono text-[11px] tracking-[0.08em] text-white/60 max-w-xs leading-relaxed">
               Proprietary GCC Media &amp; Insight Technology
             </p>
           </div>
@@ -974,11 +976,11 @@ export default function Home() {
             ]},
           ].map((col) => (
             <div key={col.heading} className="flex flex-col gap-4">
-              <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/40">{col.heading}</span>
+              <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/70">{col.heading}</span>
               <ul className="flex flex-col gap-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <a href={link.href} className="font-mono text-[11px] tracking-[0.12em] uppercase text-white/20 hover:text-white/40 transition-colors duration-200">
+                    <a href={link.href} className="font-mono text-[11px] tracking-[0.12em] uppercase text-white/50 hover:text-white/80 transition-colors duration-200">
                       {link.label}
                     </a>
                   </li>
@@ -990,7 +992,7 @@ export default function Home() {
 
         <div className="border-t border-white/[0.05] px-6 md:px-10 py-5">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/15">
+            <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/50">
               © 2026 Diwaniya Media. All rights reserved.
             </span>
           </div>
