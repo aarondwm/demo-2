@@ -610,8 +610,8 @@ export default function Home() {
             className="flex flex-row items-center gap-6 opacity-0 mt-20 mb-20"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
-            <HoverActionButton labelText="Request a Briefing" scramble href="/contact" variant="white" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "rgba(255,255,255,0.10)", backdropFilter: "blur(40px) saturate(180%) brightness(1.15)", WebkitBackdropFilter: "blur(40px) saturate(180%) brightness(1.15)", borderColor: "rgba(255,255,255,0.22)", boxShadow: "0 0 0 1px rgba(255,255,255,0.10) inset, 0 2px 24px rgba(255,255,255,0.04) inset, 0 12px 40px rgba(0,0,0,0.35)" }} />
-            <HoverActionButton labelText="How It Works" scramble scrambleStep={6.2} href="#what-we-do" variant="white" direction="vertical" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "rgba(255,255,255,0.10)", backdropFilter: "blur(40px) saturate(180%) brightness(1.15)", WebkitBackdropFilter: "blur(40px) saturate(180%) brightness(1.15)", borderColor: "rgba(255,255,255,0.22)", boxShadow: "0 0 0 1px rgba(255,255,255,0.10) inset, 0 2px 24px rgba(255,255,255,0.04) inset, 0 12px 40px rgba(0,0,0,0.35)" }} />
+            <HoverActionButton labelText="Request a Briefing" scramble href="/contact" variant="blue-fill" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
+            <HoverActionButton labelText="How It Works" scramble scrambleStep={6.2} href="#what-we-do" variant="white" direction="vertical" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
           </div>
         </div>
       </section>
@@ -763,8 +763,8 @@ export default function Home() {
                 className="font-display font-bold uppercase text-white"
                 style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
-                <ScrambleOnSignal text="Know Exactly" signal={sec4Visible} style={{ color: "#ffffff" }} />
-                <ScrambleOnSignal text="Who Engaged" signal={sec4Visible} onDone={sec4BodyDone} style={{ color: "#ffffff" }} />
+                <span style={{ display: "block", color: "#ffffff", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>Know Exactly</span>
+                <span style={{ display: "block", color: "#ffffff", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.12s" }}>Who Engaged</span>
               </h2>
             </div>
             <p className="lg:max-w-sm lg:ml-auto" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
@@ -927,8 +927,8 @@ export default function Home() {
             />
             <span className="absolute top-3 left-3   w-5 h-5 border-t border-l border-[#4a6cf7]" />
             <span className="absolute top-3 right-3  w-5 h-5 border-t border-r border-[#4a6cf7]" />
-            <span className="absolute bottom-3 left-3  w-5 h-5 border-b border-l border-white/20" />
-            <span className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-white/20" />
+            <span className="absolute bottom-3 left-3  w-5 h-5 border-b border-l border-[#4a6cf7]" />
+            <span className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-[#4a6cf7]" />
 
             <div className="relative z-10">
               <div className="flex items-center mb-5">
@@ -940,12 +940,12 @@ export default function Home() {
               >
                 <span style={{ display: "block", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>Start with</span>
                 <span style={{ display: "block", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.1s" }}>a Briefing.</span>
-                <span style={{ display: "block", color: "var(--accent)", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.18s" }}>See What Returns.</span>
+                <span style={{ display: "block", color: "#4a6cf7", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.18s" }}>See What Returns.</span>
               </h2>
               <p className="sys-body max-w-lg mb-10 mx-auto text-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
                 Book a briefing. We&apos;ll walk you through what we&apos;d run, who we&apos;d reach, and whether you&apos;re eligible.
               </p>
-              <div className="flex justify-center">
+              <div className="flex justify-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.32s" }}>
                 <HoverActionButton label="Request a Briefing" href="/contact" />
               </div>
             </div>

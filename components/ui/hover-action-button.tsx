@@ -43,7 +43,7 @@ interface HoverActionButtonProps {
   href?: string;
   className?: string;
   style?: React.CSSProperties;
-  variant?: "blue" | "white";
+  variant?: "blue" | "white" | "blue-fill";
   direction?: "horizontal" | "vertical";
 }
 
@@ -59,9 +59,9 @@ export const HoverActionButton = ({
   direction = "horizontal",
 }: HoverActionButtonProps = {}) => {
   const sizerText  = labelText ?? (typeof label === "string" ? label : "");
-  const fillClass  = variant === "white" ? "group-hover:bg-white"    : "group-hover:bg-[#4a6cf7]";
-  const textHover  = variant === "white" ? "text-black"              : "text-white";
-  const borderBase = variant === "white" ? "border-white/40 bg-black": "border-white/20 bg-black";
+  const fillClass  = variant === "white" ? "group-hover:bg-white" : "group-hover:bg-[#4a6cf7]";
+  const textHover  = variant === "white" ? "text-black"          : "text-white";
+  const borderBase = variant === "blue-fill" ? "border-white/40 bg-black" : variant === "white" ? "border-white/40 bg-black" : "border-white/20 bg-black";
 
   const isVertical = direction === "vertical";
   const Arrow      = isVertical ? ArrowDown : ArrowRight;
