@@ -17,7 +17,7 @@ export default function ContactPage() {
   };
 
   const inputClass =
-    "w-full bg-transparent border border-white/[0.35] px-4 py-3 font-mono text-[13px] tracking-[0.06em] text-white placeholder:text-white/50 focus:outline-none focus:border-[#4a6cf7]/50 transition-colors";
+    "w-full bg-transparent border border-white/[0.45] px-4 py-3 font-mono text-[13px] tracking-[0.06em] text-white placeholder:text-white/80 focus:outline-none focus:border-white transition-colors";
 
   return (
     <main className="min-h-screen bg-[#04060c] text-white">
@@ -47,7 +47,7 @@ export default function ContactPage() {
               <p className="font-display font-bold uppercase text-white text-[24px] tracking-[0.03em] mb-2">
                 We&apos;ll be in touch.
               </p>
-              <p className="font-mono text-[12px] text-white/30">
+              <p className="font-mono text-[12px] text-white/80">
                 Our team will review your request and get back to you shortly.
               </p>
             </div>
