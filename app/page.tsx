@@ -666,8 +666,8 @@ export default function Home() {
                 className="font-display font-bold uppercase"
                 style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
-                <ScrambleOnSignal text="Your Story." signal={sec3Visible} style={{ color: "#ffffff" }} />
-                <ScrambleOnSignal text="Guaranteed Publishing." signal={sec3Visible} onDone={sec3BodyDone} style={{ color: "#4a6cf7" }} />
+                <span style={{ display: "block", color: "#ffffff", opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>Your Story.</span>
+                <span style={{ display: "block", color: "#4a6cf7", opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.12s" }}>Guaranteed Publishing.</span>
               </h2>
 
               {/* Stat counters */}
@@ -930,22 +930,24 @@ export default function Home() {
             <span className="absolute bottom-3 left-3  w-5 h-5 border-b border-l border-white/20" />
             <span className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-white/20" />
 
-            <div className="relative z-10 max-w-2xl">
+            <div className="relative z-10">
               <div className="flex items-center mb-5">
                 <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Get Started" delay={0} style={{ display: "inline" }} onDone={secCtaDone} /></span>
               </div>
               <h2
-                className="font-display font-bold uppercase text-white mb-5"
+                className="font-display font-bold uppercase text-white mb-5 text-center"
                 style={{ fontSize: "clamp(40px,6.5vw,84px)", letterSpacing: "0.03em", lineHeight: "0.90" }}
               >
                 <span style={{ display: "block", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>Start with</span>
                 <span style={{ display: "block", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.1s" }}>a Briefing.</span>
                 <span style={{ display: "block", color: "var(--accent)", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.18s" }}>See What Returns.</span>
               </h2>
-              <p className="sys-body max-w-lg mb-10" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
+              <p className="sys-body max-w-lg mb-10 mx-auto text-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
                 Book a briefing. We&apos;ll walk you through what we&apos;d run, who we&apos;d reach, and whether you&apos;re eligible.
               </p>
-              <HoverActionButton label="Request a Briefing" href="/contact" />
+              <div className="flex justify-center">
+                <HoverActionButton label="Request a Briefing" href="/contact" />
+              </div>
             </div>
           </div>
         </div>
