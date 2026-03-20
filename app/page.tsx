@@ -731,6 +731,8 @@ export default function Home() {
             border: "1px solid rgba(74,108,247,0.30)",
             boxShadow: "0 0 0 1px rgba(74,108,247,0.06), 0 0 40px rgba(74,108,247,0.18), 0 0 80px rgba(74,108,247,0.08), inset 0 0 40px rgba(4,13,28,0.6)",
             overflow: "hidden",
+            opacity: secMapVisible ? 1 : 0,
+            transition: "opacity 0.6s ease 0.3s",
           }}>
             {/* Atmospheric glow — centred on the Gulf */}
             <div aria-hidden style={{
