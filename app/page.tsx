@@ -327,7 +327,7 @@ function DashboardCard({ engagement }: { engagement: string[] }) {
             Campaign Intelligence — Live
           </span>
         </div>
-        <span className="font-mono text-[9px] tracking-[0.2em] uppercase" style={{ color: "#3d4a5e" }}>
+        <span className="font-mono text-[9px] tracking-[0.2em] uppercase" style={{ color: "rgba(255,255,255,0.35)" }}>
           AXM.DWM.FEED
         </span>
       </div>
@@ -335,7 +335,7 @@ function DashboardCard({ engagement }: { engagement: string[] }) {
       <div className="relative flex-1 overflow-hidden px-2">
         <div className="grid grid-cols-4 gap-0 px-4 py-2.5 border-b border-white/[0.10]">
           {["Organization", "Industry", "Seniority", "Engagement"].map((h) => (
-            <span key={h} className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "12px", color: "#5a6a84" }}>
+            <span key={h} className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "12px", color: "rgba(255,255,255,0.45)" }}>
               {h}
             </span>
           ))}
@@ -355,7 +355,7 @@ function DashboardCard({ engagement }: { engagement: string[] }) {
       </div>
       {/* Footer */}
       <div className="relative flex items-center justify-between px-6 py-2.5 border-t border-white/[0.08]">
-        <span className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "11px", color: "#4d5a6e" }}>
+        <span className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)" }}>
           Full data available after onboarding
         </span>
         <div className="flex items-center gap-1.5">
@@ -408,7 +408,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
           fontFamily: "var(--font-body), sans-serif",
           fontSize: hovered ? "14px" : "13px",
           lineHeight: "1.75",
-          color: hovered ? "rgba(255,255,255,0.88)" : "rgba(255,255,255,0.55)",
+          color: hovered ? "rgba(255,255,255,0.88)" : "rgba(255,255,255,0.7)",
           opacity: visible ? 1 : 0,
           transition: `opacity 0.35s ease ${0.15 + index * 0.08}s, color 0.3s ease, font-size 0.3s ease`,
         }}>{body}</span>
@@ -480,7 +480,7 @@ function FeatureCard({
         }}
       >
         <div className="p-8 md:p-10 flex flex-col gap-5">
-          <span className="font-mono text-[10px] tracking-[0.25em] font-light" style={{ color: "#3d4a5e" }}>{n}</span>
+          <span className="font-mono text-[10px] tracking-[0.25em] font-light" style={{ color: "#c8c0b0" }}>{n}</span>
           <h3
             className="font-display font-bold uppercase"
             style={{ fontSize: "clamp(20px,2vw,28px)", letterSpacing: "0.05em", lineHeight: "1", color: "#e8e2d6", opacity: visible ? 1 : 0, transition: `opacity 0.35s ease ${0.05 + index * 0.08}s` }}
@@ -489,7 +489,7 @@ function FeatureCard({
           </h3>
           <p
             className="text-[13px] leading-[1.8]"
-            style={{ color: "#5a6272", opacity: visible ? 1 : 0, transition: `opacity 0.35s ease ${0.15 + index * 0.08}s` }}
+            style={{ color: "rgba(255,255,255,0.55)", opacity: visible ? 1 : 0, transition: `opacity 0.35s ease ${0.15 + index * 0.08}s` }}
           >
             {body}
           </p>
@@ -678,7 +678,7 @@ export default function Home() {
                 ].map(({ value, label }) => (
                   <div key={label} className="flex flex-col gap-1 pr-8 first:pl-0 pl-8">
                     <span className="font-display font-bold" style={{ fontSize: "28px", color: "#e8e2d6" }}>{value}</span>
-                    <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "#7a8598" }}>{label}</span>
+                    <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
                   </div>
                 ))}
               </div>
@@ -963,15 +963,15 @@ export default function Home() {
 
           {[
             { heading: "Services", links: [
-              { label: "Our Aim", href: "#what-we-do" },
-              { label: "Media Placement", href: "#media-placement" },
-              { label: "Targeting", href: "#audience-selection" },
-              { label: "Audience Insights", href: "#intelligence" },
+              { label: "Our Aim", href: "/#what-we-do" },
+              { label: "Media Placement", href: "/#media-placement" },
+              { label: "Targeting", href: "/#audience-selection" },
+              { label: "Audience Insights", href: "/#intelligence" },
             ]},
             { heading: "Company", links: [
-              { label: "Home", href: "#home" },
-              { label: "Contact", href: "#get-started" },
-              { label: "Reviews", href: "#reviews" },
+              { label: "Home", href: "/#home" },
+              { label: "Contact", href: "/#get-started" },
+              { label: "Reviews", href: "/#reviews" },
             ]},
             { heading: "Legal", links: [
               { label: "Privacy Policy", href: "/privacy-policy" },

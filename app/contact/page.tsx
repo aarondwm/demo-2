@@ -17,7 +17,7 @@ export default function ContactPage() {
   };
 
   const inputClass =
-    "w-full bg-transparent border border-white/[0.45] px-4 py-3 font-mono text-[13px] tracking-[0.06em] text-white placeholder:text-white/80 focus:outline-none focus:border-white transition-colors";
+    "w-full bg-transparent border border-white/[0.45] px-4 py-3 font-mono text-[13px] tracking-[0.06em] text-white placeholder:text-white/40 focus:outline-none focus:border-white transition-colors";
 
   return (
     <main className="min-h-screen bg-[#04060c] text-white">
