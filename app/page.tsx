@@ -390,7 +390,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
         letterSpacing: "0.25em",
         flexShrink: 0,
         paddingTop: "2px",
-        color: hovered ? "#a0c4ff" : "#2e3a4e",
+        color: hovered ? "#a0c4ff" : "#c8c0b0",
         transition: "color 0.3s ease",
       }}>{n}</span>
       <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -400,7 +400,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
           textTransform: "uppercase",
           fontSize: hovered ? "15px" : "13px",
           letterSpacing: hovered ? "0.14em" : "0.1em",
-          color: hovered ? "#ffffff" : "#7a8598",
+          color: hovered ? "#ffffff" : "#c8c0b0",
           opacity: visible ? 1 : 0,
           transition: `opacity 0.35s ease ${0.05 + index * 0.08}s, color 0.3s ease, font-size 0.3s ease, letter-spacing 0.3s ease`,
         }}>{title}</span>
@@ -408,7 +408,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
           fontFamily: "var(--font-body), sans-serif",
           fontSize: hovered ? "14px" : "13px",
           lineHeight: "1.75",
-          color: hovered ? "rgba(255,255,255,0.88)" : "#3a4255",
+          color: hovered ? "rgba(255,255,255,0.88)" : "rgba(255,255,255,0.55)",
           opacity: visible ? 1 : 0,
           transition: `opacity 0.35s ease ${0.15 + index * 0.08}s, color 0.3s ease, font-size 0.3s ease`,
         }}>{body}</span>
@@ -824,7 +824,7 @@ export default function Home() {
                       <span
                         className="font-mono text-[10px] tracking-[0.2em]"
                         style={{
-                          color: active && intelVisible ? "#4a6cf7" : "#2e3a4e",
+                          color: active && intelVisible ? "#4a6cf7" : "#c8c0b0",
                           transition: "color 0.25s ease",
                         }}
                       >{n}</span>
