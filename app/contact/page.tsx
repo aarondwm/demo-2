@@ -78,7 +78,7 @@ export default function ContactPage() {
               <input
                 type="text"
                 name="company"
-                placeholder="Company"
+                placeholder="Company (Leave blank if no company mention)"
                 value={form.company}
                 onChange={handleChange}
                 className={inputClass}
