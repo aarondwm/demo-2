@@ -10,7 +10,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   const pendingHref = useRef<string | null>(null);
   const prevPath = useRef(pathname);
 
-  /* Intercept all <a> clicks that navigate internally */
+  /* Intercept all <a> clicks that navigate to a different page */
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       const anchor = (e.target as HTMLElement).closest("a");
@@ -18,14 +18,20 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       const href = anchor.getAttribute("href");
       if (!href) return;
 
-      const isInternal = href.startsWith("/") && !href.startsWith("//");
-      const isHashOnly = href.startsWith("#");
-      const hrefPath = href.split("#")[0] || "/";
-      const isSamePage = hrefPath === prevPath.current;
+      /* Hash-only links (#section) stay on same page — skip */
+      if (href.startsWith("#")) return;
+      /* External links — skip */
+      if (!href.startsWith("/") || href.startsWith("//")) return;
 
-      if (!isInternal || isHashOnly || isSamePage) return;
+      /* Extract the page path (strip hash) */
+      const hrefPath = href.split("#")[0] || "/";
+      const currentPage = prevPath.current;
+
+      /* Same page — skip (e.g. /#reviews on homepage) */
+      if (hrefPath === currentPage) return;
 
       e.preventDefault();
+      e.stopPropagation();
       if (phase !== "idle") return;
 
       pendingHref.current = href;
@@ -39,9 +45,15 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   /* When wipe-in animation ends → navigate and hold */
   const handleAnimationEnd = useCallback(() => {
     if (phase === "wipe-in" && pendingHref.current) {
-      router.push(pendingHref.current);
+      const href = pendingHref.current;
       pendingHref.current = null;
+      router.push(href);
       setPhase("hold");
+
+      /* Safety: if pathname doesn't change within 2s, force wipe-out */
+      setTimeout(() => {
+        setPhase((p) => (p === "hold" ? "wipe-out" : p));
+      }, 2000);
     } else if (phase === "wipe-out") {
       setPhase("idle");
     }
@@ -52,7 +64,6 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     if (pathname !== prevPath.current) {
       prevPath.current = pathname;
       if (phase === "hold") {
-        /* Small delay to let the new page paint a frame */
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             setPhase("wipe-out");
@@ -83,7 +94,6 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
                 : phase === "wipe-out"
                   ? "wipeOut 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards"
                   : "none",
-            /* Hold phase: panel stays fully covering the screen */
             transform: phase === "hold" ? "translateX(0%)" : undefined,
           }}
         >
@@ -94,9 +104,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
             style={{
               width: 80,
               height: "auto",
-              opacity: phase === "hold" ? 1 : 0.85,
-              filter: "brightness(0) invert(1)",
-              transition: "opacity 0.2s ease",
+              mixBlendMode: "screen",
             }}
           />
         </div>

@@ -5,7 +5,9 @@
       "Read(//usr/local/bin/**)",
       "Read(//Users/aaron/.nvm/versions/**)",
       "Bash(npm run:*)",
-      "Bash(npx next:*)"
+      "Bash(npx next:*)",
+      "Read(//Users/aaron/Documents/**)",
+      "Bash(ls -lh \"/Users/aaron/Documents/D*M/VSCODE /Demo 1/public/\"*)"
     ]
   }
 }
