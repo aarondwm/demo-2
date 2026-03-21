@@ -217,7 +217,6 @@ export function Navbar() {
               WebkitMaskSize: "contain",
               WebkitMaskRepeat: "no-repeat",
               WebkitMaskPosition: "center",
-              WebkitMaskMode: "luminance",
               maskImage: "url('/D*M website.png')",
               maskSize: "contain",
               maskRepeat: "no-repeat",
