@@ -213,7 +213,7 @@ export function Navbar() {
             src="/D*M website.png"
             alt="DWM"
             className="h-10 w-auto"
-            style={{ mixBlendMode: "screen" }}
+            style={{ filter: "brightness(0) invert(1)", mixBlendMode: "screen" }}
           />
         </a>
 
