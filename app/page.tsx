@@ -328,7 +328,7 @@ function DashboardCard({ engagement }: { engagement: string[] }) {
           </span>
         </div>
         <span className="font-mono text-[9px] tracking-[0.2em] uppercase" style={{ color: "rgba(255,255,255,0.35)" }}>
-          AXM.DWM.FEED
+          What we know, they don&apos;t
         </span>
       </div>
       {/* Table */}
