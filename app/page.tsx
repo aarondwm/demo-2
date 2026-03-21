@@ -666,8 +666,8 @@ export default function Home() {
                 className="font-display font-bold uppercase"
                 style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
-                <span style={{ display: "block", color: "#ffffff", opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>Your Story.</span>
-                <span style={{ display: "block", color: "#4a6cf7", opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.12s" }}>Guaranteed Publishing.</span>
+                <ScrambleOnSignal text="Your Story." signal={sec3Visible} style={{ color: "#ffffff" }} />
+                <ScrambleOnSignal text="Guaranteed Publishing." signal={sec3Visible} style={{ color: "#4a6cf7" }} />
               </h2>
 
               {/* Stat counters */}
@@ -718,8 +718,8 @@ export default function Home() {
               className="font-display font-bold uppercase text-white"
               style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
             >
-              <span style={{ display: "block", opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>Target Anyone.</span>
-              <span style={{ display: "block", color: "#4a6cf7", opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.12s" }}>Anywhere.</span>
+              <ScrambleOnSignal text="Target Anyone." signal={secMapVisible} style={{ color: "#ffffff" }} />
+              <ScrambleOnSignal text="Anywhere." signal={secMapVisible} style={{ color: "#4a6cf7" }} />
             </h2>
             <p className="sys-body max-w-lg mt-6" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s" }}>
               Our proprietary technology allows us to ensure anyone you want to read the story, reads it.
@@ -763,8 +763,8 @@ export default function Home() {
                 className="font-display font-bold uppercase text-white"
                 style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
               >
-                <span style={{ display: "block", color: "#ffffff", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>Know Exactly</span>
-                <span style={{ display: "block", color: "#ffffff", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.12s" }}>Who Engaged</span>
+                <ScrambleOnSignal text="Know Exactly" signal={sec4Visible} style={{ color: "#ffffff" }} />
+                <ScrambleOnSignal text="Who Engaged" signal={sec4Visible} style={{ color: "#ffffff" }} />
               </h2>
             </div>
             <p className="lg:max-w-sm lg:ml-auto" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
@@ -938,9 +938,9 @@ export default function Home() {
                 className="font-display font-bold uppercase text-white mb-5 text-center"
                 style={{ fontSize: "clamp(40px,6.5vw,84px)", letterSpacing: "0.03em", lineHeight: "0.90" }}
               >
-                <span style={{ display: "block", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>Start with</span>
-                <span style={{ display: "block", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.1s" }}>a Briefing.</span>
-                <span style={{ display: "block", color: "#4a6cf7", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.18s" }}>See What Returns.</span>
+                <ScrambleOnSignal text="Start with" signal={secCtaVisible} style={{ color: "#ffffff" }} />
+                <ScrambleOnSignal text="a Briefing." signal={secCtaVisible} style={{ color: "#ffffff" }} />
+                <ScrambleOnSignal text="See What Returns." signal={secCtaVisible} style={{ color: "#4a6cf7" }} />
               </h2>
               <p className="sys-body max-w-lg mb-10 mx-auto text-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
                 Book a briefing. We&apos;ll walk you through what we&apos;d run, who we&apos;d reach, and whether you&apos;re eligible.
