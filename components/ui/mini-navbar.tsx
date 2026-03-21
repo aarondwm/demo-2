@@ -213,7 +213,7 @@ export function Navbar() {
             src="/D*M website.png"
             alt="DWM"
             className="h-10 w-auto"
-            style={{ filter: "brightness(0) invert(1)", mixBlendMode: "screen" }}
+            style={{ clipPath: "circle(43% at 50% 50%)", mixBlendMode: "screen", transform: "scale(1.4)" }}
           />
         </a>
 
