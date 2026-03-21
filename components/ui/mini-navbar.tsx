@@ -213,7 +213,7 @@ export function Navbar() {
             src="/D*M website.png"
             alt="DWM"
             className="h-10 w-auto"
-            style={{ clipPath: "inset(12% 12% 12% 12%)" }}
+            style={{ clipPath: "inset(20% 20% 20% 20%)", transform: "scale(1.5)" }}
           />
         </a>
 
