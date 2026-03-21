@@ -222,6 +222,7 @@ export function Navbar() {
               maskRepeat: "no-repeat",
               maskPosition: "center",
               maskMode: "luminance",
+              clipPath: "circle(38% at 50% 50%)",
             }}
           />
         </a>
