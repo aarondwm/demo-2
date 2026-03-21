@@ -504,6 +504,9 @@ export default function Home() {
   const [activeIntelItem, setActiveIntelItem] = useState(0);
   const [intelVisible, setIntelVisible] = useState(true);
   const [hoveredIntelItem, setHoveredIntelItem] = useState<number | null>(null);
+  const [showTable, setShowTable] = useState(false);
+  const tableTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const intelSectionRef = useRef<HTMLDivElement>(null);
   const [sec2Visible,       setSec2Visible]       = useState(false);
   const [sec3Visible,       setSec3Visible]       = useState(false);
   const [sec4Visible,       setSec4Visible]       = useState(false);
@@ -558,6 +561,18 @@ export default function Home() {
       }, 250);
     }, 4500);
     return () => clearInterval(timer);
+  }, []);
+
+  /* Hide table when clicking outside intel section */
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (intelSectionRef.current && !intelSectionRef.current.contains(e.target as Node)) {
+        setShowTable(false);
+        if (tableTimerRef.current) { clearTimeout(tableTimerRef.current); tableTimerRef.current = null; }
+      }
+    };
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
   }, []);
 
   return (
@@ -743,7 +758,7 @@ export default function Home() {
               src="/dwm-gcc-map.html"
               scrolling="no"
               loading="lazy"
-              style={{ width: "100%", height: "860px", border: "none", display: "block", position: "relative", zIndex: 0 }}
+              style={{ width: "100%", height: "620px", border: "none", display: "block", position: "relative", zIndex: 0 }}
               title="GCC Audience Map"
             />
           </div>
@@ -751,7 +766,7 @@ export default function Home() {
       </section>
 
       {/* ── 4. AUDIENCE INTELLIGENCE ─────────────────────────────────────── */}
-      <section id="intelligence" className="sys-section">
+      <section id="intelligence" className="sys-section" ref={intelSectionRef}>
         <div className="max-w-6xl mx-auto px-6 md:px-10">
 
           <div className="grid lg:grid-cols-2 gap-10 mb-14 items-end">
@@ -815,8 +830,16 @@ export default function Home() {
                     <li
                       key={n}
                       className="p-6 flex flex-col gap-3 cursor-pointer"
-                      onMouseEnter={() => setHoveredIntelItem(idx)}
-                      onMouseLeave={() => setHoveredIntelItem(null)}
+                      onMouseEnter={() => {
+                        setHoveredIntelItem(idx);
+                        setShowTable(true);
+                        if (tableTimerRef.current) { clearTimeout(tableTimerRef.current); tableTimerRef.current = null; }
+                      }}
+                      onMouseLeave={() => {
+                        setHoveredIntelItem(null);
+                        if (tableTimerRef.current) clearTimeout(tableTimerRef.current);
+                        tableTimerRef.current = setTimeout(() => setShowTable(false), 10000);
+                      }}
                       style={{
                         background: active && intelVisible ? "rgba(74,108,247,0.08)" : "rgba(255,255,255,0.02)",
                         borderLeft: active && intelVisible ? "2px solid #4a6cf7" : "2px solid transparent",
@@ -855,11 +878,11 @@ export default function Home() {
 
           <div
             style={{
-              opacity: hoveredIntelItem !== null ? 1 : 0,
-              maxHeight: hoveredIntelItem !== null ? "600px" : "0px",
+              opacity: showTable ? 1 : 0,
+              maxHeight: showTable ? "600px" : "0px",
               overflow: "hidden",
               transition: "opacity 0.3s ease, max-height 0.4s ease",
-              pointerEvents: hoveredIntelItem !== null ? "auto" : "none",
+              pointerEvents: showTable ? "auto" : "none",
             }}
           >
             <div className="py-8 text-center border border-white/[0.08] border-t-0 border-b-0">
