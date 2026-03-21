@@ -209,11 +209,21 @@ export function Navbar() {
           href="/"
           className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity"
         >
-          <img
-            src="/D*M website.png"
-            alt="DWM"
-            className="h-10 w-auto"
-            style={{ clipPath: "circle(43% at 50% 50%)", mixBlendMode: "screen", transform: "scale(1.4)" }}
+          <span
+            className="inline-block h-10 w-10"
+            style={{
+              backgroundColor: "white",
+              WebkitMaskImage: "url('/D*M website.png')",
+              WebkitMaskSize: "contain",
+              WebkitMaskRepeat: "no-repeat",
+              WebkitMaskPosition: "center",
+              WebkitMaskMode: "luminance",
+              maskImage: "url('/D*M website.png')",
+              maskSize: "contain",
+              maskRepeat: "no-repeat",
+              maskPosition: "center",
+              maskMode: "luminance",
+            }}
           />
         </a>
 
