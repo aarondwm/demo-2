@@ -105,6 +105,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
               width: 80,
               height: "auto",
               mixBlendMode: "screen",
+              clipPath: "inset(12% 12% 12% 12%)",
             }}
           />
         </div>
