@@ -267,7 +267,7 @@
 
   /* ── Section shell — consistent section spacing */
   .sys-section {
-    padding: 96px 0;
+    padding: clamp(48px, 10vw, 96px) 0;
     border-top: none;
     position: relative;
   }

@@ -322,42 +322,44 @@ function DashboardCard({ engagement }: { engagement: string[] }) {
         }}
       />
       {/* Card header */}
-      <div className="relative flex items-center justify-between px-6 py-3 border-b border-white/[0.08]">
-        <div className="flex items-center gap-2.5">
-          <span className="w-1.5 h-1.5 bg-[#4a6cf7] animate-pulse" />
-          <span className="font-mono font-bold tracking-[0.22em] uppercase" style={{ fontSize: "13px", color: "#e8e2d6" }}>
+      <div className="relative flex items-center justify-between px-4 md:px-6 py-3 border-b border-white/[0.08]">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <span className="w-1.5 h-1.5 bg-[#4a6cf7] animate-pulse flex-shrink-0" />
+          <span className="font-mono font-bold tracking-[0.22em] uppercase truncate" style={{ fontSize: "clamp(9px, 2.5vw, 13px)", color: "#e8e2d6" }}>
             Campaign Intelligence — Live
           </span>
         </div>
-        <span className="font-mono text-[9px] tracking-[0.2em] uppercase" style={{ color: "rgba(255,255,255,0.35)" }}>
+        <span className="font-mono text-[9px] tracking-[0.2em] uppercase flex-shrink-0 hidden sm:block" style={{ color: "rgba(255,255,255,0.35)" }}>
           What we know, they don&apos;t
         </span>
       </div>
       {/* Table */}
-      <div className="relative flex-1 overflow-hidden px-2">
-        <div className="grid grid-cols-4 gap-0 px-4 py-2.5 border-b border-white/[0.10]">
-          {["Organization", "Industry", "Seniority", "Engagement"].map((h) => (
-            <span key={h} className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "12px", color: "rgba(255,255,255,0.45)" }}>
-              {h}
-            </span>
-          ))}
-        </div>
-        {rows.map((row, i) => (
-          <div
-            key={i}
-            className="grid grid-cols-4 gap-0 px-4 border-b border-white/[0.04] hover:bg-white/[0.04] transition-colors duration-150"
-            style={{ paddingTop: "14px", paddingBottom: "14px" }}
-          >
-            <span className="font-mono tracking-wider" style={{ fontSize: "14px", color: "rgba(255,255,255,0.55)" }}>{row.org}</span>
-            <span className="font-mono tracking-[0.1em] uppercase" style={{ fontSize: "14px", color: "rgba(255,255,255,0.35)" }}>{row.industry}</span>
-            <span className="font-mono tracking-[0.1em] uppercase" style={{ fontSize: "14px", color: "rgba(255,255,255,0.25)" }}>{row.seniority}</span>
-            <span className="font-mono" style={{ fontSize: "14px", color: "rgba(255,255,255,0.80)", fontWeight: 600, letterSpacing: "0.05em" }}>{row.engagement}</span>
-          </div>
-        ))}
+      <div className="relative flex-1 overflow-x-auto">
+        <table className="w-full" style={{ minWidth: "480px" }}>
+          <thead>
+            <tr className="border-b border-white/[0.10]">
+              {["Organization", "Industry", "Seniority", "Engagement"].map((h) => (
+                <th key={h} className="font-mono tracking-[0.2em] uppercase text-left font-normal px-4 py-2.5" style={{ fontSize: "11px", color: "rgba(255,255,255,0.45)" }}>
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <tr key={i} className="border-b border-white/[0.04] hover:bg-white/[0.04] transition-colors duration-150">
+                <td className="font-mono tracking-wider px-4 py-3" style={{ fontSize: "13px", color: "rgba(255,255,255,0.55)" }}>{row.org}</td>
+                <td className="font-mono tracking-[0.1em] uppercase px-4 py-3" style={{ fontSize: "13px", color: "rgba(255,255,255,0.35)" }}>{row.industry}</td>
+                <td className="font-mono tracking-[0.1em] uppercase px-4 py-3" style={{ fontSize: "13px", color: "rgba(255,255,255,0.25)" }}>{row.seniority}</td>
+                <td className="font-mono px-4 py-3" style={{ fontSize: "13px", color: "rgba(255,255,255,0.80)", fontWeight: 600, letterSpacing: "0.05em" }}>{row.engagement}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
       {/* Footer */}
-      <div className="relative flex items-center justify-between px-6 py-2.5 border-t border-white/[0.08]">
-        <span className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)" }}>
+      <div className="relative flex items-center justify-between px-4 md:px-6 py-2.5 border-t border-white/[0.08]">
+        <span className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "clamp(8px, 2vw, 11px)", color: "rgba(255,255,255,0.35)" }}>
           Full data available after onboarding
         </span>
         <div className="flex items-center gap-1.5">
@@ -601,7 +603,7 @@ export default function Home() {
 
           <h1
             className="font-display font-bold uppercase text-center leading-[0.90]"
-            style={{ fontSize: "clamp(52px,9vw,110px)", letterSpacing: "0.03em" }}
+            style={{ fontSize: "clamp(36px,9vw,110px)", letterSpacing: "0.03em" }}
           >
             <ScrambledLine
               text="RIGHT STORY."
@@ -624,11 +626,11 @@ export default function Home() {
           </h1>
 
           <div
-            className="flex flex-row items-center gap-6 opacity-0 mt-20 mb-20"
+            className="flex flex-col md:flex-row items-stretch md:items-center gap-4 md:gap-6 opacity-0 mt-12 md:mt-20 mb-12 md:mb-20 max-w-sm md:max-w-none mx-auto w-full"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
-            <HoverActionButton labelText="Request a Briefing" scramble href="/contact" variant="blue-fill" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
-            <HoverActionButton labelText="How It Works" scramble scrambleStep={6.2} href="#what-we-do" variant="white" direction="vertical" className="text-[15px] font-bold w-80" style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
+            <HoverActionButton labelText="Request a Briefing" scramble href="/contact" variant="blue-fill" className="text-[13px] md:text-[15px] font-bold w-full md:w-80" style={{ borderRadius: "999px", padding: "20px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
+            <HoverActionButton labelText="How It Works" scramble scrambleStep={6.2} href="#what-we-do" variant="white" direction="vertical" className="text-[13px] md:text-[15px] font-bold w-full md:w-80" style={{ borderRadius: "999px", padding: "20px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
           </div>
         </div>
       </section>
@@ -760,7 +762,7 @@ export default function Home() {
               src="/dwm-gcc-map.html"
               scrolling="no"
               loading="lazy"
-              style={{ width: "100%", height: "620px", border: "none", display: "block", position: "relative", zIndex: 0 }}
+              style={{ width: "100%", height: "clamp(320px, 70vw, 620px)", border: "none", display: "block", position: "relative", zIndex: 0 }}
               title="GCC Audience Map"
             />
           </div>
@@ -816,7 +818,7 @@ export default function Home() {
                 <HoverActionButton label="Request a Briefing" href="/contact" className="mt-2" />
               </div>
 
-              <ul className="grid grid-cols-2 gap-px border border-[#161c2c]" style={{ backgroundColor: "#161c2c" }}>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-px border border-[#161c2c]" style={{ backgroundColor: "#161c2c" }}>
                 {[
                   { n: "01", label: "Company-Level Engagement" },
                   { n: "02", label: "Role & Seniority Breakdown" },
@@ -982,7 +984,7 @@ export default function Home() {
       <footer className="relative">
         <div aria-hidden className="absolute top-0 left-[10%] right-[10%] h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.12) 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.12) 70%, transparent)" }} />
         <div aria-hidden className="absolute -top-1 left-[15%] right-[15%] h-[9px] pointer-events-none" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.04) 30%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.04) 70%, transparent)", filter: "blur(4px)" }} />
-        <div className="max-w-6xl mx-auto px-6 md:px-10 py-14 grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-10">
+        <div className="max-w-6xl mx-auto px-6 md:px-10 py-10 md:py-14 grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-6 md:gap-10">
           <div className="flex flex-col gap-4">
             <img src="/D*M website.png" alt="DWM" className="h-9 w-auto self-start" />
             <p className="font-mono text-[11px] tracking-[0.08em] text-white/60 max-w-xs leading-relaxed">
