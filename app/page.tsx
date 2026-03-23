@@ -17,12 +17,14 @@ class TextScramble {
   private speed: number;
   private sequential: boolean;
   private seqStep: number;
+  private seqWindow: number;
 
-  constructor(el: HTMLElement, speed = 30, sequential = false, seqStep = 4) {
+  constructor(el: HTMLElement, speed = 30, sequential = false, seqStep = 4, seqWindow = 6) {
     this.el = el;
     this.speed = speed;
     this.sequential = sequential;
     this.seqStep = seqStep;
+    this.seqWindow = seqWindow;
     this.update = this.update.bind(this);
   }
 
@@ -38,7 +40,7 @@ class TextScramble {
       if (this.sequential) {
         // each letter starts after the previous one resolves: strict left-to-right
         start = i * this.seqStep;
-        end   = start + 6;
+        end   = start + this.seqWindow;
       } else {
         start = Math.floor(Math.random() * this.speed);
         end   = start + Math.floor(Math.random() * this.speed);
@@ -99,7 +101,7 @@ function ScrambledLine({
     const el = ref.current;
     if (!el) return;
     el.style.opacity = "0";
-    const scrambler = new TextScramble(el, 30, true);
+    const scrambler = new TextScramble(el, 30, true, 2, 3);
     let loopTimer: ReturnType<typeof setTimeout>;
 
     const run = () => {
@@ -144,7 +146,7 @@ function ScrambleOnView({
         t = setTimeout(() => {
           el.style.opacity = "1";
           el.innerHTML = "";
-          new TextScramble(el, 14, true, 3).setText(text).then(() => onDone?.());
+          new TextScramble(el, 14, true, 1.5, 3).setText(text).then(() => onDone?.());
         }, delay);
         obs.disconnect();
       }
@@ -170,7 +172,7 @@ function ScrambleOnTrigger({
     if (!el) return;
     el.style.opacity = "1";
     el.innerHTML = "";
-    new TextScramble(el, 14, true, 3).setText(text);
+    new TextScramble(el, 14, true, 1.5, 3).setText(text);
   }, [text, trigger]);
   return <span ref={ref} className={className} style={style}>{text}</span>;
 }
@@ -191,7 +193,7 @@ function ScrambleOnSignal({
     const t = setTimeout(() => {
       el.style.opacity = "1";
       el.innerHTML = "";
-      new TextScramble(el, 14, true, 3).setText(text).then(() => onDone?.());
+      new TextScramble(el, 14, true, 1.5, 3).setText(text).then(() => onDone?.());
     }, delay);
     return () => clearTimeout(t);
   // eslint-disable-next-line react-hooks/exhaustive-deps
