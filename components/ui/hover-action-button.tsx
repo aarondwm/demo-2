@@ -93,7 +93,7 @@ export const HoverActionButton = ({
       style={style}
       onMouseLeave={scramble ? handleMouseLeave : undefined}
       className={cn(
-        "group relative cursor-pointer border py-3 px-6 md:py-4 md:px-10 font-mono text-[11px] font-semibold tracking-[0.2em] uppercase text-white flex items-center justify-center whitespace-nowrap overflow-hidden",
+        "group relative cursor-pointer border py-4 px-10 font-mono text-[11px] font-semibold tracking-[0.2em] uppercase text-white inline-flex items-center justify-center whitespace-nowrap overflow-hidden",
         borderBase,
         className
       )}

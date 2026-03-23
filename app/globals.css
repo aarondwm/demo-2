@@ -354,6 +354,11 @@
   }
 }
 
+/* ── Hero button mobile override ──────────────────────────────────────── */
+@media (max-width: 767px) {
+  .hero-btn { padding: 16px 0 !important; }
+}
+
 /* ── Page transition wipe ─────────────────────────────────────────────── */
 @keyframes wipeIn {
   from { transform: translateX(-100%); }
