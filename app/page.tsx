@@ -744,7 +744,8 @@ export default function Home() {
               Our proprietary technology allows us to ensure anyone you want to read the story, reads it.
             </p>
           </div>
-          <div style={{
+          {/* Desktop: Interactive map */}
+          <div className="hidden md:block" style={{
             position: "relative",
             borderRadius: "4px",
             border: "1px solid rgba(74,108,247,0.30)",
@@ -762,8 +763,26 @@ export default function Home() {
               src="/dwm-gcc-map.html"
               scrolling="no"
               loading="lazy"
-              style={{ width: "100%", height: "clamp(320px, 70vw, 620px)", border: "none", display: "block", position: "relative", zIndex: 0 }}
+              style={{ width: "100%", height: "620px", border: "none", display: "block", position: "relative", zIndex: 0 }}
               title="GCC Audience Map"
+            />
+          </div>
+          {/* Mobile: GCC Slideshow */}
+          <div className="block md:hidden" style={{
+            position: "relative",
+            borderRadius: "4px",
+            border: "1px solid rgba(74,108,247,0.30)",
+            boxShadow: "0 0 0 1px rgba(74,108,247,0.06), 0 0 40px rgba(74,108,247,0.18), 0 0 80px rgba(74,108,247,0.08), inset 0 0 40px rgba(4,13,28,0.6)",
+            overflow: "hidden",
+            opacity: secMapVisible ? 1 : 0,
+            transition: "opacity 0.6s ease 0.3s",
+          }}>
+            <iframe
+              src="/dwm-gcc-slideshow.html"
+              scrolling="no"
+              loading="lazy"
+              style={{ width: "100%", height: "580px", border: "none", display: "block" }}
+              title="GCC Audience Slideshow"
             />
           </div>
         </div>
