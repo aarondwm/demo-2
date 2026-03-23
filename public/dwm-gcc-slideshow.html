@@ -32,7 +32,7 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
   padding:14px 20px;
   display:flex;align-items:center;justify-content:space-between;
   border-bottom:1px solid var(--border);
-  background:rgba(5,5,8,0.95);
+  background:var(--bg);
   position:fixed;top:0;left:0;right:0;z-index:100;
 }
 .header-brand{display:flex;align-items:center;gap:10px}
@@ -116,7 +116,16 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
   color:var(--accent);margin-top:4px;
   text-shadow:0 0 20px rgba(74,108,247,0.3);
 }
+.slide-total-value.redacted{font-size:12px;letter-spacing:0.14em;text-shadow:none}
 .slide-total-sub{font-size:8px;color:var(--white-30);margin-top:2px;letter-spacing:0.06em}
+
+/* Per-country map positioning */
+[data-index="0"] .slide-map{height:110px;top:10px;right:15px}  /* Kuwait — tall shape, pull up */
+[data-index="1"] .slide-map{height:130px;top:5px;right:10px}   /* Saudi — large, needs room */
+[data-index="2"] .slide-map{height:100px;top:15px;right:15px}  /* UAE — compact */
+[data-index="3"] .slide-map{height:70px;top:25px;right:20px}   /* Qatar — small, no clash */
+[data-index="4"] .slide-map{height:60px;top:25px;right:20px}   /* Bahrain — tiny, no clash */
+[data-index="5"] .slide-map{height:120px;top:8px;right:10px}   /* Oman — tall */
 
 /* Demographics */
 .slide-section{margin-top:16px}
