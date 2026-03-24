@@ -302,7 +302,41 @@ const secondColumn = [testimonials[2], testimonials[3], testimonials[6]];
 const thirdColumn  = [testimonials[5], testimonials[7], testimonials[0], testimonials[3]];
 
 /* ── Dashboard card (inside ContainerScroll) ─────────────────────────────── */
-function DashboardCard({ engagement }: { engagement: string[] }) {
+function ScrambleNumber({ value, trigger }: { value: string; trigger: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isFirst = useRef(true);
+  const [pulsing, setPulsing] = useState(false);
+  useEffect(() => {
+    if (isFirst.current) { isFirst.current = false; return; }
+    const el = ref.current;
+    if (!el) return;
+    setPulsing(true);
+    const chars = "0123456789,";
+    type Q = { to: string; start: number; end: number; char?: string };
+    const queue: Q[] = Array.from(value).map((to, i) => ({ to, start: i, end: i + 3 }));
+    let frame = 0;
+    let raf = 0;
+    const tick = () => {
+      let out = "";
+      let done = 0;
+      for (const item of queue) {
+        if (frame >= item.end) { done++; out += item.to; }
+        else if (frame >= item.start) {
+          if (!item.char || Math.random() < 0.4) item.char = chars[Math.floor(Math.random() * chars.length)];
+          out += `<span style="color:#4a6cf7">${item.char}</span>`;
+        } else { out += ""; }
+      }
+      el.innerHTML = out;
+      if (done < queue.length) { raf = requestAnimationFrame(tick); frame++; }
+      else { setTimeout(() => setPulsing(false), 300); }
+    };
+    cancelAnimationFrame(raf);
+    tick();
+  }, [value, trigger]);
+  return <span ref={ref} style={{ transition: "text-shadow 0.3s ease", textShadow: pulsing ? "0 0 10px rgba(74,108,247,0.6), 0 0 20px rgba(74,108,247,0.3)" : "none" }}>{value}</span>;
+}
+
+function DashboardCard({ engagement, trigger = 0 }: { engagement: string[]; trigger?: number }) {
   const orgs       = ["**********", "********", "******", "*********", "************"];
   const industries = ["Banking", "Investment", "Energy", "Telecom", "Logistics"];
   const seniorities= ["C-Suite", "Director", "VP", "Manager", "Analyst"];
@@ -324,14 +358,11 @@ function DashboardCard({ engagement }: { engagement: string[] }) {
       {/* Card header */}
       <div className="relative flex items-center justify-between px-4 md:px-6 py-3 border-b border-white/[0.08]">
         <div className="flex items-center gap-2.5 min-w-0">
-          <span className="w-1.5 h-1.5 bg-[#4a6cf7] animate-pulse flex-shrink-0" />
+          <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ background: "#4a6cf7", boxShadow: "0 0 6px #4a6cf7, 0 0 12px rgba(74,108,247,0.5), 0 0 20px rgba(74,108,247,0.3)" }} />
           <span className="font-mono font-bold tracking-[0.22em] uppercase truncate" style={{ fontSize: "clamp(9px, 2.5vw, 13px)", color: "#e8e2d6" }}>
             Campaign Intelligence — Live
           </span>
         </div>
-        <span className="font-mono text-[9px] tracking-[0.2em] uppercase flex-shrink-0 hidden sm:block" style={{ color: "rgba(255,255,255,0.35)" }}>
-          LIVE
-        </span>
       </div>
       {/* Table */}
       <div className="relative flex-1 overflow-x-auto">
@@ -339,7 +370,7 @@ function DashboardCard({ engagement }: { engagement: string[] }) {
           <thead>
             <tr className="border-b border-white/[0.10]">
               {["Organization", "Industry", "Seniority", "Engagement"].map((h) => (
-                <th key={h} className="font-mono tracking-[0.2em] uppercase text-left font-normal px-4 py-2.5" style={{ fontSize: "11px", color: "rgba(255,255,255,0.45)" }}>
+                <th key={h} className="font-mono tracking-[0.2em] uppercase text-left font-normal px-4 py-2.5" style={{ fontSize: "11px", color: "rgba(255,255,255,0.7)" }}>
                   {h}
                 </th>
               ))}
@@ -348,10 +379,12 @@ function DashboardCard({ engagement }: { engagement: string[] }) {
           <tbody>
             {rows.map((row, i) => (
               <tr key={i} className="border-b border-white/[0.04] hover:bg-white/[0.04] transition-colors duration-150">
-                <td className="font-mono tracking-wider px-4 py-3" style={{ fontSize: "13px", color: "rgba(255,255,255,0.55)" }}>{row.org}</td>
-                <td className="font-mono tracking-[0.1em] uppercase px-4 py-3" style={{ fontSize: "13px", color: "rgba(255,255,255,0.35)" }}>{row.industry}</td>
-                <td className="font-mono tracking-[0.1em] uppercase px-4 py-3" style={{ fontSize: "13px", color: "rgba(255,255,255,0.25)" }}>{row.seniority}</td>
-                <td className="font-mono px-4 py-3" style={{ fontSize: "13px", color: "rgba(255,255,255,0.80)", fontWeight: 600, letterSpacing: "0.05em" }}>{row.engagement}</td>
+                <td className="font-mono tracking-wider px-4 py-3" style={{ fontSize: "13px", color: "rgba(255,255,255,0.85)" }}>{row.org}</td>
+                <td className="font-mono tracking-[0.1em] uppercase px-4 py-3" style={{ fontSize: "13px", color: "rgba(255,255,255,0.85)" }}>{row.industry}</td>
+                <td className="font-mono tracking-[0.1em] uppercase px-4 py-3" style={{ fontSize: "13px", color: "rgba(255,255,255,0.85)" }}>{row.seniority}</td>
+                <td className="font-mono px-4 py-3" style={{ fontSize: "13px", color: "rgba(255,255,255,0.85)", fontWeight: 600, letterSpacing: "0.05em" }}>
+                  <ScrambleNumber value={row.engagement} trigger={trigger} />
+                </td>
               </tr>
             ))}
           </tbody>
@@ -856,7 +889,7 @@ export default function Home() {
             <ScrambleOnView text="They Don't." delay={200} style={{ display: "inline", color: "#4a6cf7" }} />
           </h2>
           <div className="h-[420px] border border-white/[0.08]">
-            <DashboardCard engagement={tableEngagement[activeIntelItem]} />
+            <DashboardCard engagement={tableEngagement[activeIntelItem]} trigger={activeIntelItem} />
           </div>
         </div>
       </section>
