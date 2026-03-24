@@ -47,45 +47,61 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 .header-live .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 2s ease infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.2}}
 
-/* Slide container */
+/* Slide container — stacked card carousel */
 .slides-wrap{
   position:fixed;top:52px;bottom:56px;left:0;right:0;
   overflow:hidden;
-  touch-action:pan-y;
-  display:flex;
-  align-items:stretch;
+  touch-action:pan-x;
+  perspective:800px;
 }
-.slides-track{
-  display:flex;
-  height:100%;
-  transition:transform 0.45s cubic-bezier(0.16,1,0.3,1);
-  will-change:transform;
-}
-.slides-track.dragging{transition:none}
 
-/* Individual slide */
+/* Individual slide — stacked */
 .slide{
-  flex:0 0 80%;
-  margin:0 2%;
-  height:100%;
+  position:absolute;
+  top:12px;bottom:12px;left:16px;right:16px;
   padding:20px;
   display:flex;
   flex-direction:column;
-  position:relative;
   overflow:hidden;
-  border-radius:8px;
-  border:1px solid transparent;
-  transition:transform 0.45s ease, filter 0.45s ease, opacity 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease;
-  transform:scale(0.88);
-  filter:blur(2px);
-  opacity:0.5;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.06);
+  background:var(--surface);
+  transition:transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.5s ease, filter 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+  transform:scale(0.85) translateX(0);
+  opacity:0;
+  filter:blur(3px);
+  pointer-events:none;
+  z-index:1;
 }
-.slide.active{
-  transform:scale(1);
-  filter:blur(0);
+/* Active card — front and center */
+.slide[data-pos="0"]{
+  transform:scale(1) translateX(0);
   opacity:1;
+  filter:blur(0);
+  pointer-events:auto;
+  z-index:10;
   border-color:rgba(74,108,247,0.35);
-  box-shadow:0 0 0 1px rgba(74,108,247,0.15), 0 0 30px rgba(74,108,247,0.15), 0 0 60px rgba(74,108,247,0.06);
+  box-shadow:0 0 0 1px rgba(74,108,247,0.12), 0 0 30px rgba(74,108,247,0.15), 0 0 60px rgba(74,108,247,0.06);
+}
+/* Next card — peeking right */
+.slide[data-pos="1"]{
+  transform:scale(0.88) translateX(30px);
+  opacity:0.4;
+  filter:blur(2px);
+  z-index:5;
+}
+/* Previous card — peeking left */
+.slide[data-pos="-1"]{
+  transform:scale(0.88) translateX(-30px);
+  opacity:0.4;
+  filter:blur(2px);
+  z-index:5;
+}
+/* Cards further away — hidden behind */
+.slide[data-pos="2"],.slide[data-pos="-2"]{
+  transform:scale(0.8) translateX(0);
+  opacity:0;
+  z-index:1;
 }
 
 /* Nav arrows */
@@ -94,22 +110,22 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
   top:50%;
   transform:translateY(-50%);
   z-index:60;
-  width:36px;height:36px;
+  width:40px;height:40px;
   display:flex;align-items:center;justify-content:center;
   background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.15);
   border-radius:50%;
-  color:rgba(255,255,255,0.7);
-  font-size:16px;
+  color:rgba(255,255,255,0.8);
+  font-size:18px;
   cursor:pointer;
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
   box-shadow:0 0 12px rgba(255,255,255,0.08), 0 0 24px rgba(255,255,255,0.04);
   transition:background 0.2s ease, box-shadow 0.2s ease;
 }
-.nav-arrow:active{background:rgba(255,255,255,0.12);box-shadow:0 0 16px rgba(255,255,255,0.15)}
-.nav-arrow.left{left:6px}
-.nav-arrow.right{right:6px}
+.nav-arrow:active{background:rgba(255,255,255,0.15);box-shadow:0 0 20px rgba(255,255,255,0.2)}
+.nav-arrow.left{left:4px}
+.nav-arrow.right{right:4px}
 
 /* Country name */
 .slide-country{
@@ -260,7 +276,6 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 </div>
 
 <div class="slides-wrap" id="slidesWrap">
-  <div class="slides-track" id="slidesTrack">
 
     <div class="slide slide-animate" data-index="0">
       <div class="slide-map">
@@ -724,7 +739,6 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 
     </div>
 
-  </div>
 </div>
 
 <div class="progress-bar" id="progressBar" style="--dur:9s">
@@ -749,7 +763,6 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 </div>
 
 <script>
-const track = document.getElementById('slidesTrack');
 const wrap = document.getElementById('slidesWrap');
 const segs = document.querySelectorAll('.progress-seg');
 const hint = document.getElementById('swipeHint');
@@ -760,38 +773,31 @@ const total = slides.length;
 let current = 0;
 let timer = null;
 const DURATION = 9000;
-const SLIDE_WIDTH = 84; // 80% card + 4% margin (2% each side)
 
-function goTo(index, animate) {
-  // Infinite loop
-  if (index < 0) index = total - 1;
-  if (index >= total) index = 0;
-  current = index;
+function mod(n, m) { return ((n % m) + m) % m; }
 
-  if (animate === false) track.classList.add('dragging');
-  else track.classList.remove('dragging');
+function goTo(index) {
+  current = mod(index, total);
 
-  // Center the active slide: offset so active card is centered
-  const offset = current * SLIDE_WIDTH + (SLIDE_WIDTH / 2) - 50; // center in viewport
-  track.style.transform = `translateX(-${offset}%)`;
-
-  if (animate !== false) {
-    setTimeout(() => track.classList.remove('dragging'), 10);
-  }
-
-  // Active class
+  // Set data-pos attribute for each slide relative to current
   slides.forEach((s, i) => {
-    s.classList.toggle('active', i === current);
-    s.classList.toggle('slide-animate', i === current);
+    let diff = i - current;
+    // Wrap around for infinite feel
+    if (diff > total / 2) diff -= total;
+    if (diff < -total / 2) diff += total;
+    // Clamp to -2..2 range
+    if (diff > 2) diff = 2;
+    if (diff < -2) diff = -2;
+    s.setAttribute('data-pos', diff);
   });
 
-  // Progress
+  // Progress bar
   segs.forEach((s, i) => {
     s.classList.remove('active', 'done');
     s.querySelector('.progress-fill').style.animation = 'none';
     if (i < current) s.classList.add('done');
   });
-  const activeSeg = segs[current];
+  const activeSeg = segs[mod(current, segs.length)];
   void activeSeg.offsetWidth;
   activeSeg.classList.add('active');
 
@@ -804,7 +810,7 @@ function goTo(index, animate) {
 
   hint.classList.add('hide');
 
-  // Reset timer
+  // Auto-advance
   clearTimeout(timer);
   timer = setTimeout(() => goTo(current + 1), DURATION);
 }
@@ -814,34 +820,24 @@ navLeft.addEventListener('click', () => goTo(current - 1));
 navRight.addEventListener('click', () => goTo(current + 1));
 
 // Touch swipe
-let startX = 0, startY = 0, dx = 0, swiping = false;
+let startX = 0, dx = 0, swiping = false;
 wrap.addEventListener('touchstart', e => {
   startX = e.touches[0].clientX;
-  startY = e.touches[0].clientY;
   dx = 0;
   swiping = false;
 }, { passive: true });
 
 wrap.addEventListener('touchmove', e => {
   const moveX = e.touches[0].clientX - startX;
-  const moveY = e.touches[0].clientY - startY;
-  if (!swiping && Math.abs(moveX) > Math.abs(moveY) && Math.abs(moveX) > 10) {
-    swiping = true;
-  }
-  if (swiping) {
-    dx = moveX;
-    track.classList.add('dragging');
-    const offset = current * SLIDE_WIDTH + (SLIDE_WIDTH / 2) - 50;
-    track.style.transform = `translateX(calc(-${offset}% + ${dx}px))`;
-  }
+  const moveY = e.touches[0].clientY - (e.touches[0].clientY || 0);
+  if (!swiping && Math.abs(moveX) > 10) swiping = true;
+  if (swiping) dx = moveX;
 }, { passive: true });
 
 wrap.addEventListener('touchend', () => {
   if (!swiping) return;
-  track.classList.remove('dragging');
-  if (dx < -50) goTo(current + 1);
-  else if (dx > 50) goTo(current - 1);
-  else goTo(current);
+  if (dx < -40) goTo(current + 1);
+  else if (dx > 40) goTo(current - 1);
 });
 
 // Tap progress segments to jump
