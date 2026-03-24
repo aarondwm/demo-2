@@ -717,6 +717,12 @@ segs.forEach((s, i) => {
   s.addEventListener('click', () => goTo(i));
 });
 
+// Listen for parent page navigation messages
+window.addEventListener('message', e => {
+  if (e.data === 'next') goTo(current + 1);
+  if (e.data === 'prev') goTo(current - 1);
+});
+
 // Init
 goTo(0);
 </script>

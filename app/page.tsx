@@ -1129,11 +1129,23 @@ export default function Home() {
             transition: "opacity 0.6s ease 0.3s",
           }}>
             <iframe
+              id="slideshow-iframe"
               src="/dwm-gcc-slideshow.html"
               scrolling="no"
               loading="lazy"
-              style={{ width: "100%", height: "540px", border: "none", display: "block" }}
+              style={{ width: "100%", height: "540px", border: "none", display: "block", pointerEvents: "none" }}
               title="GCC Audience Slideshow"
+            />
+            {/* Tap zones for card navigation — overlay on top of iframe */}
+            <button
+              aria-label="Previous card"
+              onClick={() => { const f = document.getElementById("slideshow-iframe") as HTMLIFrameElement; try { f?.contentWindow?.postMessage("prev","*"); } catch(e){} }}
+              style={{ position: "absolute", top: 0, left: 0, width: "25%", height: "100%", background: "transparent", border: "none", zIndex: 2, cursor: "pointer" }}
+            />
+            <button
+              aria-label="Next card"
+              onClick={() => { const f = document.getElementById("slideshow-iframe") as HTMLIFrameElement; try { f?.contentWindow?.postMessage("next","*"); } catch(e){} }}
+              style={{ position: "absolute", top: 0, right: 0, width: "25%", height: "100%", background: "transparent", border: "none", zIndex: 2, cursor: "pointer" }}
             />
           </div>
         </div>
