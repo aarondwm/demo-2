@@ -932,7 +932,9 @@ function renderPanel(country) {
     </div>`;
   }).join('');
 
-  const companiesHTML = d.companies.map(c =>
+  const topCompanies = d.companies.filter(c => !c.includes('█')).slice(0, 3);
+  topCompanies.push('██████');
+  const companiesHTML = topCompanies.map(c =>
     c.includes('█') ? `<span class="company-tag redacted">${c}</span>` : `<span class="company-tag">${c}</span>`
   ).join('');
 
