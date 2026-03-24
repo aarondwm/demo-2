@@ -404,66 +404,98 @@ function DashboardCard({ engagement, trigger = 0 }: { engagement: string[]; trig
   );
 }
 
-/* ── Mobile Accordion for Campaign Intelligence ─────────────────────────── */
-function MobileAccordion({ engagement, trigger }: { engagement: string[]; trigger: number }) {
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
-  const orgs       = ["Company A", "Company B", "Company C", "Company D", "Company E"];
-  const industries = ["Banking", "Investment", "Energy", "Telecom", "Logistics"];
-  const seniorities= ["C-Suite", "Director", "VP", "Manager", "Analyst"];
-  const rows = orgs.map((org, i) => ({
-    org, industry: industries[i], seniority: seniorities[i], engagement: engagement[i],
-  }));
+/* ── Mobile Live Feed Ticker for Campaign Intelligence ───────────────────── */
+const FEED_ENTRIES = [
+  { seniority: "C-Suite", industry: "Banking", views: "2,847", time: "2m ago" },
+  { seniority: "Director", industry: "Investment", views: "1,392", time: "4m ago" },
+  { seniority: "VP", industry: "Energy", views: "934", time: "6m ago" },
+  { seniority: "Manager", industry: "Telecom", views: "611", time: "9m ago" },
+  { seniority: "C-Suite", industry: "Real Estate", views: "1,204", time: "11m ago" },
+  { seniority: "Director", industry: "Oil & Gas", views: "897", time: "14m ago" },
+  { seniority: "Analyst", industry: "Logistics", views: "478", time: "16m ago" },
+  { seniority: "C-Suite", industry: "Healthcare", views: "3,102", time: "18m ago" },
+  { seniority: "VP", industry: "Construction", views: "743", time: "21m ago" },
+  { seniority: "Manager", industry: "Technology", views: "521", time: "24m ago" },
+  { seniority: "Director", industry: "Financial Services", views: "1,847", time: "27m ago" },
+  { seniority: "C-Suite", industry: "Insurance", views: "891", time: "30m ago" },
+];
+
+function LiveFeedTicker() {
+  const [items, setItems] = useState<typeof FEED_ENTRIES>([]);
+  const [nextIdx, setNextIdx] = useState(0);
+
+  useEffect(() => {
+    // Add first 4 items immediately
+    setItems(FEED_ENTRIES.slice(0, 4));
+    setNextIdx(4);
+  }, []);
+
+  useEffect(() => {
+    if (nextIdx === 0) return;
+    const timer = setInterval(() => {
+      setNextIdx(prev => {
+        const idx = prev % FEED_ENTRIES.length;
+        setItems(current => {
+          const next = [FEED_ENTRIES[idx], ...current];
+          return next.slice(0, 8);
+        });
+        return prev + 1;
+      });
+    }, 2500);
+    return () => clearInterval(timer);
+  }, [nextIdx]);
 
   return (
     <div className="flex flex-col bg-black border border-white/[0.08] rounded-lg overflow-hidden">
-      <div className="flex items-center gap-2.5 px-4 py-3 border-b border-white/[0.08]">
-        <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ background: "#4a6cf7", boxShadow: "0 0 6px #4a6cf7, 0 0 12px rgba(74,108,247,0.5)" }} />
-        <span className="font-mono font-bold tracking-[0.22em] uppercase" style={{ fontSize: "11px", color: "#e8e2d6" }}>
-          Campaign Intelligence
-        </span>
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.08]">
+        <div className="flex items-center gap-2.5">
+          <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ background: "#4a6cf7", boxShadow: "0 0 6px #4a6cf7, 0 0 12px rgba(74,108,247,0.5)" }} />
+          <span className="font-mono font-bold tracking-[0.22em] uppercase" style={{ fontSize: "11px", color: "#e8e2d6" }}>
+            Live Activity
+          </span>
+        </div>
+        <span className="font-mono text-[8px] tracking-[0.15em] uppercase" style={{ color: "rgba(74,108,247,0.6)" }}>STREAMING</span>
       </div>
-      {rows.map((row, i) => (
-        <div key={i} className="border-b border-white/[0.04] last:border-b-0">
-          <button
-            onClick={() => setOpenIdx(openIdx === i ? null : i)}
-            className="w-full flex items-center justify-between px-4 py-3 text-left"
-            style={{ background: openIdx === i ? "rgba(74,108,247,0.06)" : "transparent", transition: "background 0.2s ease" }}
-          >
-            <div className="flex items-center gap-3">
-              <span className="font-mono" style={{ fontSize: "10px", color: openIdx === i ? "#4a6cf7" : "rgba(255,255,255,0.3)", letterSpacing: "0.15em" }}>
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="font-mono tracking-wider" style={{ fontSize: "13px", color: "rgba(255,255,255,0.85)" }}>
-                {row.org}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="font-mono font-bold" style={{ fontSize: "13px", color: "#4a6cf7" }}>
-                <ScrambleNumber value={row.engagement} trigger={trigger} />
-              </span>
-              <span style={{ fontSize: "10px", color: "rgba(255,255,255,0.3)", transform: openIdx === i ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s ease" }}>▼</span>
-            </div>
-          </button>
+
+      {/* Feed */}
+      <div className="flex flex-col" style={{ minHeight: "240px" }}>
+        {items.map((item, i) => (
           <div
+            key={`${item.industry}-${item.views}-${i}`}
+            className="flex items-center gap-3 px-4 py-2.5 border-b border-white/[0.03]"
             style={{
-              maxHeight: openIdx === i ? "120px" : "0",
-              overflow: "hidden",
-              transition: "max-height 0.3s ease",
+              opacity: i === 0 ? 1 : Math.max(0.3, 1 - i * 0.15),
+              animation: i === 0 ? "feedIn 0.4s ease" : "none",
             }}
           >
-            <div className="px-4 pb-3 grid grid-cols-2 gap-3">
-              <div className="flex flex-col gap-1">
-                <span className="font-mono uppercase" style={{ fontSize: "7px", letterSpacing: "0.18em", color: "rgba(255,255,255,0.3)" }}>Industry</span>
-                <span className="font-mono" style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)" }}>{row.industry}</span>
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="font-mono uppercase" style={{ fontSize: "7px", letterSpacing: "0.18em", color: "rgba(255,255,255,0.3)" }}>Seniority</span>
-                <span className="font-mono" style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)" }}>{row.seniority}</span>
-              </div>
+            <span
+              className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+              style={{
+                background: i === 0 ? "#4a6cf7" : "rgba(74,108,247,0.3)",
+                boxShadow: i === 0 ? "0 0 6px rgba(74,108,247,0.6)" : "none",
+              }}
+            />
+            <div className="flex-1 min-w-0">
+              <span className="font-mono" style={{ fontSize: "11px", color: i === 0 ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.5)" }}>
+                {item.seniority}
+              </span>
+              <span className="font-mono" style={{ fontSize: "11px", color: "rgba(255,255,255,0.2)", margin: "0 6px" }}>·</span>
+              <span className="font-mono" style={{ fontSize: "11px", color: i === 0 ? "rgba(255,255,255,0.7)" : "rgba(255,255,255,0.35)" }}>
+                {item.industry}
+              </span>
             </div>
+            <span className="font-mono font-bold flex-shrink-0" style={{ fontSize: "11px", color: i === 0 ? "#4a6cf7" : "rgba(74,108,247,0.4)" }}>
+              {item.views}
+            </span>
+            <span className="font-mono flex-shrink-0" style={{ fontSize: "8px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.05em" }}>
+              {item.time}
+            </span>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+
+      {/* Footer */}
       <div className="flex items-center justify-between px-4 py-2 border-t border-white/[0.08]">
         <span className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "8px", color: "rgba(255,255,255,0.35)" }}>Full data after onboarding</span>
         <div className="flex items-center gap-1.5">
@@ -963,9 +995,9 @@ export default function Home() {
           <div className="hidden md:block border border-white/[0.08]">
             <DashboardCard engagement={tableEngagement[activeIntelItem]} trigger={activeIntelItem} />
           </div>
-          {/* Mobile: accordion */}
+          {/* Mobile: live feed ticker */}
           <div className="block md:hidden">
-            <MobileAccordion engagement={tableEngagement[activeIntelItem]} trigger={activeIntelItem} />
+            <LiveFeedTicker />
           </div>
         </div>
       </section>
