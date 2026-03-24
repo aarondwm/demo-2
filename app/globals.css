@@ -354,8 +354,9 @@
   }
 }
 
-/* ── What We Do card hover ────────────────────────────────────────────── */
-.wwd-card:hover {
+/* ── What We Do card hover & cycle ────────────────────────────────────── */
+.wwd-card:hover,
+.wwd-card-active {
   transform: scale(1.03);
   box-shadow: 0 0 0 1px rgba(74,108,247,0.3), 0 0 24px rgba(74,108,247,0.12), 0 0 48px rgba(74,108,247,0.06);
   border-color: rgba(74,108,247,0.5) !important;

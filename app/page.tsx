@@ -505,6 +505,8 @@ function FeatureCard({
 
 /* ── Page ────────────────────────────────────────────────────────────────── */
 export default function Home() {
+  const [activeWwdCard, setActiveWwdCard] = useState(0);
+  const [wwdHovered, setWwdHovered] = useState(false);
   const [activeIntelItem, setActiveIntelItem] = useState(0);
   const [intelVisible, setIntelVisible] = useState(true);
   const [hoveredIntelItem, setHoveredIntelItem] = useState<number | null>(null);
@@ -566,6 +568,15 @@ export default function Home() {
     }, 4500);
     return () => clearInterval(timer);
   }, []);
+
+  /* Cycle WE RUN IT cards every 8s, pause on hover */
+  useEffect(() => {
+    if (wwdHovered) return;
+    const timer = setInterval(() => {
+      setActiveWwdCard(c => (c + 1) % 3);
+    }, 8000);
+    return () => clearInterval(timer);
+  }, [wwdHovered]);
 
   /* Hide table when clicking outside intel section */
   useEffect(() => {
@@ -658,11 +669,15 @@ export default function Home() {
               { n: "01", stat: "<24hr", statLabel: "DELIVERY GUARANTEED", title: "SECURED MEDIA PLACEMENT", desc: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches \u2014 placements.", accent: true, href: "#media-placement" },
               { n: "02", stat: "44.7M+", statLabel: "REACHABLE AUDIENCE", title: "PRECISION DISTRIBUTION", desc: "6 GCC markets. 32 industries. Your content reaches the right audience \u2014 from the general population to the C-suite.", accent: false, href: "#audience-selection" },
               { n: "03", stat: "94%", statLabel: "READER IDENTIFICATION", title: "FULL ENGAGEMENT VISIBILITY", desc: "Who read it. Where they\u2019re from. What they do. Full audience breakdowns across every campaign \u2014 delivered as a branded, exportable report.", accent: false, href: "#sample-insights" },
-            ].map(({ n, stat, statLabel, title, desc, accent, href }) => (
+            ].map(({ n, stat, statLabel, title, desc, accent, href }, i) => {
+              const isActive = wwdHovered ? false : i === activeWwdCard;
+              return (
               <a
                 key={n}
                 href={href}
-                className="wwd-card"
+                className={`wwd-card${isActive ? " wwd-card-active" : ""}`}
+                onMouseEnter={() => setWwdHovered(true)}
+                onMouseLeave={() => setWwdHovered(false)}
                 style={{
                   background: "#12151b",
                   padding: "40px 36px 48px",
@@ -679,7 +694,8 @@ export default function Home() {
                 <div style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "16px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.35, color: "#e8e8e8", marginBottom: "16px" }}>{title}</div>
                 <div style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "#6b7080" }}>{desc}</div>
               </a>
-            ))}
+              );
+            })}
           </div>
 
           <div className="flex justify-center" style={{ marginBottom: "56px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
@@ -825,13 +841,19 @@ export default function Home() {
       {/* ── Sample Insights ────────────────────────────────────────────────── */}
       <section id="sample-insights" className="sys-section">
         <div className="max-w-[1200px] mx-auto px-6 md:px-12">
-          <div className="py-8 text-center border border-white/[0.08] border-b-0">
-            <span className="sys-label" style={{ fontSize: "20px" }}>
-              <img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
+          <div className="flex items-center mb-5">
+            <span className="sys-label" style={{ fontSize: "13px" }}>
+              <img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
               Sample Insights
             </span>
           </div>
-          <div className="h-[420px] border border-white/[0.08] border-t-0">
+          <h2
+            className="font-display font-bold uppercase text-white text-center mb-10"
+            style={{ fontSize: "clamp(28px,4vw,48px)", letterSpacing: "0.05em", lineHeight: "1" }}
+          >
+            Campaign Intelligence — Live
+          </h2>
+          <div className="h-[420px] border border-white/[0.08]">
             <DashboardCard engagement={tableEngagement[activeIntelItem]} />
           </div>
         </div>
