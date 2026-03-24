@@ -27,7 +27,7 @@
 @font-face {
   font-family: 'Neue Montreal';
   src: url('/fonts/NeueMontreal-Bold.otf') format('opentype');
-  font-weight: 700;
+  font-weight: 700 900;
   font-style: normal;
   font-display: swap;
 }
@@ -368,10 +368,12 @@
 
 @media (max-width: 767px) {
   .hero-btn { padding: 16px 0 !important; }
-  .wwd-card-inner { padding: 16px 16px 20px !important; }
-  .wwd-card-inner .wwd-stat + div { padding-bottom: 16px !important; margin-bottom: 16px !important; }
-  .wwd-card-inner > div:first-child { margin-bottom: 16px !important; }
-  .wwd-stat { font-size: clamp(32px, 9vw, 52px) !important; }
+  .wwd-card-inner { padding: 14px 14px 16px !important; }
+  .wwd-card-inner .wwd-stat + div { padding-bottom: 10px !important; margin-bottom: 10px !important; }
+  .wwd-card-inner > div:first-child { margin-bottom: 10px !important; }
+  .wwd-stat { font-size: clamp(28px, 8vw, 52px) !important; }
+  .wwd-card-inner > div:nth-child(4) { font-size: 14px !important; margin-bottom: 8px !important; }
+  .wwd-card-inner > div:nth-child(5) { font-size: 12px !important; }
 }
 
 /* ── Page transition wipe ─────────────────────────────────────────────── */

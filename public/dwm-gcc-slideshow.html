@@ -55,29 +55,27 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
   perspective:800px;
 }
 
-/* Individual slide — stacked */
+/* Individual slide — single stack */
 .slide{
   position:absolute;
-  top:8px;bottom:8px;left:12px;right:12px;
+  top:8px;bottom:28px;left:12px;right:12px;
   padding:16px 16px 12px;
   display:flex;
   flex-direction:column;
   overflow:hidden;
   border-radius:10px;
-  border:1px solid rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.04);
   background:var(--surface);
-  transition:transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.5s ease, filter 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
-  transform:scale(0.85) translateX(0);
-  opacity:0;
-  filter:blur(3px);
+  transition:transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+  transform:scale(0.92);
+  opacity:0.05;
   pointer-events:none;
   z-index:1;
 }
-/* Active card — front and center */
+/* Active card — front, fully visible */
 .slide[data-pos="0"]{
-  transform:scale(1) translateX(0);
+  transform:scale(1);
   opacity:1;
-  filter:blur(0);
   pointer-events:auto;
   z-index:10;
   border-color:rgba(74,108,247,0.45);
@@ -88,23 +86,15 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
     0 0 80px rgba(74,108,247,0.08),
     inset 0 0 30px rgba(74,108,247,0.04);
 }
-/* Next card — peeking right */
-.slide[data-pos="1"]{
-  transform:scale(0.90) translateX(24px);
-  opacity:0.35;
-  filter:blur(2px);
+/* Adjacent cards — behind, nearly hidden */
+.slide[data-pos="1"],.slide[data-pos="-1"]{
+  transform:scale(0.94);
+  opacity:0.05;
   z-index:5;
 }
-/* Previous card — peeking left */
-.slide[data-pos="-1"]{
-  transform:scale(0.90) translateX(-24px);
-  opacity:0.35;
-  filter:blur(2px);
-  z-index:5;
-}
-/* Cards further away — hidden behind */
+/* Further cards — fully hidden */
 .slide[data-pos="2"],.slide[data-pos="-2"]{
-  transform:scale(0.82) translateX(0);
+  transform:scale(0.88);
   opacity:0;
   z-index:1;
 }
