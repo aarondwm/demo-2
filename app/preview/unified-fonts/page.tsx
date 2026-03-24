@@ -537,7 +537,7 @@ function FeatureCard({
 }
 
 /* ── Page ────────────────────────────────────────────────────────────────── */
-export default function Home() {
+export default function UnifiedFontsPreview() {
   const [activeWwdCard, setActiveWwdCard] = useState(0);
   const [wwdHovered, setWwdHovered] = useState(false);
   const [activeIntelItem, setActiveIntelItem] = useState(0);
@@ -765,7 +765,7 @@ export default function Home() {
                 <span className="sys-label" style={{ fontSize: "12px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Secured Media Placement" delay={0} style={{ display: "inline" }} onDone={sec3Done} /></span>
               </div>
               <h2
-                className="font-bold uppercase"
+                className="font-bold uppercase" 
                 style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(44px,6vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
               >
                 <ScrambleOnSignal text="Your Story." signal={sec3Visible} style={{ color: "#ffffff" }} />
@@ -823,7 +823,7 @@ export default function Home() {
               <ScrambleOnSignal text="Target Anyone." signal={secMapVisible} style={{ color: "#ffffff" }} />
               <ScrambleOnSignal text="Anywhere." signal={secMapVisible} style={{ color: "#4a6cf7" }} />
             </h2>
-            <p className="sys-body max-w-lg mt-6" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s" }}>
+            <p className="max-w-lg mt-6" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "#6b7080", opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s" }}>
               Our proprietary technology allows us to ensure anyone you want to read the story, reads it.
             </p>
           </div>
@@ -882,7 +882,7 @@ export default function Home() {
           </div>
           <h2
             className="font-bold uppercase text-center mb-10"
-            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(28px,4vw,48px)", letterSpacing: "-0.02em", lineHeight: 1.05 }}
           >
             <ScrambleOnView text="What We Know," delay={0} style={{ display: "inline", color: "#ffffff" }} />
             {" "}
@@ -959,7 +959,7 @@ export default function Home() {
                 <ScrambleOnSignal text="a Briefing." signal={secCtaVisible} style={{ color: "#ffffff" }} />
                 <ScrambleOnSignal text="See What Returns." signal={secCtaVisible} style={{ color: "#4a6cf7" }} />
               </h2>
-              <p className="sys-body max-w-lg mb-10 mx-auto text-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
+              <p className="max-w-lg mb-10 mx-auto text-center" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "#6b7080", opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
                 Book a briefing. We&apos;ll walk you through what we&apos;d run, who we&apos;d reach, and whether you&apos;re eligible.
               </p>
               <div className="flex justify-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.32s" }}>
