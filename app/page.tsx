@@ -933,7 +933,7 @@ export default function Home() {
               text="REAL IMPACT."
               delay={1100}
               loopInterval={8000}
-              className="text-white"
+              style={{ color: "#4a6cf7" }}
             />
           </h1>
 
@@ -1053,7 +1053,7 @@ export default function Home() {
                 ))}
               </div>
 
-              <p style={{ color: "#6b7080", fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s" }}>
+              <p style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s" }}>
                 We produce and place editorially-driven stories across a network of Gulf business and industry publications. Your content goes live — as a confirmed placement.
               </p>
             </div>
@@ -1149,7 +1149,7 @@ export default function Home() {
             </span>
           </div>
           <h2
-            className="font-bold uppercase text-center mb-10"
+            className="font-bold uppercase text-left mb-10"
             style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
           >
             <ScrambleOnView text="What We Know," delay={0} style={{ display: "inline", color: "#ffffff" }} />
@@ -1184,7 +1184,7 @@ export default function Home() {
             style={{
               maskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
               WebkitMaskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
-              maxHeight: "680px",
+              maxHeight: "clamp(400px, 60vh, 680px)",
               opacity: sec5Visible ? 1 : 0,
               transition: "opacity 0.5s ease",
             }}
