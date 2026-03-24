@@ -655,16 +655,22 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px]" style={{ marginBottom: "56px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
             {[
-              { n: "01", stat: "<24hr", statLabel: "DELIVERY GUARANTEED", title: "SECURED MEDIA PLACEMENT", desc: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches \u2014 placements.", accent: true },
-              { n: "02", stat: "44.7M+", statLabel: "REACHABLE AUDIENCE", title: "PRECISION DISTRIBUTION", desc: "6 GCC markets. 32 industries. Your content reaches the right audience \u2014 from the general population to the C-suite.", accent: false },
-              { n: "03", stat: "94%", statLabel: "READER IDENTIFICATION", title: "FULL ENGAGEMENT VISIBILITY", desc: "Who read it. Where they\u2019re from. What they do. Full audience breakdowns across every campaign \u2014 delivered as a branded, exportable report.", accent: false },
-            ].map(({ n, stat, statLabel, title, desc, accent }) => (
-              <div
+              { n: "01", stat: "<24hr", statLabel: "DELIVERY GUARANTEED", title: "SECURED MEDIA PLACEMENT", desc: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches \u2014 placements.", accent: true, href: "#media-placement" },
+              { n: "02", stat: "44.7M+", statLabel: "REACHABLE AUDIENCE", title: "PRECISION DISTRIBUTION", desc: "6 GCC markets. 32 industries. Your content reaches the right audience \u2014 from the general population to the C-suite.", accent: false, href: "#audience-selection" },
+              { n: "03", stat: "94%", statLabel: "READER IDENTIFICATION", title: "FULL ENGAGEMENT VISIBILITY", desc: "Who read it. Where they\u2019re from. What they do. Full audience breakdowns across every campaign \u2014 delivered as a branded, exportable report.", accent: false, href: "#sample-insights" },
+            ].map(({ n, stat, statLabel, title, desc, accent, href }) => (
+              <a
                 key={n}
+                href={href}
+                className="wwd-card"
                 style={{
                   background: "#12151b",
                   padding: "40px 36px 48px",
                   borderTop: accent ? "2px solid #4a6cf7" : "2px solid transparent",
+                  display: "block",
+                  textDecoration: "none",
+                  cursor: "pointer",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
                 }}
               >
                 <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: "11px", color: "rgba(74,108,247,0.4)", letterSpacing: "0.15em", marginBottom: "32px" }}>{n}</div>
@@ -672,7 +678,7 @@ export default function Home() {
                 <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(74,108,247,0.4)", marginTop: "8px", paddingBottom: "28px", marginBottom: "28px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>{statLabel}</div>
                 <div style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "16px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.35, color: "#e8e8e8", marginBottom: "16px" }}>{title}</div>
                 <div style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "#6b7080" }}>{desc}</div>
-              </div>
+              </a>
             ))}
           </div>
 
@@ -691,19 +697,6 @@ export default function Home() {
               </span>
               <span className="invisible px-8">Get In Touch</span>
             </a>
-          </div>
-
-          {/* Sample Insights Report */}
-          <div style={{ opacity: sec2Visible ? 1 : 0, transition: "opacity 0.6s ease 0.5s" }}>
-            <div className="py-8 text-center border border-white/[0.08] border-b-0">
-              <span className="sys-label" style={{ fontSize: "20px" }}>
-                <img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
-                Sample Insights
-              </span>
-            </div>
-            <div className="h-[420px] border border-white/[0.08] border-t-0">
-              <DashboardCard engagement={tableEngagement[activeIntelItem]} />
-            </div>
           </div>
 
         </div>
@@ -825,6 +818,21 @@ export default function Home() {
               style={{ width: "100%", height: "580px", border: "none", display: "block" }}
               title="GCC Audience Slideshow"
             />
+          </div>
+        </div>
+      </section>
+
+      {/* ── Sample Insights ────────────────────────────────────────────────── */}
+      <section id="sample-insights" className="sys-section">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+          <div className="py-8 text-center border border-white/[0.08] border-b-0">
+            <span className="sys-label" style={{ fontSize: "20px" }}>
+              <img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
+              Sample Insights
+            </span>
+          </div>
+          <div className="h-[420px] border border-white/[0.08] border-t-0">
+            <DashboardCard engagement={tableEngagement[activeIntelItem]} />
           </div>
         </div>
       </section>
