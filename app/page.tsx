@@ -101,7 +101,7 @@ function ScrambledLine({
     const el = ref.current;
     if (!el) return;
     el.style.opacity = "0";
-    const scrambler = new TextScramble(el, 30, true, 2, 3);
+    const scrambler = new TextScramble(el, 30, true, 3.2, 5);
     let loopTimer: ReturnType<typeof setTimeout>;
 
     const run = () => {
@@ -146,7 +146,7 @@ function ScrambleOnView({
         t = setTimeout(() => {
           el.style.opacity = "1";
           el.innerHTML = "";
-          new TextScramble(el, 14, true, 1.5, 3).setText(text).then(() => onDone?.());
+          new TextScramble(el, 14, true, 2.4, 5).setText(text).then(() => onDone?.());
         }, delay);
         obs.disconnect();
       }
@@ -172,7 +172,7 @@ function ScrambleOnTrigger({
     if (!el) return;
     el.style.opacity = "1";
     el.innerHTML = "";
-    new TextScramble(el, 14, true, 1.5, 3).setText(text);
+    new TextScramble(el, 14, true, 2.4, 5).setText(text);
   }, [text, trigger]);
   return <span ref={ref} className={className} style={style}>{text}</span>;
 }
@@ -193,7 +193,7 @@ function ScrambleOnSignal({
     const t = setTimeout(() => {
       el.style.opacity = "1";
       el.innerHTML = "";
-      new TextScramble(el, 14, true, 1.5, 3).setText(text).then(() => onDone?.());
+      new TextScramble(el, 14, true, 2.4, 5).setText(text).then(() => onDone?.());
     }, delay);
     return () => clearTimeout(t);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -637,32 +637,73 @@ export default function Home() {
 
       {/* ── 2. WHAT WE DO ────────────────────────────────────────────────── */}
       <section id="what-we-do" className="sys-section">
-        <div className="max-w-6xl mx-auto px-6 md:px-10">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
 
-          <div className="mb-14">
-            <div className="flex items-center mb-5">
-              <span className="sys-label" style={{ fontSize: "13px" }}>
-                <img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
-                <ScrambleOnView text="What We Do" delay={0} onDone={sec2Done} />
-              </span>
-            </div>
-            <h2
-              className="font-display font-bold uppercase text-white"
-              style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
-            >
-              <ScrambleOnSignal text="We Run It." signal={sec2Visible} style={{ color: "#ffffff" }} />
-              <ScrambleOnSignal text="You See Who Engaged." signal={sec2Visible} onDone={sec2BodyDone} style={{ color: "#ffffff" }} />
-            </h2>
+          <div className="flex items-center gap-2.5 mb-7">
+            <span style={{ fontFamily: "var(--font-mono), monospace", fontSize: "12px", letterSpacing: "0.3em", color: "#4a6cf7", textTransform: "uppercase" }}>
+              <span style={{ opacity: 0.6, marginRight: "10px" }}>⌐</span>
+              <ScrambleOnView text="WHAT WE DO" delay={0} style={{ display: "inline" }} onDone={sec2Done} />
+            </span>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-3">
+          <h2
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(44px,6vw,72px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.02em", textTransform: "uppercase", marginBottom: "64px", color: "#e8e8e8" }}
+          >
+            <ScrambleOnSignal text="WE RUN IT." signal={sec2Visible} style={{ color: "#e8e8e8" }} />
+            <ScrambleOnSignal text="YOU SEE WHO ENGAGED." signal={sec2Visible} style={{ color: "#e8e8e8" }} />
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px]" style={{ marginBottom: "56px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
             {[
-              { n: "01", title: "Secured Media Placement", body: "Your story, guaranteed publishing. We lock in editorial coverage across the region's most-read publications." },
-              { n: "02", title: "Targeted Distribution",   body: "Your content reaches the people who matter, we make sure the right eyes see it — every time." },
-              { n: "03", title: "Audience Intelligence",   body: "After every campaign, you find out who read it, what they do, and where they're from. Not estimates. Real people." },
-            ].map(({ n, title, body }, i) => (
-              <FeatureCard key={n} n={n} title={title} body={body} index={i} visible={sec2Visible} />
+              { n: "01", stat: "<24hr", statLabel: "DELIVERY GUARANTEED", title: "SECURED MEDIA PLACEMENT", desc: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches \u2014 placements.", accent: true },
+              { n: "02", stat: "44.7M+", statLabel: "REACHABLE AUDIENCE", title: "PRECISION DISTRIBUTION", desc: "6 GCC markets. 32 industries. Your content reaches the right audience \u2014 from the general population to the C-suite.", accent: false },
+              { n: "03", stat: "94%", statLabel: "READER IDENTIFICATION", title: "FULL ENGAGEMENT VISIBILITY", desc: "Who read it. Where they\u2019re from. What they do. Full audience breakdowns across every campaign \u2014 delivered as a branded, exportable report.", accent: false },
+            ].map(({ n, stat, statLabel, title, desc, accent }) => (
+              <div
+                key={n}
+                style={{
+                  background: "#12151b",
+                  padding: "40px 36px 48px",
+                  borderTop: accent ? "2px solid #4a6cf7" : "2px solid transparent",
+                }}
+              >
+                <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: "11px", color: "rgba(74,108,247,0.4)", letterSpacing: "0.15em", marginBottom: "32px" }}>{n}</div>
+                <div style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "52px", fontWeight: 800, letterSpacing: "-0.03em", color: "#e8e8e8", lineHeight: 1 }}>{stat}</div>
+                <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(74,108,247,0.4)", marginTop: "8px", paddingBottom: "28px", marginBottom: "28px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>{statLabel}</div>
+                <div style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "16px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.35, color: "#e8e8e8", marginBottom: "16px" }}>{title}</div>
+                <div style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "#6b7080" }}>{desc}</div>
+              </div>
             ))}
+          </div>
+
+          <div className="flex justify-center" style={{ marginBottom: "56px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
+            <a
+              href="/contact"
+              className="group inline-flex items-center h-12 font-mono text-[12px] tracking-[0.22em] uppercase text-black font-bold relative overflow-hidden"
+              style={{ borderRadius: "12px", transform: "translateZ(0)" }}
+            >
+              <span className="absolute inset-0 bg-white" />
+              <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>
+                <img src="/D*M website.png" alt="DWM" className="h-6 w-auto" style={{ mixBlendMode: "screen" }} />
+              </span>
+              <span className="absolute inset-0 flex items-center justify-center text-black transition-opacity duration-300 group-hover:opacity-0 z-20">
+                Get In Touch
+              </span>
+              <span className="invisible px-8">Get In Touch</span>
+            </a>
+          </div>
+
+          {/* Sample Insights Report */}
+          <div style={{ opacity: sec2Visible ? 1 : 0, transition: "opacity 0.6s ease 0.5s" }}>
+            <div className="py-8 text-center border border-white/[0.08] border-b-0">
+              <span className="sys-label" style={{ fontSize: "20px" }}>
+                <img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
+                Sample Insights
+              </span>
+            </div>
+            <div className="h-[420px] border border-white/[0.08] border-t-0">
+              <DashboardCard engagement={tableEngagement[activeIntelItem]} />
+            </div>
           </div>
 
         </div>
@@ -788,142 +829,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 4. AUDIENCE INTELLIGENCE ─────────────────────────────────────── */}
-      <section id="intelligence" className="sys-section" ref={intelSectionRef}>
-        <div className="max-w-6xl mx-auto px-6 md:px-10">
-
-          <div className="grid lg:grid-cols-2 gap-10 mb-14 items-end">
-            <div>
-              <div className="flex items-center mb-5">
-                <span className="sys-label" style={{ fontSize: "13px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Intelligence, Delivered" delay={0} style={{ display: "inline" }} onDone={sec4Done} /></span>
-              </div>
-              <h2
-                className="font-display font-bold uppercase text-white"
-                style={{ fontSize: "clamp(36px,5vw,60px)", letterSpacing: "0.05em", lineHeight: "0.93" }}
-              >
-                <ScrambleOnSignal text="Know Exactly" signal={sec4Visible} style={{ color: "#ffffff" }} />
-                <ScrambleOnSignal text="Who Engaged" signal={sec4Visible} style={{ color: "#ffffff" }} />
-              </h2>
-            </div>
-            <p className="lg:max-w-sm lg:ml-auto" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
-              Other agencies show you impressions. We show you exactly who read it.
-            </p>
-          </div>
-
-          <div className="relative w-full bg-white/[0.02] border border-white/[0.08] overflow-hidden">
-            <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="#4a6cf7" />
-
-            <div className="p-10 md:p-14 grid md:grid-cols-2 gap-12 items-center">
-              <div className="flex flex-col gap-6">
-                <span className="sys-label" style={{ fontSize: "20px" }}><img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Engagement Breakdowns" delay={0} style={{ display: "inline" }} /></span>
-
-                {/* Stats row */}
-                <div className="flex items-stretch divide-x divide-[#161c2c]" style={{ opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.1s" }}>
-                  {intelStats[displayItem].map(({ value, label }, i) => (
-                    <div key={i} className="flex flex-col gap-1 pr-6 first:pl-0 pl-6" style={{ transition: "opacity 0.25s ease" }}>
-                      <span className="font-display font-bold" style={{ fontSize: "22px", color: "#e8e2d6" }}>
-                        <ScrambleOnTrigger text={value} trigger={displayItem} style={{ display: "inline" }} />
-                      </span>
-                      <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.7)" }}>
-                        {label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                <p style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: "14px", lineHeight: "1.8", opacity: sec4Visible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
-                  Exportable. Presentable. Boardroom-ready.
-                </p>
-                <HoverActionButton label="Request a Briefing" href="/contact" className="mt-2" />
-              </div>
-
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-px border border-[#161c2c]" style={{ backgroundColor: "#161c2c" }}>
-                {[
-                  { n: "01", label: "Company-Level Engagement" },
-                  { n: "02", label: "Role & Seniority Breakdown" },
-                  { n: "03", label: "Industry Segmentation" },
-                  { n: "04", label: "Exportable, Branded Reports" },
-                  { n: "05", label: "Engagement Frequency per Company" },
-                  { n: "06", label: "Individual Job Title Tracking" },
-                  { n: "07", label: "Week-over-Week Engagement Trends" },
-                  { n: "08", label: "Competitor Audience Overlap" },
-                ].map(({ n, label }, idx) => {
-                  const active = idx === displayItem;
-                  return (
-                    <li
-                      key={n}
-                      className="p-6 flex flex-col gap-3 cursor-pointer"
-                      onMouseEnter={() => {
-                        setHoveredIntelItem(idx);
-                        setShowTable(true);
-                        if (tableTimerRef.current) { clearTimeout(tableTimerRef.current); tableTimerRef.current = null; }
-                      }}
-                      onMouseLeave={() => {
-                        setHoveredIntelItem(null);
-                        if (tableTimerRef.current) clearTimeout(tableTimerRef.current);
-                        tableTimerRef.current = setTimeout(() => setShowTable(false), 10000);
-                      }}
-                      style={{
-                        background: active && intelVisible ? "rgba(74,108,247,0.08)" : "rgba(255,255,255,0.02)",
-                        borderLeft: active && intelVisible ? "2px solid #4a6cf7" : "2px solid transparent",
-                        boxShadow: active && intelVisible ? "inset 0 0 24px rgba(74,108,247,0.07)" : "none",
-                        transition: "background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease",
-                      }}
-                    >
-                      <span
-                        className="font-mono text-[10px] tracking-[0.2em]"
-                        style={{
-                          color: active && intelVisible ? "#4a6cf7" : "#c8c0b0",
-                          transition: "color 0.25s ease",
-                        }}
-                      >{n}</span>
-                      <span
-                        className="font-mono tracking-[0.12em] uppercase leading-relaxed"
-                        style={{
-                          fontSize: active && intelVisible ? "13px" : "11px",
-                          color: active && intelVisible ? "#ffffff" : "#c8c0b0",
-                          transition: "color 0.25s ease, font-size 0.25s ease",
-                        }}
-                      >
-                        <span style={{ opacity: sec4Visible ? 1 : 0, transition: `opacity 0.35s ease ${0.05 + idx * 0.03}s` }}>{label}</span>
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-
-            <span className="absolute top-2 left-2   w-3 h-3 border-t border-l border-[#4a6cf7] pointer-events-none" />
-            <span className="absolute top-2 right-2  w-3 h-3 border-t border-r border-[#4a6cf7] pointer-events-none" />
-            <span className="absolute bottom-2 left-2  w-3 h-3 border-b border-l border-white/20 pointer-events-none" />
-            <span className="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-white/20 pointer-events-none" />
-          </div>
-
-          <div
-            style={{
-              opacity: showTable ? 1 : 0,
-              maxHeight: showTable ? "600px" : "0px",
-              overflow: "hidden",
-              transition: "opacity 0.3s ease, max-height 0.4s ease",
-              pointerEvents: showTable ? "auto" : "none",
-            }}
-          >
-            <div className="py-8 text-center border border-white/[0.08] border-t-0 border-b-0">
-              <span className="sys-label" style={{ fontSize: "20px" }}>
-                <img src="/Untitled design.png" alt="" style={{ width: "20px", height: "20px", marginRight: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
-                Sample Insights
-              </span>
-            </div>
-
-            <div className="h-[420px] border border-white/[0.08] border-t-0">
-              <DashboardCard engagement={tableEngagement[displayItem]} />
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── 5. WHO WE WORK WITH ──────────────────────────────────────────── */}
+      {/* ── 4. WHO WE WORK WITH ──────────────────────────────────────────── */}
       <section id="reviews" className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="mb-14 text-center">
