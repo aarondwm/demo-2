@@ -330,7 +330,7 @@ function DashboardCard({ engagement }: { engagement: string[] }) {
           </span>
         </div>
         <span className="font-mono text-[9px] tracking-[0.2em] uppercase flex-shrink-0 hidden sm:block" style={{ color: "rgba(255,255,255,0.35)" }}>
-          What we know, they don&apos;t
+          LIVE
         </span>
       </div>
       {/* Table */}
@@ -574,7 +574,7 @@ export default function Home() {
     if (wwdHovered) return;
     const timer = setInterval(() => {
       setActiveWwdCard(c => (c + 1) % 3);
-    }, 8000);
+    }, 4000);
     return () => clearInterval(timer);
   }, [wwdHovered]);
 
@@ -666,7 +666,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px]" style={{ marginBottom: "56px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
             {[
-              { n: "01", stat: "<24hr", statLabel: "DELIVERY GUARANTEED", title: "SECURED MEDIA PLACEMENT", desc: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches \u2014 placements.", accent: true, href: "#media-placement" },
+              { n: "01", stat: "<24hr", statLabel: "DELIVERY GUARANTEED", title: "SECURED MEDIA PLACEMENT", desc: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches \u2014 placements.", accent: false, href: "#media-placement" },
               { n: "02", stat: "44.7M+", statLabel: "REACHABLE AUDIENCE", title: "PRECISION DISTRIBUTION", desc: "6 GCC markets. 32 industries. Your content reaches the right audience \u2014 from the general population to the C-suite.", accent: false, href: "#audience-selection" },
               { n: "03", stat: "94%", statLabel: "READER IDENTIFICATION", title: "FULL ENGAGEMENT VISIBILITY", desc: "Who read it. Where they\u2019re from. What they do. Full audience breakdowns across every campaign \u2014 delivered as a branded, exportable report.", accent: false, href: "#sample-insights" },
             ].map(({ n, stat, statLabel, title, desc, accent, href }, i) => {
@@ -848,10 +848,12 @@ export default function Home() {
             </span>
           </div>
           <h2
-            className="font-display font-bold uppercase text-white text-center mb-10"
+            className="font-display font-bold uppercase text-center mb-10"
             style={{ fontSize: "clamp(28px,4vw,48px)", letterSpacing: "0.05em", lineHeight: "1" }}
           >
-            Campaign Intelligence — Live
+            <ScrambleOnView text="What We Know," delay={0} style={{ display: "inline", color: "#ffffff" }} />
+            {" "}
+            <ScrambleOnView text="They Don't." delay={200} style={{ display: "inline", color: "#4a6cf7" }} />
           </h2>
           <div className="h-[420px] border border-white/[0.08]">
             <DashboardCard engagement={tableEngagement[activeIntelItem]} />
