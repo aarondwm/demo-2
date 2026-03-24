@@ -346,9 +346,9 @@ const DASH_AUDIENCE = [
   { rank: "06", name: "Deloitte", views: 3210, avgRead: "8m 27s", roles: [{ role: "Partner", count: 3 }, { role: "Director", count: 16 }, { role: "Manager", count: 42 }, { role: "Consultant", count: 196 }] },
 ];
 const DASH_DEMOGRAPHICS = {
-  gender: [{ label: "Male", pct: 71 }, { label: "Female", pct: 29 }],
-  location: [{ name: "Kuwait", pct: 31 }, { name: "UAE", pct: 26 }, { name: "Saudi Arabia", pct: 24 }, { name: "Qatar", pct: 11 }, { name: "Bahrain", pct: 5 }, { name: "Oman", pct: 3 }],
-  age: [{ range: "25-34", pct: 34 }, { range: "35-44", pct: 36 }, { range: "45-54", pct: 19 }, { range: "55+", pct: 11 }],
+  gender: [{ label: "Male", pct: 74 }, { label: "Female", pct: 26 }],
+  location: [{ name: "Kuwait", pct: 86 }, { name: "UAE", pct: 78 }, { name: "Saudi Arabia", pct: 72 }, { name: "Qatar", pct: 81 }, { name: "Bahrain", pct: 73 }, { name: "Oman", pct: 68 }],
+  age: [{ range: "25-34", pct: 89 }, { range: "35-44", pct: 94 }, { range: "45-54", pct: 76 }, { range: "55+", pct: 71 }],
 };
 const DASH_TABS = ["Overview", "Audience Breakdown"];
 
@@ -440,12 +440,12 @@ function CampaignDashboard() {
               <div>
                 <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30 mb-3">Gender</div>
                 <div className="flex h-[8px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
-                  <div className="h-full" style={{ width: visible ? "71%" : "0%", background: "#4a6cf7", transition: "width 0.8s ease 0.2s" }} />
-                  <div className="h-full" style={{ width: visible ? "29%" : "0%", background: "#7a9cff", transition: "width 0.8s ease 0.3s" }} />
+                  <div className="h-full" style={{ width: visible ? "74%" : "0%", background: "#4a6cf7", transition: "width 0.8s ease 0.2s" }} />
+                  <div className="h-full" style={{ width: visible ? "26%" : "0%", background: "#7a9cff", transition: "width 0.8s ease 0.3s" }} />
                 </div>
                 <div className="flex justify-between mt-2">
-                  <span className="font-mono text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />71% Male</span>
-                  <span className="font-mono text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />29% Female</span>
+                  <span className="font-mono text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />74% Male</span>
+                  <span className="font-mono text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />26% Female</span>
                 </div>
               </div>
               <div>
