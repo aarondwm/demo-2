@@ -242,8 +242,8 @@ export function Navbar() {
         <div className="flex items-center gap-3 flex-shrink-0">
           <a
             href="/contact"
-            className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase text-black font-bold relative overflow-hidden"
-            style={{ borderRadius: "12px", transform: "translateZ(0)" }}
+            className="group hidden sm:inline-flex items-center h-11 text-[12px] tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden"
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", borderRadius: "12px", transform: "translateZ(0)" }}
           >
             <span className="absolute inset-0 bg-white" />
             <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>

@@ -90,10 +90,10 @@ export const HoverActionButton = ({
   return (
     <a
       href={href}
-      style={style}
+      style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", ...style }}
       onMouseLeave={scramble ? handleMouseLeave : undefined}
       className={cn(
-        "group relative cursor-pointer border py-4 px-10 font-mono text-[11px] font-semibold tracking-[0.2em] uppercase text-white inline-flex items-center justify-center whitespace-nowrap overflow-hidden",
+        "group relative cursor-pointer border py-4 px-10 text-[11px] font-bold tracking-[0.12em] uppercase text-white inline-flex items-center justify-center whitespace-nowrap overflow-hidden",
         borderBase,
         className
       )}

@@ -248,7 +248,7 @@ function HeroVideoBackground() {
 /* ── Testimonials ────────────────────────────────────────────────────────── */
 const testimonials: Testimonial[] = [
   {
-    text: "I genuinely didn't believe it at first. They sent us a link to our article live on a real news site. Not a sponsored post, not a banner — an actual editorial piece. I forwarded it to the whole company.",
+    text: "I genuinely didn't believe it at first. They sent us a link to our article live on a real news site. Not a sponsored post, not a banner. An actual editorial piece. I forwarded it to the whole company.",
     image: "https://randomuser.me/api/portraits/men/32.jpg",
     name: "CEO",
     role: "Kuwait Real Estate Development",
@@ -260,7 +260,7 @@ const testimonials: Testimonial[] = [
     role: "GCC Telecommunications",
   },
   {
-    text: "The reporting is what sold us. We don't just know our content ran — we know exactly who read it, what they do, and where they work. That's what we needed to make the right decisions.",
+    text: "The reporting is what sold us. We don't just know our content ran. We know exactly who read it, what they do, and where they work. That's what we needed to make the right decisions.",
     image: "https://randomuser.me/api/portraits/men/58.jpg",
     name: "Head of Marketing",
     role: "Kuwait Investment Management",
@@ -290,7 +290,7 @@ const testimonials: Testimonial[] = [
     role: "UAE Infrastructure Group",
   },
   {
-    text: "I was sceptical — I'd heard 'guaranteed media' before and it always meant something small or obscure. These were real publications. People in our industry actually read them.",
+    text: "I was sceptical. I'd heard 'guaranteed media' before and it always meant something small or obscure. These were real publications. People in our industry actually read them.",
     image: "https://randomuser.me/api/portraits/women/53.jpg",
     name: "Chief Marketing Officer",
     role: "Bahrain Logistics & Trade",
@@ -879,6 +879,42 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [wwdHovered]);
 
+  /* Horizontal swipe on slideshow overlay → navigate cards */
+  useEffect(() => {
+    const zone = document.getElementById("slideshow-swipe-zone");
+    if (!zone) return;
+    let startX = 0, startY = 0, dx = 0, direction: string | null = null;
+    const onStart = (e: TouchEvent) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      dx = 0;
+      direction = null;
+    };
+    const onMove = (e: TouchEvent) => {
+      dx = e.touches[0].clientX - startX;
+      const dy = e.touches[0].clientY - startY;
+      if (!direction && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
+        direction = Math.abs(dx) > Math.abs(dy) ? "h" : "v";
+      }
+      if (direction === "h") e.preventDefault();
+    };
+    const onEnd = () => {
+      if (direction !== "h") return;
+      const f = document.getElementById("slideshow-iframe") as HTMLIFrameElement;
+      if (!f?.contentWindow) return;
+      if (dx < -40) f.contentWindow.postMessage("next", "*");
+      else if (dx > 40) f.contentWindow.postMessage("prev", "*");
+    };
+    zone.addEventListener("touchstart", onStart, { passive: true });
+    zone.addEventListener("touchmove", onMove, { passive: false });
+    zone.addEventListener("touchend", onEnd);
+    return () => {
+      zone.removeEventListener("touchstart", onStart);
+      zone.removeEventListener("touchmove", onMove);
+      zone.removeEventListener("touchend", onEnd);
+    };
+  }, []);
+
   /* Hide table when clicking outside intel section */
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -967,9 +1003,9 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-[6px]" style={{ marginBottom: "56px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
             {[
-              { n: "01", stat: "<24hr", statLabel: "DELIVERY GUARANTEED", title: "SECURED MEDIA PLACEMENT", desc: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches \u2014 placements.", accent: false, href: "#media-placement" },
-              { n: "02", stat: "44.7M+", statLabel: "REACHABLE AUDIENCE", title: "PRECISION DISTRIBUTION", desc: "6 GCC markets. 32 industries. Your content reaches the right audience \u2014 from the general population to the C-suite.", accent: false, href: "#audience-selection" },
-              { n: "03", stat: "94%", statLabel: "READER IDENTIFICATION", title: "FULL ENGAGEMENT VISIBILITY", desc: "Who read it. Where they\u2019re from. What they do. Full audience breakdowns across every campaign \u2014 delivered as a branded, exportable report.", accent: false, href: "#sample-insights" },
+              { n: "01", stat: "<24hr", statLabel: "DELIVERY GUARANTEED", title: "SECURED MEDIA PLACEMENT", desc: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches. Placements.", accent: false, href: "#media-placement" },
+              { n: "02", stat: "44.7M+", statLabel: "REACHABLE AUDIENCE", title: "PRECISION DISTRIBUTION", desc: "6 GCC markets. 32 industries. Your content reaches the right audience. From the general population to the C-suite.", accent: false, href: "#audience-selection" },
+              { n: "03", stat: "94%", statLabel: "READER IDENTIFICATION", title: "FULL ENGAGEMENT VISIBILITY", desc: "Who read it. Where they\u2019re from. What they do. Full audience breakdowns across every campaign. Delivered as a branded, exportable report.", accent: false, href: "#sample-insights" },
             ].map(({ n, stat, statLabel, title, desc, accent, href }, i) => {
               const isActive = wwdHovered ? false : i === activeWwdCard;
               return (
@@ -1002,8 +1038,8 @@ export default function Home() {
           <div className="flex justify-center" style={{ marginBottom: "56px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
             <a
               href="/contact"
-              className="group inline-flex items-center h-14 font-mono text-[13px] tracking-[0.22em] uppercase text-black font-bold relative overflow-hidden"
-              style={{ borderRadius: "12px", transform: "translateZ(0)" }}
+              className="group inline-flex items-center h-14 text-[13px] tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden"
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", borderRadius: "12px", transform: "translateZ(0)" }}
             >
               <span className="absolute inset-0 bg-white" />
               <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>
@@ -1054,14 +1090,14 @@ export default function Home() {
               </div>
 
               <p style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s" }}>
-                We produce and place editorially-driven stories across a network of Gulf business and industry publications. Your content goes live — as a confirmed placement.
+                We produce and place editorially-driven stories across a network of Gulf business and industry publications. Your content goes live as a confirmed placement.
               </p>
             </div>
 
             {/* Right — 4 card rows */}
             <div className="flex flex-col" style={{ gap: "1px", background: "#ffffff08" }}>
               {[
-                { n: "01", title: "Confirmed Placement", body: "Your content is placed, not pitched. Every partner publication is pre-contracted — your story runs." },
+                { n: "01", title: "Confirmed Placement", body: "Your content is placed, not pitched. Every partner publication is pre-contracted. Your story runs." },
                 { n: "02", title: "Gulf-Wide Network",   body: "Kuwait, UAE, Saudi Arabia, Bahrain, Qatar, Oman. Every major GCC market covered." },
                 { n: "03", title: "Editorial Quality",   body: "Produced and formatted to editorial standard. It reads like news because it is." },
                 { n: "04", title: "Timed & Controlled",  body: "You choose when it runs. We coordinate across every publication simultaneously." },
@@ -1136,16 +1172,10 @@ export default function Home() {
               style={{ width: "100%", height: "540px", border: "none", display: "block", pointerEvents: "none" }}
               title="GCC Audience Slideshow"
             />
-            {/* Tap zones for card navigation — overlay on top of iframe */}
-            <button
-              aria-label="Previous card"
-              onClick={() => { const f = document.getElementById("slideshow-iframe") as HTMLIFrameElement; try { f?.contentWindow?.postMessage("prev","*"); } catch(e){} }}
-              style={{ position: "absolute", top: 0, left: 0, width: "25%", height: "100%", background: "transparent", border: "none", zIndex: 2, cursor: "pointer" }}
-            />
-            <button
-              aria-label="Next card"
-              onClick={() => { const f = document.getElementById("slideshow-iframe") as HTMLIFrameElement; try { f?.contentWindow?.postMessage("next","*"); } catch(e){} }}
-              style={{ position: "absolute", top: 0, right: 0, width: "25%", height: "100%", background: "transparent", border: "none", zIndex: 2, cursor: "pointer" }}
+            {/* Swipe overlay — captures horizontal swipes for cards, vertical passes to page */}
+            <div
+              id="slideshow-swipe-zone"
+              style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 2, touchAction: "pan-y" }}
             />
           </div>
         </div>
