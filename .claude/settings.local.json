@@ -13,7 +13,9 @@
       "Bash(mkdir -p \"/Users/aaron/Documents/D*M/VSCODE /Demo 1/app/preview/unified-fonts\")",
       "Bash(cp \"/Users/aaron/Documents/D*M/VSCODE /Demo 1/app/page.tsx\" \"/Users/aaron/Documents/D*M/VSCODE /Demo 1/app/preview/unified-fonts/page.tsx\")",
       "Bash(FILE=\"/Users/aaron/Documents/D*M/VSCODE /Demo 1/app/preview/unified-fonts/page.tsx\")",
-      "Bash(sed -i '' 's/className=\"\"sys-body-unified /style={{ fontFamily: \"\"var\\(--font-body\\), sans-serif\"\", fontSize: \"\"13.5px\"\", lineHeight: 1.7, color: \"\"#6b7080\"\" }} className=\"\"/g' \"$FILE\")"
+      "Bash(sed -i '' 's/className=\"\"sys-body-unified /style={{ fontFamily: \"\"var\\(--font-body\\), sans-serif\"\", fontSize: \"\"13.5px\"\", lineHeight: 1.7, color: \"\"#6b7080\"\" }} className=\"\"/g' \"$FILE\")",
+      "Bash(__NEW_LINE_5a1de5663234133d__ python3:*)",
+      "Bash(__NEW_LINE_146b451cbaba7aa8__ python3:*)"
     ]
   }
 }

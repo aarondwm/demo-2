@@ -390,22 +390,6 @@ function DashboardCard({ engagement, trigger = 0 }: { engagement: string[]; trig
           </tbody>
         </table>
       </div>
-      {/* Audience Stats */}
-      <div className="relative px-4 md:px-6 py-4 border-t border-white/[0.06]">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { value: "44.7M+", label: "Total GCC Reach" },
-            { value: "94%", label: "Reader Identified" },
-            { value: "32+", label: "Industries Tracked" },
-            { value: "6", label: "Markets Covered" },
-          ].map(({ value, label }) => (
-            <div key={label} className="flex flex-col gap-1">
-              <span className="font-mono font-bold" style={{ fontSize: "16px", color: "#4a6cf7" }}>{value}</span>
-              <span className="font-mono uppercase" style={{ fontSize: "7px", letterSpacing: "0.18em", color: "rgba(255,255,255,0.35)" }}>{label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
       {/* Footer */}
       <div className="relative flex items-center justify-between px-4 md:px-6 py-2.5 border-t border-white/[0.08]">
         <span className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "clamp(8px, 2vw, 11px)", color: "rgba(255,255,255,0.35)" }}>
@@ -480,19 +464,6 @@ function MobileAccordion({ engagement, trigger }: { engagement: string[]; trigge
           </div>
         </div>
       ))}
-      <div className="grid grid-cols-2 gap-3 px-4 py-3 border-t border-white/[0.06]">
-        {[
-          { value: "44.7M+", label: "Total GCC Reach" },
-          { value: "94%", label: "Reader Identified" },
-          { value: "32+", label: "Industries" },
-          { value: "6", label: "Markets" },
-        ].map(({ value, label }) => (
-          <div key={label} className="flex flex-col gap-1">
-            <span className="font-mono font-bold" style={{ fontSize: "14px", color: "#4a6cf7" }}>{value}</span>
-            <span className="font-mono uppercase" style={{ fontSize: "7px", letterSpacing: "0.18em", color: "rgba(255,255,255,0.35)" }}>{label}</span>
-          </div>
-        ))}
-      </div>
       <div className="flex items-center justify-between px-4 py-2 border-t border-white/[0.08]">
         <span className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "8px", color: "rgba(255,255,255,0.35)" }}>Full data after onboarding</span>
         <div className="flex items-center gap-1.5">
@@ -946,7 +917,7 @@ export default function Home() {
               src="/dwm-gcc-map.html"
               scrolling="no"
               loading="lazy"
-              style={{ width: "100%", height: "620px", border: "none", display: "block", position: "relative", zIndex: 0 }}
+              style={{ width: "100%", height: "780px", border: "none", display: "block", position: "relative", zIndex: 0 }}
               title="GCC Audience Map"
             />
           </div>
