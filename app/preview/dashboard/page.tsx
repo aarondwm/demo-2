@@ -4,12 +4,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { Navbar } from "@/components/ui/mini-navbar";
 
 const INDUSTRIES = [
-  { name: "Finance", views: 42180, blur: false },
-  { name: "Oil & Gas", views: 31420, blur: true },
-  { name: "Real Estate", views: 24890, blur: false },
-  { name: "Construction", views: 19740, blur: true },
-  { name: "Technology", views: 16350, blur: false },
-  { name: "Healthcare", views: 12870, blur: true },
+  { name: "Finance", views: 42180, blurName: false, blurViews: true },
+  { name: "Oil & Gas", views: 31420, blurName: true, blurViews: false },
+  { name: "Real Estate", views: 24890, blurName: false, blurViews: true },
+  { name: "Construction", views: 19740, blurName: true, blurViews: false },
+  { name: "Technology", views: 16350, blurName: false, blurViews: false },
+  { name: "Healthcare", views: 12870, blurName: false, blurViews: false },
 ];
 
 const COMPANIES = [
@@ -153,7 +153,7 @@ export default function PreviewDashboard() {
                   </div>
                   {INDUSTRIES.map((ind, i) => (
                     <div key={ind.name} className="flex items-center gap-3">
-                      <span className="font-mono w-[160px] flex-shrink-0 truncate" style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)", filter: (ind as any).blur ? "blur(4px)" : "none", userSelect: (ind as any).blur ? "none" : "auto" }}>{ind.name}</span>
+                      <span className="font-mono w-[160px] flex-shrink-0 truncate" style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)", filter: (ind as any).blurName ? "blur(4px)" : "none", userSelect: (ind as any).blurName ? "none" : "auto" }}>{ind.name}</span>
                       <div className="flex-1 h-[6px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
                         <div
                           className="h-full rounded-full"
@@ -164,7 +164,7 @@ export default function PreviewDashboard() {
                           }}
                         />
                       </div>
-                      <span className="font-mono font-bold flex-shrink-0 w-[50px] text-right" style={{ fontSize: "11px", color: "#4a6cf7", filter: i % 2 === 1 ? "blur(4px)" : "none", userSelect: i % 2 === 1 ? "none" : "auto" }}>
+                      <span className="font-mono font-bold flex-shrink-0 w-[50px] text-right" style={{ fontSize: "11px", color: "#4a6cf7", filter: (ind as any).blurViews ? "blur(4px)" : "none", userSelect: (ind as any).blurViews ? "none" : "auto" }}>
                         {ind.views.toLocaleString()}
                       </span>
                     </div>

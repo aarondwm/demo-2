@@ -338,12 +338,12 @@ function ScrambleNumber({ value, trigger }: { value: string; trigger: number }) 
 
 /* ── Campaign Dashboard (replaces old table + ticker) ────────────────────── */
 const DASH_INDUSTRIES = [
-  { name: "Finance", views: 42180, blur: false },
-  { name: "Oil & Gas", views: 31420, blur: true },
-  { name: "Real Estate", views: 24890, blur: false },
-  { name: "Construction", views: 19740, blur: true },
-  { name: "Technology", views: 16350, blur: false },
-  { name: "Healthcare", views: 12870, blur: true },
+  { name: "Finance", views: 42180, blurName: false, blurViews: true },
+  { name: "Oil & Gas", views: 31420, blurName: true, blurViews: false },
+  { name: "Real Estate", views: 24890, blurName: false, blurViews: true },
+  { name: "Construction", views: 19740, blurName: true, blurViews: false },
+  { name: "Technology", views: 16350, blurName: false, blurViews: false },
+  { name: "Healthcare", views: 12870, blurName: false, blurViews: false },
 ];
 const DASH_COMPANIES = [
   { rank: "01", name: "Saudi Aramco", views: 5130, blur: false, blurViews: true },
@@ -458,11 +458,11 @@ function CampaignDashboard() {
             </div>
             {DASH_INDUSTRIES.map((ind, i) => (
               <div key={ind.name} className="flex items-center gap-2 md:gap-3">
-                <span className="font-mono w-[110px] md:w-[160px] flex-shrink-0 truncate" style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)", filter: ind.blur ? "blur(4px)" : "none", userSelect: ind.blur ? "none" as const : "auto" as const }}>{ind.name}</span>
+                <span className="font-mono w-[110px] md:w-[160px] flex-shrink-0 truncate" style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)", filter: ind.blurName ? "blur(4px)" : "none", userSelect: ind.blurName ? "none" as const : "auto" as const }}>{ind.name}</span>
                 <div className="flex-1 h-[6px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
                   <div className="h-full rounded-full" style={{ width: `${(ind.views / 42180) * 100}%`, background: `rgba(74,108,247,${1 - i * 0.07})`, transition: `width 0.8s ease ${i * 0.06}s` }} />
                 </div>
-                <span className="font-mono font-bold flex-shrink-0 w-[50px] text-right" style={{ fontSize: "11px", color: "#4a6cf7", filter: i % 2 === 1 ? "blur(4px)" : "none", userSelect: i % 2 === 1 ? "none" as const : "auto" as const }}>{ind.views.toLocaleString()}</span>
+                <span className="font-mono font-bold flex-shrink-0 w-[50px] text-right" style={{ fontSize: "11px", color: "#4a6cf7", filter: ind.blurViews ? "blur(4px)" : "none", userSelect: ind.blurViews ? "none" as const : "auto" as const }}>{ind.views.toLocaleString()}</span>
               </div>
             ))}
           </div>

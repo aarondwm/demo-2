@@ -25,6 +25,7 @@
 }
 html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
   height:100%;overflow:hidden;-webkit-tap-highlight-color:transparent;
+  touch-action:pan-y;
 }
 
 /* Header */
@@ -51,7 +52,7 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 .slides-wrap{
   position:fixed;top:0;bottom:0;left:0;right:0;
   overflow:hidden;
-  touch-action:pan-y pan-x;
+  touch-action:manipulation;
   perspective:800px;
 }
 
