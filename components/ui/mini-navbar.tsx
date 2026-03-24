@@ -96,7 +96,6 @@ const NAV_GROUPS = [
   { label: "Targeting", href: "/#audience-selection" },
   { label: "Insights",   href: "/#intelligence" },
   { label: "Reviews",    href: "/#reviews" },
-  { label: "Contact",    href: "/#get-started" },
 ];
 
 /* ── ListItem (adapted from header-3 pattern) ────────────────────────────── */
@@ -225,7 +224,7 @@ export function Navbar() {
               clipPath: "circle(38% at 50% 50%)",
             }}
           />
-          <span className="hidden sm:block ml-2 font-bold uppercase tracking-[0.08em]" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "13px", color: "#e8e8e8" }}>Diwaniya Media</span>
+          <span className="hidden sm:block ml-2 font-bold uppercase tracking-[0.08em]" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "16px", color: "#e8e8e8" }}>Diwaniya Media</span>
         </a>
 
         {/* Desktop nav */}

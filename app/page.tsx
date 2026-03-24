@@ -953,7 +953,7 @@ export default function Home() {
 
           <div className="flex items-center mb-5">
             <span className="sys-label" style={{ fontSize: "12px", letterSpacing: "0.3em" }}>
-              <img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
+              <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
               <ScrambleOnView text="What We Do" delay={0} style={{ display: "inline" }} onDone={sec2Done} />
             </span>
           </div>
@@ -1030,7 +1030,7 @@ export default function Home() {
             {/* Left */}
             <div className="flex flex-col gap-8">
               <div className="flex items-center mb-5">
-                <span className="sys-label" style={{ fontSize: "12px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Secured Media Placement" delay={0} style={{ display: "inline" }} onDone={sec3Done} /></span>
+                <span className="sys-label" style={{ fontSize: "12px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Secured Media Placement" delay={0} style={{ display: "inline" }} onDone={sec3Done} /></span>
               </div>
               <h2
                 className="font-bold uppercase"
@@ -1080,7 +1080,7 @@ export default function Home() {
           <div className="mb-14">
             <div className="flex items-center mb-5">
               <span className="sys-label" style={{ fontSize: "12px", letterSpacing: "0.3em" }}>
-                <img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
+                <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
                 <ScrambleOnView text="Audience Selection" delay={0} style={{ display: "inline" }} onDone={secMapDone} />
               </span>
             </div>
@@ -1144,18 +1144,23 @@ export default function Home() {
         <div className="max-w-[1200px] mx-auto px-6 md:px-12">
           <div className="flex items-center mb-5">
             <span className="sys-label" style={{ fontSize: "12px", letterSpacing: "0.3em" }}>
-              <img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
+              <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
               Sample Insights
             </span>
           </div>
-          <h2
-            className="font-bold uppercase text-left mb-10"
-            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
-          >
-            <ScrambleOnView text="What We Know," delay={0} style={{ display: "inline", color: "#ffffff" }} />
-            {" "}
-            <ScrambleOnView text="They Don't." delay={200} style={{ display: "inline", color: "#4a6cf7" }} />
-          </h2>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+            <h2
+              className="font-bold uppercase text-left"
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+            >
+              <ScrambleOnView text="What We Know," delay={0} style={{ display: "inline", color: "#ffffff" }} />
+              {" "}
+              <ScrambleOnView text="They Don't." delay={200} style={{ display: "inline", color: "#4a6cf7" }} />
+            </h2>
+            <p className="md:text-right md:max-w-xs" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "rgba(255,255,255,0.5)" }}>
+              We run your content and track exactly who reads it. You get a full intelligence report. No guesswork.
+            </p>
+          </div>
           <CampaignDashboard />
         </div>
       </section>
@@ -1165,7 +1170,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="mb-14 text-center">
             <div className="flex items-center justify-center mb-5">
-              <span className="sys-label" style={{ fontSize: "12px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Who We Work With" delay={0} style={{ display: "inline" }} onDone={sec5Done} /></span>
+              <span className="sys-label" style={{ fontSize: "12px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Who We Work With" delay={0} style={{ display: "inline" }} onDone={sec5Done} /></span>
             </div>
             <h2
               className="font-bold uppercase text-white"
@@ -1177,8 +1182,6 @@ export default function Home() {
           </div>
 
           <div className="relative">
-            {/* Blue tint gradient overlay */}
-            <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(74,108,247,0.06) 0%, transparent 40%, transparent 60%, rgba(74,108,247,0.06) 100%)", pointerEvents: "none", zIndex: 10 }} />
           <div
             className="flex justify-center gap-4 overflow-hidden"
             style={{
@@ -1215,7 +1218,7 @@ export default function Home() {
 
             <div className="relative z-10">
               <div className="flex items-center mb-5">
-                <span className="sys-label" style={{ fontSize: "12px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Get Started" delay={0} style={{ display: "inline" }} onDone={secCtaDone} /></span>
+                <span className="sys-label" style={{ fontSize: "12px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Get Started" delay={0} style={{ display: "inline" }} onDone={secCtaDone} /></span>
               </div>
               <h2
                 className="font-bold uppercase text-white mb-5 text-center"
