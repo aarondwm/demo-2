@@ -58,8 +58,8 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 /* Individual slide — stacked */
 .slide{
   position:absolute;
-  top:12px;bottom:12px;left:16px;right:16px;
-  padding:20px;
+  top:8px;bottom:8px;left:12px;right:12px;
+  padding:16px 16px 12px;
   display:flex;
   flex-direction:column;
   overflow:hidden;
@@ -74,32 +74,38 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
   z-index:1;
 }
 /* Active card — front and center */
+.slide.active,
 .slide[data-pos="0"]{
   transform:scale(1) translateX(0);
   opacity:1;
   filter:blur(0);
   pointer-events:auto;
   z-index:10;
-  border-color:rgba(74,108,247,0.35);
-  box-shadow:0 0 0 1px rgba(74,108,247,0.12), 0 0 30px rgba(74,108,247,0.15), 0 0 60px rgba(74,108,247,0.06);
+  border-color:rgba(74,108,247,0.45);
+  box-shadow:
+    0 0 0 1px rgba(74,108,247,0.20),
+    0 0 20px rgba(74,108,247,0.25),
+    0 0 50px rgba(74,108,247,0.15),
+    0 0 80px rgba(74,108,247,0.08),
+    inset 0 0 30px rgba(74,108,247,0.04);
 }
 /* Next card — peeking right */
 .slide[data-pos="1"]{
-  transform:scale(0.88) translateX(30px);
-  opacity:0.4;
+  transform:scale(0.90) translateX(24px);
+  opacity:0.35;
   filter:blur(2px);
   z-index:5;
 }
 /* Previous card — peeking left */
 .slide[data-pos="-1"]{
-  transform:scale(0.88) translateX(-30px);
-  opacity:0.4;
+  transform:scale(0.90) translateX(-24px);
+  opacity:0.35;
   filter:blur(2px);
   z-index:5;
 }
 /* Cards further away — hidden behind */
 .slide[data-pos="2"],.slide[data-pos="-2"]{
-  transform:scale(0.8) translateX(0);
+  transform:scale(0.82) translateX(0);
   opacity:0;
   z-index:1;
 }
@@ -129,7 +135,7 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 
 /* Country name */
 .slide-country{
-  font-family:var(--sans);font-size:32px;font-weight:800;
+  font-family:var(--sans);font-size:24px;font-weight:800;
   color:var(--accent);letter-spacing:0.02em;
   text-shadow:0 0 40px rgba(74,108,247,0.4);
   position:relative;z-index:2;
@@ -158,8 +164,8 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 
 /* Total — compact, max half width */
 .slide-total{
-  margin-top:16px;
-  padding:12px 14px;
+  margin-top:10px;
+  padding:10px 12px;
   background:linear-gradient(135deg,rgba(74,108,247,0.04),rgba(122,156,255,0.02));
   border:1px solid var(--border);
   max-width:50%;
@@ -182,7 +188,7 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 [data-index="5"] .slide-map{height:120px;top:8px;right:10px}   /* Oman */
 
 /* Demographics */
-.slide-section{margin-top:16px}
+.slide-section{margin-top:10px}
 .slide-section-title{
   font-size:9px;letter-spacing:0.14em;text-transform:uppercase;
   color:var(--accent-2);margin-bottom:10px;
@@ -277,7 +283,7 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 
 <div class="slides-wrap" id="slidesWrap">
 
-    <div class="slide slide-animate" data-index="0">
+    <div class="slide slide-animate active" data-index="0" data-pos="0">
       <div class="slide-map">
         <svg viewBox="361.0 45.6 76.80000000000001 60.199999999999996" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           <path d="M 414.3,56.6 L 415.2,58.0 L 415.4,59.7 L 415.9,61.2 L 416.7,62.6 L 418.5,63.6 L 419.1,64.9 L 419.8,66.1 L 421.2,67.6 L 421.8,68.8 L 419.6,69.0 L 418.1,68.3 L 416.8,68.1 L 414.9,68.4 L 413.2,69.6 L 411.2,70.4 L 409.8,71.4 L 408.4,73.0 L 407.0,73.6 L 408.4,74.2 L 410.0,73.9 L 410.1,75.1 L 411.5,75.5 L 412.8,75.2 L 414.7,74.1 L 416.3,74.2 L 418.0,74.9 L 418.9,76.5 L 419.4,78.6 L 420.3,80.3 L 421.1,84.1 L 423.2,86.9 L 424.9,87.6 L 424.9,89.2 L 426.0,90.6 L 427.3,91.6 L 428.6,91.9 L 428.2,93.3 L 429.8,97.6 L 424.2,97.7 L 418.5,97.7 L 412.8,97.7 L 407.1,97.8 L 405.4,97.8 L 403.8,96.1 L 402.2,94.2 L 401.8,91.8 L 399.8,87.3 L 398.3,85.3 L 396.1,84.6 L 392.9,84.3 L 389.7,83.9 L 386.5,83.6 L 383.3,83.3 L 379.7,82.9 L 376.2,82.6 L 372.6,82.2 L 369.0,81.9 L 374.8,77.0 L 376.8,74.3 L 378.8,72.7 L 380.3,70.1 L 382.7,67.1 L 383.4,65.7 L 383.6,64.5 L 384.8,62.8 L 387.5,57.5 L 390.3,55.5 L 395.5,53.8 L 397.3,53.6 L 405.6,53.6 L 407.4,53.9 L 414.3,56.6 Z" style="stroke-width:0.5;stroke:var(--accent);stroke-opacity:1;fill:rgba(74,108,247,0.06)"/>

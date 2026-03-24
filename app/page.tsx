@@ -863,7 +863,7 @@ export default function Home() {
               src="/dwm-gcc-slideshow.html"
               scrolling="no"
               loading="lazy"
-              style={{ width: "100%", height: "580px", border: "none", display: "block" }}
+              style={{ width: "100%", height: "640px", border: "none", display: "block" }}
               title="GCC Audience Slideshow"
             />
           </div>
