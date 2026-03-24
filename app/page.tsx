@@ -336,30 +336,21 @@ function ScrambleNumber({ value, trigger }: { value: string; trigger: number }) 
   return <span ref={ref} style={{ transition: "text-shadow 0.3s ease", textShadow: pulsing ? "0 0 10px rgba(74,108,247,0.6), 0 0 20px rgba(74,108,247,0.3)" : "none" }}>{value}</span>;
 }
 
-/* ── Campaign Dashboard (replaces old table + ticker) ────────────────────── */
-const DASH_INDUSTRIES = [
-  { name: "Finance", views: 42180, blurName: false, blurViews: true },
-  { name: "Oil & Gas", views: 31420, blurName: true, blurViews: false },
-  { name: "Real Estate", views: 24890, blurName: false, blurViews: true },
-  { name: "Construction", views: 19740, blurName: true, blurViews: false },
-  { name: "Technology", views: 16350, blurName: false, blurViews: false },
-  { name: "Healthcare", views: 12870, blurName: false, blurViews: false },
+/* ── Campaign Dashboard ──────────────────────────────────────────────────── */
+const DASH_AUDIENCE = [
+  { rank: "01", name: "Saudi Aramco", views: 5130, avgRead: "4m 12s", roles: [{ role: "CEO", count: 1 }, { role: "Director", count: 8 }, { role: "Manager", count: 42 }, { role: "Analyst", count: 187 }] },
+  { rank: "02", name: "McKinsey & Company", views: 4215, avgRead: "5m 38s", roles: [{ role: "Partner", count: 3 }, { role: "Director", count: 12 }, { role: "Manager", count: 34 }, { role: "Analyst", count: 156 }] },
+  { rank: "03", name: "Goldman Sachs", views: 3510, avgRead: "3m 54s", roles: [{ role: "CEO", count: 1 }, { role: "VP", count: 6 }, { role: "Manager", count: 28 }, { role: "Analyst", count: 203 }] },
+  { rank: "04", name: "Qatar Energy", views: 2970, avgRead: "4m 47s", roles: [{ role: "Director", count: 4 }, { role: "Manager", count: 31 }, { role: "Engineer", count: 89 }, { role: "Analyst", count: 112 }] },
+  { rank: "05", name: "JPMorgan Chase", views: 2460, avgRead: "3m 21s", roles: [{ role: "VP", count: 2 }, { role: "Director", count: 7 }, { role: "Manager", count: 19 }, { role: "Analyst", count: 164 }] },
+  { rank: "06", name: "Deloitte", views: 1935, avgRead: "6m 03s", roles: [{ role: "Partner", count: 2 }, { role: "Director", count: 9 }, { role: "Manager", count: 24 }, { role: "Consultant", count: 142 }] },
 ];
-const DASH_COMPANIES = [
-  { rank: "01", name: "Saudi Aramco", views: 5130, blur: false, blurViews: true },
-  { rank: "02", name: "Emirates NBD", views: 4215, blur: false, blurViews: false },
-  { rank: "03", name: "SABIC Industries", views: 3510, blur: true, blurViews: true },
-  { rank: "04", name: "Qatar Energy Corp", views: 2970, blur: true, blurViews: false },
-  { rank: "05", name: "Etisalat Group", views: 2460, blur: false, blurViews: true },
-  { rank: "06", name: "Emaar Properties", views: 1935, blur: true, blurViews: false },
-];
-const DASH_SENIORITY = [
-  { level: "Managers", count: 48200, blur: true },
-  { level: "CFO", count: 36800, blur: true },
-  { level: "Directors", count: 12400, blur: false },
-  { level: "CEO", count: 4180, blur: false },
-];
-const DASH_TABS = ["Overview", "Industries", "Companies"];
+const DASH_DEMOGRAPHICS = {
+  gender: [{ label: "Male", pct: 68 }, { label: "Female", pct: 32 }],
+  location: [{ name: "Kuwait", pct: 34 }, { name: "UAE", pct: 24 }, { name: "Saudi Arabia", pct: 22 }, { name: "Qatar", pct: 10 }, { name: "Bahrain", pct: 6 }, { name: "Oman", pct: 4 }],
+  age: [{ range: "25-34", pct: 38 }, { range: "35-44", pct: 31 }, { range: "45-54", pct: 18 }, { range: "55+", pct: 13 }],
+};
+const DASH_TABS = ["Overview", "Audience Breakdown"];
 
 function AnimatedViewCount({ value, duration = 1500 }: { value: number; duration?: number }) {
   const [display, setDisplay] = useState(0);
@@ -381,6 +372,7 @@ function AnimatedViewCount({ value, duration = 1500 }: { value: number; duration
 function CampaignDashboard() {
   const [tab, setTab] = useState(0);
   const [visible, setVisible] = useState(false);
+  const [openCompany, setOpenCompany] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -415,16 +407,8 @@ function CampaignDashboard() {
       {/* Tabs */}
       <div className="flex border-b border-white/[0.06]">
         {DASH_TABS.map((t, i) => (
-          <button
-            key={t}
-            onClick={() => setTab(i)}
-            className="flex-1 py-3 font-mono text-[10px] tracking-[0.2em] uppercase text-center transition-colors duration-200"
-            style={{
-              color: tab === i ? "#4a6cf7" : "rgba(255,255,255,0.3)",
-              borderBottom: tab === i ? "2px solid #4a6cf7" : "2px solid transparent",
-              background: tab === i ? "rgba(74,108,247,0.04)" : "transparent",
-            }}
-          >
+          <button key={t} onClick={() => setTab(i)} className="flex-1 py-3 font-mono text-[10px] tracking-[0.2em] uppercase text-center transition-colors duration-200"
+            style={{ color: tab === i ? "#4a6cf7" : "rgba(255,255,255,0.3)", borderBottom: tab === i ? "2px solid #4a6cf7" : "2px solid transparent", background: tab === i ? "rgba(74,108,247,0.04)" : "transparent" }}>
             {t}
           </button>
         ))}
@@ -432,66 +416,95 @@ function CampaignDashboard() {
 
       {/* Tab Content */}
       <div className="p-4 md:p-6">
+        {/* Overview: Demographics */}
         {tab === 0 && (
-          <div className="flex flex-col gap-4 md:gap-6">
-            <div className="flex items-center justify-between mb-1">
-              <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30">Seniority Breakdown</span>
-              <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white/20">Viewership</span>
-            </div>
-            {DASH_SENIORITY.map((s, i) => (
-              <div key={s.level} className="flex items-center gap-2 md:gap-3">
-                <span className="font-mono w-[110px] md:w-[140px] flex-shrink-0 truncate" style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)" }}>{s.level}</span>
-                <div className="flex-1 h-[6px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
-                  <div className="h-full rounded-full" style={{ width: visible ? `${(s.count / 48200) * 100}%` : "0%", background: i === 0 ? "#4a6cf7" : `rgba(74,108,247,${0.8 - i * 0.1})`, transition: `width 0.8s ease ${i * 0.1}s` }} />
-                </div>
-                <span className="font-mono font-bold flex-shrink-0 w-[50px] md:w-[60px] text-right" style={{ fontSize: "11px", color: "#4a6cf7", filter: s.blur ? "blur(4px)" : "none", userSelect: s.blur ? "none" as const : "auto" as const }}>{s.count.toLocaleString()}</span>
+          <div className="flex flex-col gap-6">
+            {/* Location */}
+            <div>
+              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30 mb-3">Location</div>
+              <div className="flex flex-col gap-2.5">
+                {DASH_DEMOGRAPHICS.location.map((loc, i) => (
+                  <div key={loc.name} className="flex items-center gap-2 md:gap-3">
+                    <span className="font-mono w-[90px] md:w-[120px] flex-shrink-0 truncate" style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)" }}>{loc.name}</span>
+                    <div className="flex-1 h-[6px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
+                      <div className="h-full rounded-full" style={{ width: visible ? `${loc.pct}%` : "0%", background: `rgba(74,108,247,${1 - i * 0.1})`, transition: `width 0.8s ease ${i * 0.08}s` }} />
+                    </div>
+                    <span className="font-mono font-bold flex-shrink-0 w-[36px] text-right" style={{ fontSize: "11px", color: "#4a6cf7" }}>{loc.pct}%</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Gender + Age side by side */}
+            <div className="grid grid-cols-2 gap-4 md:gap-6">
+              <div>
+                <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30 mb-3">Gender</div>
+                <div className="flex h-[8px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
+                  <div className="h-full" style={{ width: visible ? "68%" : "0%", background: "#4a6cf7", transition: "width 0.8s ease 0.2s" }} />
+                  <div className="h-full" style={{ width: visible ? "32%" : "0%", background: "#7a9cff", transition: "width 0.8s ease 0.3s" }} />
+                </div>
+                <div className="flex justify-between mt-2">
+                  <span className="font-mono text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />68% Male</span>
+                  <span className="font-mono text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />32% Female</span>
+                </div>
+              </div>
+              <div>
+                <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30 mb-3">Age Range</div>
+                <div className="flex flex-col gap-2">
+                  {DASH_DEMOGRAPHICS.age.map((a, i) => (
+                    <div key={a.range} className="flex items-center gap-2">
+                      <span className="font-mono flex-shrink-0 w-[36px]" style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)" }}>{a.range}</span>
+                      <div className="flex-1 h-[5px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
+                        <div className="h-full rounded-full" style={{ width: visible ? `${a.pct}%` : "0%", background: `rgba(74,108,247,${0.9 - i * 0.15})`, transition: `width 0.8s ease ${0.3 + i * 0.08}s` }} />
+                      </div>
+                      <span className="font-mono font-bold flex-shrink-0 w-[28px] text-right" style={{ fontSize: "10px", color: "#4a6cf7" }}>{a.pct}%</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
+        {/* Audience Breakdown */}
         {tab === 1 && (
-          <div className="flex flex-col gap-3 md:gap-4">
-            <div className="flex items-center justify-between mb-1">
-              <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30">Top Industries</span>
-              <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white/20">Viewership</span>
-            </div>
-            {DASH_INDUSTRIES.map((ind, i) => (
-              <div key={ind.name} className="flex items-center gap-2 md:gap-3">
-                <span className="font-mono w-[110px] md:w-[160px] flex-shrink-0 truncate" style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)", filter: ind.blurName ? "blur(4px)" : "none", userSelect: ind.blurName ? "none" as const : "auto" as const }}>{ind.name}</span>
-                <div className="flex-1 h-[6px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
-                  <div className="h-full rounded-full" style={{ width: `${(ind.views / 42180) * 100}%`, background: `rgba(74,108,247,${1 - i * 0.07})`, transition: `width 0.8s ease ${i * 0.06}s` }} />
-                </div>
-                <span className="font-mono font-bold flex-shrink-0 w-[50px] text-right" style={{ fontSize: "11px", color: "#4a6cf7", filter: ind.blurViews ? "blur(4px)" : "none", userSelect: ind.blurViews ? "none" as const : "auto" as const }}>{ind.views.toLocaleString()}</span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {tab === 2 && (
           <div className="flex flex-col gap-0">
             <div className="flex items-center justify-between mb-3">
               <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30">Top Companies</span>
-              <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white/20">Viewership</span>
+              <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white/20">Avg. Read Time</span>
             </div>
-            {DASH_COMPANIES.map((c, i) => (
-              <div key={c.rank} className="flex items-center gap-2 md:gap-3 py-2 md:py-2.5 border-b border-white/[0.03]" style={{ opacity: i < 5 ? 1 : 0.6 }}>
-                <span className="font-mono flex-shrink-0 w-[18px]" style={{ fontSize: "10px", color: i === 0 ? "#4a6cf7" : "rgba(74,108,247,0.4)", letterSpacing: "0.1em" }}>{c.rank}</span>
-                <span className="font-mono flex-1 truncate" style={{ fontSize: "12px", color: "rgba(255,255,255,0.8)", filter: c.blur ? "blur(5px)" : "none", userSelect: c.blur ? "none" as const : "auto" as const }}>{c.name}</span>
-                <div className="w-[40px] md:w-[60px] h-[4px] rounded-full overflow-hidden flex-shrink-0" style={{ background: "rgba(255,255,255,0.04)" }}>
-                  <div className="h-full rounded-full" style={{ width: `${(c.views / 5130) * 100}%`, background: "#4a6cf7", transition: `width 0.6s ease ${i * 0.05}s` }} />
+            {DASH_AUDIENCE.map((c, i) => (
+              <div key={c.rank}>
+                <button
+                  onClick={() => setOpenCompany(openCompany === i ? null : i)}
+                  className="w-full flex items-center gap-2 md:gap-3 py-2.5 md:py-3 border-b border-white/[0.04] text-left"
+                  style={{ background: openCompany === i ? "rgba(74,108,247,0.04)" : "transparent", transition: "background 0.2s ease" }}
+                >
+                  <span className="font-mono flex-shrink-0 w-[18px]" style={{ fontSize: "10px", color: openCompany === i ? "#4a6cf7" : "rgba(74,108,247,0.4)", letterSpacing: "0.1em" }}>{c.rank}</span>
+                  <span className="font-mono flex-1 truncate" style={{ fontSize: "12px", color: "rgba(255,255,255,0.85)" }}>{c.name}</span>
+                  <span className="font-mono flex-shrink-0" style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)" }}>{c.views.toLocaleString()} views</span>
+                  <span className="font-mono font-bold flex-shrink-0 w-[50px] md:w-[60px] text-right" style={{ fontSize: "11px", color: "#4a6cf7" }}>{c.avgRead}</span>
+                  <span style={{ fontSize: "9px", color: "rgba(255,255,255,0.25)", transform: openCompany === i ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s ease", flexShrink: 0 }}>▼</span>
+                </button>
+                <div style={{ maxHeight: openCompany === i ? "160px" : "0", overflow: "hidden", transition: "max-height 0.3s ease" }}>
+                  <div className="px-4 md:px-6 py-2.5 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3" style={{ background: "rgba(74,108,247,0.02)" }}>
+                    {c.roles.map((r) => (
+                      <div key={r.role} className="flex items-center justify-between px-2 py-1.5 rounded" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.04)" }}>
+                        <span className="font-mono" style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)" }}>{r.role}</span>
+                        <span className="font-mono font-bold" style={{ fontSize: "11px", color: "#4a6cf7" }}>{r.count}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <span className="font-mono font-bold flex-shrink-0 w-[40px] md:w-[50px] text-right" style={{ fontSize: "11px", color: "rgba(255,255,255,0.7)", filter: c.blurViews ? "blur(4px)" : "none", userSelect: c.blurViews ? "none" as const : "auto" as const }}>{c.views}</span>
               </div>
             ))}
-            <div className="mt-3 font-mono text-[9px] text-white/20 text-center">40+ companies with 500+ views each</div>
           </div>
         )}
       </div>
 
       {/* Footer */}
       <div className="flex items-center justify-between px-4 md:px-6 py-2.5 border-t border-white/[0.08]">
-        <span className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "clamp(7px, 2vw, 9px)", color: "rgba(255,255,255,0.35)" }}>Full data available after onboarding</span>
+        <span className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "clamp(7px, 2vw, 9px)", color: "rgba(255,255,255,0.35)" }}>DWM Audience Intelligence Platform</span>
         <div className="flex items-center gap-1.5">
           <span className="w-1 h-1 bg-[#4a6cf7]" />
           <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/50">SAMPLE</span>
