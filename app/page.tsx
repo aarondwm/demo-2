@@ -503,7 +503,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
       }}>{n}</span>
       <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <span style={{
-          fontFamily: "var(--font-display), sans-serif",
+          fontFamily: "'Neue Montreal', var(--font-display), sans-serif",
           fontWeight: 700,
           textTransform: "uppercase",
           fontSize: hovered ? "15px" : "13px",
@@ -590,7 +590,7 @@ function FeatureCard({
         <div className="p-8 md:p-10 flex flex-col gap-5">
           <span className="font-mono text-[10px] tracking-[0.25em] font-light" style={{ color: "#c8c0b0" }}>{n}</span>
           <h3
-            className="font-display font-bold uppercase"
+            className="font-bold uppercase"
             style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "16px", fontWeight: 700, letterSpacing: "0.03em", lineHeight: 1.35, color: "#e8e8e8", opacity: visible ? 1 : 0, transition: `opacity 0.35s ease ${0.05 + index * 0.08}s` }}
           >
             {title}
@@ -805,17 +805,17 @@ export default function Home() {
           <div className="flex justify-center" style={{ marginBottom: "56px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
             <a
               href="/contact"
-              className="group inline-flex items-center h-12 font-mono text-[12px] tracking-[0.22em] uppercase text-black font-bold relative overflow-hidden"
+              className="group inline-flex items-center h-14 font-mono text-[13px] tracking-[0.22em] uppercase text-black font-bold relative overflow-hidden"
               style={{ borderRadius: "12px", transform: "translateZ(0)" }}
             >
               <span className="absolute inset-0 bg-white" />
               <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>
-                <img src="/D*M website.png" alt="DWM" className="h-6 w-auto" style={{ mixBlendMode: "screen" }} />
+                <img src="/D*M website.png" alt="DWM" className="h-7 w-auto" style={{ mixBlendMode: "screen" }} />
               </span>
               <span className="absolute inset-0 flex items-center justify-center text-black transition-opacity duration-300 group-hover:opacity-0 z-20">
                 Get In Touch
               </span>
-              <span className="invisible px-8">Get In Touch</span>
+              <span className="invisible px-12">Get In Touch</span>
             </a>
           </div>
 
@@ -850,7 +850,7 @@ export default function Home() {
                   { value: "12+",  label: "Publications" },
                 ].map(({ value, label }) => (
                   <div key={label} className="flex flex-col gap-1 pr-4 md:pr-8 first:pl-0 pl-4 md:pl-8">
-                    <span className="font-display font-bold" style={{ fontSize: "28px", color: "#e8e2d6" }}>{value}</span>
+                    <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "28px", fontWeight: 800, color: "#e8e2d6" }}>{value}</span>
                     <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
                   </div>
                 ))}
