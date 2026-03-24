@@ -338,17 +338,17 @@ function ScrambleNumber({ value, trigger }: { value: string; trigger: number }) 
 
 /* ── Campaign Dashboard ──────────────────────────────────────────────────── */
 const DASH_AUDIENCE = [
-  { rank: "01", name: "Saudi Aramco", views: 5130, avgRead: "4m 12s", roles: [{ role: "CEO", count: 1 }, { role: "Director", count: 8 }, { role: "Manager", count: 42 }, { role: "Analyst", count: 187 }] },
-  { rank: "02", name: "McKinsey & Company", views: 4215, avgRead: "5m 38s", roles: [{ role: "Partner", count: 3 }, { role: "Director", count: 12 }, { role: "Manager", count: 34 }, { role: "Analyst", count: 156 }] },
-  { rank: "03", name: "Goldman Sachs", views: 3510, avgRead: "3m 54s", roles: [{ role: "CEO", count: 1 }, { role: "VP", count: 6 }, { role: "Manager", count: 28 }, { role: "Analyst", count: 203 }] },
-  { rank: "04", name: "Qatar Energy", views: 2970, avgRead: "4m 47s", roles: [{ role: "Director", count: 4 }, { role: "Manager", count: 31 }, { role: "Engineer", count: 89 }, { role: "Analyst", count: 112 }] },
-  { rank: "05", name: "JPMorgan Chase", views: 2460, avgRead: "3m 21s", roles: [{ role: "VP", count: 2 }, { role: "Director", count: 7 }, { role: "Manager", count: 19 }, { role: "Analyst", count: 164 }] },
-  { rank: "06", name: "Deloitte", views: 1935, avgRead: "6m 03s", roles: [{ role: "Partner", count: 2 }, { role: "Director", count: 9 }, { role: "Manager", count: 24 }, { role: "Consultant", count: 142 }] },
+  { rank: "01", name: "Saudi Aramco", views: 8740, avgRead: "5m 42s", roles: [{ role: "CEO", count: 2 }, { role: "Director", count: 14 }, { role: "Manager", count: 67 }, { role: "Analyst", count: 312 }] },
+  { rank: "02", name: "McKinsey & Company", views: 6320, avgRead: "7m 18s", roles: [{ role: "Partner", count: 5 }, { role: "Director", count: 19 }, { role: "Manager", count: 48 }, { role: "Analyst", count: 241 }] },
+  { rank: "03", name: "Goldman Sachs", views: 5180, avgRead: "4m 36s", roles: [{ role: "CEO", count: 1 }, { role: "VP", count: 11 }, { role: "Manager", count: 39 }, { role: "Analyst", count: 287 }] },
+  { rank: "04", name: "Qatar Energy", views: 4650, avgRead: "6m 14s", roles: [{ role: "Director", count: 7 }, { role: "Manager", count: 52 }, { role: "Engineer", count: 134 }, { role: "Analyst", count: 178 }] },
+  { rank: "05", name: "JPMorgan Chase", views: 3890, avgRead: "4m 03s", roles: [{ role: "VP", count: 4 }, { role: "Director", count: 12 }, { role: "Manager", count: 31 }, { role: "Analyst", count: 248 }] },
+  { rank: "06", name: "Deloitte", views: 3210, avgRead: "8m 27s", roles: [{ role: "Partner", count: 3 }, { role: "Director", count: 16 }, { role: "Manager", count: 42 }, { role: "Consultant", count: 196 }] },
 ];
 const DASH_DEMOGRAPHICS = {
-  gender: [{ label: "Male", pct: 68 }, { label: "Female", pct: 32 }],
-  location: [{ name: "Kuwait", pct: 34 }, { name: "UAE", pct: 24 }, { name: "Saudi Arabia", pct: 22 }, { name: "Qatar", pct: 10 }, { name: "Bahrain", pct: 6 }, { name: "Oman", pct: 4 }],
-  age: [{ range: "25-34", pct: 38 }, { range: "35-44", pct: 31 }, { range: "45-54", pct: 18 }, { range: "55+", pct: 13 }],
+  gender: [{ label: "Male", pct: 71 }, { label: "Female", pct: 29 }],
+  location: [{ name: "Kuwait", pct: 31 }, { name: "UAE", pct: 26 }, { name: "Saudi Arabia", pct: 24 }, { name: "Qatar", pct: 11 }, { name: "Bahrain", pct: 5 }, { name: "Oman", pct: 3 }],
+  age: [{ range: "25-34", pct: 34 }, { range: "35-44", pct: 36 }, { range: "45-54", pct: 19 }, { range: "55+", pct: 11 }],
 };
 const DASH_TABS = ["Overview", "Audience Breakdown"];
 
@@ -399,7 +399,7 @@ function CampaignDashboard() {
       {/* Hero Stat */}
       <div className="bg-black px-6 py-5 md:py-6 flex flex-col items-center gap-1 border-b border-white/[0.06]">
         <span style={{ fontFamily: "'Neue Montreal', sans-serif", fontSize: "clamp(36px, 8vw, 64px)", fontWeight: 800, color: "#4a6cf7", letterSpacing: "-0.03em" }}>
-          {visible ? <AnimatedViewCount value={247610} /> : "0"}
+          {visible ? <AnimatedViewCount value={312840} /> : "0"}
         </span>
         <span className="font-mono uppercase" style={{ fontSize: "9px", letterSpacing: "0.22em", color: "rgba(255,255,255,0.35)" }}>Total Article Views</span>
       </div>
@@ -440,12 +440,12 @@ function CampaignDashboard() {
               <div>
                 <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30 mb-3">Gender</div>
                 <div className="flex h-[8px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
-                  <div className="h-full" style={{ width: visible ? "68%" : "0%", background: "#4a6cf7", transition: "width 0.8s ease 0.2s" }} />
-                  <div className="h-full" style={{ width: visible ? "32%" : "0%", background: "#7a9cff", transition: "width 0.8s ease 0.3s" }} />
+                  <div className="h-full" style={{ width: visible ? "71%" : "0%", background: "#4a6cf7", transition: "width 0.8s ease 0.2s" }} />
+                  <div className="h-full" style={{ width: visible ? "29%" : "0%", background: "#7a9cff", transition: "width 0.8s ease 0.3s" }} />
                 </div>
                 <div className="flex justify-between mt-2">
-                  <span className="font-mono text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />68% Male</span>
-                  <span className="font-mono text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />32% Female</span>
+                  <span className="font-mono text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />71% Male</span>
+                  <span className="font-mono text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />29% Female</span>
                 </div>
               </div>
               <div>

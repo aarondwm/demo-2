@@ -192,8 +192,8 @@ body{height:100%;display:flex;flex-direction:column;overflow:hidden}
 .city-dot{fill:var(--accent);opacity:0.9;filter:drop-shadow(0 0 4px var(--accent)) drop-shadow(0 0 1px var(--accent))}
 .city-dot-ring{fill:none;stroke:var(--accent);stroke-width:0.5;opacity:0;animation:cityRing 4s ease-out infinite}
 @keyframes cityRing{0%{r:4;opacity:0.5}100%{r:22;opacity:0}}
-.city-label{font-family:var(--mono);font-size:8px;letter-spacing:0.14em;text-transform:uppercase;fill:var(--white-70);filter:drop-shadow(0 0 4px rgba(0,0,0,0.8))}
-.city-label-sm{font-family:var(--mono);font-size:8px;letter-spacing:0.14em;text-transform:uppercase;fill:var(--white-70);filter:drop-shadow(0 0 4px rgba(0,0,0,0.8))}
+.city-label{font-family:var(--mono);font-size:18px;letter-spacing:0.14em;text-transform:uppercase;fill:var(--white-70);filter:drop-shadow(0 0 4px rgba(0,0,0,0.8))}
+.city-label-sm{font-family:var(--mono);font-size:18px;letter-spacing:0.14em;text-transform:uppercase;fill:var(--white-70);filter:drop-shadow(0 0 4px rgba(0,0,0,0.8))}
 .city-dot-sm{fill:var(--accent);opacity:0.8;filter:drop-shadow(0 0 3px var(--accent))}
 
 /* Connection lines between cities */
@@ -541,7 +541,7 @@ body{height:100%;display:flex;flex-direction:column;overflow:hidden}
 
 
 
-    <svg class="map-svg" viewBox="-60 30 920 640" xmlns="http://www.w3.org/2000/svg">
+    <svg class="map-svg" viewBox="-28 52 856 595" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <filter id="glow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
@@ -586,7 +586,7 @@ body{height:100%;display:flex;flex-direction:column;overflow:hidden}
         <text x="539.0" y="183.4" class="city-label" text-anchor="start">DOHA</text>
         <circle cx="648.7" cy="191.7" r="12" class="city-dot-ring"/>
         <circle cx="648.7" cy="191.7" r="3" class="city-dot"/>
-        <text x="635" y="195" class="city-label" text-anchor="end">DUBAI</text>
+        <text x="635" y="200" class="city-label" text-anchor="end">DUBAI</text>
         <circle cx="620.1" cy="213.0" r="12" class="city-dot-ring"/>
         <circle cx="620.1" cy="213.0" r="3" class="city-dot"/>
         <text x="605" y="210" class="city-label" text-anchor="end">ABU DHABI</text>
@@ -595,9 +595,9 @@ body{height:100%;display:flex;flex-direction:column;overflow:hidden}
         <text x="752" y="234" class="city-label" text-anchor="start">MUSCAT</text>
         <!-- Secondary cities — UAE -->
         <circle cx="660" cy="185" r="2" class="city-dot-sm"/>
-        <text x="672" y="183" class="city-label-sm" text-anchor="start">SHARJAH</text>
+        <text x="635" y="185" class="city-label-sm" text-anchor="end">SHARJAH</text>
         <circle cx="676" cy="174" r="2" class="city-dot-sm"/>
-        <text x="676" y="170" class="city-label-sm" text-anchor="middle">RAS AL KHAIMAH</text>
+        <text x="695" y="172" class="city-label-sm" text-anchor="start">RAS AL KHAIMAH</text>
         <!-- Secondary cities — Saudi Arabia -->
         <circle cx="443" cy="155" r="2" class="city-dot-sm"/>
         <text x="443" y="148" class="city-label-sm" text-anchor="middle">DAMMAM</text>
@@ -993,17 +993,17 @@ function renderPanel(country) {
             </div>`).join('')}
         </div>
       </div>
-      <!-- Col 2: Seniority + Companies -->
+      <!-- Col 2: Seniority -->
       <div class="bp-col">
         <div class="panel-section-title">B2B Seniority</div>
         ${rolesHTML}
-        <div class="panel-section-title" style="margin-top:6px">Top Companies</div>
-        <div class="company-tags">${companiesHTML}</div>
       </div>
-      <!-- Col 3: Industries -->
+      <!-- Col 3: Industries + Companies -->
       <div class="bp-col">
         <div class="panel-section-title">Industry Concentration</div>
         ${industryHTML}
+        <div class="panel-section-title" style="margin-top:6px">Top Companies</div>
+        <div class="company-tags">${companiesHTML}</div>
       </div>
     </div>
   `;
