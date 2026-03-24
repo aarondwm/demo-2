@@ -362,9 +362,14 @@
   border-color: rgba(74,108,247,0.5) !important;
 }
 
-/* ── Hero button mobile override ──────────────────────────────────────── */
+/* ── Mobile responsiveness overrides ──────────────────────────────────── */
+.wwd-card-inner { padding: 40px 36px 48px; }
+.wwd-stat { font-size: 52px; }
+
 @media (max-width: 767px) {
   .hero-btn { padding: 16px 0 !important; }
+  .wwd-card-inner { padding: 20px 20px 28px !important; }
+  .wwd-stat { font-size: clamp(32px, 9vw, 52px) !important; }
 }
 
 /* ── Page transition wipe ─────────────────────────────────────────────── */

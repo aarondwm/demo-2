@@ -23,7 +23,7 @@ export default function ContactPage() {
     <main className="min-h-screen bg-[#04060c] text-white">
       <Navbar />
 
-      <div className="pt-32 pb-24 px-6 md:px-10">
+      <div className="pt-20 md:pt-32 pb-24 px-6 md:px-10">
         <div className="max-w-2xl mx-auto">
           <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#4a6cf7]/70 mb-4 block">
             Contact

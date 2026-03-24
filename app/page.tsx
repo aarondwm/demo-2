@@ -635,7 +635,7 @@ export default function Home() {
         <HeroVideoBackground />
 
         {/* Hero content sits above the videos */}
-        <div className="relative z-10 flex flex-col items-center px-6 py-24 md:py-36 gap-6">
+        <div className="relative z-10 flex flex-col items-center px-6 py-14 md:py-24 lg:py-36 gap-6">
           <div
             className="opacity-0 mb-3"
             style={{ animation: "reveal-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards" }}
@@ -683,10 +683,10 @@ export default function Home() {
       <section id="what-we-do" className="sys-section">
         <div className="max-w-[1200px] mx-auto px-6 md:px-12">
 
-          <div className="flex items-center gap-2.5 mb-7">
-            <span style={{ fontFamily: "var(--font-mono), monospace", fontSize: "12px", letterSpacing: "0.3em", color: "#4a6cf7", textTransform: "uppercase" }}>
-              <span style={{ opacity: 0.6, marginRight: "10px" }}>⌐</span>
-              <ScrambleOnView text="WHAT WE DO" delay={0} style={{ display: "inline" }} onDone={sec2Done} />
+          <div className="flex items-center mb-5">
+            <span className="sys-label" style={{ fontSize: "12px", letterSpacing: "0.3em" }}>
+              <img src="/Untitled design.png" alt="" style={{ width: "14px", height: "14px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
+              <ScrambleOnView text="What We Do" delay={0} style={{ display: "inline" }} onDone={sec2Done} />
             </span>
           </div>
 
@@ -708,12 +708,11 @@ export default function Home() {
               <a
                 key={n}
                 href={href}
-                className={`wwd-card${isActive ? " wwd-card-active" : ""}`}
+                className={`wwd-card wwd-card-inner${isActive ? " wwd-card-active" : ""}`}
                 onMouseEnter={() => setWwdHovered(true)}
                 onMouseLeave={() => setWwdHovered(false)}
                 style={{
                   background: "#12151b",
-                  padding: "40px 36px 48px",
                   borderTop: accent ? "2px solid #4a6cf7" : "2px solid transparent",
                   display: "block",
                   textDecoration: "none",
@@ -722,7 +721,7 @@ export default function Home() {
                 }}
               >
                 <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: "11px", color: "rgba(74,108,247,0.4)", letterSpacing: "0.15em", marginBottom: "32px" }}>{n}</div>
-                <div style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "52px", fontWeight: 800, letterSpacing: "-0.03em", color: "#e8e8e8", lineHeight: 1 }}>{stat}</div>
+                <div className="wwd-stat" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontWeight: 800, letterSpacing: "-0.03em", color: "#e8e8e8", lineHeight: 1 }}>{stat}</div>
                 <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(74,108,247,0.4)", marginTop: "8px", paddingBottom: "28px", marginBottom: "28px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>{statLabel}</div>
                 <div style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "16px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.35, color: "#e8e8e8", marginBottom: "16px" }}>{title}</div>
                 <div style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "#6b7080" }}>{desc}</div>
@@ -778,7 +777,7 @@ export default function Home() {
                   { value: "6",   label: "GCC Markets" },
                   { value: "12+", label: "Publications" },
                 ].map(({ value, label }) => (
-                  <div key={label} className="flex flex-col gap-1 pr-8 first:pl-0 pl-8">
+                  <div key={label} className="flex flex-col gap-1 pr-4 md:pr-8 first:pl-0 pl-4 md:pl-8">
                     <span className="font-display font-bold" style={{ fontSize: "28px", color: "#e8e2d6" }}>{value}</span>
                     <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
                   </div>
@@ -888,7 +887,7 @@ export default function Home() {
             {" "}
             <ScrambleOnView text="They Don't." delay={200} style={{ display: "inline", color: "#4a6cf7" }} />
           </h2>
-          <div className="h-[420px] border border-white/[0.08]">
+          <div className="h-[300px] md:h-[420px] border border-white/[0.08]">
             <DashboardCard engagement={tableEngagement[activeIntelItem]} trigger={activeIntelItem} />
           </div>
         </div>
@@ -934,7 +933,7 @@ export default function Home() {
       {/* ── 5. CTA ───────────────────────────────────────────────────────── */}
       <section id="get-started" className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
-          <div className="border border-white/[0.08] bg-white/[0.02] p-12 md:p-20 relative overflow-hidden">
+          <div className="border border-white/[0.08] bg-white/[0.02] p-6 md:p-12 lg:p-20 relative overflow-hidden">
             <div
               className="absolute inset-0 opacity-20 pointer-events-none"
               style={{
@@ -942,10 +941,10 @@ export default function Home() {
                   "radial-gradient(circle at 70% 50%, rgba(74,108,247,0.10) 0%, transparent 60%)",
               }}
             />
-            <span className="absolute top-3 left-3   w-5 h-5 border-t border-l border-[#4a6cf7]" />
-            <span className="absolute top-3 right-3  w-5 h-5 border-t border-r border-[#4a6cf7]" />
-            <span className="absolute bottom-3 left-3  w-5 h-5 border-b border-l border-[#4a6cf7]" />
-            <span className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-[#4a6cf7]" />
+            <span className="absolute top-2 left-2 md:top-3 md:left-3 w-3 h-3 md:w-5 md:h-5 border-t border-l border-[#4a6cf7]" />
+            <span className="absolute top-2 right-2 md:top-3 md:right-3 w-3 h-3 md:w-5 md:h-5 border-t border-r border-[#4a6cf7]" />
+            <span className="absolute bottom-2 left-2 md:bottom-3 md:left-3 w-3 h-3 md:w-5 md:h-5 border-b border-l border-[#4a6cf7]" />
+            <span className="absolute bottom-2 right-2 md:bottom-3 md:right-3 w-3 h-3 md:w-5 md:h-5 border-b border-r border-[#4a6cf7]" />
 
             <div className="relative z-10">
               <div className="flex items-center mb-5">
@@ -974,7 +973,7 @@ export default function Home() {
       <footer className="relative">
         <div aria-hidden className="absolute top-0 left-[10%] right-[10%] h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.12) 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.12) 70%, transparent)" }} />
         <div aria-hidden className="absolute -top-1 left-[15%] right-[15%] h-[9px] pointer-events-none" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.04) 30%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.04) 70%, transparent)", filter: "blur(4px)" }} />
-        <div className="max-w-6xl mx-auto px-6 md:px-10 py-10 md:py-14 grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-6 md:gap-10">
+        <div className="max-w-6xl mx-auto px-6 md:px-10 py-10 md:py-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-6 md:gap-10">
           <div className="flex flex-col gap-4">
             <img src="/D*M website.png" alt="DWM" className="h-9 w-auto self-start" />
             <p className="font-mono text-[11px] tracking-[0.08em] text-white/60 max-w-xs leading-relaxed">
