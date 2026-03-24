@@ -656,8 +656,8 @@ export default function Home() {
             className="opacity-0 mb-3"
             style={{ animation: "reveal-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards" }}
           >
-            <div className="flex items-center justify-center">
-              <span className="sys-label"><ScrambleOnView text="Proprietary GCC Media & Insight Technology" delay={0} style={{ display: "inline" }} /></span>
+            <div className="flex items-center justify-center w-full text-center">
+              <span className="sys-label" style={{ textAlign: "center" }}><ScrambleOnView text="Proprietary GCC Media & Insight Technology" delay={0} style={{ display: "inline" }} /></span>
             </div>
           </div>
 
