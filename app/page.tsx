@@ -150,7 +150,7 @@ function ScrambleOnView({
         }, delay);
         obs.disconnect();
       }
-    }, { threshold: 0.05 });
+    }, { threshold: 0, rootMargin: "200px 0px 200px 0px" });
     obs.observe(el);
     return () => { obs.disconnect(); clearTimeout(t); };
   }, [text, delay, onDone]);
@@ -345,7 +345,7 @@ function DashboardCard({ engagement, trigger = 0 }: { engagement: string[]; trig
   }));
 
   return (
-    <div className="relative w-full h-full flex flex-col overflow-hidden bg-black">
+    <div className="relative w-full flex flex-col overflow-hidden bg-black">
       {/* Grid overlay */}
       <div
         className="absolute inset-0 opacity-20 pointer-events-none"
@@ -389,6 +389,22 @@ function DashboardCard({ engagement, trigger = 0 }: { engagement: string[]; trig
             ))}
           </tbody>
         </table>
+      </div>
+      {/* Audience Stats */}
+      <div className="relative px-4 md:px-6 py-4 border-t border-white/[0.06]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { value: "44.7M+", label: "Total GCC Reach" },
+            { value: "94%", label: "Reader Identified" },
+            { value: "32+", label: "Industries Tracked" },
+            { value: "6", label: "Markets Covered" },
+          ].map(({ value, label }) => (
+            <div key={label} className="flex flex-col gap-1">
+              <span className="font-mono font-bold" style={{ fontSize: "16px", color: "#4a6cf7" }}>{value}</span>
+              <span className="font-mono uppercase" style={{ fontSize: "7px", letterSpacing: "0.18em", color: "rgba(255,255,255,0.35)" }}>{label}</span>
+            </div>
+          ))}
+        </div>
       </div>
       {/* Footer */}
       <div className="relative flex items-center justify-between px-4 md:px-6 py-2.5 border-t border-white/[0.08]">
@@ -775,8 +791,8 @@ export default function Home() {
               {/* Stat counters */}
               <div className="flex items-stretch divide-x divide-white/[0.06]" style={{ opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
                 {[
-                  { value: "6",   label: "GCC Markets" },
-                  { value: "12+", label: "Publications" },
+                  { value: "100%", label: "Placement Rate" },
+                  { value: "12+",  label: "Publications" },
                 ].map(({ value, label }) => (
                   <div key={label} className="flex flex-col gap-1 pr-4 md:pr-8 first:pl-0 pl-4 md:pl-8">
                     <span className="font-display font-bold" style={{ fontSize: "28px", color: "#e8e2d6" }}>{value}</span>
@@ -888,7 +904,7 @@ export default function Home() {
             {" "}
             <ScrambleOnView text="They Don't." delay={200} style={{ display: "inline", color: "#4a6cf7" }} />
           </h2>
-          <div className="h-[300px] md:h-[420px] border border-white/[0.08]">
+          <div className="border border-white/[0.08]">
             <DashboardCard engagement={tableEngagement[activeIntelItem]} trigger={activeIntelItem} />
           </div>
         </div>

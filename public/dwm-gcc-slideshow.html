@@ -58,17 +58,17 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 /* Individual slide — single stack */
 .slide{
   position:absolute;
-  top:8px;bottom:28px;left:12px;right:12px;
-  padding:16px 16px 12px;
+  top:6px;bottom:6px;left:10px;right:10px;
+  padding:14px 16px 12px;
   display:flex;
   flex-direction:column;
   overflow:hidden;
   border-radius:10px;
-  border:1px solid rgba(255,255,255,0.04);
+  border:1px solid transparent;
   background:var(--surface);
-  transition:transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
-  transform:scale(0.92);
-  opacity:0.05;
+  transition:transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+  transform:scale(0.95);
+  opacity:0;
   pointer-events:none;
   z-index:1;
 }
@@ -86,15 +86,10 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
     0 0 80px rgba(74,108,247,0.08),
     inset 0 0 30px rgba(74,108,247,0.04);
 }
-/* Adjacent cards — behind, nearly hidden */
-.slide[data-pos="1"],.slide[data-pos="-1"]{
-  transform:scale(0.94);
-  opacity:0.05;
-  z-index:5;
-}
-/* Further cards — fully hidden */
+/* All other cards — fully hidden behind */
+.slide[data-pos="1"],.slide[data-pos="-1"],
 .slide[data-pos="2"],.slide[data-pos="-2"]{
-  transform:scale(0.88);
+  transform:scale(0.95);
   opacity:0;
   z-index:1;
 }
@@ -169,12 +164,12 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 .slide-total-sub{font-size:8px;color:var(--white-30);margin-top:2px;letter-spacing:0.06em}
 
 /* Per-country map positioning */
-[data-index="0"] .slide-map{height:110px;top:10px;right:15px}  /* Kuwait */
-[data-index="1"] .slide-map{height:90px;top:72px;right:25%;transform:translateX(50%)}  /* Saudi — aligned with GCC tag */
-[data-index="2"] .slide-map{height:100px;top:15px;right:15px}  /* UAE */
-[data-index="3"] .slide-map{height:200px;top:5px;right:25%;transform:translateX(50%)}   /* Qatar — much bigger */
-[data-index="4"] .slide-map{height:220px;top:0px;right:25%;transform:translateX(50%)}  /* Bahrain — much bigger */
-[data-index="5"] .slide-map{height:120px;top:8px;right:10px}   /* Oman */
+[data-index="0"] .slide-map{height:100px;top:50px;right:10px}   /* Kuwait — lowered */
+[data-index="1"] .slide-map{height:90px;top:65px;right:25%;transform:translateX(50%)}  /* Saudi */
+[data-index="2"] .slide-map{height:90px;top:50px;right:10px}   /* UAE — lowered */
+[data-index="3"] .slide-map{height:180px;top:5px;right:25%;transform:translateX(50%)}  /* Qatar */
+[data-index="4"] .slide-map{height:200px;top:0px;right:25%;transform:translateX(50%)}  /* Bahrain */
+[data-index="5"] .slide-map{height:110px;top:40px;right:10px}  /* Oman — lowered */
 
 /* Demographics */
 .slide-section{margin-top:10px}
