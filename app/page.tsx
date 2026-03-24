@@ -959,7 +959,7 @@ export default function Home() {
           </div>
 
           <h2
-            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(44px,6vw,72px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.02em", textTransform: "uppercase", marginBottom: "64px", color: "#e8e8e8" }}
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(30px,5.5vw,72px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.02em", textTransform: "uppercase", marginBottom: "64px", color: "#e8e8e8" }}
           >
             <ScrambleOnSignal text="WE RUN IT." signal={sec2Visible} style={{ color: "#e8e8e8" }} />
             <ScrambleOnSignal text="YOU SEE WHO ENGAGED." signal={sec2Visible} style={{ color: "#4a6cf7" }} />
@@ -1034,7 +1034,7 @@ export default function Home() {
               </div>
               <h2
                 className="font-bold uppercase"
-                style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(44px,6vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+                style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(30px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
               >
                 <ScrambleOnSignal text="Your Story." signal={sec3Visible} style={{ color: "#ffffff" }} />
                 <ScrambleOnSignal text="Guaranteed Publishing." signal={sec3Visible} style={{ color: "#4a6cf7" }} />
@@ -1086,7 +1086,7 @@ export default function Home() {
             </div>
             <h2
               className="font-bold uppercase text-white"
-              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(44px,6vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(30px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
               <ScrambleOnSignal text="Target Anyone." signal={secMapVisible} style={{ color: "#ffffff" }} />
               <ScrambleOnSignal text="Anywhere." signal={secMapVisible} style={{ color: "#4a6cf7" }} />
@@ -1151,7 +1151,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
             <h2
               className="font-bold uppercase text-left"
-              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(28px,4vw,48px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(24px,4vw,48px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
               <ScrambleOnView text="What We Know," delay={0} style={{ display: "inline", color: "#ffffff" }} />
               {" "}
@@ -1174,7 +1174,7 @@ export default function Home() {
             </div>
             <h2
               className="font-bold uppercase text-white"
-              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(44px,6vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(30px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
               <ScrambleOnSignal text="In Their" signal={sec5Visible} style={{ color: "#ffffff" }} />
               <ScrambleOnSignal text="Own Words" signal={sec5Visible} onDone={sec5BodyDone} style={{ color: "#ffffff" }} />
@@ -1222,7 +1222,7 @@ export default function Home() {
               </div>
               <h2
                 className="font-bold uppercase text-white mb-5 text-center"
-                style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(44px,6vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+                style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(30px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
               >
                 <ScrambleOnSignal text="Start with" signal={secCtaVisible} style={{ color: "#ffffff" }} />
                 <ScrambleOnSignal text="a Briefing." signal={secCtaVisible} style={{ color: "#ffffff" }} />

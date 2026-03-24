@@ -30,7 +30,7 @@ export default function ContactPage() {
           </span>
           <h1
             className="font-display font-bold uppercase text-white mb-4"
-            style={{ fontSize: "clamp(36px, 5vw, 64px)", letterSpacing: "0.03em", lineHeight: "0.95" }}
+            style={{ fontSize: "clamp(28px, 5vw, 64px)", letterSpacing: "0.03em", lineHeight: "0.95" }}
           >
             Request a<br />
             <span style={{ color: "#4a6cf7" }}>Briefing.</span>
@@ -52,7 +52,7 @@ export default function ContactPage() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3 md:gap-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <input
                   type="text"

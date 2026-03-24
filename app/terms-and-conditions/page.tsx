@@ -12,7 +12,7 @@ export default function TermsAndConditionsPage() {
           </span>
           <h1
             className="font-display font-bold uppercase text-white mb-10"
-            style={{ fontSize: "clamp(36px, 5vw, 64px)", letterSpacing: "0.03em", lineHeight: "0.95" }}
+            style={{ fontSize: "clamp(28px, 5vw, 64px)", letterSpacing: "0.03em", lineHeight: "0.95" }}
           >
             Terms &amp;<br />
             <span style={{ color: "#4a6cf7" }}>Conditions.</span>

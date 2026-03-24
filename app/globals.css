@@ -366,13 +366,14 @@
 .wwd-stat { font-size: 52px; }
 
 @media (max-width: 767px) {
-  .hero-btn { padding: 16px 0 !important; }
-  .wwd-card-inner { padding: 14px 14px 16px !important; }
-  .wwd-card-inner .wwd-stat + div { padding-bottom: 10px !important; margin-bottom: 10px !important; }
-  .wwd-card-inner > div:first-child { margin-bottom: 10px !important; }
-  .wwd-stat { font-size: clamp(28px, 8vw, 52px) !important; }
-  .wwd-card-inner > div:nth-child(4) { font-size: 14px !important; margin-bottom: 8px !important; }
-  .wwd-card-inner > div:nth-child(5) { font-size: 12px !important; }
+  .hero-btn { padding: 14px 0 !important; }
+  .wwd-card-inner { padding: 12px 12px 14px !important; }
+  .wwd-card-inner .wwd-stat + div { padding-bottom: 8px !important; margin-bottom: 8px !important; }
+  .wwd-card-inner > div:first-child { margin-bottom: 8px !important; }
+  .wwd-stat { font-size: clamp(24px, 7vw, 52px) !important; }
+  .wwd-card-inner > div:nth-child(4) { font-size: 13px !important; margin-bottom: 6px !important; }
+  .wwd-card-inner > div:nth-child(5) { font-size: 11px !important; }
+  .sys-label { font-size: 11px !important; letter-spacing: 0.15em !important; }
 }
 
 /* ── Page transition wipe ─────────────────────────────────────────────── */
