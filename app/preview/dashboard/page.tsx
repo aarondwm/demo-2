@@ -4,28 +4,28 @@ import React, { useState, useEffect, useRef } from "react";
 import { Navbar } from "@/components/ui/mini-navbar";
 
 const INDUSTRIES = [
-  { name: "Financial Services", views: 42180 },
-  { name: "Oil & Gas", views: 31420 },
-  { name: "Real Estate", views: 24890 },
-  { name: "Construction", views: 19740 },
-  { name: "Technology", views: 16350 },
-  { name: "Healthcare", views: 12870 },
+  { name: "Finance", views: 42180, blur: false },
+  { name: "Oil & Gas", views: 31420, blur: true },
+  { name: "Real Estate", views: 24890, blur: false },
+  { name: "Construction", views: 19740, blur: true },
+  { name: "Technology", views: 16350, blur: false },
+  { name: "Healthcare", views: 12870, blur: true },
 ];
 
 const COMPANIES = [
-  { rank: "01", name: "Saudi Aramco", views: 3420 },
-  { rank: "02", name: "Emirates NBD", views: 2810 },
-  { rank: "03", name: "SABIC Industries", views: 2340, blur: true },
-  { rank: "04", name: "Qatar Energy Corp", views: 1980, blur: true },
-  { rank: "05", name: "Etisalat Group", views: 1640 },
-  { rank: "06", name: "Emaar Properties", views: 1290, blur: true },
+  { rank: "01", name: "Saudi Aramco", views: 5130, blur: false, blurViews: true },
+  { rank: "02", name: "Emirates NBD", views: 4215, blur: false, blurViews: false },
+  { rank: "03", name: "SABIC Industries", views: 3510, blur: true, blurViews: true },
+  { rank: "04", name: "Qatar Energy Corp", views: 2970, blur: true, blurViews: false },
+  { rank: "05", name: "Etisalat Group", views: 2460, blur: false, blurViews: true },
+  { rank: "06", name: "Emaar Properties", views: 1935, blur: true, blurViews: false },
 ];
 
 const SENIORITY = [
-  { level: "Managers", count: 48200 },
-  { level: "Senior Professionals", count: 36800 },
-  { level: "Directors", count: 12400 },
-  { level: "C-Suite (CXO)", count: 4180 },
+  { level: "Managers", count: 48200, blur: true },
+  { level: "CFO", count: 36800, blur: true },
+  { level: "Directors", count: 12400, blur: false },
+  { level: "CEO", count: 4180, blur: false },
 ];
 
 const TABS = ["Overview", "Industries", "Companies"];
@@ -136,7 +136,7 @@ export default function PreviewDashboard() {
                           }}
                         />
                       </div>
-                      <span className="font-mono font-bold flex-shrink-0 w-[60px] text-right" style={{ fontSize: "11px", color: "#4a6cf7" }}>
+                      <span className="font-mono font-bold flex-shrink-0 w-[60px] text-right" style={{ fontSize: "11px", color: "#4a6cf7", filter: (s as any).blur ? "blur(4px)" : "none", userSelect: (s as any).blur ? "none" : "auto" }}>
                         {s.count.toLocaleString()}
                       </span>
                     </div>
@@ -153,7 +153,7 @@ export default function PreviewDashboard() {
                   </div>
                   {INDUSTRIES.map((ind, i) => (
                     <div key={ind.name} className="flex items-center gap-3">
-                      <span className="font-mono w-[160px] flex-shrink-0 truncate" style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)" }}>{ind.name}</span>
+                      <span className="font-mono w-[160px] flex-shrink-0 truncate" style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)", filter: (ind as any).blur ? "blur(4px)" : "none", userSelect: (ind as any).blur ? "none" : "auto" }}>{ind.name}</span>
                       <div className="flex-1 h-[6px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
                         <div
                           className="h-full rounded-full"
@@ -192,9 +192,9 @@ export default function PreviewDashboard() {
                         {c.name}
                       </span>
                       <div className="w-[60px] h-[4px] rounded-full overflow-hidden flex-shrink-0" style={{ background: "rgba(255,255,255,0.04)" }}>
-                        <div className="h-full rounded-full" style={{ width: `${(c.views / 3420) * 100}%`, background: "#4a6cf7", transition: `width 0.6s ease ${i * 0.05}s` }} />
+                        <div className="h-full rounded-full" style={{ width: `${(c.views / 5130) * 100}%`, background: "#4a6cf7", transition: `width 0.6s ease ${i * 0.05}s` }} />
                       </div>
-                      <span className="font-mono font-bold flex-shrink-0 w-[50px] text-right" style={{ fontSize: "11px", color: "rgba(255,255,255,0.7)" }}>
+                      <span className="font-mono font-bold flex-shrink-0 w-[50px] text-right" style={{ fontSize: "11px", color: "rgba(255,255,255,0.7)", filter: (c as any).blurViews ? "blur(4px)" : "none", userSelect: (c as any).blurViews ? "none" : "auto" }}>
                         {c.views}
                       </span>
                     </div>
