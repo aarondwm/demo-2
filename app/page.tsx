@@ -949,7 +949,7 @@ export default function Home() {
               src="/dwm-gcc-map.html"
               scrolling="no"
               loading="lazy"
-              style={{ width: "100%", height: "620px", border: "none", display: "block", position: "relative", zIndex: 0 }}
+              style={{ width: "100%", height: "680px", border: "none", display: "block", position: "relative", zIndex: 0 }}
               title="GCC Audience Map"
             />
           </div>
