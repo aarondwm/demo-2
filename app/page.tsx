@@ -917,7 +917,7 @@ export default function Home() {
               src="/dwm-gcc-map.html"
               scrolling="no"
               loading="lazy"
-              style={{ width: "100%", height: "min(580px, 70vh)", border: "none", display: "block", position: "relative", zIndex: 0 }}
+              style={{ width: "100%", height: "620px", border: "none", display: "block", position: "relative", zIndex: 0 }}
               title="GCC Audience Map"
             />
           </div>
@@ -935,7 +935,7 @@ export default function Home() {
               src="/dwm-gcc-slideshow.html"
               scrolling="no"
               loading="lazy"
-              style={{ width: "100%", height: "640px", border: "none", display: "block" }}
+              style={{ width: "100%", height: "540px", border: "none", display: "block" }}
               title="GCC Audience Slideshow"
             />
           </div>
