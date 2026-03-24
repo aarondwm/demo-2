@@ -192,24 +192,22 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-full ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full ${
         scrolled
           ? "bg-black/97 backdrop-blur-md"
           : "bg-transparent"
       }`}
-      style={{ maxWidth: "1360px" }}
     >
 
-      {/* ── Main nav row — max-w-7xl centered (header-3 max-w-5xl pattern) ── */}
-      <div className="mx-auto w-full px-6 md:px-10 h-16 flex items-center justify-between gap-6">
+      <div className="w-full px-6 md:px-10 h-16 flex items-center justify-between">
 
-        {/* Logo block */}
+        {/* Left — Logo + Company Name */}
         <a
           href="/"
           className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity"
         >
           <span
-            className="inline-block h-10 w-10"
+            className="inline-block h-8 w-8 md:h-10 md:w-10"
             style={{
               backgroundColor: "white",
               WebkitMaskImage: "url('/D*M website.png')",
@@ -224,44 +222,39 @@ export function Navbar() {
               clipPath: "circle(38% at 50% 50%)",
             }}
           />
-          <span className="hidden sm:block ml-2 font-bold uppercase tracking-[0.08em]" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "20px", color: "#e8e8e8" }}>Diwaniya Media</span>
+          <span className="ml-2 font-bold uppercase tracking-[0.06em]" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(12px, 3vw, 20px)", color: "#e8e8e8" }}>Diwaniya Media</span>
         </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center flex-1 justify-evenly">
+        {/* Center — Desktop nav */}
+        <nav className="hidden lg:flex items-center justify-center gap-6 absolute left-1/2 -translate-x-1/2">
           {NAV_GROUPS.map((group) => (
             <a
               key={group.label}
               href={group.href}
-              className="py-5 font-mono font-bold text-[15px] tracking-[0.18em] uppercase text-white hover:text-white/70 transition-colors duration-150 whitespace-nowrap"
+              className="py-5 font-mono font-bold text-[13px] tracking-[0.15em] uppercase text-white hover:text-white/70 transition-colors duration-150 whitespace-nowrap"
             >
               {group.label}
             </a>
           ))}
         </nav>
 
-        {/* CTA + mobile toggle */}
+        {/* Right — CTA + mobile toggle */}
         <div className="flex items-center gap-3 flex-shrink-0">
           <a
             href="/contact"
             className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase text-black font-bold relative overflow-hidden"
             style={{ borderRadius: "12px", transform: "translateZ(0)" }}
           >
-            {/* Static white background */}
             <span className="absolute inset-0 bg-white" />
-            {/* Blue overlay slides in on hover */}
             <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>
               <img src="/D*M website.png" alt="DWM" className="h-6 w-auto" style={{ mixBlendMode: "screen" }} />
             </span>
-            {/* Text — fades out on hover, stays centered */}
             <span className="absolute inset-0 flex items-center justify-center text-black transition-opacity duration-300 group-hover:opacity-0 z-20">
               Check Eligibility
             </span>
-            {/* Invisible sizer keeps button width stable */}
             <span className="invisible px-7">Check Eligibility</span>
           </a>
 
-          {/* Animated toggle (header-3 MenuToggleIcon) */}
           <button
             className="lg:hidden w-10 h-10 border border-white/[0.08] flex items-center justify-center text-white/30 hover:text-white hover:border-[#4a6cf7]/40 transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
