@@ -646,8 +646,8 @@ export default function Home() {
           </div>
 
           <h1
-            className="font-display font-bold uppercase text-center leading-[0.90]"
-            style={{ fontSize: "clamp(48px,12vw,110px)", letterSpacing: "0.03em" }}
+            className="font-bold uppercase text-center"
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(48px,12vw,110px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
           >
             <ScrambledLine
               text="RIGHT STORY."
@@ -694,7 +694,7 @@ export default function Home() {
             style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(44px,6vw,72px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.02em", textTransform: "uppercase", marginBottom: "64px", color: "#e8e8e8" }}
           >
             <ScrambleOnSignal text="WE RUN IT." signal={sec2Visible} style={{ color: "#e8e8e8" }} />
-            <ScrambleOnSignal text="YOU SEE WHO ENGAGED." signal={sec2Visible} style={{ color: "#e8e8e8" }} />
+            <ScrambleOnSignal text="YOU SEE WHO ENGAGED." signal={sec2Visible} style={{ color: "#4a6cf7" }} />
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px]" style={{ marginBottom: "56px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
@@ -714,6 +714,7 @@ export default function Home() {
                 style={{
                   background: "#12151b",
                   borderTop: accent ? "2px solid #4a6cf7" : "2px solid transparent",
+                  borderRadius: "12px",
                   display: "block",
                   textDecoration: "none",
                   cursor: "pointer",

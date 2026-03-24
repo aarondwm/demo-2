@@ -49,7 +49,7 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 
 /* Slide container — stacked card carousel */
 .slides-wrap{
-  position:fixed;top:40px;bottom:56px;left:0;right:0;
+  position:fixed;top:0;bottom:0;left:0;right:0;
   overflow:hidden;
   touch-action:pan-x;
   perspective:800px;
@@ -74,7 +74,6 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
   z-index:1;
 }
 /* Active card — front and center */
-.slide.active,
 .slide[data-pos="0"]{
   transform:scale(1) translateX(0);
   opacity:1;
@@ -222,10 +221,9 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 
 /* Progress indicators */
 .progress-bar{
-  position:fixed;bottom:56px;left:0;right:0;
+  position:fixed;bottom:8px;left:0;right:0;
   display:flex;gap:4px;padding:0 20px;z-index:50;
-  background:linear-gradient(to top, var(--bg), transparent);
-  padding-top:16px;padding-bottom:8px;
+  padding-top:12px;padding-bottom:6px;
 }
 .progress-seg{flex:1;height:2px;background:var(--white-15);border-radius:1px;overflow:hidden}
 .progress-fill{height:100%;width:0%;background:var(--accent);border-radius:1px;opacity:0.8}
@@ -246,7 +244,7 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 
 /* Swipe hint */
 .swipe-hint{
-  position:fixed;bottom:76px;left:50%;transform:translateX(-50%);
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
   font-size:9px;color:var(--white-30);letter-spacing:0.1em;
   z-index:50;opacity:1;transition:opacity 0.5s ease;
   display:flex;align-items:center;gap:6px;
@@ -260,17 +258,9 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 </head>
 <body>
 
-<div class="header">
-  <div class="header-brand">
-    <div class="header-logo">DWM</div>
-    <div class="header-title">Audience Intel</div>
-  </div>
-  <div class="header-live"><div class="dot"></div>LIVE</div>
-</div>
-
 <div class="slides-wrap" id="slidesWrap">
 
-    <div class="slide active" data-index="0" data-pos="0">
+    <div class="slide" data-index="0">
       <div class="slide-map">
         <svg viewBox="361.0 45.6 76.80000000000001 60.199999999999996" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           <path d="M 414.3,56.6 L 415.2,58.0 L 415.4,59.7 L 415.9,61.2 L 416.7,62.6 L 418.5,63.6 L 419.1,64.9 L 419.8,66.1 L 421.2,67.6 L 421.8,68.8 L 419.6,69.0 L 418.1,68.3 L 416.8,68.1 L 414.9,68.4 L 413.2,69.6 L 411.2,70.4 L 409.8,71.4 L 408.4,73.0 L 407.0,73.6 L 408.4,74.2 L 410.0,73.9 L 410.1,75.1 L 411.5,75.5 L 412.8,75.2 L 414.7,74.1 L 416.3,74.2 L 418.0,74.9 L 418.9,76.5 L 419.4,78.6 L 420.3,80.3 L 421.1,84.1 L 423.2,86.9 L 424.9,87.6 L 424.9,89.2 L 426.0,90.6 L 427.3,91.6 L 428.6,91.9 L 428.2,93.3 L 429.8,97.6 L 424.2,97.7 L 418.5,97.7 L 412.8,97.7 L 407.1,97.8 L 405.4,97.8 L 403.8,96.1 L 402.2,94.2 L 401.8,91.8 L 399.8,87.3 L 398.3,85.3 L 396.1,84.6 L 392.9,84.3 L 389.7,83.9 L 386.5,83.6 L 383.3,83.3 L 379.7,82.9 L 376.2,82.6 L 372.6,82.2 L 369.0,81.9 L 374.8,77.0 L 376.8,74.3 L 378.8,72.7 L 380.3,70.1 L 382.7,67.1 L 383.4,65.7 L 383.6,64.5 L 384.8,62.8 L 387.5,57.5 L 390.3,55.5 L 395.5,53.8 L 397.3,53.6 L 405.6,53.6 L 407.4,53.9 L 414.3,56.6 Z" style="stroke-width:0.5;stroke:var(--accent);stroke-opacity:1;fill:rgba(74,108,247,0.06)"/>
@@ -750,11 +740,6 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
   SWIPE <span class="swipe-arrow">→</span>
 </div>
 
-<div class="bottom-bar">
-  <span>GCC REACH <span class="val">44.7M</span></span>
-  <span>DWM · RESTRICTED</span>
-</div>
-
 <script>
 const wrap = document.getElementById('slidesWrap');
 const segs = document.querySelectorAll('.progress-seg');
@@ -765,6 +750,7 @@ const slides = document.querySelectorAll('.slide');
 const total = slides.length;
 let current = 0;
 let timer = null;
+let firstRun = true;
 const DURATION = 9000;
 
 function mod(n, m) { return ((n % m) + m) % m; }
@@ -772,17 +758,30 @@ function mod(n, m) { return ((n % m) + m) % m; }
 function goTo(index) {
   current = mod(index, total);
 
+  // Disable transitions on first run to prevent glitch
+  if (firstRun) {
+    slides.forEach(s => s.style.transition = 'none');
+  }
+
   // Set data-pos attribute for each slide relative to current
   slides.forEach((s, i) => {
     let diff = i - current;
-    // Wrap around for infinite feel
     if (diff > total / 2) diff -= total;
     if (diff < -total / 2) diff += total;
-    // Clamp to -2..2 range
     if (diff > 2) diff = 2;
     if (diff < -2) diff = -2;
     s.setAttribute('data-pos', diff);
   });
+
+  // Re-enable transitions after first paint
+  if (firstRun) {
+    firstRun = false;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        slides.forEach(s => s.style.transition = '');
+      });
+    });
+  }
 
   // Progress bar
   segs.forEach((s, i) => {
@@ -801,7 +800,8 @@ function goTo(index) {
     });
   }, 300);
 
-  hint.classList.add('hide');
+  // Hide swipe hint after first interaction
+  if (!firstRun && hint) hint.classList.add('hide');
 
   // Auto-advance
   clearTimeout(timer);

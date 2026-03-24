@@ -368,7 +368,9 @@
 
 @media (max-width: 767px) {
   .hero-btn { padding: 16px 0 !important; }
-  .wwd-card-inner { padding: 20px 20px 28px !important; }
+  .wwd-card-inner { padding: 16px 16px 20px !important; }
+  .wwd-card-inner .wwd-stat + div { padding-bottom: 16px !important; margin-bottom: 16px !important; }
+  .wwd-card-inner > div:first-child { margin-bottom: 16px !important; }
   .wwd-stat { font-size: clamp(32px, 9vw, 52px) !important; }
 }
 
