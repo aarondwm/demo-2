@@ -334,7 +334,7 @@ body{height:100%;display:flex;flex-direction:column;overflow:hidden}
 
 
 
-    <svg class="map-svg" viewBox="-28 52 856 595" xmlns="http://www.w3.org/2000/svg">
+    <svg class="map-svg" viewBox="-28 -20 856 667" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <filter id="glow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
@@ -666,8 +666,8 @@ function positionCard(country) {
   const svgRect = svg.getBoundingClientRect();
   const mapArea = document.querySelector('.map-area');
   const mapRect = mapArea.getBoundingClientRect();
-  // viewBox: -28 52 856 595
-  const vbX = -28, vbY = 52, vbW = 856, vbH = 595;
+  // viewBox: -28 -20 856 667
+  const vbX = -28, vbY = -20, vbW = 856, vbH = 667;
   const pxX = svgRect.left - mapRect.left + ((d.center[0] - vbX) / vbW) * svgRect.width;
   const pxY = svgRect.top - mapRect.top + ((d.center[1] - vbY) / vbH) * svgRect.height;
 
