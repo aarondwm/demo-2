@@ -30,7 +30,8 @@
   --font-mono:'IBM Plex Mono',monospace;
 }
 html{background:var(--off-black);color:var(--white);font-family:var(--font-body);scroll-behavior:smooth}
-body{overflow-x:hidden;line-height:1.6}
+body{overflow-x:hidden;line-height:1.6;animation:articleFadeIn 0.5s ease both}
+@keyframes articleFadeIn{from{opacity:0}to{opacity:1}}
 a{color:inherit;text-decoration:none}
 
 /* ===== NAV ===== */
@@ -240,7 +241,7 @@ a{color:inherit;text-decoration:none}
   <div class="nav-brand">
     <div class="nav-logo">DIWANIYA <span>MEDIA</span></div>
   </div>
-  <a href="#" class="nav-back">← BACK TO ARTICLES</a>
+  <a href="/#sample-insights" class="nav-back">← BACK TO INSIGHTS</a>
 </nav>
 
 <div class="article-hero">

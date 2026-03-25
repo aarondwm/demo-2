@@ -150,7 +150,7 @@ function ScrambleOnView({
         }, delay);
         obs.disconnect();
       }
-    }, { threshold: 0, rootMargin: "200px 0px 200px 0px" });
+    }, { threshold: 0, rootMargin: "600px 0px 600px 0px" });
     obs.observe(el);
     return () => { obs.disconnect(); clearTimeout(t); };
   }, [text, delay, onDone]);
@@ -380,7 +380,7 @@ function CampaignDashboard() {
     if (!el) return;
     const obs = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) { setVisible(true); obs.disconnect(); }
-    }, { threshold: 0.1 });
+    }, { threshold: 0, rootMargin: "600px 0px 600px 0px" });
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
@@ -425,8 +425,6 @@ function CampaignDashboard() {
           </div>
           <a
             href="/dwm-article-full.html"
-            target="_blank"
-            rel="noopener noreferrer"
             className="group inline-flex items-center h-10 font-mono text-[10px] tracking-[0.15em] uppercase text-black font-bold relative overflow-hidden mt-3"
             style={{ borderRadius: "8px", transform: "translateZ(0)" }}
           >
@@ -787,7 +785,7 @@ function FeatureCard({
     if (!el) return;
     const obs = new IntersectionObserver(
       ([entry]) => { setInView(entry.isIntersecting); },
-      { threshold: 0.15 }
+      { threshold: 0, rootMargin: "600px 0px 600px 0px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -1339,7 +1337,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 md:px-10 py-10 md:py-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-6 md:gap-10">
           <div className="flex flex-col gap-4">
             <img src="/D*M website.png" alt="DWM" className="h-9 w-auto self-start" />
-            <p className="font-mono text-[11px] tracking-[0.08em] text-white/60 max-w-xs leading-relaxed">
+            <p className="text-[11px] tracking-[0.08em] text-white/60 max-w-xs leading-relaxed" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif" }}>
               Proprietary GCC Media &amp; Insight Technology
             </p>
           </div>
@@ -1362,11 +1360,11 @@ export default function Home() {
             ]},
           ].map((col) => (
             <div key={col.heading} className="flex flex-col gap-4">
-              <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/70">{col.heading}</span>
+              <span className="text-[9px] tracking-[0.2em] uppercase text-white/70" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif" }}>{col.heading}</span>
               <ul className="flex flex-col gap-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <a href={link.href} className="font-mono text-[11px] tracking-[0.12em] uppercase text-white/50 hover:text-white/80 transition-colors duration-200">
+                    <a href={link.href} className="text-[11px] tracking-[0.08em] uppercase text-white/50 hover:text-white/80 transition-colors duration-200" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif" }}>
                       {link.label}
                     </a>
                   </li>
@@ -1379,7 +1377,7 @@ export default function Home() {
         <div className="relative px-6 md:px-10 py-5">
           <div aria-hidden className="absolute top-0 left-[10%] right-[10%] h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0.08) 70%, transparent)" }} />
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/50">
+            <span className="text-[9px] tracking-[0.1em] uppercase text-white/50" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif" }}>
               © 2026 Diwaniya Media. All rights reserved.
             </span>
           </div>

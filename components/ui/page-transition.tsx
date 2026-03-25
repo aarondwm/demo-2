@@ -47,6 +47,13 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     if (phase === "wipe-in" && pendingHref.current) {
       const href = pendingHref.current;
       pendingHref.current = null;
+
+      /* Static files (.html) — use full page navigation */
+      if (href.endsWith(".html")) {
+        window.location.href = href;
+        return;
+      }
+
       router.push(href);
       setPhase("hold");
 

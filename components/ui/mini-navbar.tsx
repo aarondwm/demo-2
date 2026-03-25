@@ -109,11 +109,11 @@ function ListItem({ title, description, icon: Icon, href }: NavItem) {
         <Icon className="w-4 h-4 text-white/20 group-hover:text-[#4a6cf7] transition-colors" />
       </div>
       <div className="flex flex-col gap-0.5 min-w-0">
-        <span className="font-mono font-bold text-[13px] tracking-[0.14em] uppercase text-white group-hover:text-white transition-colors leading-tight">
+        <span className="font-bold text-[13px] tracking-[0.08em] uppercase text-white group-hover:text-white transition-colors leading-tight" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif" }}>
           {title}
         </span>
         {description && (
-          <span className="font-mono text-[9px] tracking-[0.06em] text-white/10 group-hover:text-white/25 transition-colors leading-relaxed">
+          <span className="text-[9px] tracking-[0.04em] text-white/10 group-hover:text-white/25 transition-colors leading-relaxed" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif" }}>
             {description}
           </span>
         )}
@@ -149,7 +149,8 @@ function DropdownPanel({
         <div className="p-2 pt-0">
           <a
             href={cta.href}
-            className="block text-center font-mono text-[11px] tracking-[0.2em] uppercase text-[#4a6cf7] border border-[#4a6cf7]/25 px-4 py-2.5 hover:bg-[#4a6cf7]/10 transition-colors"
+            className="block text-center text-[11px] tracking-[0.12em] uppercase text-[#4a6cf7] border border-[#4a6cf7]/25 px-4 py-2.5 hover:bg-[#4a6cf7]/10 transition-colors"
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif" }}
           >
             {cta.label}
           </a>
@@ -233,7 +234,8 @@ export function Navbar() {
             <a
               key={group.label}
               href={group.href}
-              className="py-5 font-mono font-bold text-[15px] tracking-[0.18em] uppercase text-white hover:text-white/70 transition-colors duration-150 whitespace-nowrap"
+              className="py-5 font-bold text-[15px] tracking-[0.12em] uppercase text-white hover:text-white/70 transition-colors duration-150 whitespace-nowrap"
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif" }}
             >
               {group.label}
             </a>
@@ -244,8 +246,8 @@ export function Navbar() {
         <div className="flex items-center gap-3 flex-shrink-0">
           <a
             href="/contact"
-            className="group hidden sm:inline-flex items-center h-11 font-mono text-[15px] tracking-[0.22em] uppercase text-black font-bold relative overflow-hidden"
-            style={{ borderRadius: "12px", transform: "translateZ(0)" }}
+            className="group hidden sm:inline-flex items-center h-11 text-[15px] tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden"
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", borderRadius: "12px", transform: "translateZ(0)" }}
           >
             {/* Static white background */}
             <span className="absolute inset-0 bg-white" />
@@ -281,7 +283,8 @@ export function Navbar() {
             <a
               key={group.label}
               href={group.href}
-              className="px-6 py-5 font-mono font-bold text-[15px] tracking-[0.2em] uppercase text-white hover:text-white/80 hover:bg-white/[0.02] transition-colors"
+              className="px-6 py-5 font-bold text-[15px] tracking-[0.12em] uppercase text-white hover:text-white/80 hover:bg-white/[0.02] transition-colors"
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif" }}
               onClick={() => setMobileOpen(false)}
             >
               {group.label}
@@ -291,7 +294,8 @@ export function Navbar() {
           <div className="px-6 py-6">
             <a
               href="/contact"
-              className="flex items-center justify-center gap-2 h-12 font-mono text-[12px] tracking-[0.22em] uppercase bg-[#4a6cf7] text-[#04060c] font-bold"
+              className="flex items-center justify-center gap-2 h-12 text-[12px] tracking-[0.12em] uppercase bg-[#4a6cf7] text-[#04060c] font-bold"
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif" }}
               onClick={() => setMobileOpen(false)}
             >
               Request a Briefing
