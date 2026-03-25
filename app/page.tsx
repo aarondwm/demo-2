@@ -580,7 +580,7 @@ function DashboardCard({ engagement, trigger = 0 }: { engagement: string[]; trig
       </div>
       {/* Table */}
       <div className="relative flex-1 overflow-x-auto">
-        <table className="w-full" style={{ minWidth: "480px" }}>
+        <table className="w-full" style={{ minWidth: "380px" }}>
           <thead>
             <tr className="border-b border-white/[0.10]">
               {["Organization", "Industry", "Seniority", "Engagement"].map((h) => (
@@ -1218,7 +1218,7 @@ export default function Home() {
               src="/dwm-gcc-slideshow.html"
               scrolling="no"
               loading="lazy"
-              style={{ width: "100%", height: "540px", border: "none", display: "block", pointerEvents: "none" }}
+              style={{ width: "100%", height: "clamp(380px, 70vh, 540px)", border: "none", display: "block", pointerEvents: "none" }}
               title="GCC Audience Slideshow"
             />
             {/* Swipe overlay — captures horizontal swipes for cards, vertical passes to page */}
