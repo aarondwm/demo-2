@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Integration 3 — Split Scroll</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#050505;color:#fff;font-family:'Inter',sans-serif;min-height:100vh;padding:60px 24px}
+.container{max-width:1200px;width:100%;margin:0 auto}
+.label{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:12px;font-weight:600}
+.heading{font-size:clamp(24px,4vw,48px);font-weight:800;letter-spacing:-0.02em;line-height:1.05;margin-bottom:8px;text-transform:uppercase}
+.heading span{color:#4a6cf7}
+.subtext{font-size:13.5px;line-height:1.7;color:rgba(255,255,255,0.55);margin-bottom:32px;max-width:500px}
+.option-label{text-align:center;margin-bottom:32px;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:#4a6cf7;font-weight:600}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* Split container */
+.split{display:grid;grid-template-columns:340px 1fr;border:1px solid rgba(74,108,247,0.25);border-radius:8px;overflow:hidden;background:#000;box-shadow:0 0 60px rgba(74,108,247,0.08);height:580px}
+
+/* Left — sticky dashboard */
+.split-left{border-right:1px solid rgba(74,108,247,0.12);overflow-y:auto;display:flex;flex-direction:column;background:rgba(0,0,0,0.5)}
+.split-left::-webkit-scrollbar{width:0}
+
+.sl-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;background:#000;z-index:2}
+.sl-dot{width:6px;height:6px;border-radius:50%;background:#4a6cf7;box-shadow:0 0 6px #4a6cf7;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+.sl-hero{padding:16px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.06)}
+.sl-hero-num{font-size:36px;font-weight:800;color:#4a6cf7;letter-spacing:-0.03em}
+
+.sl-section{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.sl-section-title{font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:8px}
+
+.sl-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+.sl-row:last-child{border-bottom:none}
+
+.sl-gender-bar{display:flex;height:6px;border-radius:3px;overflow:hidden;background:rgba(255,255,255,0.04);margin-bottom:6px}
+.sl-gender-bar .m{background:#4a6cf7}
+.sl-gender-bar .f{background:#7a9cff}
+.sl-gender-labels{display:flex;justify-content:space-between}
+
+.sl-loc-row{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.sl-loc-name{width:75px;font-size:10px;color:rgba(255,255,255,0.5);flex-shrink:0}
+.sl-loc-bar-bg{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,0.04);overflow:hidden}
+.sl-loc-bar{height:100%;border-radius:2px;background:#4a6cf7}
+.sl-loc-pct{width:28px;text-align:right;font-size:10px;font-weight:600;color:#4a6cf7;flex-shrink:0}
+
+.sl-footer{padding:10px 16px;margin-top:auto;border-top:1px solid rgba(255,255,255,0.06);position:sticky;bottom:0;background:#000;z-index:2}
+
+/* Right — scrollable article */
+.split-right{position:relative;overflow:hidden}
+.split-right iframe{width:200%;height:200%;border:none;transform:scale(0.5);transform-origin:top left;pointer-events:none}
+.split-right-fade{position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to bottom,transparent,#000);pointer-events:none;z-index:2}
+.split-right-cta{position:absolute;bottom:20px;left:0;right:0;z-index:3;display:flex;justify-content:center}
+.split-right-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#4a6cf7;color:#fff;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;transition:all 0.3s ease;text-decoration:none;box-shadow:0 0 20px rgba(74,108,247,0.3)}
+.split-right-btn:hover{background:#5a7cff;box-shadow:0 0 36px rgba(74,108,247,0.5)}
+.split-right-btn svg{width:12px;height:12px}
+/* Top label bar on article side */
+.split-right-bar{position:absolute;top:0;left:0;right:0;z-index:4;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(0,0,0,0.9),transparent);backdrop-filter:blur(4px)}
+
+/* Corner accents */
+.corner{position:absolute;width:12px;height:12px;z-index:20}
+.corner-tl{top:0;left:0;border-top:1px solid #4a6cf7;border-left:1px solid #4a6cf7}
+.corner-tr{top:0;right:0;border-top:1px solid #4a6cf7;border-right:1px solid #4a6cf7}
+.corner-bl{bottom:0;left:0;border-bottom:1px solid #4a6cf7;border-left:1px solid #4a6cf7}
+.corner-br{bottom:0;right:0;border-bottom:1px solid #4a6cf7;border-right:1px solid #4a6cf7}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="option-label">Integration 3 — Split View: Dashboard + Article Side by Side</div>
+  <div class="label">Sample Insights</div>
+  <div class="heading">What We Know, <span>They Don't.</span></div>
+  <div class="subtext">We run your content and track exactly who reads it. You get a full intelligence report. No guesswork.</div>
+
+  <div class="split" style="position:relative">
+    <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
+
+    <!-- Left: Dashboard -->
+    <div class="split-left">
+      <div class="sl-header">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="sl-dot"></span>
+          <span class="mono" style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#e8e2d6">Campaign Report</span>
+        </div>
+        <span class="mono" style="font-size:8px;letter-spacing:0.14em;color:rgba(255,255,255,0.25);text-transform:uppercase">SAMPLE</span>
+      </div>
+
+      <div class="sl-hero">
+        <div class="sl-hero-num">312,840</div>
+        <div class="mono" style="font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35)">Total Article Views</div>
+      </div>
+
+      <div class="sl-section">
+        <div class="sl-section-title mono">Top Companies</div>
+        <div class="sl-row"><span class="mono" style="width:16px;font-size:9px;color:rgba(74,108,247,0.5);flex-shrink:0">01</span><span class="mono" style="flex:1;font-size:11px;color:rgba(255,255,255,0.85)">Saudi Aramco</span><span class="mono" style="font-size:10px;font-weight:600;color:#4a6cf7">5m 42s</span></div>
+        <div class="sl-row"><span class="mono" style="width:16px;font-size:9px;color:rgba(74,108,247,0.5);flex-shrink:0">02</span><span class="mono" style="flex:1;font-size:11px;color:rgba(255,255,255,0.85)">McKinsey</span><span class="mono" style="font-size:10px;font-weight:600;color:#4a6cf7">7m 18s</span></div>
+        <div class="sl-row"><span class="mono" style="width:16px;font-size:9px;color:rgba(74,108,247,0.5);flex-shrink:0">03</span><span class="mono" style="flex:1;font-size:11px;color:rgba(255,255,255,0.85)">Goldman Sachs</span><span class="mono" style="font-size:10px;font-weight:600;color:#4a6cf7">4m 36s</span></div>
+        <div class="sl-row"><span class="mono" style="width:16px;font-size:9px;color:rgba(74,108,247,0.5);flex-shrink:0">04</span><span class="mono" style="flex:1;font-size:11px;color:rgba(255,255,255,0.85)">Qatar Energy</span><span class="mono" style="font-size:10px;font-weight:600;color:#4a6cf7">6m 14s</span></div>
+        <div class="sl-row"><span class="mono" style="width:16px;font-size:9px;color:rgba(74,108,247,0.5);flex-shrink:0">05</span><span class="mono" style="flex:1;font-size:11px;color:rgba(255,255,255,0.85)">JPMorgan</span><span class="mono" style="font-size:10px;font-weight:600;color:#4a6cf7">4m 03s</span></div>
+        <div class="sl-row"><span class="mono" style="width:16px;font-size:9px;color:rgba(74,108,247,0.5);flex-shrink:0">06</span><span class="mono" style="flex:1;font-size:11px;color:rgba(255,255,255,0.85)">Deloitte</span><span class="mono" style="font-size:10px;font-weight:600;color:#4a6cf7">8m 27s</span></div>
+      </div>
+
+      <div class="sl-section">
+        <div class="sl-section-title mono">Gender</div>
+        <div class="sl-gender-bar"><div class="m" style="width:74%"></div><div class="f" style="width:26%"></div></div>
+        <div class="sl-gender-labels">
+          <span class="mono" style="font-size:9px;color:rgba(255,255,255,0.5)"><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:#4a6cf7;margin-right:4px"></span>74% M</span>
+          <span class="mono" style="font-size:9px;color:rgba(255,255,255,0.5)"><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:#7a9cff;margin-right:4px"></span>26% F</span>
+        </div>
+      </div>
+
+      <div class="sl-section">
+        <div class="sl-section-title mono">Location</div>
+        <div class="sl-loc-row"><span class="sl-loc-name mono">Kuwait</span><div class="sl-loc-bar-bg"><div class="sl-loc-bar" style="width:86%"></div></div><span class="sl-loc-pct mono">86%</span></div>
+        <div class="sl-loc-row"><span class="sl-loc-name mono">Qatar</span><div class="sl-loc-bar-bg"><div class="sl-loc-bar" style="width:81%"></div></div><span class="sl-loc-pct mono">81%</span></div>
+        <div class="sl-loc-row"><span class="sl-loc-name mono">UAE</span><div class="sl-loc-bar-bg"><div class="sl-loc-bar" style="width:78%"></div></div><span class="sl-loc-pct mono">78%</span></div>
+        <div class="sl-loc-row"><span class="sl-loc-name mono">Saudi Arabia</span><div class="sl-loc-bar-bg"><div class="sl-loc-bar" style="width:72%"></div></div><span class="sl-loc-pct mono">72%</span></div>
+        <div class="sl-loc-row"><span class="sl-loc-name mono">Bahrain</span><div class="sl-loc-bar-bg"><div class="sl-loc-bar" style="width:73%"></div></div><span class="sl-loc-pct mono">73%</span></div>
+        <div class="sl-loc-row"><span class="sl-loc-name mono">Oman</span><div class="sl-loc-bar-bg"><div class="sl-loc-bar" style="width:68%"></div></div><span class="sl-loc-pct mono">68%</span></div>
+      </div>
+
+      <div class="sl-footer">
+        <span class="mono" style="font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3)">DWM Intelligence Platform</span>
+      </div>
+    </div>
+
+    <!-- Right: Article -->
+    <div class="split-right">
+      <div class="split-right-bar">
+        <span class="mono" style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35)">Sample Article</span>
+        <span style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(74,108,247,0.25);color:#4a6cf7;background:rgba(74,108,247,0.06)">DWM Intelligence</span>
+      </div>
+      <iframe src="/dwm-article-full.html" scrolling="no" loading="lazy"></iframe>
+      <div class="split-right-fade"></div>
+      <div class="split-right-cta">
+        <a href="/dwm-article-full.html" target="_blank" class="split-right-btn">
+          Read Full Article
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

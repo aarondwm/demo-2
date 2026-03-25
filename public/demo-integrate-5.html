@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Integration 5 — Expandable Row in Table</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#050505;color:#fff;font-family:'Inter',sans-serif;min-height:100vh;padding:60px 24px}
+.container{max-width:1200px;width:100%;margin:0 auto}
+.label{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:12px;font-weight:600}
+.heading{font-size:clamp(24px,4vw,48px);font-weight:800;letter-spacing:-0.02em;line-height:1.05;margin-bottom:8px;text-transform:uppercase}
+.heading span{color:#4a6cf7}
+.subtext{font-size:13.5px;line-height:1.7;color:rgba(255,255,255,0.55);margin-bottom:32px;max-width:500px}
+.option-label{text-align:center;margin-bottom:32px;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:#4a6cf7;font-weight:600}
+.mono{font-family:'JetBrains Mono',monospace}
+
+.dash{border:1px solid rgba(255,255,255,0.08);background:#000;border-radius:8px;overflow:hidden}
+.dash-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dash-dot{width:8px;height:8px;border-radius:50%;background:#4a6cf7;box-shadow:0 0 6px #4a6cf7,0 0 12px rgba(74,108,247,0.5);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.dash-hero{padding:20px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dash-hero-num{font-size:clamp(36px,8vw,56px);font-weight:800;color:#4a6cf7;letter-spacing:-0.03em}
+.dash-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dash-tab{flex:1;padding:10px;text-align:center;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);border-bottom:2px solid transparent}
+.dash-tab.active{color:#4a6cf7;border-bottom-color:#4a6cf7;background:rgba(74,108,247,0.04)}
+.dash-body{padding:16px 20px}
+.dash-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.dash-row:last-child{border-bottom:none}
+.dash-rank{width:20px;font-size:10px;color:rgba(74,108,247,0.5);letter-spacing:0.1em;flex-shrink:0}
+.dash-name{flex:1;font-size:12px;color:rgba(255,255,255,0.85)}
+.dash-views{font-size:10px;color:rgba(255,255,255,0.4);flex-shrink:0}
+.dash-time{font-size:11px;font-weight:600;color:#4a6cf7;width:56px;text-align:right;flex-shrink:0}
+
+/* Article row */
+.article-row{border-top:1px solid rgba(74,108,247,0.15);background:rgba(74,108,247,0.02)}
+.article-row-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;cursor:pointer;transition:background 0.3s ease}
+.article-row-bar:hover{background:rgba(74,108,247,0.06)}
+.article-row-left{display:flex;align-items:center;gap:12px}
+.article-row-icon{width:32px;height:32px;border:1px solid rgba(74,108,247,0.25);border-radius:4px;display:flex;align-items:center;justify-content:center;background:rgba(74,108,247,0.06);flex-shrink:0}
+.article-row-icon svg{width:14px;height:14px;color:#4a6cf7}
+.article-row-title{font-size:13px;font-weight:600;color:rgba(255,255,255,0.85)}
+.article-row-meta{font-size:10px;color:rgba(255,255,255,0.3);margin-top:1px}
+.article-row-right{display:flex;align-items:center;gap:10px}
+.article-row-read{font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:6px 12px;border:1px solid rgba(74,108,247,0.2);color:#4a6cf7;background:rgba(74,108,247,0.06);border-radius:3px;text-decoration:none;transition:all 0.3s ease}
+.article-row-read:hover{background:rgba(74,108,247,0.15);border-color:rgba(74,108,247,0.4)}
+.article-row-chevron{color:rgba(255,255,255,0.3);font-size:12px;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1)}
+.article-expand.open .article-row-chevron{transform:rotate(180deg);color:#4a6cf7}
+
+/* Expandable preview */
+.article-expand-content{max-height:0;overflow:hidden;transition:max-height 0.5s cubic-bezier(0.16,1,0.3,1)}
+.article-expand.open .article-expand-content{max-height:520px}
+.article-preview{position:relative;height:460px;overflow:hidden;border-top:1px solid rgba(74,108,247,0.1)}
+.article-preview iframe{width:200%;height:200%;border:none;transform:scale(0.5);transform-origin:top left;pointer-events:none}
+.article-preview-fade{position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to bottom,transparent,#000);pointer-events:none;z-index:2}
+.article-preview-cta{position:absolute;bottom:20px;left:0;right:0;z-index:3;display:flex;justify-content:center}
+.article-preview-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#4a6cf7;color:#fff;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;transition:all 0.3s ease;text-decoration:none;box-shadow:0 0 20px rgba(74,108,247,0.3)}
+.article-preview-btn:hover{background:#5a7cff;box-shadow:0 0 36px rgba(74,108,247,0.5)}
+.article-preview-btn svg{width:12px;height:12px}
+
+.dash-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-top:1px solid rgba(255,255,255,0.08)}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="option-label">Integration 5 — Article as Expandable Row Inside Table</div>
+  <div class="label">Sample Insights</div>
+  <div class="heading">What We Know, <span>They Don't.</span></div>
+  <div class="subtext">We run your content and track exactly who reads it. You get a full intelligence report. No guesswork.</div>
+
+  <div class="dash">
+    <div class="dash-header">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="dash-dot"></span>
+        <span class="mono" style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#e8e2d6">Campaign Report</span>
+      </div>
+      <span class="mono" style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25)">SAMPLE</span>
+    </div>
+    <div class="dash-hero">
+      <div class="dash-hero-num">312,840</div>
+      <div class="mono" style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.35)">Total Article Views</div>
+    </div>
+    <div class="dash-tabs">
+      <div class="dash-tab">Overview</div>
+      <div class="dash-tab active">Audience Breakdown</div>
+    </div>
+    <div class="dash-body">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <span class="mono" style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3)">Top Companies</span>
+        <span class="mono" style="font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.2)">Avg. Read Time</span>
+      </div>
+      <div class="dash-row"><span class="dash-rank mono">01</span><span class="dash-name mono">Saudi Aramco</span><span class="dash-views mono">8,740 views</span><span class="dash-time mono">5m 42s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">02</span><span class="dash-name mono">McKinsey & Company</span><span class="dash-views mono">6,320 views</span><span class="dash-time mono">7m 18s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">03</span><span class="dash-name mono">Goldman Sachs</span><span class="dash-views mono">5,180 views</span><span class="dash-time mono">4m 36s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">04</span><span class="dash-name mono">Qatar Energy</span><span class="dash-views mono">4,650 views</span><span class="dash-time mono">6m 14s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">05</span><span class="dash-name mono">JPMorgan Chase</span><span class="dash-views mono">3,890 views</span><span class="dash-time mono">4m 03s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">06</span><span class="dash-name mono">Deloitte</span><span class="dash-views mono">3,210 views</span><span class="dash-time mono">8m 27s</span></div>
+    </div>
+
+    <!-- Article expandable row -->
+    <div class="article-row article-expand" id="articleExpand">
+      <div class="article-row-bar" onclick="document.getElementById('articleExpand').classList.toggle('open')">
+        <div class="article-row-left">
+          <div class="article-row-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div>
+            <div class="article-row-title">Saudi Aramco Reaches 70% Local Content Target</div>
+            <div class="article-row-meta mono">Source article · DWM Editorial · 6 min read</div>
+          </div>
+        </div>
+        <div class="article-row-right">
+          <a href="/dwm-article-full.html" target="_blank" class="article-row-read" onclick="event.stopPropagation()">Open ↗</a>
+          <span class="article-row-chevron">▼</span>
+        </div>
+      </div>
+      <div class="article-expand-content">
+        <div class="article-preview">
+          <iframe src="/dwm-article-full.html" scrolling="no" loading="lazy"></iframe>
+          <div class="article-preview-fade"></div>
+          <div class="article-preview-cta">
+            <a href="/dwm-article-full.html" target="_blank" class="article-preview-btn">
+              Read Full Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-footer">
+      <span class="mono" style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35)">DWM Audience Intelligence Platform</span>
+      <div style="display:flex;align-items:center;gap:6px"><span style="width:4px;height:4px;background:#4a6cf7"></span><span class="mono" style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5)">SAMPLE</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

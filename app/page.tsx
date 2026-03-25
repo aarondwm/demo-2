@@ -396,12 +396,50 @@ function CampaignDashboard() {
         <span className="font-mono text-[9px] tracking-[0.15em] uppercase" style={{ color: "rgba(255,255,255,0.25)" }}>SAMPLE</span>
       </div>
 
-      {/* Hero Stat */}
-      <div className="bg-black px-6 py-5 md:py-6 flex flex-col items-center gap-1 border-b border-white/[0.06]">
-        <span style={{ fontFamily: "'Neue Montreal', sans-serif", fontSize: "clamp(36px, 8vw, 64px)", fontWeight: 800, color: "#4a6cf7", letterSpacing: "-0.03em" }}>
-          {visible ? <AnimatedViewCount value={312840} /> : "0"}
-        </span>
-        <span className="font-mono uppercase" style={{ fontSize: "9px", letterSpacing: "0.22em", color: "rgba(255,255,255,0.35)" }}>Total Article Views</span>
+      {/* Hero Stat with article background */}
+      <div className="relative overflow-hidden border-b border-white/[0.06]" style={{ minHeight: "160px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "28px 16px 20px" }}>
+        {/* Article iframe bg */}
+        <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+          <iframe
+            src="/dwm-article-full.html"
+            scrolling="no"
+            loading="lazy"
+            tabIndex={-1}
+            style={{ width: "200%", height: "200%", border: "none", transform: "scale(0.5)", transformOrigin: "top left", pointerEvents: "none" }}
+          />
+        </div>
+        {/* Blur overlay */}
+        <div className="absolute inset-0 z-[1]" style={{ backdropFilter: "blur(10px)", background: "rgba(0,0,0,0.65)" }} />
+        {/* Article title bar — unblurred */}
+        <div className="absolute top-0 left-0 right-0 z-[6] flex items-center gap-2 px-3 md:px-5 py-2" style={{ background: "rgba(0,0,0,0.4)", borderBottom: "1px solid rgba(74,108,247,0.1)" }}>
+          <span className="w-[5px] h-[5px] rounded-full flex-shrink-0" style={{ background: "#4a6cf7" }} />
+          <span className="truncate" style={{ fontSize: "clamp(9px, 2.5vw, 11px)", fontWeight: 600, color: "rgba(255,255,255,0.7)" }}>Saudi Aramco Reaches 70% Local Content Target Ahead of 2025 Iktva Deadline</span>
+        </div>
+        {/* Content */}
+        <div className="relative z-[5] flex flex-col items-center" style={{ marginTop: "16px" }}>
+          <div className="flex flex-col md:flex-row items-center md:items-baseline gap-1 md:gap-3">
+            <span style={{ fontFamily: "'Neue Montreal', sans-serif", fontSize: "clamp(36px, 9vw, 64px)", fontWeight: 800, color: "#4a6cf7", letterSpacing: "-0.03em", textShadow: "0 0 40px rgba(74,108,247,0.4), 0 0 12px rgba(74,108,247,0.2)" }}>
+              {visible ? <AnimatedViewCount value={312840} /> : "0"}
+            </span>
+            <span className="font-mono uppercase" style={{ fontSize: "clamp(8px, 2vw, 10px)", letterSpacing: "0.22em", color: "#ffffff" }}>Total Article Views</span>
+          </div>
+          <a
+            href="/dwm-article-full.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center h-10 font-mono text-[10px] tracking-[0.15em] uppercase text-black font-bold relative overflow-hidden mt-3"
+            style={{ borderRadius: "8px", transform: "translateZ(0)" }}
+          >
+            <span className="absolute inset-0 bg-white" />
+            <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>
+              <span className="text-white text-[10px] tracking-[0.15em] uppercase font-bold">Preview Article</span>
+            </span>
+            <span className="absolute inset-0 flex items-center justify-center text-black transition-opacity duration-300 group-hover:opacity-0 z-20">
+              Preview Article
+            </span>
+            <span className="invisible px-6">Preview Article</span>
+          </a>
+        </div>
       </div>
 
       {/* Tabs */}
@@ -1108,7 +1146,7 @@ export default function Home() {
             </div>
 
             {/* Right — 4 card rows */}
-            <div className="flex flex-col" style={{ gap: "1px", background: "#ffffff08" }}>
+            <div className="flex flex-col" style={{ gap: "1px" }}>
               {[
                 { n: "01", title: "Confirmed Placement", body: "Your content is placed, not pitched. Every partner publication is pre-contracted. Your story runs." },
                 { n: "02", title: "Gulf-Wide Network",   body: "Kuwait, UAE, Saudi Arabia, Bahrain, Qatar, Oman. Every major GCC market covered." },

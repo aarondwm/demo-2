@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option 2 — Table + Split Layout</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#050505;color:#fff;font-family:'Inter',sans-serif;min-height:100vh;padding:60px 24px}
+.container{max-width:1200px;width:100%;margin:0 auto}
+.label{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:12px;font-weight:600}
+.heading{font-size:clamp(24px,4vw,48px);font-weight:800;letter-spacing:-0.02em;line-height:1.05;margin-bottom:8px;text-transform:uppercase}
+.heading span{color:#4a6cf7}
+.subtext{font-size:13.5px;line-height:1.7;color:rgba(255,255,255,0.55);margin-bottom:32px;max-width:500px}
+.option-label{text-align:center;margin-bottom:32px;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:#4a6cf7;font-weight:600}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* ===== DASHBOARD TABLE ===== */
+.dash{border:1px solid rgba(255,255,255,0.08);background:#000;border-radius:8px;overflow:hidden}
+.dash-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dash-dot{width:8px;height:8px;border-radius:50%;background:#4a6cf7;box-shadow:0 0 6px #4a6cf7,0 0 12px rgba(74,108,247,0.5);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.dash-hero{padding:20px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dash-hero-num{font-family:'Inter',sans-serif;font-size:clamp(36px,8vw,56px);font-weight:800;color:#4a6cf7;letter-spacing:-0.03em}
+.dash-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dash-tab{flex:1;padding:10px;text-align:center;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);cursor:pointer;border-bottom:2px solid transparent}
+.dash-tab.active{color:#4a6cf7;border-bottom-color:#4a6cf7;background:rgba(74,108,247,0.04)}
+.dash-body{padding:16px 20px}
+.dash-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.dash-row:last-child{border-bottom:none}
+.dash-rank{width:20px;font-size:10px;color:rgba(74,108,247,0.5);letter-spacing:0.1em;flex-shrink:0}
+.dash-name{flex:1;font-size:12px;color:rgba(255,255,255,0.85)}
+.dash-views{font-size:10px;color:rgba(255,255,255,0.4);flex-shrink:0}
+.dash-time{font-size:11px;font-weight:600;color:#4a6cf7;width:56px;text-align:right;flex-shrink:0}
+.dash-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-top:1px solid rgba(255,255,255,0.08)}
+
+/* ===== SPACER ===== */
+.section-spacer{height:28px;display:flex;align-items:center;justify-content:center}
+.spacer-line{width:40px;height:1px;background:rgba(74,108,247,0.2)}
+
+/* ===== SPLIT CARD ===== */
+.split-card{display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(74,108,247,0.2);border-radius:6px;overflow:hidden;background:#0a0a0a;box-shadow:0 0 60px rgba(74,108,247,0.08);min-height:420px}
+.split-info{padding:40px 36px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid rgba(74,108,247,0.12);background:linear-gradient(135deg,rgba(74,108,247,0.03),transparent)}
+.split-eyebrow{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#4a6cf7;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.split-eyebrow::before{content:'';width:20px;height:1px;background:#4a6cf7}
+.split-title{font-size:22px;font-weight:800;line-height:1.25;letter-spacing:-0.02em;color:#fff;margin-bottom:14px}
+.split-deck{font-size:14px;line-height:1.7;color:rgba(255,255,255,0.5);margin-bottom:24px}
+.split-meta{display:flex;gap:16px;margin-bottom:28px;font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.04em}
+.split-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;width:fit-content;background:#4a6cf7;color:#fff;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;transition:all 0.3s ease;text-decoration:none;box-shadow:0 0 20px rgba(74,108,247,0.3)}
+.split-btn:hover{background:#5a7cff;box-shadow:0 0 36px rgba(74,108,247,0.5)}
+.split-btn svg{width:13px;height:13px}
+.split-preview{position:relative;overflow:hidden}
+.split-preview iframe{width:200%;height:200%;border:none;transform:scale(0.5);transform-origin:top left;pointer-events:none}
+.split-preview-fade-top{position:absolute;top:0;left:0;right:0;height:60px;background:linear-gradient(to bottom,#0a0a0a,transparent);pointer-events:none;z-index:2}
+.split-preview-fade-bottom{position:absolute;bottom:0;left:0;right:0;height:100px;background:linear-gradient(to bottom,transparent,#0a0a0a);pointer-events:none;z-index:2}
+.split-preview-fade-left{position:absolute;top:0;bottom:0;left:0;width:40px;background:linear-gradient(to right,#0a0a0a,transparent);pointer-events:none;z-index:2}
+.split-scanlines{position:absolute;inset:0;z-index:3;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.03) 3px,rgba(0,0,0,0.03) 4px)}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="option-label">Option 2 — Table + Split Layout Below</div>
+  <div class="label">Sample Insights</div>
+  <div class="heading">What We Know, <span>They Don't.</span></div>
+  <div class="subtext">We run your content and track exactly who reads it. You get a full intelligence report. No guesswork.</div>
+
+  <!-- Dashboard Table -->
+  <div class="dash">
+    <div class="dash-header">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="dash-dot"></span>
+        <span class="mono" style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#e8e2d6">Campaign Report</span>
+      </div>
+      <span class="mono" style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25)">SAMPLE</span>
+    </div>
+    <div class="dash-hero">
+      <div class="dash-hero-num">312,840</div>
+      <div class="mono" style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.35)">Total Article Views</div>
+    </div>
+    <div class="dash-tabs">
+      <div class="dash-tab">Overview</div>
+      <div class="dash-tab active">Audience Breakdown</div>
+    </div>
+    <div class="dash-body">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <span class="mono" style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3)">Top Companies</span>
+        <span class="mono" style="font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.2)">Avg. Read Time</span>
+      </div>
+      <div class="dash-row"><span class="dash-rank mono">01</span><span class="dash-name mono">Saudi Aramco</span><span class="dash-views mono">8,740 views</span><span class="dash-time mono">5m 42s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">02</span><span class="dash-name mono">McKinsey & Company</span><span class="dash-views mono">6,320 views</span><span class="dash-time mono">7m 18s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">03</span><span class="dash-name mono">Goldman Sachs</span><span class="dash-views mono">5,180 views</span><span class="dash-time mono">4m 36s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">04</span><span class="dash-name mono">Qatar Energy</span><span class="dash-views mono">4,650 views</span><span class="dash-time mono">6m 14s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">05</span><span class="dash-name mono">JPMorgan Chase</span><span class="dash-views mono">3,890 views</span><span class="dash-time mono">4m 03s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">06</span><span class="dash-name mono">Deloitte</span><span class="dash-views mono">3,210 views</span><span class="dash-time mono">8m 27s</span></div>
+    </div>
+    <div class="dash-footer">
+      <span class="mono" style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35)">DWM Audience Intelligence Platform</span>
+      <div style="display:flex;align-items:center;gap:6px"><span style="width:4px;height:4px;background:#4a6cf7"></span><span class="mono" style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5)">SAMPLE</span></div>
+    </div>
+  </div>
+
+  <div class="section-spacer"><div class="spacer-line"></div></div>
+
+  <!-- Split Layout Article -->
+  <div class="split-card">
+    <div class="split-info">
+      <div class="split-eyebrow">DWM Intelligence Report</div>
+      <div class="split-title">Saudi Aramco Reaches 70% Local Content Target</div>
+      <div class="split-deck">A deep-dive into Aramco's Iktva milestone, what it means for GCC procurement, and how DWM tracked the audience that engaged with the coverage.</div>
+      <div class="split-meta mono">
+        <span>DWM EDITORIAL</span>
+        <span>6 MIN READ</span>
+        <span>MAR 2026</span>
+      </div>
+      <a href="/dwm-article-full.html" target="_blank" class="split-btn">
+        Read Full Article
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+      </a>
+    </div>
+    <div class="split-preview">
+      <div class="split-preview-fade-top"></div>
+      <div class="split-preview-fade-bottom"></div>
+      <div class="split-preview-fade-left"></div>
+      <div class="split-scanlines"></div>
+      <iframe src="/dwm-article-full.html" scrolling="no" loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+</body>
+</html>

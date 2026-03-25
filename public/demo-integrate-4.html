@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Integration 4 — Article with Inline Metrics</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#050505;color:#fff;font-family:'Inter',sans-serif;min-height:100vh;padding:60px 24px}
+.container{max-width:1200px;width:100%;margin:0 auto}
+.label{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:12px;font-weight:600}
+.heading{font-size:clamp(24px,4vw,48px);font-weight:800;letter-spacing:-0.02em;line-height:1.05;margin-bottom:8px;text-transform:uppercase}
+.heading span{color:#4a6cf7}
+.subtext{font-size:13.5px;line-height:1.7;color:rgba(255,255,255,0.55);margin-bottom:32px;max-width:500px}
+.option-label{text-align:center;margin-bottom:32px;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:#4a6cf7;font-weight:600}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* Article card */
+.article-card{max-width:760px;margin:0 auto;border:1px solid rgba(74,108,247,0.2);border-radius:8px;overflow:hidden;background:#0a0a0a;box-shadow:0 0 60px rgba(74,108,247,0.08);position:relative}
+.corner{position:absolute;width:12px;height:12px;z-index:20}
+.corner-tl{top:0;left:0;border-top:1px solid #4a6cf7;border-left:1px solid #4a6cf7}
+.corner-tr{top:0;right:0;border-top:1px solid #4a6cf7;border-right:1px solid #4a6cf7}
+.corner-bl{bottom:0;left:0;border-bottom:1px solid #4a6cf7;border-left:1px solid #4a6cf7}
+.corner-br{bottom:0;right:0;border-bottom:1px solid #4a6cf7;border-right:1px solid #4a6cf7}
+
+.ac-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;border-bottom:1px solid rgba(74,108,247,0.12);background:rgba(0,0,0,0.6)}
+.ac-dot{width:6px;height:6px;border-radius:50%;background:#4a6cf7;box-shadow:0 0 6px #4a6cf7;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+.ac-body{padding:32px 28px}
+
+/* Article eyebrow */
+.ac-eyebrow{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#4a6cf7;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.ac-eyebrow::before{content:'';width:20px;height:1px;background:#4a6cf7}
+.ac-title{font-size:clamp(22px,3.5vw,32px);font-weight:800;line-height:1.2;letter-spacing:-0.02em;color:#fff;margin-bottom:12px}
+.ac-deck{font-size:15px;line-height:1.7;color:rgba(255,255,255,0.5);margin-bottom:24px}
+.ac-meta{display:flex;gap:16px;font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.06)}
+
+/* Inline metric callout */
+.metric-callout{margin:28px -28px;padding:20px 28px;background:rgba(74,108,247,0.04);border-top:1px solid rgba(74,108,247,0.12);border-bottom:1px solid rgba(74,108,247,0.12)}
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.metric-item{}
+.metric-label{font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:4px}
+.metric-value{font-size:24px;font-weight:800;color:#4a6cf7;letter-spacing:-0.02em;text-shadow:0 0 16px rgba(74,108,247,0.3)}
+.metric-sub{font-size:9px;color:rgba(255,255,255,0.3);margin-top:2px}
+
+/* Inline company strip */
+.company-strip{margin:28px -28px;padding:16px 28px;background:rgba(74,108,247,0.03);border-top:1px solid rgba(74,108,247,0.1);border-bottom:1px solid rgba(74,108,247,0.1)}
+.company-strip-title{font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px}
+.company-strip-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+.company-strip-row:last-child{border-bottom:none}
+
+/* Article paragraphs */
+.ac-p{font-size:15px;line-height:1.85;color:rgba(255,255,255,0.65);margin-bottom:20px}
+.ac-p:first-of-type::first-letter{font-size:42px;font-weight:800;float:left;line-height:0.85;margin:4px 10px 0 0;color:#4a6cf7}
+
+/* Location inline */
+.loc-inline{margin:28px -28px;padding:16px 28px;background:rgba(74,108,247,0.03);border-top:1px solid rgba(74,108,247,0.1);border-bottom:1px solid rgba(74,108,247,0.1)}
+.loc-inline-title{font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px}
+.loc-inline-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.loc-inline-name{width:80px;font-size:10px;color:rgba(255,255,255,0.5);flex-shrink:0}
+.loc-inline-bar-bg{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,0.04);overflow:hidden}
+.loc-inline-bar{height:100%;border-radius:2px;background:#4a6cf7}
+.loc-inline-pct{width:28px;text-align:right;font-size:10px;font-weight:600;color:#4a6cf7;flex-shrink:0}
+
+/* CTA at bottom */
+.ac-cta{text-align:center;padding:24px 0 8px;border-top:1px solid rgba(255,255,255,0.06)}
+.ac-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:#4a6cf7;color:#fff;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;transition:all 0.3s ease;text-decoration:none;box-shadow:0 0 20px rgba(74,108,247,0.3)}
+.ac-btn:hover{background:#5a7cff;box-shadow:0 0 36px rgba(74,108,247,0.5)}
+.ac-btn svg{width:13px;height:13px}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="option-label">Integration 4 — Article with Inline Metrics</div>
+  <div class="label">Sample Insights</div>
+  <div class="heading">What We Know, <span>They Don't.</span></div>
+  <div class="subtext">We run your content and track exactly who reads it. You get a full intelligence report. No guesswork.</div>
+
+  <div class="article-card">
+    <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
+
+    <div class="ac-bar">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="ac-dot"></span>
+        <span class="mono" style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#e8e2d6">Intelligence Report</span>
+      </div>
+      <span class="mono" style="font-size:8px;letter-spacing:0.14em;color:rgba(255,255,255,0.25);text-transform:uppercase">SAMPLE</span>
+    </div>
+
+    <div class="ac-body">
+      <div class="ac-eyebrow mono">Energy · Saudi Arabia</div>
+      <h1 class="ac-title">Saudi Aramco Reaches 70% Local Content Target Ahead of 2025 Iktva Deadline</h1>
+      <p class="ac-deck">The state oil giant's Iktva programme hits a milestone that reshapes procurement across the Kingdom — and signals what's next for GCC supply chains.</p>
+      <div class="ac-meta mono">
+        <span>DWM EDITORIAL</span>
+        <span>6 MIN READ</span>
+        <span>MAR 2026</span>
+      </div>
+
+      <!-- Inline metric callout -->
+      <div class="metric-callout">
+        <div class="metric-grid">
+          <div class="metric-item">
+            <div class="metric-label mono">Total Views</div>
+            <div class="metric-value">312,840</div>
+            <div class="metric-sub mono">across GCC</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label mono">Avg. Read Time</div>
+            <div class="metric-value">5:42</div>
+            <div class="metric-sub mono">minutes</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label mono">Reader Split</div>
+            <div class="metric-value">74<span style="font-size:14px;color:rgba(255,255,255,0.3)">%</span></div>
+            <div class="metric-sub mono">male readership</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="ac-p">Saudi Aramco has officially crossed the 70% local content threshold under its In-Kingdom Total Value Add programme, a landmark in the company's decades-long effort to localize its supply chain and reduce dependence on foreign contractors.</p>
+
+      <p class="ac-p">The milestone, confirmed by CEO Amin H. Nasser at the annual Iktva Forum, comes a full year ahead of the programme's original 2025 target — a timeline many analysts had considered aspirational when it was set in 2015.</p>
+
+      <!-- Company strip -->
+      <div class="company-strip">
+        <div class="company-strip-title mono">Top Companies That Read This</div>
+        <div class="company-strip-row"><span class="mono" style="width:16px;font-size:9px;color:rgba(74,108,247,0.5);flex-shrink:0">01</span><span class="mono" style="flex:1;font-size:11px;color:rgba(255,255,255,0.85)">Saudi Aramco</span><span class="mono" style="font-size:10px;color:rgba(255,255,255,0.4)">8,740 views</span><span class="mono" style="font-size:10px;font-weight:600;color:#4a6cf7;width:50px;text-align:right">5m 42s</span></div>
+        <div class="company-strip-row"><span class="mono" style="width:16px;font-size:9px;color:rgba(74,108,247,0.5);flex-shrink:0">02</span><span class="mono" style="flex:1;font-size:11px;color:rgba(255,255,255,0.85)">McKinsey & Company</span><span class="mono" style="font-size:10px;color:rgba(255,255,255,0.4)">6,320 views</span><span class="mono" style="font-size:10px;font-weight:600;color:#4a6cf7;width:50px;text-align:right">7m 18s</span></div>
+        <div class="company-strip-row"><span class="mono" style="width:16px;font-size:9px;color:rgba(74,108,247,0.5);flex-shrink:0">03</span><span class="mono" style="flex:1;font-size:11px;color:rgba(255,255,255,0.85)">Goldman Sachs</span><span class="mono" style="font-size:10px;color:rgba(255,255,255,0.4)">5,180 views</span><span class="mono" style="font-size:10px;font-weight:600;color:#4a6cf7;width:50px;text-align:right">4m 36s</span></div>
+      </div>
+
+      <p class="ac-p">The programme now covers more than 900 Saudi-based suppliers, up from fewer than 200 when Iktva launched. Independent audits show that localization has cut Aramco's average procurement lead times by 30% while delivering an estimated $8 billion in cumulative savings.</p>
+
+      <!-- Location breakdown -->
+      <div class="loc-inline">
+        <div class="loc-inline-title mono">Where Readers Are Located</div>
+        <div class="loc-inline-row"><span class="loc-inline-name mono">Kuwait</span><div class="loc-inline-bar-bg"><div class="loc-inline-bar" style="width:86%"></div></div><span class="loc-inline-pct mono">86%</span></div>
+        <div class="loc-inline-row"><span class="loc-inline-name mono">Qatar</span><div class="loc-inline-bar-bg"><div class="loc-inline-bar" style="width:81%"></div></div><span class="loc-inline-pct mono">81%</span></div>
+        <div class="loc-inline-row"><span class="loc-inline-name mono">UAE</span><div class="loc-inline-bar-bg"><div class="loc-inline-bar" style="width:78%"></div></div><span class="loc-inline-pct mono">78%</span></div>
+        <div class="loc-inline-row"><span class="loc-inline-name mono">Saudi Arabia</span><div class="loc-inline-bar-bg"><div class="loc-inline-bar" style="width:72%"></div></div><span class="loc-inline-pct mono">72%</span></div>
+      </div>
+
+      <p class="ac-p">For international firms operating in the Gulf, Aramco's achievement is both a template and a warning. Localization mandates are tightening across the GCC — from the UAE's ICV programme to Kuwait's offset requirements.</p>
+
+      <div class="ac-cta">
+        <a href="/dwm-article-full.html" target="_blank" class="ac-btn">
+          Read Full Article
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Integration 2 — Dashboard HUD over Article</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#050505;color:#fff;font-family:'Inter',sans-serif;min-height:100vh;padding:60px 24px}
+.container{max-width:1200px;width:100%;margin:0 auto}
+.label{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:12px;font-weight:600}
+.heading{font-size:clamp(24px,4vw,48px);font-weight:800;letter-spacing:-0.02em;line-height:1.05;margin-bottom:8px;text-transform:uppercase}
+.heading span{color:#4a6cf7}
+.subtext{font-size:13.5px;line-height:1.7;color:rgba(255,255,255,0.55);margin-bottom:32px;max-width:500px}
+.option-label{text-align:center;margin-bottom:32px;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:#4a6cf7;font-weight:600}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* Composite container */
+.composite{position:relative;border:1px solid rgba(74,108,247,0.25);border-radius:8px;overflow:hidden;background:#000;box-shadow:0 0 60px rgba(74,108,247,0.08);height:600px}
+
+/* Article background */
+.article-bg{position:absolute;inset:0;z-index:0}
+.article-bg iframe{width:200%;height:200%;border:none;transform:scale(0.5);transform-origin:top left;pointer-events:none;opacity:0.25}
+.article-bg-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.6) 50%,rgba(0,0,0,0.85) 100%);z-index:1}
+.article-bg-scanlines{position:absolute;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.04) 2px,rgba(0,0,0,0.04) 3px)}
+
+/* HUD overlay */
+.hud{position:relative;z-index:10;height:100%;display:flex;flex-direction:column;padding:24px}
+
+/* Top bar */
+.hud-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.hud-brand{display:flex;align-items:center;gap:10px}
+.hud-dot{width:8px;height:8px;border-radius:50%;background:#4a6cf7;box-shadow:0 0 6px #4a6cf7;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.hud-tag{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border:1px solid rgba(74,108,247,0.3);color:#4a6cf7;background:rgba(74,108,247,0.08)}
+
+/* Stats grid */
+.hud-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+.hud-stat{padding:16px;border:1px solid rgba(74,108,247,0.12);background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);border-radius:4px}
+.hud-stat-label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:6px}
+.hud-stat-value{font-size:28px;font-weight:800;color:#4a6cf7;letter-spacing:-0.02em;text-shadow:0 0 20px rgba(74,108,247,0.3)}
+.hud-stat-sub{font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px}
+
+/* Companies list */
+.hud-companies{flex:1;border:1px solid rgba(74,108,247,0.12);background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);border-radius:4px;padding:14px 16px;overflow:hidden}
+.hud-companies-title{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px}
+.hud-company-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.hud-company-row:last-child{border-bottom:none}
+
+/* Bottom CTA */
+.hud-bottom{margin-top:16px;display:flex;align-items:center;justify-content:space-between}
+.hud-article-info{display:flex;align-items:center;gap:12px}
+.hud-article-icon{width:36px;height:36px;border:1px solid rgba(74,108,247,0.2);border-radius:4px;display:flex;align-items:center;justify-content:center;background:rgba(74,108,247,0.06)}
+.hud-article-icon svg{width:16px;height:16px;color:#4a6cf7}
+.hud-article-title{font-size:12px;font-weight:600;color:rgba(255,255,255,0.8)}
+.hud-article-meta{font-size:10px;color:rgba(255,255,255,0.3);margin-top:1px}
+.hud-read-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#4a6cf7;color:#fff;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;transition:all 0.3s ease;text-decoration:none;box-shadow:0 0 20px rgba(74,108,247,0.3)}
+.hud-read-btn:hover{background:#5a7cff;box-shadow:0 0 36px rgba(74,108,247,0.5)}
+.hud-read-btn svg{width:12px;height:12px}
+
+/* Corner accents */
+.corner{position:absolute;width:14px;height:14px;z-index:20}
+.corner-tl{top:0;left:0;border-top:1px solid #4a6cf7;border-left:1px solid #4a6cf7}
+.corner-tr{top:0;right:0;border-top:1px solid #4a6cf7;border-right:1px solid #4a6cf7}
+.corner-bl{bottom:0;left:0;border-bottom:1px solid #4a6cf7;border-left:1px solid #4a6cf7}
+.corner-br{bottom:0;right:0;border-bottom:1px solid #4a6cf7;border-right:1px solid #4a6cf7}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="option-label">Integration 2 — Dashboard HUD Overlaying Article Background</div>
+  <div class="label">Sample Insights</div>
+  <div class="heading">What We Know, <span>They Don't.</span></div>
+  <div class="subtext">We run your content and track exactly who reads it. You get a full intelligence report. No guesswork.</div>
+
+  <div class="composite">
+    <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
+
+    <!-- Article as background -->
+    <div class="article-bg">
+      <iframe src="/dwm-article-full.html" scrolling="no" loading="lazy"></iframe>
+      <div class="article-bg-overlay"></div>
+      <div class="article-bg-scanlines"></div>
+    </div>
+
+    <!-- HUD overlay -->
+    <div class="hud">
+      <div class="hud-top">
+        <div class="hud-brand">
+          <span class="hud-dot"></span>
+          <span class="mono" style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#e8e2d6">Campaign Report</span>
+        </div>
+        <span class="hud-tag mono">SAMPLE</span>
+      </div>
+
+      <div class="hud-stats">
+        <div class="hud-stat">
+          <div class="hud-stat-label mono">Total Views</div>
+          <div class="hud-stat-value">312,840</div>
+          <div class="hud-stat-sub mono">across GCC</div>
+        </div>
+        <div class="hud-stat">
+          <div class="hud-stat-label mono">Gender Split</div>
+          <div class="hud-stat-value">74<span style="font-size:16px;color:rgba(255,255,255,0.3)">%</span></div>
+          <div class="hud-stat-sub mono">male readership</div>
+        </div>
+        <div class="hud-stat">
+          <div class="hud-stat-label mono">Avg. Read Time</div>
+          <div class="hud-stat-value">5:42</div>
+          <div class="hud-stat-sub mono">minutes per reader</div>
+        </div>
+      </div>
+
+      <div class="hud-companies">
+        <div class="hud-companies-title mono">Top Companies Reached</div>
+        <div class="hud-company-row"><span class="mono" style="width:20px;font-size:10px;color:rgba(74,108,247,0.5);flex-shrink:0">01</span><span class="mono" style="flex:1;font-size:12px;color:rgba(255,255,255,0.85)">Saudi Aramco</span><span class="mono" style="font-size:10px;color:rgba(255,255,255,0.4)">8,740 views</span><span class="mono" style="font-size:11px;font-weight:600;color:#4a6cf7;width:56px;text-align:right">5m 42s</span></div>
+        <div class="hud-company-row"><span class="mono" style="width:20px;font-size:10px;color:rgba(74,108,247,0.5);flex-shrink:0">02</span><span class="mono" style="flex:1;font-size:12px;color:rgba(255,255,255,0.85)">McKinsey & Company</span><span class="mono" style="font-size:10px;color:rgba(255,255,255,0.4)">6,320 views</span><span class="mono" style="font-size:11px;font-weight:600;color:#4a6cf7;width:56px;text-align:right">7m 18s</span></div>
+        <div class="hud-company-row"><span class="mono" style="width:20px;font-size:10px;color:rgba(74,108,247,0.5);flex-shrink:0">03</span><span class="mono" style="flex:1;font-size:12px;color:rgba(255,255,255,0.85)">Goldman Sachs</span><span class="mono" style="font-size:10px;color:rgba(255,255,255,0.4)">5,180 views</span><span class="mono" style="font-size:11px;font-weight:600;color:#4a6cf7;width:56px;text-align:right">4m 36s</span></div>
+        <div class="hud-company-row"><span class="mono" style="width:20px;font-size:10px;color:rgba(74,108,247,0.5);flex-shrink:0">04</span><span class="mono" style="flex:1;font-size:12px;color:rgba(255,255,255,0.85)">Qatar Energy</span><span class="mono" style="font-size:10px;color:rgba(255,255,255,0.4)">4,650 views</span><span class="mono" style="font-size:11px;font-weight:600;color:#4a6cf7;width:56px;text-align:right">6m 14s</span></div>
+        <div class="hud-company-row"><span class="mono" style="width:20px;font-size:10px;color:rgba(74,108,247,0.5);flex-shrink:0">05</span><span class="mono" style="flex:1;font-size:12px;color:rgba(255,255,255,0.85)">JPMorgan Chase</span><span class="mono" style="font-size:10px;color:rgba(255,255,255,0.4)">3,890 views</span><span class="mono" style="font-size:11px;font-weight:600;color:#4a6cf7;width:56px;text-align:right">4m 03s</span></div>
+        <div class="hud-company-row"><span class="mono" style="width:20px;font-size:10px;color:rgba(74,108,247,0.5);flex-shrink:0">06</span><span class="mono" style="flex:1;font-size:12px;color:rgba(255,255,255,0.85)">Deloitte</span><span class="mono" style="font-size:10px;color:rgba(255,255,255,0.4)">3,210 views</span><span class="mono" style="font-size:11px;font-weight:600;color:#4a6cf7;width:56px;text-align:right">8m 27s</span></div>
+      </div>
+
+      <div class="hud-bottom">
+        <div class="hud-article-info">
+          <div class="hud-article-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h4l2 3h8a2 2 0 012 2v9a2 2 0 01-2 2z"/></svg></div>
+          <div>
+            <div class="hud-article-title">Saudi Aramco Reaches 70% Local Content Target</div>
+            <div class="hud-article-meta mono">DWM Editorial · 6 min read</div>
+          </div>
+        </div>
+        <a href="/dwm-article-full.html" target="_blank" class="hud-read-btn">
+          Read Article
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

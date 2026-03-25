@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Integration 1 — Third Tab</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#050505;color:#fff;font-family:'Inter',sans-serif;min-height:100vh;padding:60px 24px}
+.container{max-width:1200px;width:100%;margin:0 auto}
+.label{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:12px;font-weight:600}
+.heading{font-size:clamp(24px,4vw,48px);font-weight:800;letter-spacing:-0.02em;line-height:1.05;margin-bottom:8px;text-transform:uppercase}
+.heading span{color:#4a6cf7}
+.subtext{font-size:13.5px;line-height:1.7;color:rgba(255,255,255,0.55);margin-bottom:32px;max-width:500px}
+.option-label{text-align:center;margin-bottom:32px;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:#4a6cf7;font-weight:600}
+.mono{font-family:'JetBrains Mono',monospace}
+
+.dash{border:1px solid rgba(255,255,255,0.08);background:#000;border-radius:8px;overflow:hidden}
+.dash-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dash-dot{width:8px;height:8px;border-radius:50%;background:#4a6cf7;box-shadow:0 0 6px #4a6cf7,0 0 12px rgba(74,108,247,0.5);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.dash-hero{padding:20px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dash-hero-num{font-size:clamp(36px,8vw,56px);font-weight:800;color:#4a6cf7;letter-spacing:-0.03em}
+.dash-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dash-tab{flex:1;padding:10px;text-align:center;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s ease}
+.dash-tab.active{color:#4a6cf7;border-bottom-color:#4a6cf7;background:rgba(74,108,247,0.04)}
+.dash-tab:hover:not(.active){color:rgba(255,255,255,0.5)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.dash-body{padding:16px 20px}
+.dash-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.dash-row:last-child{border-bottom:none}
+.dash-rank{width:20px;font-size:10px;color:rgba(74,108,247,0.5);letter-spacing:0.1em;flex-shrink:0}
+.dash-name{flex:1;font-size:12px;color:rgba(255,255,255,0.85)}
+.dash-views{font-size:10px;color:rgba(255,255,255,0.4);flex-shrink:0}
+.dash-time{font-size:11px;font-weight:600;color:#4a6cf7;width:56px;text-align:right;flex-shrink:0}
+.dash-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-top:1px solid rgba(255,255,255,0.08)}
+
+/* Overview tab */
+.demo-section-label{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px}
+.loc-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.loc-name{width:100px;font-size:11px;color:rgba(255,255,255,0.6);flex-shrink:0}
+.loc-bar-bg{flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,0.04);overflow:hidden}
+.loc-bar{height:100%;border-radius:3px;background:#4a6cf7}
+.loc-pct{width:36px;text-align:right;font-size:11px;font-weight:600;color:#4a6cf7;flex-shrink:0}
+.gender-bar{display:flex;height:8px;border-radius:4px;overflow:hidden;background:rgba(255,255,255,0.04);margin-bottom:8px}
+.gender-bar .m{background:#4a6cf7}
+.gender-bar .f{background:#7a9cff}
+.gender-labels{display:flex;justify-content:space-between}
+.gender-label{font-size:10px;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:4px}
+.gender-dot{width:6px;height:6px;border-radius:50%}
+.age-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.age-label{width:36px;font-size:10px;color:rgba(255,255,255,0.5);flex-shrink:0}
+.age-bar-bg{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,0.04);overflow:hidden}
+.age-bar{height:100%;border-radius:3px;background:#4a6cf7}
+.age-pct{width:28px;text-align:right;font-size:10px;font-weight:600;color:#4a6cf7;flex-shrink:0}
+
+/* Article tab */
+.article-preview{position:relative;height:480px;overflow:hidden}
+.article-preview iframe{width:200%;height:200%;border:none;transform:scale(0.5);transform-origin:top left;pointer-events:none}
+.article-fade{position:absolute;bottom:0;left:0;right:0;height:180px;background:linear-gradient(to bottom,transparent,#000);pointer-events:none;z-index:2}
+.article-cta{position:absolute;bottom:24px;left:0;right:0;z-index:3;display:flex;justify-content:center}
+.article-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:#4a6cf7;color:#fff;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;transition:all 0.3s ease;text-decoration:none;box-shadow:0 0 24px rgba(74,108,247,0.3)}
+.article-btn:hover{background:#5a7cff;box-shadow:0 0 40px rgba(74,108,247,0.5)}
+.article-btn svg{width:13px;height:13px}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="option-label">Integration 1 — Article as Third Tab in Dashboard</div>
+  <div class="label">Sample Insights</div>
+  <div class="heading">What We Know, <span>They Don't.</span></div>
+  <div class="subtext">We run your content and track exactly who reads it. You get a full intelligence report. No guesswork.</div>
+
+  <div class="dash">
+    <div class="dash-header">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="dash-dot"></span>
+        <span class="mono" style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#e8e2d6">Campaign Report</span>
+      </div>
+      <span class="mono" style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25)">SAMPLE</span>
+    </div>
+    <div class="dash-hero">
+      <div class="dash-hero-num">312,840</div>
+      <div class="mono" style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.35)">Total Article Views</div>
+    </div>
+    <div class="dash-tabs">
+      <div class="dash-tab active" onclick="switchTab(0)">Overview</div>
+      <div class="dash-tab" onclick="switchTab(1)">Audience Breakdown</div>
+      <div class="dash-tab" onclick="switchTab(2)">Sample Article</div>
+    </div>
+
+    <!-- Tab 0: Overview -->
+    <div class="tab-content active" id="tab0">
+      <div class="dash-body">
+        <div class="demo-section-label mono">Location</div>
+        <div class="loc-row"><span class="loc-name mono">Kuwait</span><div class="loc-bar-bg"><div class="loc-bar" style="width:86%"></div></div><span class="loc-pct mono">86%</span></div>
+        <div class="loc-row"><span class="loc-name mono">Qatar</span><div class="loc-bar-bg"><div class="loc-bar" style="width:81%"></div></div><span class="loc-pct mono">81%</span></div>
+        <div class="loc-row"><span class="loc-name mono">UAE</span><div class="loc-bar-bg"><div class="loc-bar" style="width:78%"></div></div><span class="loc-pct mono">78%</span></div>
+        <div class="loc-row"><span class="loc-name mono">Bahrain</span><div class="loc-bar-bg"><div class="loc-bar" style="width:73%"></div></div><span class="loc-pct mono">73%</span></div>
+        <div class="loc-row"><span class="loc-name mono">Saudi Arabia</span><div class="loc-bar-bg"><div class="loc-bar" style="width:72%"></div></div><span class="loc-pct mono">72%</span></div>
+        <div class="loc-row"><span class="loc-name mono">Oman</span><div class="loc-bar-bg"><div class="loc-bar" style="width:68%"></div></div><span class="loc-pct mono">68%</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:20px">
+          <div>
+            <div class="demo-section-label mono">Gender</div>
+            <div class="gender-bar"><div class="m" style="width:74%"></div><div class="f" style="width:26%"></div></div>
+            <div class="gender-labels">
+              <span class="gender-label mono"><span class="gender-dot" style="background:#4a6cf7"></span>74% Male</span>
+              <span class="gender-label mono"><span class="gender-dot" style="background:#7a9cff"></span>26% Female</span>
+            </div>
+          </div>
+          <div>
+            <div class="demo-section-label mono">Age Range</div>
+            <div class="age-row"><span class="age-label mono">25-34</span><div class="age-bar-bg"><div class="age-bar" style="width:89%"></div></div><span class="age-pct mono">89%</span></div>
+            <div class="age-row"><span class="age-label mono">35-44</span><div class="age-bar-bg"><div class="age-bar" style="width:94%"></div></div><span class="age-pct mono">94%</span></div>
+            <div class="age-row"><span class="age-label mono">45-54</span><div class="age-bar-bg"><div class="age-bar" style="width:76%"></div></div><span class="age-pct mono">76%</span></div>
+            <div class="age-row"><span class="age-label mono">55+</span><div class="age-bar-bg"><div class="age-bar" style="width:71%"></div></div><span class="age-pct mono">71%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 1: Audience -->
+    <div class="tab-content" id="tab1">
+      <div class="dash-body">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <span class="mono" style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3)">Top Companies</span>
+          <span class="mono" style="font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.2)">Avg. Read Time</span>
+        </div>
+        <div class="dash-row"><span class="dash-rank mono">01</span><span class="dash-name mono">Saudi Aramco</span><span class="dash-views mono">8,740 views</span><span class="dash-time mono">5m 42s</span></div>
+        <div class="dash-row"><span class="dash-rank mono">02</span><span class="dash-name mono">McKinsey & Company</span><span class="dash-views mono">6,320 views</span><span class="dash-time mono">7m 18s</span></div>
+        <div class="dash-row"><span class="dash-rank mono">03</span><span class="dash-name mono">Goldman Sachs</span><span class="dash-views mono">5,180 views</span><span class="dash-time mono">4m 36s</span></div>
+        <div class="dash-row"><span class="dash-rank mono">04</span><span class="dash-name mono">Qatar Energy</span><span class="dash-views mono">4,650 views</span><span class="dash-time mono">6m 14s</span></div>
+        <div class="dash-row"><span class="dash-rank mono">05</span><span class="dash-name mono">JPMorgan Chase</span><span class="dash-views mono">3,890 views</span><span class="dash-time mono">4m 03s</span></div>
+        <div class="dash-row"><span class="dash-rank mono">06</span><span class="dash-name mono">Deloitte</span><span class="dash-views mono">3,210 views</span><span class="dash-time mono">8m 27s</span></div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Article -->
+    <div class="tab-content" id="tab2">
+      <div class="article-preview">
+        <iframe src="/dwm-article-full.html" scrolling="no" loading="lazy"></iframe>
+        <div class="article-fade"></div>
+        <div class="article-cta">
+          <a href="/dwm-article-full.html" target="_blank" class="article-btn">
+            Read Full Article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-footer">
+      <span class="mono" style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35)">DWM Audience Intelligence Platform</span>
+      <div style="display:flex;align-items:center;gap:6px"><span style="width:4px;height:4px;background:#4a6cf7"></span><span class="mono" style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5)">SAMPLE</span></div>
+    </div>
+  </div>
+</div>
+<script>
+function switchTab(n){
+  document.querySelectorAll('.dash-tab').forEach((t,i)=>t.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab-content').forEach((c,i)=>c.classList.toggle('active',i===n));
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option 1 — Table + Full-Width Preview Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#050505;color:#fff;font-family:'Inter',sans-serif;min-height:100vh;padding:60px 24px}
+.container{max-width:1200px;width:100%;margin:0 auto}
+.label{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:12px;font-weight:600}
+.heading{font-size:clamp(24px,4vw,48px);font-weight:800;letter-spacing:-0.02em;line-height:1.05;margin-bottom:8px;text-transform:uppercase}
+.heading span{color:#4a6cf7}
+.subtext{font-size:13.5px;line-height:1.7;color:rgba(255,255,255,0.55);margin-bottom:32px;max-width:500px}
+.option-label{text-align:center;margin-bottom:32px;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:#4a6cf7;font-weight:600}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* ===== DASHBOARD TABLE ===== */
+.dash{border:1px solid rgba(255,255,255,0.08);background:#000;border-radius:8px;overflow:hidden}
+.dash-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dash-dot{width:8px;height:8px;border-radius:50%;background:#4a6cf7;box-shadow:0 0 6px #4a6cf7,0 0 12px rgba(74,108,247,0.5);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.dash-hero{padding:20px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dash-hero-num{font-family:'Inter',sans-serif;font-size:clamp(36px,8vw,56px);font-weight:800;color:#4a6cf7;letter-spacing:-0.03em}
+.dash-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dash-tab{flex:1;padding:10px;text-align:center;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);cursor:pointer;border-bottom:2px solid transparent}
+.dash-tab.active{color:#4a6cf7;border-bottom-color:#4a6cf7;background:rgba(74,108,247,0.04)}
+.dash-body{padding:16px 20px}
+.dash-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.dash-row:last-child{border-bottom:none}
+.dash-rank{width:20px;font-size:10px;color:rgba(74,108,247,0.5);letter-spacing:0.1em;flex-shrink:0}
+.dash-name{flex:1;font-size:12px;color:rgba(255,255,255,0.85)}
+.dash-views{font-size:10px;color:rgba(255,255,255,0.4);flex-shrink:0}
+.dash-time{font-size:11px;font-weight:600;color:#4a6cf7;width:56px;text-align:right;flex-shrink:0}
+.dash-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-top:1px solid rgba(255,255,255,0.08)}
+
+/* ===== SPACER ===== */
+.section-spacer{height:28px;display:flex;align-items:center;justify-content:center}
+.spacer-line{width:40px;height:1px;background:rgba(74,108,247,0.2)}
+
+/* ===== PREVIEW CARD ===== */
+.preview-card{position:relative;border:1px solid rgba(74,108,247,0.25);border-radius:6px;overflow:hidden;background:#0a0a0a;box-shadow:0 0 60px rgba(74,108,247,0.08),0 0 0 1px rgba(74,108,247,0.06)}
+.preview-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(10,10,10,0.95);border-bottom:1px solid rgba(74,108,247,0.12);backdrop-filter:blur(8px);z-index:10;position:relative}
+.preview-bar-left{display:flex;align-items:center;gap:10px}
+.preview-dots{display:flex;gap:5px}
+.preview-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.1)}
+.preview-bar-title{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);font-weight:600}
+.preview-bar-tag{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border:1px solid rgba(74,108,247,0.25);color:#4a6cf7;background:rgba(74,108,247,0.06);border-radius:2px}
+.preview-window{position:relative;height:500px;overflow:hidden}
+.preview-window iframe{width:200%;height:200%;border:none;transform:scale(0.5);transform-origin:top left;pointer-events:none}
+.preview-fade{position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to bottom,transparent,#0a0a0a);pointer-events:none;z-index:2}
+.preview-cta{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:32px;display:flex;align-items:center;justify-content:center}
+.preview-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:#4a6cf7;color:#fff;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;transition:all 0.3s ease;text-decoration:none;box-shadow:0 0 24px rgba(74,108,247,0.3)}
+.preview-btn:hover{background:#5a7cff;box-shadow:0 0 40px rgba(74,108,247,0.5);transform:translateY(-1px)}
+.preview-btn svg{width:14px;height:14px}
+.corner{position:absolute;width:12px;height:12px;z-index:4}
+.corner-tl{top:0;left:0;border-top:1px solid #4a6cf7;border-left:1px solid #4a6cf7}
+.corner-tr{top:0;right:0;border-top:1px solid #4a6cf7;border-right:1px solid #4a6cf7}
+.corner-bl{bottom:0;left:0;border-bottom:1px solid #4a6cf7;border-left:1px solid #4a6cf7}
+.corner-br{bottom:0;right:0;border-bottom:1px solid #4a6cf7;border-right:1px solid #4a6cf7}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="option-label">Option 1 — Table + Full-Width Preview Card Below</div>
+  <div class="label">Sample Insights</div>
+  <div class="heading">What We Know, <span>They Don't.</span></div>
+  <div class="subtext">We run your content and track exactly who reads it. You get a full intelligence report. No guesswork.</div>
+
+  <!-- Dashboard Table -->
+  <div class="dash">
+    <div class="dash-header">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="dash-dot"></span>
+        <span class="mono" style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#e8e2d6">Campaign Report</span>
+      </div>
+      <span class="mono" style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25)">SAMPLE</span>
+    </div>
+    <div class="dash-hero">
+      <div class="dash-hero-num">312,840</div>
+      <div class="mono" style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.35)">Total Article Views</div>
+    </div>
+    <div class="dash-tabs">
+      <div class="dash-tab">Overview</div>
+      <div class="dash-tab active">Audience Breakdown</div>
+    </div>
+    <div class="dash-body">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <span class="mono" style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3)">Top Companies</span>
+        <span class="mono" style="font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.2)">Avg. Read Time</span>
+      </div>
+      <div class="dash-row"><span class="dash-rank mono">01</span><span class="dash-name mono">Saudi Aramco</span><span class="dash-views mono">8,740 views</span><span class="dash-time mono">5m 42s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">02</span><span class="dash-name mono">McKinsey & Company</span><span class="dash-views mono">6,320 views</span><span class="dash-time mono">7m 18s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">03</span><span class="dash-name mono">Goldman Sachs</span><span class="dash-views mono">5,180 views</span><span class="dash-time mono">4m 36s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">04</span><span class="dash-name mono">Qatar Energy</span><span class="dash-views mono">4,650 views</span><span class="dash-time mono">6m 14s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">05</span><span class="dash-name mono">JPMorgan Chase</span><span class="dash-views mono">3,890 views</span><span class="dash-time mono">4m 03s</span></div>
+      <div class="dash-row"><span class="dash-rank mono">06</span><span class="dash-name mono">Deloitte</span><span class="dash-views mono">3,210 views</span><span class="dash-time mono">8m 27s</span></div>
+    </div>
+    <div class="dash-footer">
+      <span class="mono" style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35)">DWM Audience Intelligence Platform</span>
+      <div style="display:flex;align-items:center;gap:6px"><span style="width:4px;height:4px;background:#4a6cf7"></span><span class="mono" style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5)">SAMPLE</span></div>
+    </div>
+  </div>
+
+  <div class="section-spacer"><div class="spacer-line"></div></div>
+
+  <!-- Article Preview Card -->
+  <div class="preview-card">
+    <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
+    <div class="preview-bar">
+      <div class="preview-bar-left">
+        <div class="preview-dots"><span></span><span></span><span></span></div>
+        <span class="preview-bar-title">Sample Article</span>
+      </div>
+      <span class="preview-bar-tag">DWM Intelligence</span>
+    </div>
+    <div class="preview-window">
+      <iframe src="/dwm-article-full.html" scrolling="no" loading="lazy"></iframe>
+      <div class="preview-fade"></div>
+      <div class="preview-cta">
+        <a href="/dwm-article-full.html" target="_blank" class="preview-btn">
+          Read Full Article
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
