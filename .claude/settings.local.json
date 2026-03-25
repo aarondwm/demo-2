@@ -17,7 +17,9 @@
       "Bash(__NEW_LINE_5a1de5663234133d__ python3:*)",
       "Bash(__NEW_LINE_146b451cbaba7aa8__ python3:*)",
       "Bash(__NEW_LINE_4166e6d0d828960f__ python3:*)",
-      "Bash(__NEW_LINE_23495ebd432f14a8__ python3:*)"
+      "Bash(__NEW_LINE_23495ebd432f14a8__ python3:*)",
+      "Bash(ls /Users/aaron/Desktop/demo-2/public/dwm-gcc-map-v2*)",
+      "Bash(ls /Users/aaron/Desktop/demo-2/public/*.html)"
     ]
   }
 }

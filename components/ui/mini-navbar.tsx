@@ -224,7 +224,7 @@ export function Navbar() {
               clipPath: "circle(38% at 50% 50%)",
             }}
           />
-          <span className="hidden sm:block ml-2 font-bold uppercase tracking-[0.08em]" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "20px", color: "#e8e8e8" }}>Diwaniya Media</span>
+          <span className="hidden sm:block ml-2 font-bold uppercase tracking-[0.08em]" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "15px", color: "#e8e8e8" }}>Diwaniya Media</span>
         </a>
 
         {/* Desktop nav */}
@@ -244,7 +244,7 @@ export function Navbar() {
         <div className="flex items-center gap-3 flex-shrink-0">
           <a
             href="/contact"
-            className="group hidden sm:inline-flex items-center h-11 font-mono text-[12px] tracking-[0.22em] uppercase text-black font-bold relative overflow-hidden"
+            className="group hidden sm:inline-flex items-center h-11 font-mono text-[15px] tracking-[0.22em] uppercase text-black font-bold relative overflow-hidden"
             style={{ borderRadius: "12px", transform: "translateZ(0)" }}
           >
             {/* Static white background */}
