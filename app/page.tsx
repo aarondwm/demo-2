@@ -386,7 +386,7 @@ function ScrambleNumber({ value, trigger }: { value: string; trigger: number }) 
 
 /* ── Campaign Dashboard ──────────────────────────────────────────────────── */
 const DASH_AUDIENCE = [
-  { rank: "01", name: "Saudi Aramco", views: 8740, avgRead: "5m 42s", roles: [{ role: "CEO", count: 2 }, { role: "Director", count: 14 }, { role: "Manager", count: 67 }, { role: "Analyst", count: 312 }] },
+  { rank: "01", name: "Saudi Aramco", views: 8740, avgRead: "5m 42s", roles: [{ role: "CEO", count: 1 }, { role: "Director", count: 14 }, { role: "Manager", count: 67 }, { role: "Analyst", count: 312 }] },
   { rank: "02", name: "McKinsey & Company", views: 6320, avgRead: "7m 18s", roles: [{ role: "Partner", count: 5 }, { role: "Director", count: 19 }, { role: "Manager", count: 48 }, { role: "Analyst", count: 241 }] },
   { rank: "03", name: "Goldman Sachs", views: 5180, avgRead: "4m 36s", roles: [{ role: "CEO", count: 1 }, { role: "VP", count: 11 }, { role: "Manager", count: 39 }, { role: "Analyst", count: 287 }] },
   { rank: "04", name: "Qatar Energy", views: 4650, avgRead: "6m 14s", roles: [{ role: "Director", count: 7 }, { role: "Manager", count: 52 }, { role: "Engineer", count: 134 }, { role: "Analyst", count: 178 }] },
@@ -465,11 +465,11 @@ function CampaignDashboard() {
         </div>
         {/* Content */}
         <div className="relative z-[5] flex flex-col items-center" style={{ marginTop: "16px" }}>
-          <div className="flex flex-col md:flex-row items-center md:items-baseline gap-1 md:gap-3">
-            <span style={{ fontFamily: "'Neue Montreal', sans-serif", fontSize: "clamp(36px, 9vw, 64px)", fontWeight: 800, color: "#4a6cf7", letterSpacing: "-0.03em", textShadow: "0 0 40px rgba(74,108,247,0.4), 0 0 12px rgba(74,108,247,0.2)" }}>
+          <div className="flex flex-col items-center gap-1">
+            <span style={{ fontFamily: "'Neue Montreal', sans-serif", fontSize: "clamp(28px, 7vw, 48px)", fontWeight: 800, color: "#4a6cf7", letterSpacing: "-0.03em", textShadow: "0 0 40px rgba(74,108,247,0.4), 0 0 12px rgba(74,108,247,0.2)" }}>
               {visible ? <AnimatedViewCount value={312840} /> : "0"}
             </span>
-            <span className="font-mono uppercase" style={{ fontSize: "clamp(8px, 2vw, 10px)", letterSpacing: "0.22em", color: "#ffffff" }}>Total Article Views</span>
+            <span className="font-mono uppercase" style={{ fontSize: "clamp(7px, 1.8vw, 9px)", letterSpacing: "0.22em", color: "rgba(255,255,255,0.5)" }}>Total Article Views</span>
           </div>
           <a
             href="/dwm-article-full.html"
@@ -1043,7 +1043,7 @@ export default function Home() {
             style={{ animation: "reveal-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards" }}
           >
             <div className="flex items-center justify-center w-full text-center">
-              <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em", textAlign: "center" }}><ScrambleOnView text="Proprietary GCC Media & Insight Technology" delay={0} style={{ display: "inline" }} /></span>
+              <span className="sys-label" style={{ fontSize: "14px", letterSpacing: "0.3em", textAlign: "center" }}><ScrambleOnView text="Proprietary GCC Media & Insight Technology" delay={0} style={{ display: "inline" }} /></span>
             </div>
           </div>
 
@@ -1362,7 +1362,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 md:px-10 py-10 md:py-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-6 md:gap-10">
           <div className="flex flex-col gap-4">
             <img src="/D*M website.png" alt="DWM" className="h-9 w-auto self-start" />
-            <p className="text-[11px] tracking-[0.08em] text-white/60 max-w-xs leading-relaxed" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif" }}>
+            <p className="font-mono text-[11px] tracking-[0.08em] text-white/60 max-w-xs leading-relaxed">
               Proprietary GCC Media &amp; Insight Technology
             </p>
           </div>
@@ -1385,11 +1385,11 @@ export default function Home() {
             ]},
           ].map((col) => (
             <div key={col.heading} className="flex flex-col gap-4">
-              <span className="text-[9px] tracking-[0.2em] uppercase text-white/70" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif" }}>{col.heading}</span>
+              <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/70">{col.heading}</span>
               <ul className="flex flex-col gap-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <a href={link.href} className="text-[11px] tracking-[0.08em] uppercase text-white/50 hover:text-white/80 transition-colors duration-200" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif" }}>
+                    <a href={link.href} className="font-mono text-[11px] tracking-[0.12em] uppercase text-white/50 hover:text-white/80 transition-colors duration-200">
                       {link.label}
                     </a>
                   </li>
@@ -1402,7 +1402,7 @@ export default function Home() {
         <div className="relative px-6 md:px-10 py-5">
           <div aria-hidden className="absolute top-0 left-[10%] right-[10%] h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0.08) 70%, transparent)" }} />
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <span className="text-[9px] tracking-[0.1em] uppercase text-white/50" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif" }}>
+            <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/50">
               © 2026 Diwaniya Media. All rights reserved.
             </span>
           </div>
