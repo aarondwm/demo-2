@@ -354,7 +354,7 @@ function wipeAndNavigate(href) {
   wipe.innerHTML = '<img src="/D*M website.png" alt="DWM">';
   document.body.appendChild(wipe);
   wipe.addEventListener('animationend', function() {
-    var dest = href.indexOf('#') !== -1 ? href.replace('#', '#_wipe') : href + '#_wipe';
+    var dest = href.indexOf('#') !== -1 ? href + '_wipe' : href + '#_wipe';
     window.location.href = dest;
   });
 }

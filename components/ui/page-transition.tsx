@@ -14,9 +14,15 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash.includes("_wipe")) {
       setPhase("wipe-out");
-      /* Clean up the hash */
+      /* Clean up the hash and scroll to the anchor */
       const cleanHash = window.location.hash.replace("_wipe", "");
       window.history.replaceState(null, "", window.location.pathname + cleanHash);
+      if (cleanHash && cleanHash.length > 1) {
+        setTimeout(() => {
+          const el = document.querySelector(cleanHash);
+          if (el) el.scrollIntoView({ behavior: "instant" });
+        }, 100);
+      }
     }
   }, []);
 
