@@ -277,7 +277,7 @@ a{color:inherit;text-decoration:none}
 <div class="page-wipe"><img src="/D*M website.png" alt="DWM"></div>
 
 <nav class="nav">
-  <a href="/" class="nav-brand" style="text-decoration:none">
+  <a href="/#sample-insights" class="nav-brand" style="text-decoration:none">
     <span class="nav-logo-icon"></span>
     <span class="nav-logo-text">Diwaniya Media</span>
   </a>
@@ -348,16 +348,25 @@ a{color:inherit;text-decoration:none}
 
 
 <script>
-document.querySelector('.nav-back').addEventListener('click', function(e) {
-  e.preventDefault();
-  var href = this.getAttribute('href');
+function wipeAndNavigate(href) {
   var wipe = document.createElement('div');
   wipe.className = 'page-wipe-in';
   wipe.innerHTML = '<img src="/D*M website.png" alt="DWM">';
   document.body.appendChild(wipe);
   wipe.addEventListener('animationend', function() {
-    window.location.href = href.replace('#', '#_wipe');
+    var dest = href.indexOf('#') !== -1 ? href.replace('#', '#_wipe') : href + '#_wipe';
+    window.location.href = dest;
   });
+}
+
+document.querySelector('.nav-back').addEventListener('click', function(e) {
+  e.preventDefault();
+  wipeAndNavigate(this.getAttribute('href'));
+});
+
+document.querySelector('.nav-brand').addEventListener('click', function(e) {
+  e.preventDefault();
+  wipeAndNavigate(this.getAttribute('href'));
 });
 </script>
 </body>

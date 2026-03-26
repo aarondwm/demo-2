@@ -20,6 +20,23 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  /* Reset on browser back/forward — prevents stuck blue screen */
+  useEffect(() => {
+    const reset = () => {
+      pendingHref.current = null;
+      setPhase("idle");
+    };
+    /* popstate fires on back/forward navigation */
+    window.addEventListener("popstate", reset);
+    /* pageshow fires when Safari restores from bfcache */
+    window.addEventListener("pageshow", (e) => {
+      if (e.persisted) reset();
+    });
+    return () => {
+      window.removeEventListener("popstate", reset);
+    };
+  }, []);
+
   /* Intercept all <a> clicks that navigate to a different page */
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {

@@ -244,7 +244,7 @@ export function Navbar() {
         <div className="flex items-center gap-3 flex-shrink-0">
           <a
             href="/contact"
-            className="group hidden sm:inline-flex items-center h-9 font-mono text-[13px] tracking-[0.14em] uppercase text-black font-medium relative overflow-hidden"
+            className="group hidden sm:inline-flex items-center h-9 font-mono text-[13px] tracking-[0.14em] uppercase text-black font-bold relative overflow-hidden"
             style={{ borderRadius: "12px", transform: "translateZ(0)" }}
           >
             {/* Static white background */}
