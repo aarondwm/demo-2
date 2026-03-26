@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BG 4 — Section Color Shifts</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;
+  color:#fff;
+  font-family:'Inter',sans-serif;
+  background:#050505;
+}
+.label{position:fixed;top:20px;left:50%;transform:translateX(-50%);font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:#4a6cf7;font-weight:600;z-index:10;background:rgba(0,0,0,0.5);padding:8px 20px;backdrop-filter:blur(8px);border:1px solid rgba(74,108,247,0.2);border-radius:4px}
+.content{max-width:800px;margin:0 auto;padding:20px 24px;position:relative;z-index:1}
+h1{font-size:clamp(30px,5vw,56px);font-weight:800;letter-spacing:-0.02em;margin-bottom:16px;text-transform:uppercase}
+h1 span{color:#4a6cf7}
+p{font-size:15px;line-height:1.8;color:rgba(255,255,255,0.5);margin-bottom:40px}
+.card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);padding:24px;margin-bottom:16px;border-radius:6px}
+.card-title{font-size:14px;font-weight:700;color:#e8e8e8;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px}
+.card-body{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7}
+
+/* Each section has a different subtle background tone */
+.sec{padding:clamp(48px,10vw,96px) 0;position:relative}
+
+.sec-hero{
+  background:linear-gradient(180deg, #050505 0%, #080c16 100%);
+}
+.sec-placement{
+  background:linear-gradient(180deg, #080c16 0%, #0a0e18 40%, #080c14 100%);
+}
+.sec-placement::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(74,108,247,0.15), transparent);
+}
+.sec-targeting{
+  background:linear-gradient(180deg, #080c14 0%, #060a10 40%, #04080e 100%);
+  position:relative;
+}
+.sec-targeting::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(74,108,247,0.12), transparent);
+}
+/* Accent glow blob */
+.sec-targeting::after{
+  content:'';position:absolute;top:20%;right:0;width:40%;height:60%;
+  background:radial-gradient(ellipse at 100% 50%, rgba(74,108,247,0.06) 0%, transparent 70%);
+  pointer-events:none;
+}
+.sec-insights{
+  background:linear-gradient(180deg, #04080e 0%, #060810 40%, #050508 100%);
+}
+.sec-insights::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(74,108,247,0.10), transparent);
+}
+.sec-reviews{
+  background:linear-gradient(180deg, #050508 0%, #080a10 50%, #050505 100%);
+}
+.sec-reviews::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+.sec-cta{
+  background:linear-gradient(180deg, #050505 0%, #0a0c14 50%, #060810 100%);
+}
+.sec-cta::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(74,108,247,0.15), transparent);
+}
+</style>
+</head>
+<body>
+<div class="label">BG 4 — Per-Section Gradient Shifts</div>
+
+<div class="sec sec-hero">
+  <div class="content">
+    <h1>What We Know, <span>They Don't.</span></h1>
+    <p>Each section gradually shifts its background tone — from pure black to deep navy to charcoal and back. The transitions between sections are seamless. Blue glow accents appear selectively to draw attention.</p>
+  </div>
+</div>
+
+<div class="sec sec-placement">
+  <div class="content">
+    <h1>Your Story. <span>Guaranteed.</span></h1>
+    <p>This section has a slightly warmer navy undertone.</p>
+    <div class="card"><div class="card-title">Confirmed Placement</div><div class="card-body">Your content is placed, not pitched. Every partner publication is pre-contracted.</div></div>
+    <div class="card"><div class="card-title">Gulf-Wide Network</div><div class="card-body">Kuwait, UAE, Saudi Arabia, Bahrain, Qatar, Oman.</div></div>
+  </div>
+</div>
+
+<div class="sec sec-targeting">
+  <div class="content">
+    <h1>Target Anyone. <span>Anywhere.</span></h1>
+    <p>A subtle blue glow bleeds in from the right edge, drawing the eye toward the map area. The background shifts cooler.</p>
+    <div class="card"><div class="card-title">Audience Selection</div><div class="card-body">Select by industry, seniority, company, or geography.</div></div>
+  </div>
+</div>
+
+<div class="sec sec-insights">
+  <div class="content">
+    <h1>Sample <span>Insights</span></h1>
+    <p>Deepest, darkest section — makes the blue data visualizations pop.</p>
+    <div class="card"><div class="card-title">Campaign Report</div><div class="card-body">312,840 total article views across 6 GCC markets.</div></div>
+  </div>
+</div>
+
+<div class="sec sec-reviews">
+  <div class="content">
+    <h1>In Their <span>Own Words</span></h1>
+    <p>Shifts back to a neutral charcoal. Testimonial cards feel grounded and authentic against this warmer dark.</p>
+    <div class="card"><div class="card-title">CEO, Kuwait Real Estate</div><div class="card-body">"I genuinely didn't believe it at first. They sent us a link to our article live on a real news site."</div></div>
+  </div>
+</div>
+
+<div class="sec sec-cta">
+  <div class="content">
+    <h1>Start with a Briefing. <span>See What Returns.</span></h1>
+    <p>Final section returns to the blue-tinted dark, creating a sense of coming full circle. The blue accents here feel intentional and action-oriented.</p>
+  </div>
+</div>
+</body>
+</html>
