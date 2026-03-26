@@ -120,8 +120,11 @@ function ScrambledLine({
   }, [text, delay, loopInterval]);
 
   return (
-    <span ref={ref} className={className} style={{ display: "block", opacity: 0, ...style }}>
-      {text}
+    <span className={className} style={{ display: "block", position: "relative", ...style }}>
+      {/* Invisible placeholder reserves exact space */}
+      <span style={{ visibility: "hidden" }} aria-hidden="true">{text}</span>
+      {/* Scramble renders on top */}
+      <span ref={ref} style={{ position: "absolute", top: 0, left: 0, right: 0, opacity: 0 }}>{text}</span>
     </span>
   );
 }
