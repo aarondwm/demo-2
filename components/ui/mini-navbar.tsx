@@ -263,7 +263,7 @@ export function Navbar() {
 
           {/* Animated toggle (header-3 MenuToggleIcon) */}
           <button
-            className="lg:hidden w-10 h-10 border border-white/[0.08] flex items-center justify-center text-white/30 hover:text-white hover:border-[#4a6cf7]/40 transition-colors"
+            className="lg:hidden w-11 h-11 border border-white/[0.08] flex items-center justify-center text-white/30 hover:text-white hover:border-[#4a6cf7]/40 transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"

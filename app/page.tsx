@@ -1419,7 +1419,7 @@ export default function Home() {
           position: "fixed",
           bottom: "24px",
           right: "24px",
-          zIndex: 9990,
+          zIndex: 50,
           width: "56px",
           height: "56px",
           borderRadius: "50%",
