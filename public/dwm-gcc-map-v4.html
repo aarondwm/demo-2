@@ -709,6 +709,18 @@ function renderCard(country) {
   const d = audienceData[country];
   if (!d) return;
 
+  const indHTML = d.industries.slice(0, 3).map(([name, count, pct]) =>
+    `<div class="hc-ind-row">
+      <span class="hc-ind-name">${name}</span>
+      <div class="hc-ind-bar-bg"><div class="hc-ind-bar" data-width="${pct}"></div></div>
+      <span class="hc-ind-count">${count}</span>
+    </div>`
+  ).join('');
+
+  const compHTML = d.companies.slice(0, 3).map(c =>
+    `<span class="hc-company">${c}</span>`
+  ).join('');
+
   hoverContent.innerHTML = `
     <div class="hc-header">
       <span class="hc-country">${country.toUpperCase()}</span>
@@ -722,15 +734,12 @@ function renderCard(country) {
       </div>
     </div>
     <div class="hc-section">
-      <div class="hc-section-title">Gender</div>
-      <div class="hc-gender-bar">
-        <div class="m" data-width="${d.gender[0]}" style="width:0"></div>
-        <div class="f" data-width="${d.gender[1]}" style="width:0"></div>
-      </div>
-      <div class="hc-gender-labels">
-        <span class="hc-gender-label"><span class="hc-gender-dot m"></span>${d.gender[0]}% M</span>
-        <span class="hc-gender-label"><span class="hc-gender-dot f"></span>${d.gender[1]}% F</span>
-      </div>
+      <div class="hc-section-title">Top Industries</div>
+      ${indHTML}
+    </div>
+    <div class="hc-section">
+      <div class="hc-section-title">Key Companies</div>
+      <div class="hc-companies">${compHTML}</div>
     </div>
   `;
 
@@ -748,7 +757,7 @@ function renderCard(country) {
   // Animate bars
   requestAnimationFrame(() => {
     setTimeout(() => {
-      hoverContent.querySelectorAll('.hc-gender-bar .m,.hc-gender-bar .f').forEach(bar => {
+      hoverContent.querySelectorAll('.hc-ind-bar,.hc-gender-bar .m,.hc-gender-bar .f').forEach(bar => {
         bar.style.width = bar.dataset.width + '%';
       });
     }, 120);

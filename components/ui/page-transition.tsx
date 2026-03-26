@@ -84,10 +84,9 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       const href = pendingHref.current;
       pendingHref.current = null;
 
-      /* Static files (.html) — full page navigation, then reset */
+      /* Static files (.html) — keep overlay visible, navigate away */
       if (href.endsWith(".html")) {
-        /* Reset phase BEFORE navigating so bfcache doesn't restore stuck state */
-        setPhase("idle");
+        setPhase("hold");
         window.location.href = href;
         return;
       }

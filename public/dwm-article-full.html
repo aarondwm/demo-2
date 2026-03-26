@@ -277,7 +277,7 @@ a{color:inherit;text-decoration:none}
 <div class="page-wipe"><img src="/D*M website.png" alt="DWM"></div>
 
 <nav class="nav">
-  <a href="/#sample-insights" class="nav-brand" style="text-decoration:none">
+  <a href="/" class="nav-brand" style="text-decoration:none">
     <span class="nav-logo-icon"></span>
     <span class="nav-logo-text">Diwaniya Media</span>
   </a>
@@ -354,6 +354,9 @@ function wipeAndNavigate(href) {
   wipe.innerHTML = '<img src="/D*M website.png" alt="DWM">';
   document.body.appendChild(wipe);
   wipe.addEventListener('animationend', function() {
+    /* Lock overlay in place — prevent any flash */
+    wipe.style.animation = 'none';
+    wipe.style.transform = 'translateX(0)';
     var dest = href.indexOf('#') !== -1 ? href + '_wipe' : href + '#_wipe';
     window.location.href = dest;
   });
