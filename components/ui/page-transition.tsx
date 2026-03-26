@@ -10,13 +10,14 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   const pendingHref = useRef<string | null>(null);
   const prevPath = useRef(pathname);
 
-  /* If arriving from a static page transition (e.g. article), play wipe-out */
+  /* ── On mount: if arriving with _wipe hash, play wipe-out and scroll to anchor ── */
   useEffect(() => {
-    if (typeof window !== "undefined" && window.location.hash.includes("_wipe")) {
-      setPhase("wipe-out");
-      /* Clean up the hash and scroll to the anchor */
-      const cleanHash = window.location.hash.replace("_wipe", "");
+    if (typeof window === "undefined") return;
+    const hash = window.location.hash;
+    if (hash.includes("_wipe")) {
+      const cleanHash = hash.replace("_wipe", "");
       window.history.replaceState(null, "", window.location.pathname + cleanHash);
+      setPhase("wipe-out");
       if (cleanHash && cleanHash.length > 1) {
         setTimeout(() => {
           const el = document.querySelector(cleanHash);
@@ -26,32 +27,26 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  /* Reset on browser back/forward — prevents stuck blue screen */
+  /* ── Always reset when page becomes visible (handles bfcache, tab switch, etc.) ── */
   useEffect(() => {
-    const reset = () => {
+    const onPageShow = (e: PageTransitionEvent) => {
+      /* Always reset on pageshow — bfcache or not */
+      setPhase((p) => p !== "idle" && p !== "wipe-out" ? "idle" : p);
+      pendingHref.current = null;
+    };
+    const onPopState = () => {
       pendingHref.current = null;
       setPhase("idle");
     };
-    const onPageShow = (e: PageTransitionEvent) => {
-      if (e.persisted) reset();
-    };
-    const onVisibility = () => {
-      if (document.visibilityState === "visible") {
-        /* If page becomes visible and we're stuck, reset */
-        setPhase((p) => (p === "hold" || p === "wipe-in") ? "idle" : p);
-      }
-    };
-    window.addEventListener("popstate", reset);
     window.addEventListener("pageshow", onPageShow);
-    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("popstate", onPopState);
     return () => {
-      window.removeEventListener("popstate", reset);
       window.removeEventListener("pageshow", onPageShow);
-      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("popstate", onPopState);
     };
   }, []);
 
-  /* Intercept all <a> clicks that navigate to a different page */
+  /* ── Intercept <a> clicks for page transitions ── */
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       const anchor = (e.target as HTMLElement).closest("a");
@@ -83,14 +78,16 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     return () => document.removeEventListener("click", handleClick, true);
   }, [phase]);
 
-  /* When wipe-in animation ends → navigate and hold */
+  /* ── When wipe-in animation ends → navigate ── */
   const handleAnimationEnd = useCallback(() => {
     if (phase === "wipe-in" && pendingHref.current) {
       const href = pendingHref.current;
       pendingHref.current = null;
 
-      /* Static files (.html) — use full page navigation */
+      /* Static files (.html) — full page navigation, then reset */
       if (href.endsWith(".html")) {
+        /* Reset phase BEFORE navigating so bfcache doesn't restore stuck state */
+        setPhase("idle");
         window.location.href = href;
         return;
       }
@@ -98,16 +95,16 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       router.push(href);
       setPhase("hold");
 
-      /* Safety: if pathname doesn't change within 1s, force wipe-out */
+      /* Safety: force wipe-out if pathname doesn't change in 800ms */
       setTimeout(() => {
         setPhase((p) => (p === "hold" ? "wipe-out" : p));
-      }, 1000);
+      }, 800);
     } else if (phase === "wipe-out") {
       setPhase("idle");
     }
   }, [phase, router]);
 
-  /* When pathname changes while holding → new page is rendered, start wipe-out */
+  /* ── When pathname changes while holding → start wipe-out ── */
   useEffect(() => {
     if (pathname !== prevPath.current) {
       prevPath.current = pathname;
