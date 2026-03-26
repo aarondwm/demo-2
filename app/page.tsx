@@ -1220,21 +1220,6 @@ export default function Home() {
               style={{ width: "100%", height: "clamp(380px, 70vh, 540px)", border: "none", display: "block" }}
               title="GCC Audience Slideshow"
             />
-            {/* Arrow buttons on top of iframe */}
-            <button
-              onClick={() => { const f = document.getElementById("slideshow-iframe") as HTMLIFrameElement; f?.contentWindow?.postMessage("prev", "*"); }}
-              style={{ position: "absolute", left: 4, top: "50%", transform: "translateY(-50%)", zIndex: 3, width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.5)", fontSize: 20, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}
-              aria-label="Previous"
-            >&lsaquo;</button>
-            <button
-              onClick={() => { const f = document.getElementById("slideshow-iframe") as HTMLIFrameElement; f?.contentWindow?.postMessage("next", "*"); }}
-              style={{ position: "absolute", right: 4, top: "50%", transform: "translateY(-50%)", zIndex: 3, width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.5)", fontSize: 20, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}
-              aria-label="Next"
-            >&rsaquo;</button>
-            {/* Overlay blocks iframe touch, allows page vertical scroll */}
-            <div
-              style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 2, touchAction: "pan-y" }}
-            />
           </div>
         </div>
       </section>

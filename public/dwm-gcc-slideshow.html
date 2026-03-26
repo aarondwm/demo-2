@@ -678,8 +678,36 @@ function goTo(index) {
 navLeft.addEventListener('click', () => goTo(current - 1));
 navRight.addEventListener('click', () => goTo(current + 1));
 
-// Disable all touch/wheel scrolling inside iframe — let parent page handle it
-// Only arrows and postMessage navigation remain active
+// Touch swipe — horizontal swipes cards, vertical scrolls parent page
+let startX = 0, startY = 0, dx = 0, dy = 0, direction = null;
+wrap.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+  startY = e.touches[0].clientY;
+  dx = 0; dy = 0;
+  direction = null;
+}, { passive: true });
+
+wrap.addEventListener('touchmove', e => {
+  const curX = e.touches[0].clientX;
+  const curY = e.touches[0].clientY;
+  dx = curX - startX;
+  dy = curY - startY;
+  if (!direction && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
+    direction = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v';
+  }
+}, { passive: true });
+
+wrap.addEventListener('touchend', () => {
+  if (direction === 'h') {
+    if (dx < -40) goTo(current + 1);
+    else if (dx > 40) goTo(current - 1);
+  }
+});
+
+// Forward mouse wheel to parent
+wrap.addEventListener('wheel', e => {
+  try { window.parent.scrollBy(0, e.deltaY); } catch(err){}
+}, { passive: true });
 
 // Tap progress segments to jump
 segs.forEach((s, i) => {
