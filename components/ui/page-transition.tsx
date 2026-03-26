@@ -10,6 +10,16 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   const pendingHref = useRef<string | null>(null);
   const prevPath = useRef(pathname);
 
+  /* If arriving from a static page transition (e.g. article), play wipe-out */
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash.includes("_wipe")) {
+      setPhase("wipe-out");
+      /* Clean up the hash */
+      const cleanHash = window.location.hash.replace("_wipe", "");
+      window.history.replaceState(null, "", window.location.pathname + cleanHash);
+    }
+  }, []);
+
   /* Intercept all <a> clicks that navigate to a different page */
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
