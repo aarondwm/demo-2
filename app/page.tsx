@@ -1207,10 +1207,8 @@ export default function Home() {
           {/* Mobile: GCC Slideshow */}
           <div className="block md:hidden" style={{
             position: "relative",
-            borderRadius: "4px",
-            border: "1px solid rgba(74,108,247,0.30)",
-            boxShadow: "0 0 0 1px rgba(74,108,247,0.06), 0 0 40px rgba(74,108,247,0.18), 0 0 80px rgba(74,108,247,0.08), inset 0 0 40px rgba(4,13,28,0.6)",
             overflow: "hidden",
+            background: "#050505",
             opacity: secMapVisible ? 1 : 0,
             transition: "opacity 0.6s ease 0.3s",
           }}>
@@ -1219,14 +1217,10 @@ export default function Home() {
               src="/dwm-gcc-slideshow.html"
               scrolling="no"
               loading="lazy"
-              style={{ width: "100%", height: "clamp(380px, 70vh, 540px)", border: "none", display: "block", pointerEvents: "none" }}
+              style={{ width: "100%", height: "clamp(380px, 70vh, 540px)", border: "none", display: "block" }}
               title="GCC Audience Slideshow"
             />
-            {/* Swipe overlay — captures horizontal swipes for cards, vertical passes to page */}
-            <div
-              id="slideshow-swipe-zone"
-              style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 2, touchAction: "pan-y" }}
-            />
+{/* No overlay — iframe handles its own interaction */}
           </div>
         </div>
       </section>
