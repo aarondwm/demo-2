@@ -1433,7 +1433,7 @@ export default function Home() {
           overflow: "hidden",
           textDecoration: "none",
         }}
-        onMouseEnter={(e) => { e.currentTarget.style.width = "210px"; e.currentTarget.style.gap = "12px"; }}
+        onMouseEnter={(e) => { e.currentTarget.style.width = "195px"; e.currentTarget.style.gap = "10px"; }}
         onMouseLeave={(e) => { e.currentTarget.style.width = "56px"; e.currentTarget.style.gap = "0px"; }}
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="white" style={{ flexShrink: 0 }}>
