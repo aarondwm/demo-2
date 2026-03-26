@@ -87,45 +87,90 @@ function ScrambledLine({
   delay = 0,
   className,
   style,
-  loopInterval = 2500,
+  trigger,
 }: {
   text: string;
   delay?: number;
   className?: string;
   style?: React.CSSProperties;
-  loopInterval?: number;
+  trigger?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
+  const hasInit = useRef(false);
 
+  /* Initial reveal on mount */
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     el.style.opacity = "0";
     const scrambler = new TextScramble(el, 30, true, 3.2, 5);
-    let loopTimer: ReturnType<typeof setTimeout>;
-
-    const run = () => {
+    const t = setTimeout(() => {
       el.style.opacity = "1";
       el.innerHTML = "";
-      scrambler.setText(text).then(() => {
-        loopTimer = setTimeout(run, loopInterval);
-      });
-    };
+      scrambler.setText(text).then(() => { hasInit.current = true; });
+    }, delay);
+    return () => clearTimeout(t);
+  }, [text, delay]);
 
-    const initTimer = setTimeout(run, delay);
-    return () => {
-      clearTimeout(initTimer);
-      clearTimeout(loopTimer);
-    };
-  }, [text, delay, loopInterval]);
+  /* Re-scramble when trigger changes */
+  useEffect(() => {
+    if (!hasInit.current || trigger === undefined || trigger === 0) return;
+    const el = ref.current;
+    if (!el) return;
+    const scrambler = new TextScramble(el, 30, true, 3.2, 5);
+    el.innerHTML = "";
+    scrambler.setText(text);
+  }, [trigger, text]);
 
   return (
     <span className={className} style={{ display: "block", position: "relative", ...style }}>
-      {/* Invisible placeholder reserves exact space */}
       <span style={{ visibility: "hidden" }} aria-hidden="true">{text}</span>
-      {/* Scramble renders on top */}
       <span ref={ref} style={{ position: "absolute", top: 0, left: 0, right: 0, opacity: 0 }}>{text}</span>
     </span>
+  );
+}
+
+/* Randomly triggers one hero line at a time */
+function HeroScrambleGroup() {
+  const [triggers, setTriggers] = useState([0, 0, 0]);
+
+  useEffect(() => {
+    /* Wait for initial animations to finish */
+    const interval = setInterval(() => {
+      const idx = Math.floor(Math.random() * 3);
+      setTriggers(prev => {
+        const next = [...prev];
+        next[idx] = prev[idx] + 1;
+        return next;
+      });
+    }, 5000 + Math.random() * 3000);
+
+    /* Start after initial reveals complete */
+    const startTimer = setTimeout(() => {}, 3000);
+    return () => { clearInterval(interval); clearTimeout(startTimer); };
+  }, []);
+
+  return (
+    <>
+      <ScrambledLine
+        text="RIGHT STORY."
+        delay={300}
+        trigger={triggers[0]}
+        className="text-white"
+      />
+      <ScrambledLine
+        text="RIGHT AUDIENCE."
+        delay={700}
+        trigger={triggers[1]}
+        style={{ color: "var(--accent)" }}
+      />
+      <ScrambledLine
+        text="REAL IMPACT."
+        delay={1100}
+        trigger={triggers[2]}
+        style={{ color: "#4a6cf7" }}
+      />
+    </>
   );
 }
 
@@ -1006,24 +1051,7 @@ export default function Home() {
             className="font-bold uppercase text-center"
             style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(48px,12vw,110px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05, minHeight: "3.2em" }}
           >
-            <ScrambledLine
-              text="RIGHT STORY."
-              delay={300}
-              loopInterval={8000}
-              className="text-white"
-            />
-            <ScrambledLine
-              text="RIGHT AUDIENCE."
-              delay={700}
-              loopInterval={8000}
-              style={{ color: "var(--accent)" }}
-            />
-            <ScrambledLine
-              text="REAL IMPACT."
-              delay={1100}
-              loopInterval={8000}
-              style={{ color: "#4a6cf7" }}
-            />
+            <HeroScrambleGroup />
           </h1>
 
           <div
