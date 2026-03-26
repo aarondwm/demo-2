@@ -628,7 +628,7 @@ function DashboardCard({ engagement, trigger = 0 }: { engagement: string[]; trig
       </div>
       {/* Table */}
       <div className="relative flex-1 overflow-x-auto">
-        <table className="w-full" style={{ minWidth: "380px" }}>
+        <table className="w-full" style={{ minWidth: "320px" }}>
           <thead>
             <tr className="border-b border-white/[0.10]">
               {["Organization", "Industry", "Seniority", "Engagement"].map((h) => (
