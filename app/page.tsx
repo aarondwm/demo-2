@@ -1426,14 +1426,14 @@ export default function Home() {
           background: "#25D366",
           alignItems: "center",
           gap: "0px",
-          padding: "0 16px",
+          padding: "0 16px 0 16px",
           boxShadow: "0 4px 16px rgba(0,0,0,0.3), 0 0 20px rgba(37,211,102,0.4), 0 0 40px rgba(37,211,102,0.2)",
           transition: "all 0.35s cubic-bezier(0.16,1,0.3,1)",
           width: "56px",
           overflow: "hidden",
           textDecoration: "none",
         }}
-        onMouseEnter={(e) => { e.currentTarget.style.width = "195px"; e.currentTarget.style.gap = "10px"; }}
+        onMouseEnter={(e) => { e.currentTarget.style.width = "175px"; e.currentTarget.style.gap = "10px"; }}
         onMouseLeave={(e) => { e.currentTarget.style.width = "56px"; e.currentTarget.style.gap = "0px"; }}
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="white" style={{ flexShrink: 0 }}>
