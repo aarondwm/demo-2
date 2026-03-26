@@ -1427,7 +1427,7 @@ export default function Home() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          boxShadow: "0 4px 16px rgba(0,0,0,0.3), 0 0 0 0 rgba(37,211,102,0.4)",
+          boxShadow: "0 4px 16px rgba(0,0,0,0.3), 0 0 20px rgba(37,211,102,0.4), 0 0 40px rgba(37,211,102,0.2)",
           transition: "transform 0.2s ease, box-shadow 0.2s ease",
         }}
         className="hover:scale-110"
