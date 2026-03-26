@@ -32,14 +32,22 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       pendingHref.current = null;
       setPhase("idle");
     };
-    /* popstate fires on back/forward navigation */
-    window.addEventListener("popstate", reset);
-    /* pageshow fires when Safari restores from bfcache */
-    window.addEventListener("pageshow", (e) => {
+    const onPageShow = (e: PageTransitionEvent) => {
       if (e.persisted) reset();
-    });
+    };
+    const onVisibility = () => {
+      if (document.visibilityState === "visible") {
+        /* If page becomes visible and we're stuck, reset */
+        setPhase((p) => (p === "hold" || p === "wipe-in") ? "idle" : p);
+      }
+    };
+    window.addEventListener("popstate", reset);
+    window.addEventListener("pageshow", onPageShow);
+    document.addEventListener("visibilitychange", onVisibility);
     return () => {
       window.removeEventListener("popstate", reset);
+      window.removeEventListener("pageshow", onPageShow);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 
@@ -90,10 +98,10 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       router.push(href);
       setPhase("hold");
 
-      /* Safety: if pathname doesn't change within 2s, force wipe-out */
+      /* Safety: if pathname doesn't change within 1s, force wipe-out */
       setTimeout(() => {
         setPhase((p) => (p === "hold" ? "wipe-out" : p));
-      }, 2000);
+      }, 1000);
     } else if (phase === "wipe-out") {
       setPhase("idle");
     }
