@@ -729,13 +729,14 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: hovered ? "#0f1829" : "#0d0f14",
+        background: hovered ? "#0f1829" : "#0a0a0a",
         padding: hovered ? "32px 28px" : "20px 24px",
+        borderBottom: "1px solid rgba(255,255,255,0.04)",
         transition: "background 0.3s ease, padding 0.3s ease",
         cursor: "default",
         display: "flex",
         alignItems: "flex-start",
-        gap: "24px",
+        gap: "16px",
       }}
     >
       <span style={{
@@ -1111,7 +1112,7 @@ export default function Home() {
 
         <div className="max-w-6xl mx-auto px-6 md:px-10">
 
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
             {/* Left */}
             <div className="flex flex-col gap-8">
               <div className="flex items-center mb-5">
@@ -1144,7 +1145,7 @@ export default function Home() {
             </div>
 
             {/* Right — 4 card rows */}
-            <div className="flex flex-col" style={{ gap: "1px" }}>
+            <div className="flex flex-col" style={{ gap: "0px" }}>
               {[
                 { n: "01", title: "Confirmed Placement", body: "Your content is placed, not pitched. Every partner publication is pre-contracted. Your story runs." },
                 { n: "02", title: "Gulf-Wide Network",   body: "Kuwait, UAE, Saudi Arabia, Bahrain, Qatar, Oman. Every major GCC market covered." },
