@@ -1001,7 +1001,7 @@ export default function Home() {
 
           <h1
             className="font-bold uppercase text-center"
-            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(48px,12vw,110px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(48px,12vw,110px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05, minHeight: "3.2em" }}
           >
             <ScrambledLine
               text="RIGHT STORY."

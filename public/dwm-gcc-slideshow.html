@@ -59,14 +59,14 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 /* Individual slide — single stack */
 .slide{
   position:absolute;
-  top:4px;bottom:4px;left:8px;right:8px;
+  top:0;bottom:0;left:0;right:0;
   padding:12px 14px 12px;
   display:flex;
   flex-direction:column;
   overflow:hidden;
-  border-radius:10px;
-  border:1px solid transparent;
-  background:var(--surface);
+  border-radius:0;
+  border:none;
+  background:var(--bg);
   transition:transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease, box-shadow 0.5s ease, border-color 0.5s ease;
   transform:scale(0.95);
   opacity:0;
@@ -79,13 +79,8 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
   opacity:1;
   pointer-events:auto;
   z-index:10;
-  border-color:rgba(74,108,247,0.45);
-  box-shadow:
-    0 0 0 1px rgba(74,108,247,0.20),
-    0 0 20px rgba(74,108,247,0.25),
-    0 0 50px rgba(74,108,247,0.15),
-    0 0 80px rgba(74,108,247,0.08),
-    inset 0 0 30px rgba(74,108,247,0.04);
+  border-color:transparent;
+  box-shadow:none;
 }
 /* All other cards — fully hidden behind */
 .slide[data-pos="1"],.slide[data-pos="-1"],
@@ -224,7 +219,7 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
   border-top:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;
   font-size:8px;color:var(--white-30);letter-spacing:0.1em;text-transform:uppercase;
-  background:var(--surface);z-index:100;
+  background:var(--bg);z-index:100;
 }
 .bottom-bar .val{color:var(--accent);font-weight:600}
 
