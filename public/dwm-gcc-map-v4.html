@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DWM — GCC Audience Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#020810;
+  --surface:#030c16;
+  --surface-2:#040e1a;
+  --border:rgba(74,108,247,0.10);
+  --border-bright:rgba(74,108,247,0.22);
+  --accent:#4a6cf7;
+  --accent-dim:rgba(74,108,247,0.06);
+  --accent-mid:rgba(74,108,247,0.2);
+  --accent-2:#93b4ff;
+  --accent-3:#ff3b3b;
+  --white:#c8ccd0;
+  --white-90:rgba(200,210,220,0.9);
+  --white-70:rgba(200,210,220,0.65);
+  --white-50:rgba(200,210,220,0.45);
+  --white-30:rgba(200,210,220,0.25);
+  --white-15:rgba(200,210,220,0.12);
+  --white-08:rgba(200,210,220,0.06);
+  --mono:'JetBrains Mono',monospace;
+  --sans:'Inter',sans-serif;
+}
+html{height:100%;overflow:hidden;background:var(--bg);color:var(--white);font-family:var(--mono)}
+body{height:100%;display:flex;flex-direction:column;overflow:hidden}
+
+/* ===== MATRIX RAIN ===== */
+.matrix-rain{
+  position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:0.05;
+}
+.matrix-col{
+  position:absolute;top:-100%;
+  font-family:var(--mono);font-size:12px;line-height:1.4;
+  color:var(--accent);
+  writing-mode:vertical-rl;
+  animation:matrixFall linear infinite;
+  opacity:0.6;
+}
+@keyframes matrixFall{
+  0%{transform:translateY(-100%)}
+  100%{transform:translateY(calc(100vh + 100%))}
+}
+
+/* ===== HEADER ===== */
+.header{
+  padding:16px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  background:rgba(5,5,8,0.92);
+  backdrop-filter:blur(16px);
+  position:sticky;top:0;z-index:100;
+}
+.header-brand{display:flex;align-items:center;gap:12px}
+.header-logo{
+  width:36px;height:28px;
+  border:1px solid var(--accent);
+  border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--sans);font-weight:800;font-size:10px;color:var(--accent);
+  position:relative;
+  box-shadow:0 0 8px rgba(74,108,247,0.15);
+  letter-spacing:0.08em;
+}
+.header-logo::after{
+  content:'';position:absolute;inset:-3px;
+  border:1px solid rgba(74,108,247,0.1);border-radius:4px;
+  animation:logoPulse 3s ease infinite;
+}
+@keyframes logoPulse{0%,100%{opacity:0.3}50%{opacity:0.8}}
+.header-title{font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent)}
+.header-right{display:flex;align-items:center;gap:24px}
+.header-time{font-size:11px;color:var(--accent);letter-spacing:0.08em;font-variant-numeric:tabular-nums;opacity:0.7;text-shadow:0 0 12px rgba(74,108,247,0.3)}
+.header-status{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--accent);letter-spacing:0.12em;font-weight:600}
+.header-status .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent),0 0 4px var(--accent);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.2}}
+
+/* ===== MAIN ===== */
+.main{flex:1;display:flex;justify-content:center;position:relative;z-index:1}
+
+/* ===== MAP AREA ===== */
+.map-area{
+  flex:1;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  padding:48px 32px;overflow:hidden;
+}
+
+/* Grid */
+.map-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(74,108,247,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74,108,247,0.02) 1px, transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;
+  animation:gridShift 20s linear infinite;
+}
+@keyframes gridShift{0%{background-position:0 0}100%{background-position:60px 60px}}
+
+/* Scanlines */
+.scanline{
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.02) 3px,rgba(0,0,0,0.02) 4px);
+  pointer-events:none;z-index:5;
+}
+
+/* Anchored hover card */
+.hover-card{
+  position:absolute;
+  z-index:50;
+  width:230px;
+  background:rgba(5,5,8,0.95);
+  border:1px solid rgba(74,108,247,0.25);
+  font-family:var(--mono);
+  opacity:0;
+  transform:scale(0.92) translateY(6px);
+  transition:opacity 0.25s ease,transform 0.25s cubic-bezier(0.16,1,0.3,1);
+  backdrop-filter:blur(14px);
+  pointer-events:none;
+  box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 20px rgba(74,108,247,0.08);
+}
+.hover-card.show{opacity:1;transform:scale(1) translateY(0);pointer-events:auto}
+.hover-card-corner{
+  position:absolute;width:8px;height:8px;
+  border-color:var(--accent);border-style:solid;
+}
+.hover-card-corner.tl{top:-1px;left:-1px;border-width:1px 0 0 1px}
+.hover-card-corner.tr{top:-1px;right:-1px;border-width:1px 1px 0 0}
+.hover-card-corner.bl{bottom:-1px;left:-1px;border-width:0 0 1px 1px}
+.hover-card-corner.br{bottom:-1px;right:-1px;border-width:0 1px 1px 0}
+.hover-card-arrow{
+  position:absolute;bottom:-6px;left:24px;
+  width:10px;height:10px;
+  background:rgba(5,5,8,0.95);
+  border-right:1px solid rgba(74,108,247,0.25);
+  border-bottom:1px solid rgba(74,108,247,0.25);
+  transform:rotate(45deg);
+}
+.hover-card.flip-left .hover-card-arrow{left:auto;right:24px}
+.hover-card-scan{
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  opacity:0;z-index:10;
+}
+.hover-card-scan.active{opacity:0.6;animation:cardScan 1s ease-out}
+@keyframes cardScan{0%{top:0;opacity:0.8}100%{top:100%;opacity:0}}
+.hc-header{
+  padding:8px 12px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.hc-country{font-family:var(--sans);font-size:12px;font-weight:700;color:var(--accent);letter-spacing:0.02em}
+.hc-tag{
+  font-size:8px;letter-spacing:0.08em;text-transform:uppercase;
+  padding:2px 5px;border:1px solid rgba(74,108,247,0.2);
+  color:var(--accent);background:rgba(74,108,247,0.04);
+}
+.hc-stats{
+  padding:8px 12px;border-bottom:1px solid var(--border);
+  display:flex;gap:12px;
+}
+.hc-stat-block{}
+.hc-stat-label{font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:var(--white-50);margin-bottom:2px}
+.hc-stat-value{font-size:16px;font-weight:700;color:var(--accent);letter-spacing:0.02em;text-shadow:0 0 16px rgba(74,108,247,0.3);line-height:1}
+.hc-stat-sub{font-size:8px;color:var(--white-30);margin-top:2px}
+.hc-section{padding:6px 12px;border-bottom:1px solid var(--border)}
+.hc-section:last-child{border-bottom:none}
+.hc-section-title{
+  font-size:8px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--accent-2);margin-bottom:4px;
+  display:flex;align-items:center;gap:4px;
+}
+.hc-section-title::before{content:'▸';font-size:7px}
+.hc-gender-bar{display:flex;height:5px;border-radius:1px;overflow:hidden;background:rgba(255,255,255,0.03)}
+.hc-gender-bar .m{background:#4a6cf7;transition:width 0.6s ease}
+.hc-gender-bar .f{background:#7a9cff;transition:width 0.6s ease}
+.hc-gender-labels{display:flex;justify-content:space-between;margin-top:4px}
+.hc-gender-label{font-size:8px;color:var(--white-50);display:flex;align-items:center;gap:3px}
+.hc-gender-dot{width:5px;height:5px;border-radius:50%}
+.hc-gender-dot.m{background:#4a6cf7}
+.hc-gender-dot.f{background:#7a9cff}
+.hc-ind-row{display:flex;align-items:center;gap:4px;padding:1px 0}
+.hc-ind-name{font-size:7px;color:var(--white-70);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hc-ind-bar-bg{width:30px;height:2px;background:rgba(74,108,247,0.06);border-radius:1px;overflow:hidden;flex-shrink:0}
+.hc-ind-bar{height:100%;background:var(--accent);border-radius:1px;width:0;transition:width 0.6s cubic-bezier(0.16,1,0.3,1)}
+.hc-ind-count{font-size:7px;color:var(--accent);font-weight:600;min-width:32px;text-align:right;font-variant-numeric:tabular-nums}
+.hc-companies{display:flex;flex-wrap:wrap;gap:3px}
+.hc-company{
+  font-size:7px;letter-spacing:0.04em;
+  padding:1px 4px;border:1px solid var(--border-bright);
+  color:var(--white-70);background:rgba(74,108,247,0.03);
+}
+
+/* Typing cursor */
+.type-cursor{
+  display:inline-block;width:2px;height:1em;
+  background:var(--accent);margin-left:2px;
+  animation:cursorBlink 0.6s step-end infinite;
+  vertical-align:text-bottom;
+}
+@keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* SVG Map */
+.map-svg{width:115%;max-width:1050px;height:auto;position:relative;z-index:2;margin:0 auto}
+
+.country-path{
+  fill:rgba(74,108,247,0.02);
+  stroke:rgba(74,108,247,0.18);
+  stroke-width:0.4;
+  filter:drop-shadow(0 0 2px rgba(74,108,247,0.12));
+  transition:all 0.4s ease;cursor:default;
+}
+.country-path.gcc{
+  fill:rgba(74,108,247,0.04);
+  stroke:var(--accent);stroke-width:0.7;stroke-opacity:0.45;
+  filter:drop-shadow(0 0 3px rgba(74,108,247,0.20));
+  cursor:pointer;transition:all 0.3s ease;
+  paint-order:stroke fill;
+}
+.country-path.gcc:hover{
+  fill:rgba(74,108,247,0.22);
+  stroke-opacity:0.9;stroke-width:1.1;
+  filter:drop-shadow(0 0 14px rgba(74,108,247,0.45));
+}
+.country-path.gcc.active{
+  fill:rgba(74,108,247,0.18);
+  stroke-opacity:0.75;stroke-width:1;
+  filter:drop-shadow(0 0 12px rgba(74,108,247,0.35));
+  animation:countryGlow 2s ease infinite;
+}
+@keyframes countryGlow{0%,100%{filter:drop-shadow(0 0 12px rgba(74,108,247,0.25))}50%{filter:drop-shadow(0 0 20px rgba(74,108,247,0.4))}}
+
+/* Bahrain marker (too small to see as path) */
+.bahrain-ring{animation:bahrainPulse 3s ease infinite}
+@keyframes bahrainPulse{0%,100%{stroke-opacity:0.3;r:6}50%{stroke-opacity:0.6;r:8}}
+.bahrain-hit:hover ~ .bahrain-ring{stroke-opacity:0.8;stroke-width:1}
+.bahrain-hit:hover ~ .bahrain-dot{opacity:1;r:3}
+/* City dots */
+.city-dot{fill:var(--accent);opacity:0.9;filter:drop-shadow(0 0 4px var(--accent)) drop-shadow(0 0 1px var(--accent))}
+.city-dot-ring{fill:none;stroke:var(--accent);stroke-width:0.5;opacity:0;animation:cityRing 4s ease-out infinite}
+@keyframes cityRing{0%{r:4;opacity:0.5}100%{r:22;opacity:0}}
+.city-label{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;fill:var(--white-70);filter:drop-shadow(0 0 4px rgba(0,0,0,0.8))}
+.city-label-sm{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;fill:var(--white-70);filter:drop-shadow(0 0 4px rgba(0,0,0,0.8))}
+.city-dot-sm{fill:var(--accent);opacity:0.8;filter:drop-shadow(0 0 3px var(--accent))}
+
+/* Connection lines between cities */
+.city-connection{
+  stroke:rgba(74,108,247,0.1);stroke-width:0.5;
+  stroke-dasharray:4 8;fill:none;
+  animation:dashFlow 3s linear infinite;
+}
+@keyframes dashFlow{0%{stroke-dashoffset:0}100%{stroke-dashoffset:-12}}
+
+/* (bottom panel removed — using hover card instead) */
+
+/* (old panel styles removed) */
+
+/* ===== BOTTOM BAR ===== */
+.bottom-bar{
+  padding:10px 32px;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:10px;color:var(--white-50);letter-spacing:0.1em;text-transform:uppercase;
+  background:var(--surface);z-index:2;
+}
+.bottom-stats{display:flex;gap:28px}
+.bottom-stat{display:flex;align-items:center;gap:5px}
+.bottom-stat .val{color:var(--accent);font-weight:600;text-shadow:0 0 10px rgba(74,108,247,0.3)}
+
+/* ===== CORNER HUD ===== */
+.corner-hud{
+  position:absolute;font-size:9px;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--white-50);z-index:3;
+  text-shadow:0 0 8px rgba(0,0,0,0.9);
+}
+.corner-hud.tl{top:14px;left:14px}
+.corner-hud.tr{top:14px;right:14px}
+.corner-hud.bl{bottom:14px;left:14px}
+.corner-hud.br{bottom:14px;right:14px;color:var(--accent);opacity:0.7}
+.corner-hud .hl{color:var(--accent);opacity:0.8}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:700px){
+  .hover-card{width:200px}
+  .matrix-rain{display:none}
+  .header{padding:12px 16px}
+  .map-area{padding:24px 16px}
+  .map-svg{width:100%!important;max-width:none!important}
+  .bottom-bar{padding:8px 16px;font-size:8px}
+  .corner-hud{font-size:7px}
+  .corner-hud.tr{display:none}
+  .corner-hud.bl{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Matrix rain background -->
+<div class="matrix-rain" id="matrixRain"></div>
+
+<div class="header">
+  <div class="header-brand">
+    <div class="header-logo">DWM</div>
+    <div class="header-title">Audience Intelligence Platform</div>
+  </div>
+  <div class="header-right">
+    <div class="header-time" id="headerTime">--:--:--</div>
+    <div class="header-status">
+      <div class="dot"></div>
+      LIVE
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <!-- Anchored hover card -->
+  <div class="hover-card" id="hoverCard">
+    <div class="hover-card-corner tl"></div>
+    <div class="hover-card-corner tr"></div>
+    <div class="hover-card-corner bl"></div>
+    <div class="hover-card-corner br"></div>
+    <div class="hover-card-arrow" id="hoverArrow"></div>
+    <div class="hover-card-scan" id="hoverScan"></div>
+    <div id="hoverContent"></div>
+  </div>
+
+  <div class="map-area">
+    <div class="map-grid"></div>
+    <div class="scanline"></div>
+
+    <div class="corner-hud tl">SYS.MAP <span class="hl">ACTIVE</span></div>
+    <div class="corner-hud tr">LAT 12.5°N — 32.0°N · LNG 35.0°E — 60.0°E</div>
+    <div class="corner-hud bl">PROJ: EQUIRECT · DATUM: WGS84</div>
+    <div class="corner-hud br" id="coordDisplay">HOVER FOR INTEL ▸</div>
+
+
+
+    <svg class="map-svg" viewBox="-28 -20 856 667" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <g id="countries">
+        <path class="country-path" d="M 543.3,366.7 L 544.4,369.0 L 545.8,371.7 L 547.2,374.5 L 548.5,377.2 L 549.9,379.9 L 551.3,382.7 L 552.7,385.4 L 554.0,388.1 L 555.4,390.9 L 556.8,393.6 L 558.1,396.2 L 559.5,399.0 L 560.9,401.7 L 562.2,404.4 L 563.6,407.2 L 565.0,409.9 L 566.3,412.6 L 567.4,414.6 L 568.8,415.0 L 570.9,417.9 L 572.9,421.7 L 574.9,425.5 L 576.9,429.3 L 578.9,433.1 L 576.7,433.8 L 575.5,433.5 L 574.1,434.1 L 572.3,435.1 L 569.9,435.9 L 568.1,436.6 L 563.1,437.8 L 561.1,438.7 L 557.4,440.8 L 554.2,443.1 L 552.9,444.4 L 551.3,446.4 L 551.0,447.7 L 550.2,449.3 L 549.9,450.5 L 549.0,451.8 L 549.7,453.0 L 549.6,454.7 L 551.2,455.6 L 550.9,458.0 L 551.1,459.3 L 551.6,460.7 L 551.5,461.9 L 545.5,463.4 L 544.1,464.1 L 541.2,465.0 L 540.0,465.6 L 538.8,466.3 L 536.3,466.9 L 533.8,468.1 L 533.4,469.4 L 529.6,470.3 L 528.4,470.8 L 526.5,471.9 L 525.3,474.2 L 522.9,472.8 L 521.2,473.6 L 514.2,475.2 L 507.2,476.4 L 501.2,477.8 L 497.7,478.1 L 494.7,479.2 L 491.5,481.4 L 489.7,481.9 L 487.8,482.6 L 485.7,483.9 L 483.9,483.9 L 482.5,484.4 L 481.2,484.0 L 478.1,484.0 L 473.6,485.4 L 466.5,486.9 L 462.8,488.7 L 461.4,489.2 L 459.9,489.4 L 458.0,490.4 L 455.3,491.5 L 453.8,493.1 L 452.4,492.7 L 451.0,493.0 L 448.9,495.4 L 448.0,497.6 L 446.4,499.2 L 444.9,500.4 L 444.2,501.7 L 443.3,502.9 L 441.5,503.7 L 439.6,505.8 L 438.3,506.5 L 434.1,506.4 L 432.1,507.6 L 430.4,507.3 L 426.8,507.2 L 422.0,508.6 L 421.7,507.4 L 420.3,507.0 L 416.5,506.1 L 414.4,506.7 L 411.7,508.8 L 410.3,509.5 L 405.3,510.8 L 402.0,513.7 L 398.0,516.8 L 396.7,517.4 L 389.3,519.3 L 381.2,520.9 L 378.4,522.5 L 374.4,523.7 L 372.1,523.4 L 370.7,523.6 L 369.3,524.1 L 362.0,524.2 L 360.6,524.0 L 359.3,523.7 L 355.6,524.4 L 350.1,524.6 L 348.5,525.1 L 346.7,525.1 L 341.3,526.3 L 337.2,529.4 L 335.8,530.4 L 333.9,533.1 L 331.7,534.4 L 326.2,535.6 L 324.9,536.1 L 323.4,537.4 L 322.7,539.1 L 321.9,540.8 L 322.0,542.2 L 320.6,542.7 L 319.3,542.1 L 320.6,541.5 L 320.7,540.2 L 319.3,540.4 L 316.3,541.8 L 314.8,542.8 L 313.2,542.9 L 311.5,542.6 L 310.1,542.3 L 310.1,541.0 L 308.9,540.6 L 307.7,541.8 L 305.9,541.6 L 304.5,541.5 L 301.9,540.5 L 300.6,539.3 L 299.3,539.3 L 297.8,539.6 L 296.4,538.9 L 294.8,539.0 L 293.5,539.1 L 294.8,537.5 L 293.3,536.8 L 293.2,535.2 L 295.3,534.0 L 293.2,535.6 L 291.5,535.0 L 290.2,534.6 L 288.5,535.4 L 286.4,536.8 L 284.4,538.8 L 284.2,537.0 L 282.7,536.6 L 280.4,535.6 L 278.8,533.4 L 276.7,532.0 L 274.3,531.5 L 272.7,529.2 L 270.5,526.8 L 266.8,524.7 L 265.5,523.2 L 264.8,521.0 L 265.1,516.5 L 263.9,513.8 L 263.5,511.1 L 261.2,509.0 L 260.4,507.5 L 259.8,506.2 L 258.7,503.2 L 258.1,501.4 L 257.5,499.9 L 256.6,497.3 L 256.2,495.9 L 255.7,494.2 L 254.8,492.9 L 256.2,494.8 L 256.9,492.5 L 255.9,490.7 L 256.0,489.4 L 255.1,488.0 L 254.5,486.7 L 254.1,485.5 L 252.6,483.8 L 252.2,482.1 L 252.7,483.4 L 254.3,484.8 L 254.5,483.5 L 254.1,481.9 L 253.8,480.6 L 252.4,479.2 L 252.2,476.6 L 250.5,475.2 L 248.9,474.1 L 247.5,473.6 L 246.1,473.5 L 244.4,474.1 L 243.5,472.6 L 245.0,472.8 L 245.8,471.1 L 246.5,469.5 L 246.4,470.7 L 248.8,472.2 L 249.0,473.5 L 249.9,471.9 L 249.8,469.7 L 249.0,468.0 L 249.0,466.6 L 248.3,465.0 L 247.0,463.4 L 246.9,462.1 L 246.9,460.3 L 246.7,459.0 L 247.9,458.0 L 248.1,456.5 L 249.7,455.2 L 250.7,453.6 L 251.0,449.8 L 250.9,448.6 L 250.0,444.6 L 249.9,442.4 L 249.6,441.1 L 250.8,440.4 L 252.7,439.5 L 252.9,438.1 L 254.6,437.4 L 256.5,436.6 L 258.4,433.8 L 258.7,432.3 L 261.2,432.6 L 261.8,431.3 L 261.9,429.9 L 262.6,428.4 L 261.0,428.1 L 260.3,426.7 L 259.5,425.1 L 260.2,423.4 L 260.2,421.6 L 260.0,420.1 L 260.8,418.4 L 261.0,417.1 L 262.5,416.4 L 264.0,415.9 L 263.1,414.4 L 261.3,413.9 L 262.9,412.1 L 265.7,410.1 L 268.5,408.6 L 269.9,408.3 L 271.6,408.5 L 274.5,409.4 L 275.8,410.1 L 278.0,412.2 L 279.4,413.1 L 280.6,413.3 L 283.1,413.3 L 284.4,413.1 L 284.7,414.4 L 286.0,414.5 L 287.4,413.0 L 288.7,412.7 L 290.7,413.4 L 292.3,411.9 L 294.8,412.0 L 297.8,411.6 L 300.9,411.3 L 302.9,411.4 L 305.1,411.8 L 308.0,411.1 L 315.2,410.9 L 319.1,411.0 L 325.3,411.0 L 327.1,411.4 L 332.3,413.9 L 333.8,414.3 L 340.5,414.9 L 348.5,415.6 L 354.6,416.0 L 362.3,416.7 L 367.6,416.1 L 374.7,415.4 L 378.0,418.3 L 380.4,421.1 L 383.0,424.2 L 388.1,424.6 L 390.1,424.2 L 394.0,422.3 L 397.7,420.4 L 400.8,414.4 L 402.3,410.9 L 406.0,406.7 L 410.8,401.7 L 415.8,396.3 L 418.7,393.3 L 421.2,390.7 L 426.0,388.5 L 431.5,386.2 L 437.6,383.4 L 443.1,381.1 L 447.7,379.1 L 449.2,378.6 L 452.1,377.6 L 456.3,377.1 L 461.4,376.5 L 466.5,375.9 L 471.6,375.3 L 476.8,374.7 L 481.9,374.1 L 487.0,373.5 L 492.1,372.9 L 497.2,372.2 L 502.4,371.6 L 507.5,371.0 L 512.6,370.5 L 517.8,369.9 L 522.9,369.2 L 528.0,368.6 L 533.2,368.0 L 538.3,367.4 L 543.3,366.7 Z" data-country="Yemen" />
+        <path class="country-path gcc" d="M 414.3,56.6 L 415.2,58.0 L 415.4,59.7 L 415.9,61.2 L 416.7,62.6 L 418.5,63.6 L 419.1,64.9 L 419.8,66.1 L 421.2,67.6 L 421.8,68.8 L 419.6,69.0 L 418.1,68.3 L 416.8,68.1 L 414.9,68.4 L 413.2,69.6 L 411.2,70.4 L 409.8,71.4 L 408.4,73.0 L 407.0,73.6 L 408.4,74.2 L 410.0,73.9 L 410.1,75.1 L 411.5,75.5 L 412.8,75.2 L 414.7,74.1 L 416.3,74.2 L 418.0,74.9 L 418.9,76.5 L 419.4,78.6 L 420.3,80.3 L 421.1,84.1 L 423.2,86.9 L 424.9,87.6 L 424.9,89.2 L 426.0,90.6 L 427.3,91.6 L 428.6,91.9 L 428.2,93.3 L 429.8,97.6 L 424.2,97.7 L 418.5,97.7 L 412.8,97.7 L 407.1,97.8 L 405.4,97.8 L 403.8,96.1 L 402.2,94.2 L 401.8,91.8 L 399.8,87.3 L 398.3,85.3 L 396.1,84.6 L 392.9,84.3 L 389.7,83.9 L 386.5,83.6 L 383.3,83.3 L 379.7,82.9 L 376.2,82.6 L 372.6,82.2 L 369.0,81.9 L 374.8,77.0 L 376.8,74.3 L 378.8,72.7 L 380.3,70.1 L 382.7,67.1 L 383.4,65.7 L 383.6,64.5 L 384.8,62.8 L 387.5,57.5 L 390.3,55.5 L 395.5,53.8 L 397.3,53.6 L 405.6,53.6 L 407.4,53.9 L 414.3,56.6 Z" data-country="Kuwait" />
+        <path class="country-path gcc" d="M 505.9,204.6 L 508.2,207.7 L 509.7,209.1 L 511.3,209.7 L 513.2,209.8 L 515.0,209.8 L 516.7,209.4 L 518.9,208.0 L 520.6,208.1 L 521.3,209.4 L 521.5,210.9 L 522.7,210.6 L 523.6,209.4 L 524.6,207.8 L 526.2,208.2 L 527.5,209.0 L 526.2,209.9 L 525.1,211.1 L 522.8,213.0 L 521.7,214.4 L 521.6,215.7 L 520.9,217.0 L 523.0,217.3 L 524.2,216.9 L 527.3,216.9 L 528.8,218.0 L 530.2,218.4 L 530.4,220.2 L 530.3,222.1 L 531.0,223.4 L 532.8,225.4 L 534.5,227.1 L 536.2,228.8 L 537.8,230.6 L 539.5,232.3 L 541.2,234.1 L 542.8,235.8 L 544.5,237.6 L 546.2,239.3 L 547.8,241.1 L 549.5,242.8 L 551.2,244.6 L 552.8,246.4 L 554.5,248.1 L 556.2,249.9 L 557.9,251.6 L 559.5,253.3 L 561.2,255.1 L 562.7,255.8 L 567.8,256.3 L 572.3,256.8 L 576.7,257.3 L 581.2,257.8 L 585.6,258.3 L 590.0,258.8 L 594.5,259.2 L 598.9,259.7 L 603.4,260.2 L 607.8,260.7 L 612.3,261.2 L 616.7,261.7 L 621.2,262.2 L 625.6,262.7 L 630.1,263.1 L 634.5,263.5 L 639.0,264.0 L 643.4,264.5 L 646.0,262.2 L 648.0,265.0 L 650.6,268.5 L 653.2,272.0 L 655.8,275.6 L 658.4,279.1 L 660.1,281.4 L 660.4,282.7 L 659.2,285.8 L 658.3,288.4 L 657.3,290.8 L 656.1,294.0 L 654.7,297.7 L 653.1,302.0 L 651.5,306.4 L 649.7,311.1 L 647.9,315.7 L 646.3,320.2 L 644.7,324.4 L 643.3,328.1 L 642.0,331.3 L 641.2,333.7 L 640.5,335.3 L 639.3,338.6 L 634.5,340.0 L 629.0,341.7 L 623.6,343.2 L 618.1,344.9 L 612.6,346.4 L 607.1,348.1 L 601.6,349.7 L 596.2,351.2 L 590.7,352.9 L 585.2,354.4 L 579.7,356.1 L 574.3,357.7 L 568.8,359.3 L 563.3,360.9 L 557.8,362.5 L 552.4,364.1 L 546.9,365.8 L 543.3,366.7 L 538.3,367.4 L 533.2,368.0 L 528.0,368.6 L 522.9,369.2 L 517.8,369.9 L 512.6,370.5 L 507.5,371.0 L 502.4,371.6 L 497.2,372.2 L 492.1,372.9 L 487.0,373.5 L 481.9,374.1 L 476.8,374.7 L 471.6,375.3 L 466.5,375.9 L 461.4,376.5 L 456.3,377.1 L 452.1,377.6 L 449.2,378.6 L 447.7,379.1 L 443.1,381.1 L 437.6,383.4 L 431.5,386.2 L 426.0,388.5 L 421.9,390.3 L 418.7,393.3 L 415.8,396.3 L 410.8,401.7 L 406.0,406.7 L 402.8,410.0 L 400.8,414.4 L 398.7,419.4 L 394.0,422.3 L 390.1,424.2 L 388.1,424.6 L 383.9,424.5 L 380.4,421.1 L 378.0,418.3 L 375.9,415.9 L 367.6,416.1 L 362.3,416.7 L 354.6,416.0 L 348.5,415.6 L 340.5,414.9 L 333.8,414.3 L 332.3,413.9 L 327.1,411.4 L 325.3,411.0 L 319.9,411.0 L 315.2,410.9 L 308.7,410.9 L 306.0,411.7 L 302.9,411.4 L 300.9,411.3 L 297.8,411.6 L 295.4,412.0 L 293.4,411.8 L 291.8,412.6 L 289.9,413.3 L 288.1,412.7 L 286.9,413.5 L 285.3,414.6 L 284.6,413.2 L 283.1,413.3 L 281.8,413.2 L 280.0,413.3 L 278.0,412.2 L 275.8,410.1 L 274.5,409.4 L 272.1,408.6 L 270.5,408.4 L 269.2,408.4 L 265.7,410.1 L 262.9,412.1 L 261.4,413.7 L 263.1,414.4 L 264.0,415.9 L 262.5,416.4 L 261.0,417.1 L 260.8,418.4 L 260.0,420.1 L 260.2,421.6 L 260.2,423.4 L 259.5,425.1 L 260.3,426.7 L 261.0,428.1 L 262.6,428.4 L 262.1,429.7 L 261.8,431.3 L 261.8,432.5 L 259.9,432.3 L 258.6,432.7 L 257.6,435.7 L 255.1,437.3 L 253.3,437.6 L 253.0,439.0 L 250.8,440.4 L 249.2,440.8 L 249.0,439.5 L 249.2,438.0 L 247.7,436.5 L 247.2,434.1 L 247.6,432.8 L 246.5,431.3 L 245.7,429.7 L 244.4,428.3 L 243.1,427.7 L 241.3,426.5 L 241.6,424.8 L 241.6,423.5 L 240.4,422.0 L 239.2,422.0 L 237.6,420.4 L 237.3,419.1 L 235.4,417.9 L 236.3,419.7 L 236.0,421.9 L 235.4,419.9 L 234.8,418.2 L 234.3,414.4 L 234.0,413.2 L 234.1,411.8 L 233.7,410.3 L 232.4,409.4 L 228.9,406.9 L 227.3,405.4 L 226.0,404.7 L 224.0,402.9 L 222.0,401.6 L 219.8,399.9 L 217.9,399.4 L 216.4,398.4 L 215.0,397.4 L 213.7,395.9 L 213.6,394.7 L 211.5,392.7 L 210.7,391.1 L 210.0,389.5 L 208.7,389.3 L 208.2,388.0 L 207.2,386.6 L 206.6,385.2 L 206.2,383.7 L 206.0,381.8 L 204.0,379.9 L 202.9,378.7 L 201.5,378.6 L 199.7,376.3 L 198.7,375.1 L 199.6,372.4 L 199.7,370.9 L 197.5,370.3 L 196.5,368.6 L 196.6,367.3 L 197.1,366.1 L 197.7,364.8 L 196.2,363.8 L 194.8,363.4 L 193.4,361.8 L 193.5,360.5 L 193.2,359.2 L 192.3,358.1 L 190.6,357.0 L 190.2,355.6 L 190.2,354.2 L 190.5,353.0 L 187.5,351.6 L 185.1,349.9 L 185.6,348.6 L 185.5,347.1 L 183.8,344.8 L 181.6,344.3 L 180.1,344.3 L 178.0,341.7 L 177.3,340.1 L 175.7,338.9 L 174.3,338.1 L 172.6,336.7 L 171.3,336.4 L 170.0,335.9 L 168.6,334.9 L 167.6,333.4 L 166.3,333.0 L 165.1,332.7 L 163.7,331.4 L 162.2,330.3 L 160.6,330.5 L 159.0,330.7 L 157.6,330.0 L 154.4,329.4 L 152.9,328.8 L 151.3,327.3 L 149.6,326.1 L 146.8,322.9 L 146.1,321.6 L 145.0,319.9 L 143.8,318.5 L 143.1,317.1 L 141.5,316.7 L 142.4,315.4 L 141.2,314.6 L 139.5,314.1 L 138.9,312.8 L 137.5,312.4 L 136.6,311.1 L 136.3,309.6 L 135.5,308.4 L 133.9,307.5 L 133.1,305.8 L 133.2,304.5 L 132.0,302.9 L 130.6,301.3 L 133.1,299.6 L 133.5,297.9 L 132.8,296.5 L 132.6,295.0 L 131.2,294.8 L 130.8,293.1 L 130.8,291.6 L 130.5,290.3 L 131.2,288.8 L 129.9,289.2 L 129.2,287.9 L 127.3,285.9 L 126.4,284.2 L 125.8,281.9 L 127.6,282.0 L 128.4,280.5 L 129.4,278.4 L 129.1,276.1 L 130.3,274.4 L 130.9,272.9 L 131.9,271.6 L 132.4,270.4 L 131.2,271.4 L 130.6,269.8 L 130.4,268.2 L 130.6,266.7 L 130.1,265.5 L 128.4,262.9 L 127.6,261.6 L 126.9,259.1 L 127.1,260.5 L 125.8,259.1 L 123.2,255.8 L 125.2,257.8 L 126.4,258.0 L 126.0,256.3 L 124.6,254.9 L 123.2,254.5 L 122.0,254.4 L 120.9,252.7 L 121.8,251.2 L 121.6,250.0 L 119.9,248.7 L 118.8,247.1 L 118.0,245.8 L 117.5,244.0 L 116.7,242.6 L 116.4,240.6 L 115.6,239.0 L 114.2,238.0 L 111.8,235.6 L 111.1,233.8 L 110.7,232.4 L 109.7,231.1 L 108.5,230.6 L 107.7,229.3 L 106.2,228.9 L 104.8,227.5 L 103.6,227.0 L 102.3,226.5 L 100.7,225.2 L 99.5,224.4 L 98.3,223.5 L 96.7,223.3 L 94.9,222.3 L 94.7,221.1 L 94.3,219.8 L 93.6,221.3 L 91.7,221.4 L 90.2,220.5 L 88.6,219.4 L 87.3,218.4 L 85.6,217.5 L 84.0,217.8 L 82.8,218.6 L 81.5,217.9 L 80.0,217.5 L 78.9,216.1 L 77.7,215.3 L 77.7,213.8 L 74.2,208.1 L 72.3,205.8 L 71.3,204.1 L 69.7,203.1 L 68.8,201.6 L 70.3,201.7 L 71.8,201.5 L 72.3,199.6 L 72.9,197.8 L 72.3,196.7 L 72.3,194.3 L 72.0,193.1 L 70.8,191.4 L 69.5,190.1 L 67.9,189.0 L 66.9,187.5 L 66.1,185.8 L 64.6,183.5 L 63.8,181.9 L 62.9,180.7 L 62.0,179.2 L 60.6,178.6 L 58.9,176.8 L 57.5,176.1 L 56.0,176.5 L 54.5,175.5 L 54.2,174.2 L 53.2,172.6 L 54.2,171.4 L 54.7,170.0 L 54.3,168.6 L 52.5,167.6 L 50.3,167.2 L 48.4,166.1 L 46.4,162.3 L 44.3,159.8 L 41.9,155.2 L 39.4,151.6 L 37.8,150.1 L 36.0,148.7 L 34.6,146.8 L 33.7,145.4 L 33.0,143.7 L 31.3,142.5 L 29.2,141.0 L 26.6,138.4 L 25.7,137.0 L 26.0,135.6 L 25.1,134.4 L 22.4,131.8 L 20.9,131.1 L 18.9,128.9 L 16.7,126.4 L 16.2,125.1 L 16.0,123.5 L 14.7,122.4 L 13.3,119.8 L 11.7,118.8 L 10.8,117.5 L 10.3,116.3 L 8.7,114.8 L 7.4,113.7 L 5.8,112.7 L 7.3,111.9 L 5.9,111.0 L 4.6,110.7 L 3.2,110.3 L 1.7,109.5 L 0.3,109.7 L -1.8,110.2 L -3.2,110.6 L -4.5,110.5 L -5.7,110.1 L -6.9,110.2 L -8.3,109.7 L -9.7,109.1 L -11.1,109.9 L -11.5,111.2 L -12.8,109.9 L -12.6,108.6 L -11.1,108.1 L -10.6,106.9 L -10.4,105.2 L -9.1,103.6 L -8.3,101.2 L -7.4,99.7 L -6.3,98.0 L -6.5,96.7 L -6.6,95.3 L -7.1,94.1 L -6.5,92.3 L -5.6,90.7 L -5.2,89.5 L -5.0,88.1 L -5.1,86.8 L -4.6,85.7 L -4.7,83.7 L -4.0,82.2 L -3.4,79.7 L -2.9,78.1 L -2.1,76.5 L -1.8,75.1 L 1.9,75.2 L 5.7,75.7 L 10.7,76.4 L 15.2,77.0 L 19.9,77.6 L 23.7,78.0 L 25.5,78.3 L 29.2,78.8 L 32.5,79.2 L 34.2,79.0 L 37.7,76.8 L 41.1,74.6 L 44.8,72.3 L 47.3,70.6 L 49.3,68.0 L 51.3,65.4 L 52.8,63.5 L 54.6,61.2 L 56.2,60.2 L 59.0,59.8 L 61.8,59.3 L 66.4,58.6 L 71.0,57.8 L 75.3,57.1 L 79.0,56.6 L 81.2,53.4 L 82.2,51.5 L 83.4,49.3 L 84.3,47.6 L 85.5,46.6 L 88.9,45.1 L 92.8,43.5 L 95.1,42.4 L 93.8,40.9 L 90.3,37.7 L 86.8,34.6 L 83.3,31.5 L 79.8,28.3 L 75.2,24.6 L 71.1,21.2 L 66.9,17.8 L 62.7,14.4 L 70.6,12.6 L 78.6,10.8 L 86.5,9.0 L 88.4,8.5 L 94.4,7.3 L 101.6,5.6 L 108.8,4.1 L 116.0,2.5 L 123.2,0.9 L 126.8,0.1 L 131.7,-2.9 L 132.9,-3.4 L 139.4,-2.6 L 145.7,-1.8 L 152.0,-0.9 L 158.4,-0.2 L 160.9,0.1 L 171.8,1.8 L 173.6,2.2 L 175.4,3.1 L 178.7,4.5 L 181.4,5.8 L 184.3,7.1 L 187.1,8.3 L 189.9,9.5 L 192.7,10.8 L 195.5,12.0 L 198.3,13.3 L 201.1,14.6 L 203.9,15.8 L 206.7,17.1 L 209.5,18.4 L 212.3,19.7 L 215.1,20.9 L 218.0,22.1 L 220.8,23.4 L 223.6,24.6 L 226.4,25.9 L 228.5,27.4 L 231.2,29.1 L 234.0,30.9 L 236.6,32.6 L 239.4,34.4 L 242.4,36.4 L 245.4,38.4 L 248.4,40.5 L 251.5,42.4 L 254.9,44.6 L 257.7,46.3 L 260.5,48.1 L 263.3,49.8 L 266.1,51.6 L 269.8,53.8 L 273.5,56.2 L 277.2,58.4 L 280.8,60.7 L 282.4,61.6 L 284.5,62.9 L 288.2,65.3 L 291.8,67.5 L 295.5,69.8 L 298.5,71.7 L 301.6,73.6 L 304.6,75.5 L 307.7,77.4 L 310.1,78.9 L 313.9,79.4 L 316.4,79.5 L 319.0,79.7 L 321.5,79.9 L 324.1,80.1 L 327.4,80.3 L 330.6,80.6 L 333.9,80.8 L 337.2,81.0 L 340.5,81.3 L 343.7,81.5 L 347.0,81.7 L 350.3,81.9 L 352.8,82.0 L 355.2,82.2 L 357.6,82.4 L 360.1,82.6 L 363.4,82.8 L 364.8,82.6 L 366.2,82.4 L 367.6,82.1 L 369.0,81.9 L 372.6,82.2 L 376.2,82.6 L 379.7,82.9 L 383.3,83.3 L 386.5,83.6 L 389.7,83.9 L 392.9,84.3 L 396.1,84.6 L 397.9,84.8 L 399.8,87.3 L 401.6,91.0 L 401.9,93.4 L 402.6,95.0 L 404.5,96.6 L 407.1,97.8 L 412.8,97.7 L 418.5,97.7 L 424.2,97.7 L 429.8,97.6 L 431.8,98.7 L 432.3,100.2 L 432.0,101.8 L 432.5,103.1 L 433.1,104.4 L 435.8,106.7 L 435.3,108.1 L 435.7,109.7 L 437.0,111.0 L 438.5,112.1 L 439.9,112.1 L 441.2,112.5 L 439.9,113.3 L 440.7,114.8 L 442.1,115.4 L 444.1,117.4 L 443.9,118.7 L 443.3,120.2 L 443.1,118.9 L 441.8,119.7 L 442.3,118.5 L 441.1,120.0 L 442.0,121.3 L 443.5,122.4 L 443.8,123.5 L 444.7,124.9 L 446.4,123.5 L 448.5,124.5 L 450.0,125.3 L 451.4,125.6 L 452.6,125.7 L 454.0,125.3 L 455.7,125.7 L 457.1,127.0 L 457.9,128.1 L 456.4,128.2 L 454.7,128.1 L 453.1,128.1 L 451.8,128.6 L 453.2,129.0 L 454.5,129.8 L 455.9,129.1 L 455.3,130.7 L 456.9,130.9 L 457.9,132.4 L 458.1,134.7 L 459.0,135.8 L 460.4,134.9 L 460.8,136.2 L 462.1,136.5 L 463.4,137.0 L 464.8,137.3 L 463.6,136.1 L 464.9,135.8 L 466.3,135.5 L 465.9,136.7 L 466.2,138.1 L 467.6,139.0 L 469.4,141.3 L 470.7,142.4 L 472.4,143.3 L 474.7,144.1 L 476.6,145.0 L 478.1,145.0 L 480.1,146.2 L 481.7,147.9 L 484.5,150.0 L 485.2,151.2 L 483.7,150.2 L 481.2,149.6 L 480.2,148.1 L 479.5,149.6 L 480.2,151.0 L 480.1,152.6 L 481.0,155.3 L 482.5,156.4 L 485.2,157.2 L 486.7,158.8 L 486.9,160.1 L 486.9,163.2 L 486.5,164.4 L 485.2,164.3 L 485.1,166.4 L 484.5,168.3 L 483.9,167.1 L 483.0,165.9 L 482.2,164.5 L 480.7,163.7 L 479.8,164.9 L 479.9,166.2 L 479.7,167.6 L 480.7,169.1 L 481.6,171.0 L 483.2,172.9 L 483.8,175.4 L 485.3,176.8 L 487.5,180.1 L 491.1,183.9 L 492.4,183.0 L 493.1,184.4 L 494.8,184.9 L 495.7,186.4 L 496.3,187.8 L 496.8,189.1 L 496.6,190.5 L 497.1,191.8 L 497.7,193.0 L 497.7,195.2 L 499.4,196.2 L 500.6,197.5 L 501.8,199.9 L 503.2,200.8 L 503.6,203.6 L 504.4,204.9 L 505.9,204.6 Z" data-country="Saudi Arabia" />
+        <path class="country-path gcc" d="M 505.9,204.6 L 507.3,203.9 L 507.2,200.5 L 505.6,197.7 L 505.9,196.0 L 504.8,194.8 L 504.5,192.9 L 504.4,191.1 L 504.3,189.8 L 504.5,188.3 L 504.0,185.6 L 504.4,184.4 L 504.9,182.6 L 506.3,183.6 L 506.5,182.1 L 506.5,180.8 L 505.1,180.4 L 506.8,179.7 L 507.8,180.8 L 508.1,182.2 L 509.0,180.8 L 510.4,180.6 L 511.3,179.2 L 509.6,179.6 L 508.4,178.6 L 508.6,176.9 L 508.9,175.2 L 510.1,174.7 L 510.4,173.2 L 511.3,171.6 L 511.5,169.7 L 512.9,168.4 L 514.4,167.5 L 516.3,166.9 L 517.5,165.7 L 518.9,165.3 L 522.6,165.8 L 523.1,167.5 L 524.2,169.0 L 524.9,170.5 L 527.0,170.5 L 528.4,170.8 L 529.9,171.7 L 531.0,175.7 L 529.8,176.1 L 530.9,177.3 L 529.2,177.6 L 529.7,179.0 L 528.2,180.2 L 527.8,181.4 L 527.1,182.7 L 528.4,184.7 L 528.5,186.6 L 528.4,188.2 L 530.9,189.4 L 531.6,190.7 L 531.7,193.5 L 531.4,196.5 L 530.8,198.7 L 529.2,200.3 L 528.0,201.5 L 527.2,204.1 L 526.4,205.3 L 525.8,206.9 L 524.5,207.5 L 523.6,208.9 L 522.8,207.4 L 521.2,207.4 L 519.6,207.3 L 516.7,209.4 L 515.0,209.8 L 513.2,209.8 L 511.3,209.7 L 509.7,209.1 L 508.2,207.7 L 505.9,204.6 Z" data-country="Qatar" />
+        <path class="country-path gcc" d="M 684.3,198.0 L 685.0,200.4 L 687.0,203.8 L 687.8,205.9 L 691.6,211.6 L 694.1,213.7 L 697.6,217.1 L 698.6,218.5 L 702.0,222.3 L 705.9,225.0 L 708.9,226.9 L 714.5,228.9 L 720.3,230.2 L 722.8,231.1 L 724.6,231.5 L 726.0,231.7 L 728.9,231.7 L 730.4,232.8 L 732.4,233.5 L 737.4,233.4 L 738.8,233.5 L 740.2,233.8 L 742.2,234.4 L 744.4,235.6 L 746.1,236.3 L 747.6,236.5 L 749.2,236.5 L 750.5,236.2 L 751.7,235.3 L 754.0,235.5 L 755.4,235.8 L 756.3,237.4 L 757.6,238.0 L 759.1,238.4 L 760.4,238.6 L 761.4,239.8 L 761.9,242.0 L 764.1,243.9 L 765.7,244.9 L 766.6,246.6 L 768.1,247.8 L 768.3,249.5 L 770.4,251.2 L 770.8,252.5 L 773.6,254.0 L 775.4,255.4 L 777.2,258.8 L 778.1,260.1 L 780.5,262.3 L 782.5,264.1 L 784.2,265.1 L 784.7,266.4 L 788.1,265.7 L 790.2,266.8 L 791.5,267.9 L 792.8,266.8 L 794.4,267.7 L 795.0,269.5 L 794.4,274.1 L 794.0,275.4 L 791.5,278.6 L 790.0,279.8 L 789.1,282.2 L 789.0,283.6 L 787.4,284.6 L 786.5,286.1 L 783.9,288.9 L 783.0,291.5 L 779.4,296.5 L 779.0,297.7 L 774.2,299.6 L 769.7,302.4 L 765.4,306.2 L 764.1,307.9 L 762.8,308.9 L 761.9,310.5 L 761.7,311.8 L 759.5,313.5 L 757.8,315.1 L 757.2,316.4 L 759.0,316.5 L 757.8,317.7 L 756.6,319.0 L 755.4,319.8 L 754.6,321.1 L 754.3,322.5 L 753.4,323.9 L 753.1,325.3 L 752.7,326.5 L 751.5,327.1 L 750.3,328.4 L 748.5,328.1 L 746.4,327.7 L 744.8,328.1 L 743.2,327.3 L 742.8,325.3 L 743.5,326.5 L 743.3,324.7 L 744.4,322.7 L 744.2,321.2 L 742.6,321.1 L 740.6,321.9 L 739.3,322.2 L 738.1,324.1 L 737.0,325.4 L 735.8,326.0 L 734.5,327.6 L 734.9,329.2 L 733.0,329.9 L 731.8,330.6 L 731.0,332.0 L 730.3,333.4 L 731.1,335.3 L 730.1,337.8 L 730.0,339.1 L 729.3,340.6 L 728.8,342.1 L 726.4,345.4 L 726.2,347.0 L 727.0,348.3 L 727.0,349.6 L 726.5,351.2 L 728.3,353.9 L 728.8,355.1 L 728.6,356.6 L 728.1,357.9 L 728.0,359.1 L 728.7,360.6 L 730.0,362.3 L 729.7,364.0 L 730.9,365.9 L 729.6,367.2 L 728.1,367.4 L 726.7,368.2 L 720.1,368.0 L 718.2,368.2 L 710.7,369.2 L 706.7,370.2 L 701.3,372.0 L 699.2,373.3 L 697.9,373.9 L 696.5,375.2 L 693.1,378.1 L 692.4,380.4 L 692.6,381.7 L 691.9,383.0 L 691.5,385.1 L 689.6,389.5 L 689.5,391.2 L 687.5,392.1 L 685.8,394.0 L 683.5,395.7 L 678.0,396.1 L 676.4,396.5 L 673.0,396.5 L 670.3,397.3 L 660.9,397.8 L 657.7,398.6 L 656.5,398.8 L 654.5,399.3 L 653.4,400.9 L 651.9,403.3 L 648.4,405.9 L 647.5,407.4 L 647.2,408.5 L 648.8,410.2 L 649.6,412.6 L 648.1,414.7 L 648.5,415.9 L 647.3,417.0 L 646.2,418.5 L 644.6,419.5 L 642.3,421.9 L 640.9,422.8 L 639.6,423.0 L 638.2,423.4 L 636.8,423.8 L 634.9,424.1 L 633.3,424.4 L 632.0,424.2 L 630.6,423.7 L 629.6,422.5 L 628.3,422.3 L 626.9,422.0 L 625.5,422.2 L 624.0,422.0 L 622.8,422.4 L 621.3,422.0 L 619.8,422.4 L 613.2,422.8 L 610.7,422.8 L 608.7,423.5 L 608.4,424.6 L 606.6,425.8 L 605.1,425.9 L 603.2,426.2 L 602.0,426.4 L 600.7,427.0 L 599.5,427.2 L 598.0,428.3 L 596.8,429.5 L 594.7,430.1 L 589.5,430.2 L 586.8,430.6 L 581.6,432.0 L 578.9,433.1 L 576.9,429.3 L 574.9,425.5 L 572.9,421.7 L 570.9,417.9 L 569.7,415.6 L 567.6,415.0 L 566.3,412.6 L 565.0,409.9 L 563.6,407.2 L 562.2,404.4 L 560.9,401.7 L 559.5,399.0 L 558.1,396.2 L 556.8,393.6 L 555.4,390.9 L 554.0,388.1 L 552.7,385.4 L 551.3,382.7 L 549.9,379.9 L 548.5,377.2 L 547.2,374.5 L 545.8,371.7 L 544.4,369.0 L 543.6,367.2 L 546.9,365.8 L 552.4,364.1 L 557.8,362.5 L 563.3,360.9 L 568.8,359.3 L 574.3,357.7 L 579.7,356.1 L 585.2,354.4 L 590.7,352.9 L 596.2,351.2 L 601.6,349.7 L 607.1,348.1 L 612.6,346.4 L 618.1,344.9 L 623.6,343.2 L 629.0,341.7 L 634.5,340.0 L 639.3,338.6 L 640.4,335.9 L 641.2,333.7 L 642.0,331.3 L 643.3,328.1 L 644.7,324.4 L 646.3,320.2 L 647.9,315.7 L 649.7,311.1 L 651.0,307.5 L 653.1,302.0 L 654.7,297.7 L 656.1,294.0 L 657.3,290.8 L 658.3,288.4 L 658.8,286.8 L 660.4,282.7 L 660.1,281.4 L 658.4,279.1 L 655.8,275.6 L 653.2,272.0 L 650.6,268.5 L 648.0,265.0 L 646.0,262.2 L 646.3,258.1 L 646.1,254.0 L 647.2,250.5 L 650.3,246.1 L 651.0,244.4 L 651.6,241.6 L 652.6,239.9 L 654.2,238.3 L 655.3,234.7 L 657.1,230.0 L 657.2,237.2 L 657.1,232.1 L 657.0,229.2 L 654.8,227.6 L 656.0,226.4 L 657.3,226.1 L 658.9,225.4 L 660.7,225.0 L 662.8,225.1 L 664.4,224.9 L 665.8,225.5 L 669.6,224.2 L 671.6,223.8 L 670.8,221.7 L 670.4,220.4 L 668.9,219.1 L 667.1,219.7 L 664.6,219.3 L 665.6,216.5 L 666.0,214.6 L 664.8,213.7 L 664.8,211.7 L 664.3,209.8 L 665.3,208.2 L 666.1,206.9 L 665.4,205.3 L 665.5,203.7 L 665.2,201.5 L 666.5,199.7 L 668.7,198.3 L 671.2,198.2 L 672.5,199.5 L 672.8,200.8 L 671.3,200.7 L 672.1,202.4 L 673.0,204.4 L 674.4,205.1 L 675.8,204.9 L 677.0,203.4 L 679.2,202.1 L 680.8,201.1 L 682.0,200.1 L 682.2,198.5 L 684.3,198.0 Z" data-country="Oman" />
+        <path class="country-path gcc" d="M 680.9,179.8 L 682.3,180.3 L 683.8,182.6 L 683.6,185.2 L 683.7,186.5 L 684.0,187.8 L 684.1,189.4 L 683.7,191.6 L 683.6,195.5 L 684.3,198.0 L 682.5,198.2 L 682.1,199.4 L 681.0,200.9 L 679.7,201.9 L 678.0,202.2 L 676.3,204.1 L 674.5,205.1 L 673.0,204.4 L 672.1,202.4 L 670.9,201.5 L 672.2,200.9 L 672.5,199.5 L 671.3,198.2 L 669.9,198.0 L 667.6,198.9 L 665.6,200.7 L 665.5,203.7 L 665.4,205.3 L 666.1,206.9 L 665.3,208.2 L 664.6,209.6 L 664.8,211.7 L 664.7,213.2 L 665.9,214.4 L 665.8,216.0 L 664.4,218.2 L 666.6,219.7 L 668.9,219.1 L 670.4,220.4 L 670.8,221.7 L 671.9,223.3 L 669.6,224.2 L 665.8,225.5 L 664.4,224.9 L 662.8,225.1 L 660.7,225.0 L 658.9,225.4 L 657.3,226.1 L 656.0,226.4 L 654.6,226.6 L 655.3,228.0 L 656.5,228.6 L 655.6,234.3 L 654.2,238.3 L 652.6,239.9 L 651.6,241.6 L 651.0,244.4 L 650.3,246.1 L 647.2,250.5 L 646.2,253.1 L 646.3,258.1 L 646.0,262.2 L 643.8,264.5 L 639.0,264.0 L 634.5,263.5 L 630.1,263.1 L 625.6,262.7 L 621.2,262.2 L 616.7,261.7 L 612.3,261.2 L 607.8,260.7 L 603.4,260.2 L 598.9,259.7 L 594.5,259.2 L 590.0,258.8 L 585.6,258.3 L 581.2,257.8 L 576.7,257.3 L 572.3,256.8 L 567.8,256.3 L 562.7,255.8 L 561.2,255.1 L 559.5,253.3 L 557.9,251.6 L 556.2,249.9 L 554.5,248.1 L 552.8,246.4 L 551.2,244.6 L 549.5,242.8 L 547.8,241.1 L 546.2,239.3 L 544.5,237.6 L 542.8,235.8 L 541.2,234.1 L 539.5,232.3 L 537.8,230.6 L 536.2,228.8 L 534.5,227.1 L 532.8,225.4 L 531.0,223.4 L 530.3,222.1 L 530.4,220.2 L 530.2,218.4 L 530.9,216.4 L 531.0,214.8 L 532.0,216.1 L 532.1,218.2 L 532.8,219.5 L 533.5,217.8 L 534.0,219.0 L 535.2,219.2 L 535.7,217.8 L 537.0,218.8 L 536.7,220.7 L 537.2,222.7 L 537.2,224.0 L 537.6,225.2 L 540.2,225.9 L 541.7,226.6 L 544.3,226.0 L 546.1,226.6 L 547.8,226.4 L 549.0,226.5 L 550.6,226.4 L 552.9,225.6 L 554.5,225.6 L 555.7,224.9 L 557.1,224.4 L 558.4,223.6 L 559.6,222.9 L 561.0,222.0 L 562.4,221.4 L 562.6,220.0 L 564.3,220.3 L 565.4,221.6 L 567.0,221.4 L 568.4,221.7 L 570.1,221.5 L 571.4,221.5 L 574.3,221.8 L 575.7,221.4 L 577.6,222.0 L 579.4,221.8 L 580.7,222.2 L 580.5,221.0 L 582.1,221.2 L 583.4,222.1 L 585.9,222.9 L 590.0,222.2 L 591.3,223.0 L 592.6,222.9 L 594.0,223.6 L 595.2,224.3 L 596.8,224.2 L 598.0,223.9 L 600.7,223.8 L 604.1,224.0 L 608.0,224.0 L 608.4,222.4 L 609.8,222.1 L 611.6,221.7 L 612.9,221.0 L 616.1,219.4 L 617.8,218.4 L 620.3,218.4 L 621.7,217.4 L 623.6,214.7 L 624.0,213.5 L 625.3,213.5 L 624.4,212.3 L 625.9,212.7 L 624.0,211.9 L 622.1,210.8 L 623.3,209.6 L 624.4,211.1 L 626.0,211.5 L 627.2,210.7 L 628.4,208.8 L 628.7,207.5 L 629.1,206.2 L 628.5,205.0 L 630.1,203.6 L 631.6,203.3 L 635.8,200.6 L 637.4,199.7 L 639.0,198.6 L 640.2,198.3 L 641.6,197.6 L 645.0,194.7 L 648.3,191.4 L 649.0,190.0 L 650.2,191.1 L 649.8,189.6 L 650.8,188.4 L 652.1,187.1 L 654.0,185.8 L 655.6,184.8 L 656.0,183.5 L 656.8,182.1 L 658.2,180.9 L 657.5,182.5 L 658.7,182.6 L 660.0,182.3 L 660.7,180.9 L 662.4,179.5 L 664.3,178.2 L 665.7,177.8 L 668.1,176.6 L 669.8,174.8 L 671.1,173.6 L 672.5,172.6 L 673.1,171.1 L 673.8,169.5 L 674.3,167.8 L 676.8,167.1 L 677.7,168.3 L 677.6,170.2 L 677.5,172.7 L 676.5,174.2 L 677.3,175.5 L 676.5,176.7 L 676.6,178.5 L 678.0,179.3 L 679.6,180.1 L 680.9,179.8 Z" data-country="UAE" />
+        <path class="country-path gcc" d="M 497.1,163.7 L 496.5,165.4 L 496.9,167.1 L 498.0,168.5 L 499.3,168.8 L 500.0,167.1 L 498.9,165.3 L 497.4,164.0 Z" data-country="Bahrain" />
+        <!-- Bahrain hit area + marker (country too small to see/hover) -->
+        <circle cx="498.2" cy="166.2" r="14" fill="transparent" class="country-path gcc bahrain-hit" data-country="Bahrain" style="cursor:pointer"/>
+        <circle cx="498.2" cy="166.2" r="6" fill="none" stroke="var(--accent)" stroke-width="0.6" stroke-opacity="0.3" stroke-dasharray="2 2" class="bahrain-ring"/>
+        <circle cx="498.2" cy="166.2" r="2.5" fill="var(--accent)" opacity="0.5" class="bahrain-dot"/>
+      </g>
+      <!-- City connections -->
+      <g id="connections" opacity="0.5">
+        <line class="city-connection" x1="415.3" y1="74" x2="498.5" y2="166.5"/>
+        <line class="city-connection" x1="415.3" y1="74" x2="373.6" y2="205.5"/>
+        <line class="city-connection" x1="529" y1="189.4" x2="648.7" y2="191.7"/>
+        <line class="city-connection" x1="648.7" y1="191.7" x2="740" y2="237.3"/>
+        <line class="city-connection" x1="373.6" y1="205.5" x2="134.2" y2="296.7"/>
+        <line class="city-connection" x1="498.5" y1="166.5" x2="529" y2="189.4"/>
+        <line class="city-connection" x1="620.1" y1="213" x2="648.7" y2="191.7"/>
+      </g>
+      <g id="cities">
+        <circle cx="415.3" cy="74.0" r="12" class="city-dot-ring"/>
+        <circle cx="415.3" cy="74.0" r="3" class="city-dot"/>
+        <text x="427.3" y="66.0" class="city-label" text-anchor="start">KUWAIT CITY</text>
+        <circle cx="373.6" cy="205.5" r="12" class="city-dot-ring"/>
+        <circle cx="373.6" cy="205.5" r="3" class="city-dot"/>
+        <text x="361.6" y="219.5" class="city-label" text-anchor="end">RIYADH</text>
+        <circle cx="134.2" cy="296.7" r="12" class="city-dot-ring"/>
+        <circle cx="134.2" cy="296.7" r="3" class="city-dot"/>
+        <text x="122.19999999999999" y="310.7" class="city-label" text-anchor="end">JEDDAH</text>
+        <circle cx="498.5" cy="166.5" r="12" class="city-dot-ring"/>
+        <circle cx="498.5" cy="166.5" r="3" class="city-dot"/>
+        <text x="508.5" y="160.5" class="city-label" text-anchor="start">MANAMA</text>
+        <circle cx="529.0" cy="189.4" r="12" class="city-dot-ring"/>
+        <circle cx="529.0" cy="189.4" r="3" class="city-dot"/>
+        <text x="539.0" y="183.4" class="city-label" text-anchor="start">DOHA</text>
+        <circle cx="648.7" cy="191.7" r="12" class="city-dot-ring"/>
+        <circle cx="648.7" cy="191.7" r="3" class="city-dot"/>
+        <text x="640" y="200" class="city-label" text-anchor="middle">DUBAI</text>
+        <circle cx="620.1" cy="213.0" r="12" class="city-dot-ring"/>
+        <circle cx="620.1" cy="213.0" r="3" class="city-dot"/>
+        <text x="605" y="210" class="city-label" text-anchor="end">ABU DHABI</text>
+        <circle cx="740.0" cy="237.3" r="12" class="city-dot-ring"/>
+        <circle cx="740.0" cy="237.3" r="3" class="city-dot"/>
+        <text x="752" y="234" class="city-label" text-anchor="start">MUSCAT</text>
+        <!-- Secondary cities — UAE -->
+        <circle cx="660" cy="185" r="2" class="city-dot-sm"/>
+        <text x="650" y="180" class="city-label-sm" text-anchor="end">SHARJAH</text>
+        <circle cx="676" cy="174" r="2" class="city-dot-sm"/>
+        <text x="686" y="168" class="city-label-sm" text-anchor="start">RAS AL KHAIMAH</text>
+        <!-- Secondary cities — Saudi Arabia -->
+        <circle cx="443" cy="155" r="2" class="city-dot-sm"/>
+        <text x="443" y="148" class="city-label-sm" text-anchor="middle">DAMMAM</text>
+      </g>
+    </svg>
+  </div>
+
+</div>
+
+<div class="bottom-bar">
+  <div class="bottom-stats">
+    <div class="bottom-stat">GCC REACH <span class="val" id="totalCounter">0</span></div>
+    <div class="bottom-stat">TERRITORIES <span class="val">6</span></div>
+    <div class="bottom-stat">AVG COVERAGE <span class="val">75%</span></div>
+    <div class="bottom-stat">INDUSTRIES <span class="val">32</span></div>
+  </div>
+  <div style="opacity:0.5">DWM · RESTRICTED ACCESS</div>
+</div>
+
+<script>
+// ===== MATRIX RAIN =====
+(function(){
+  const container = document.getElementById('matrixRain');
+  const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン01001110100';
+  for(let i=0;i<30;i++){
+    const col = document.createElement('div');
+    col.className = 'matrix-col';
+    col.style.left = (Math.random()*100)+'%';
+    col.style.animationDuration = (8+Math.random()*12)+'s';
+    col.style.animationDelay = (-Math.random()*15)+'s';
+    col.style.fontSize = (10+Math.random()*4)+'px';
+    col.style.opacity = (0.2+Math.random()*0.5);
+    let text = '';
+    for(let j=0;j<40;j++) text += chars[Math.floor(Math.random()*chars.length)];
+    col.textContent = text;
+    container.appendChild(col);
+  }
+})();
+
+// ===== LIVE CLOCK =====
+function updateClock(){
+  const now = new Date();
+  document.getElementById('headerTime').textContent =
+    now.toTimeString().split(' ')[0] + '.' + String(now.getMilliseconds()).padStart(3,'0').slice(0,2) + ' UTC+3';
+}
+setInterval(updateClock, 80);
+updateClock();
+
+// ===== ANIMATED COUNTERS =====
+function animateCounter(el, target, duration){
+  const start = 0;
+  const startTime = performance.now();
+  const numTarget = parseInt(target.replace(/,/g,''));
+  function tick(now){
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(numTarget * eased);
+    el.textContent = current.toLocaleString();
+    if(progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// Boot counters
+setTimeout(()=>animateCounter(document.getElementById('totalCounter'),'44,770,000',2500),500);
+
+// ===== AUDIENCE DATA =====
+const audienceData = {
+  'Kuwait': {
+    total: '3,680,000', totalNum: 3680000, popPct: 75,
+    gender: [68, 32],
+    nationality: [28, 72],
+    age: [['18–24', 14],['25–34', 32],['35–44', 28],['45–54', 16],['55+', 10]],
+    education: [['Graduate+', 38],['Undergraduate', 34],['Secondary', 28]],
+    companies: ['NBK','KFH','Zain','KIPCO','Boubyan Bank','Gulf Bank','MEW','Equate','IFA','Kuwait Airways'],
+    departments: [
+      ['Finance', 28, 'fn'],['Operations', 22, 'op'],['Strategy', 18, 'st'],
+      ['IT', 14, 'it'],['Marketing', 10, 'mk'],['HR', 8, 'hr']
+    ],
+    roles: [
+      ['CEO / Managing Director', '18,200', 100],
+      ['CFO / Finance Director', '12,400', 68],
+      ['VP / General Manager', '15,400', 85],
+      ['Director Level', '48,600', 92],
+      ['Head of Department', '62,100', 95],
+      ['Senior Manager', '94,800', 98],
+      ['Manager', '94,800', 97],
+    ],
+    industries: [
+      ['Financial Services', '182,000', 100],
+      ['Oil & Gas / Energy', '124,000', 63],
+      ['Real Estate & Construction', '78,400', 43],
+      ['Telecommunications', '71,200', 30],
+      ['Govt & Public Sector', '48,600', 27],
+    ],
+    center: [415, 120]
+  },
+  'Saudi Arabia': {
+    total: '26,600,000', totalNum: 26600000, popPct: 74,
+    gender: [57, 43],
+    nationality: [62, 38],
+    age: [['18–24', 18],['25–34', 29],['35–44', 26],['45–54', 17],['55+', 10]],
+    education: [['Graduate+', 34],['Undergraduate', 36],['Secondary', 28]],
+    companies: ['Saudi Aramco','SABIC','STC','Almarai Group','ACWA','Mobily','Saudi Telecom','Riyad Bank','Saudi Electricity','Al Rajhi Capital'],
+    departments: [
+      ['Finance', 26, 'fn'],['Operations', 24, 'op'],['Strategy', 16, 'st'],
+      ['IT', 15, 'it'],['Marketing', 12, 'mk'],['HR', 7, 'hr']
+    ],
+    roles: [
+      ['CEO / Managing Director', '142,000', 100],
+      ['CFO / Finance Director', '28,400', 68],
+      ['VP / General Manager', '186,400', 82],
+      ['Director Level', '124,000', 94],
+      ['Head of Department', '418,000', 97],
+      ['Senior Manager', '286,000', 99],
+      ['Manager', '724,000', 100],
+    ],
+    industries: [
+      ['Financial Services', '1,240,000', 100],
+      ['Oil & Gas / Energy', '960,000', 77],
+      ['Construction & Infra', '890,000', 65],
+      ['Healthcare', '524,000', 42],
+      ['Retail & Consumer', '520,000', 36],
+    ],
+    center: [300, 280]
+  },
+  'UAE': {
+    total: '7,800,000', totalNum: 7800000, popPct: 78,
+    gender: [69, 31],
+    nationality: [12, 88],
+    age: [['18–24', 12],['25–34', 34],['35–44', 30],['45–54', 15],['55+', 9]],
+    education: [['Graduate+', 42],['Undergraduate', 33],['Secondary', 28]],
+    companies: ['Emirates NBD','ADNOC','Etisalat','DP World','Emaar','Mubadala','DEWA','Dubai Holding','Majid Al Futtaim','Emirates Group'],
+    departments: [
+      ['Finance', 24, 'fn'],['Operations', 20, 'op'],['Strategy', 19, 'st'],
+      ['IT', 17, 'it'],['Marketing', 13, 'mk'],['HR', 7, 'hr']
+    ],
+    roles: [
+      ['CEO / Managing Director', '82,400', 100],
+      ['CFO / Finance Director', '56,200', 70],
+      ['VP / General Manager', '31,200', 84],
+      ['Director Level', '196,000', 93],
+      ['Head of Department', '98,400', 96],
+      ['Senior Manager', '362,000', 99],
+      ['Manager', '184,000', 100],
+    ],
+    industries: [
+      ['Financial Services', '648,000', 100],
+      ['Real Estate', '520,000', 66],
+      ['Technology', '342,000', 53],
+      ['Tourism & Hospitality', '340,000', 43],
+      ['Trade & Logistics', '254,000', 39],
+    ],
+    center: [650, 200]
+  },
+  'Qatar': {
+    total: '2,280,000', totalNum: 2280000, popPct: 76,
+    gender: [75, 25],
+    nationality: [11, 89],
+    age: [['18–24', 11],['25–34', 36],['35–44', 29],['45–54', 15],['55+', 9]],
+    education: [['Graduate+', 40],['Undergraduate', 35],['Secondary', 28]],
+    companies: ['QNB','Qatar Energy','Ooredoo','Qatar Foundation','Nakilat','Qatari Diar','Industries Qatar','Barwa Real Estate','Vodafone Qatar','Al Jazeera'],
+    departments: [
+      ['Finance', 27, 'fn'],['Operations', 23, 'op'],['Strategy', 17, 'st'],
+      ['IT', 14, 'it'],['Marketing', 11, 'mk'],['HR', 8, 'hr']
+    ],
+    roles: [
+      ['CEO / Managing Director', '12,400', 100],
+      ['CFO / Finance Director', '28,400', 68],
+      ['VP / General Manager', '18,600', 83],
+      ['Director Level', '31,200', 91],
+      ['Head of Department', '98,400', 96],
+      ['Senior Manager', '57,800', 99],
+      ['Manager', '42,600', 98],
+    ],
+    industries: [
+      ['Energy & Utilities', '168,000', 100],
+      ['Financial Services', '210,000', 78],
+      ['Construction', '98,400', 59],
+      ['Government', '94,000', 44],
+      ['Sports & Events', '42,600', 26],
+    ],
+    center: [520, 195]
+  },
+  'Bahrain': {
+    total: '1,240,000', totalNum: 1100000, popPct: 73,
+    gender: [65, 35],
+    nationality: [45, 55],
+    age: [['18–24', 15],['25–34', 31],['35–44', 27],['45–54', 17],['55+', 10]],
+    education: [['Graduate+', 36],['Undergraduate', 34],['Secondary', 28]],
+    companies: ['Ahli United Bank','Batelco','Alba','GFH','Mumtalakat','Gulf Air','Arab Banking','Bahrain Bay','National Oil','BAPCO'],
+    departments: [
+      ['Finance', 32, 'fn'],['Operations', 20, 'op'],['Strategy', 16, 'st'],
+      ['IT', 13, 'it'],['Marketing', 11, 'mk'],['HR', 8, 'hr']
+    ],
+    roles: [
+      ['CEO / Managing Director', '7,800', 100],
+      ['CFO / Finance Director', '5,400', 71],
+      ['VP / General Manager', '31,200', 84],
+      ['Director Level', '21,600', 91],
+      ['Head of Department', '25,600', 95],
+      ['Senior Manager', '286,000', 99],
+      ['Manager', '36,200', 98],
+    ],
+    industries: [
+      ['Financial Services', '86,400', 100],
+      ['Oil & Gas', '64,000', 47],
+      ['Manufacturing', '30,800', 35],
+      ['Telecommunications', '31,000', 26],
+      ['Government', '20,600', 24],
+    ],
+    center: [500, 167]
+  },
+  'Oman': {
+    total: '3,310,000', totalNum: 3310000, popPct: 72,
+    gender: [66, 34],
+    nationality: [56, 44],
+    age: [['18–24', 17],['25–34', 30],['35–44', 26],['45–54', 17],['55+', 10]],
+    education: [['Graduate+', 30],['Undergraduate', 35],['Secondary', 28]],
+    companies: ['OQ','Bank Muscat','Omantel','Sohar Port','Bank Dhofar','Oman LNG','OAB','Alizz Islamic','BEL','Oman Shipping'],
+    departments: [
+      ['Finance', 25, 'fn'],['Operations', 26, 'op'],['Strategy', 15, 'st'],
+      ['IT', 14, 'it'],['Marketing', 12, 'mk'],['HR', 8, 'hr']
+    ],
+    roles: [
+      ['CEO / Managing Director', '14,200', 100],
+      ['CFO / Finance Director', '6,800', 69],
+      ['VP / General Manager', '15,400', 82],
+      ['Director Level', '21,600', 91],
+      ['Head of Department', '32,200', 95],
+      ['Senior Manager', '46,400', 99],
+      ['Manager', '42,600', 98],
+    ],
+    industries: [
+      ['Oil & Gas', '124,000', 100],
+      ['Financial Services', '134,000', 66],
+      ['Tourism', '68,200', 55],
+      ['Logistics & Ports', '98,000', 45],
+      ['Mining & Minerals', '42,400', 34],
+    ],
+    center: [720, 300]
+  }
+};
+
+const card = document.getElementById('hoverCard');
+const hoverContent = document.getElementById('hoverContent');
+const hoverScan = document.getElementById('hoverScan');
+const hoverArrow = document.getElementById('hoverArrow');
+const coordDisplay = document.getElementById('coordDisplay');
+const gccPaths = document.querySelectorAll('.country-path.gcc');
+let activeCountry = null;
+let closeTimer = null;
+
+function scheduleClose() {
+  closeTimer = setTimeout(hideCard, 200);
+}
+function cancelClose() {
+  if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+}
+function hideCard() {
+  gccPaths.forEach(p => p.classList.remove('active'));
+  card.classList.remove('show');
+  activeCountry = null;
+  coordDisplay.textContent = 'HOVER FOR INTEL \u25b8';
+}
+
+// Per-country card anchor points in SVG viewBox coords
+// Each has [anchorX, anchorY] where the card top-left will be placed
+const cardPositions = {
+  'Kuwait':        { svgX: 500, svgY: -15 },      // right of Kuwait City, empty space
+  'Bahrain':       { svgX: 620, svgY: -15 },      // same area as UAE card
+  'Qatar':         { svgX: 620, svgY: -15 },      // same area as UAE card
+  'UAE':           { svgX: 620, svgY: -15 },      // high above Ras Al Khaimah
+  'Saudi Arabia':  { svgX: 130, svgY: 100 },      // left side, Red Sea empty area
+  'Oman':          { svgX: 720, svgY: 100 },      // above Muscat, no overlap
+};
+
+function positionCard(country) {
+  const pos = cardPositions[country];
+  if (!pos) return;
+  const svg = document.querySelector('.map-svg');
+  const svgRect = svg.getBoundingClientRect();
+  const mapArea = document.querySelector('.map-area');
+  const mapRect = mapArea.getBoundingClientRect();
+  const vbX = -28, vbY = -20, vbW = 856, vbH = 667;
+  let left = svgRect.left - mapRect.left + ((pos.svgX - vbX) / vbW) * svgRect.width;
+  let top = svgRect.top - mapRect.top + ((pos.svgY - vbY) / vbH) * svgRect.height;
+
+  const cardW = 230;
+  // Clamp so card doesn't overflow right edge
+  if (left + cardW > mapRect.width) {
+    left = mapRect.width - cardW - 8;
+  }
+  // Clamp so card doesn't overflow left edge
+  if (left < 8) left = 8;
+
+  card.classList.remove('flip-left');
+  hoverArrow.style.display = 'none';
+  card.style.left = left + 'px';
+  card.style.top = top + 'px';
+}
+
+function renderCard(country) {
+  const d = audienceData[country];
+  if (!d) return;
+
+  hoverContent.innerHTML = `
+    <div class="hc-header">
+      <span class="hc-country">${country.toUpperCase()}</span>
+      <span class="hc-tag">\u25c9 REACHABLE</span>
+    </div>
+    <div class="hc-stats">
+      <div class="hc-stat-block">
+        <div class="hc-stat-label">Total Audience</div>
+        <div class="hc-stat-value" id="hcCounter">0</div>
+        <div class="hc-stat-sub">${d.popPct}% of population</div>
+      </div>
+    </div>
+    <div class="hc-section">
+      <div class="hc-section-title">Gender</div>
+      <div class="hc-gender-bar">
+        <div class="m" data-width="${d.gender[0]}" style="width:0"></div>
+        <div class="f" data-width="${d.gender[1]}" style="width:0"></div>
+      </div>
+      <div class="hc-gender-labels">
+        <span class="hc-gender-label"><span class="hc-gender-dot m"></span>${d.gender[0]}% M</span>
+        <span class="hc-gender-label"><span class="hc-gender-dot f"></span>${d.gender[1]}% F</span>
+      </div>
+    </div>
+  `;
+
+  // Scan line
+  hoverScan.classList.remove('active');
+  void hoverScan.offsetWidth;
+  hoverScan.classList.add('active');
+
+  // Animate counter
+  setTimeout(() => {
+    const el = document.getElementById('hcCounter');
+    if (el) animateCounter(el, d.total, 800);
+  }, 80);
+
+  // Animate bars
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      hoverContent.querySelectorAll('.hc-gender-bar .m,.hc-gender-bar .f').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+    }, 120);
+  });
+}
+
+// Hover events on country paths
+gccPaths.forEach(path => {
+  path.addEventListener('mouseenter', () => {
+    cancelClose();
+    const country = path.dataset.country;
+    if (!audienceData[country]) return;
+
+    gccPaths.forEach(p => p.classList.remove('active'));
+    path.classList.add('active');
+    activeCountry = country;
+
+    renderCard(country);
+    card.classList.add('show');
+    // Position after content is rendered
+    requestAnimationFrame(() => positionCard(country));
+    coordDisplay.textContent = country.toUpperCase() + ' \u00b7 LOCKED \u25b8';
+  });
+
+  path.addEventListener('mouseleave', scheduleClose);
+});
+
+// Keep card open when hovering over it
+card.addEventListener('mouseenter', cancelClose);
+card.addEventListener('mouseleave', scheduleClose);
+
+// Close when leaving map area entirely
+document.querySelector('.main').addEventListener('mouseleave', () => {
+  cancelClose();
+  hideCard();
+});
+
+// Mouse tracking for coord display
+document.querySelector('.map-svg').addEventListener('mousemove', (e) => {
+  if (activeCountry) return;
+  const svg = e.currentTarget;
+  const rect = svg.getBoundingClientRect();
+  const x = ((e.clientX - rect.left) / rect.width * 25 + 35).toFixed(1);
+  const y = (32 - (e.clientY - rect.top) / rect.height * 19.5).toFixed(1);
+  coordDisplay.textContent = y + '\u00b0N ' + x + '\u00b0E';
+});
+
+// Reposition on resize
+window.addEventListener('resize', () => {
+  if (activeCountry) positionCard(activeCountry);
+});
+
+</script>
+</body>
+</html>
