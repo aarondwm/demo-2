@@ -668,12 +668,12 @@ function hideCard() {
 // Per-country card anchor points in SVG viewBox coords
 // Each has [anchorX, anchorY] where the card top-left will be placed
 const cardPositions = {
-  'Kuwait':        { svgX: 500, svgY: -15 },      // right of Kuwait City, empty space
+  'Kuwait':        { svgX: 550, svgY: -15 },      // further right, clear of Kuwait City text
   'Bahrain':       { svgX: 620, svgY: -15 },      // same area as UAE card
   'Qatar':         { svgX: 620, svgY: -15 },      // same area as UAE card
   'UAE':           { svgX: 620, svgY: -15 },      // high above Ras Al Khaimah
-  'Saudi Arabia':  { svgX: 130, svgY: 100 },      // left side, Red Sea empty area
-  'Oman':          { svgX: 720, svgY: 100 },      // above Muscat, no overlap
+  'Saudi Arabia':  { svgX: 100, svgY: 70 },       // up-left, clear of Riyadh text
+  'Oman':          { svgX: 720, svgY: -15 },      // high up, clear of Ras Al Khaimah
 };
 
 function positionCard(country) {
