@@ -1172,15 +1172,15 @@ export default function Home() {
                 ))}
               </div>
               {/* Mobile: stat cards */}
-              <div className="grid grid-cols-3 gap-2 lg:hidden max-w-sm mx-auto w-full" style={{ opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
+              <div className="grid grid-cols-1 gap-3 lg:hidden max-w-sm mx-auto w-full" style={{ opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
                 {[
                   { value: "100%", label: "Placement Rate" },
                   { value: "12+",  label: "Publications" },
-                  { value: "1-50+", label: "Articles / Mo" },
+                  { value: "1-50+", label: "Articles Per Month" },
                 ].map(({ value, label }) => (
-                  <div key={label} className="flex flex-col items-center justify-center py-4 px-2" style={{ background: "rgba(74,108,247,0.06)", border: "1px solid rgba(74,108,247,0.12)", borderRadius: "8px" }}>
-                    <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "22px", fontWeight: 800, color: "#4a6cf7" }}>{value}</span>
-                    <span className="font-mono uppercase text-center" style={{ fontSize: "7px", letterSpacing: "0.14em", color: "rgba(255,255,255,0.45)", marginTop: "4px" }}>{label}</span>
+                  <div key={label} className="flex items-center justify-between py-4 px-5" style={{ background: "rgba(74,108,247,0.06)", border: "1px solid rgba(74,108,247,0.12)", borderRadius: "8px" }}>
+                    <span className="font-mono uppercase" style={{ fontSize: "11px", letterSpacing: "0.14em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
+                    <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "24px", fontWeight: 800, color: "#4a6cf7" }}>{value}</span>
                   </div>
                 ))}
               </div>
@@ -1282,7 +1282,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 text-center lg:text-left">
             <h2
               className="font-bold uppercase"
-              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(24px,4vw,48px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(30px,5.5vw,48px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
               <ScrambleOnView text="What We Know," delay={0} style={{ display: "block", color: "#ffffff" }} />
               <ScrambleOnView text="They Don't." delay={200} style={{ display: "block", color: "#4a6cf7" }} />
