@@ -395,7 +395,7 @@ const DASH_AUDIENCE = [
 ];
 const DASH_DEMOGRAPHICS = {
   gender: [{ label: "Male", pct: 74 }, { label: "Female", pct: 26 }],
-  location: [{ name: "Kuwait", pct: 86 }, { name: "UAE", pct: 78 }, { name: "Saudi Arabia", pct: 72 }, { name: "Qatar", pct: 81 }, { name: "Bahrain", pct: 73 }, { name: "Oman", pct: 68 }],
+  location: [{ name: "Kuwait City", pct: 32 }, { name: "Hawally", pct: 22 }, { name: "Salmiya", pct: 18 }, { name: "Jahra", pct: 12 }, { name: "Farwaniya", pct: 10 }, { name: "Ahmadi", pct: 6 }],
   age: [{ range: "25-34", pct: 34 }, { range: "35-44", pct: 36 }, { range: "45-54", pct: 19 }, { range: "55+", pct: 11 }],
 };
 const DASH_TABS = ["Overview", "Audience Breakdown"];
@@ -1108,9 +1108,9 @@ export default function Home() {
               >
                 <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: "11px", color: "rgba(74,108,247,0.4)", letterSpacing: "0.15em", marginBottom: "32px" }}>{n}</div>
                 <div className="wwd-stat" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontWeight: 800, letterSpacing: "-0.03em", color: "#e8e8e8", lineHeight: 1 }}>{stat}</div>
-                <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(74,108,247,0.4)", marginTop: "8px", paddingBottom: "28px", marginBottom: "28px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>{statLabel}</div>
+                <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4a6cf7", marginTop: "8px", paddingBottom: "28px", marginBottom: "28px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>{statLabel}</div>
                 <div style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "16px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.35, color: "#e8e8e8", marginBottom: "16px" }}>{title}</div>
-                <div style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "#6b7080" }}>{desc}</div>
+                <div className="hidden md:block" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "#6b7080" }}>{desc}</div>
               </a>
               );
             })}
