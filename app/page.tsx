@@ -396,7 +396,7 @@ const DASH_AUDIENCE = [
 const DASH_DEMOGRAPHICS = {
   gender: [{ label: "Male", pct: 74 }, { label: "Female", pct: 26 }],
   location: [{ name: "Kuwait", pct: 86 }, { name: "UAE", pct: 78 }, { name: "Saudi Arabia", pct: 72 }, { name: "Qatar", pct: 81 }, { name: "Bahrain", pct: 73 }, { name: "Oman", pct: 68 }],
-  age: [{ range: "25-34", pct: 89 }, { range: "35-44", pct: 94 }, { range: "45-54", pct: 76 }, { range: "55+", pct: 71 }],
+  age: [{ range: "25-34", pct: 34 }, { range: "35-44", pct: 36 }, { range: "45-54", pct: 19 }, { range: "55+", pct: 11 }],
 };
 const DASH_TABS = ["Overview", "Audience Breakdown"];
 
