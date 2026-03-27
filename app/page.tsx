@@ -1082,7 +1082,8 @@ export default function Home() {
             <ScrambleOnSignal text="YOU SEE WHO ENGAGED." signal={sec2Visible} style={{ color: "#4a6cf7" }} />
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-[6px] max-w-sm md:max-w-none mx-auto" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
+          {/* Desktop: original card layout */}
+          <div className="hidden md:grid grid-cols-3 gap-[6px]" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
             {[
               { n: "01", stat: "<24hr", statLabel: "DELIVERY GUARANTEED", title: "SECURED MEDIA PLACEMENT", desc: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches. Placements.", accent: false, href: "#media-placement" },
               { n: "02", stat: "44.7M+", statLabel: "REACHABLE AUDIENCE", title: "PRECISION DISTRIBUTION", desc: "6 GCC markets. 32 industries. Your content reaches the right audience. From the general population to the C-suite.", accent: false, href: "#audience-selection" },
@@ -1110,10 +1111,31 @@ export default function Home() {
                 <div className="wwd-stat" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontWeight: 800, letterSpacing: "-0.03em", color: "#e8e8e8", lineHeight: 1 }}>{stat}</div>
                 <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4a6cf7", marginTop: "8px", paddingBottom: "28px", marginBottom: "28px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>{statLabel}</div>
                 <div style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "16px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.35, color: "#e8e8e8", marginBottom: "16px" }}>{title}</div>
-                <div className="hidden md:block" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "#6b7080" }}>{desc}</div>
+                <div style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "#6b7080" }}>{desc}</div>
               </a>
               );
             })}
+          </div>
+          {/* Mobile: horizontal row layout (label left, stat right) */}
+          <div className="grid grid-cols-1 gap-3 md:hidden max-w-sm mx-auto w-full" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
+            {[
+              { n: "01", stat: "<24hr", statLabel: "DELIVERY GUARANTEED", title: "SECURED MEDIA PLACEMENT", href: "#media-placement" },
+              { n: "02", stat: "44.7M+", statLabel: "REACHABLE AUDIENCE", title: "PRECISION DISTRIBUTION", href: "#audience-selection" },
+              { n: "03", stat: "94%", statLabel: "READER IDENTIFICATION", title: "FULL ENGAGEMENT VISIBILITY", href: "#sample-insights" },
+            ].map(({ n, stat, statLabel, title, href }) => (
+              <a
+                key={n}
+                href={href}
+                className="flex items-center justify-between py-4 px-5"
+                style={{ background: "rgba(74,108,247,0.06)", border: "1px solid rgba(74,108,247,0.12)", borderRadius: "8px", textDecoration: "none" }}
+              >
+                <div className="flex flex-col">
+                  <span className="font-mono uppercase" style={{ fontSize: "11px", letterSpacing: "0.14em", color: "#4a6cf7" }}>{statLabel}</span>
+                  <span style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "13px", fontWeight: 700, textTransform: "uppercase", color: "rgba(255,255,255,0.6)", marginTop: "2px" }}>{title}</span>
+                </div>
+                <span className="font-bold flex-shrink-0 ml-4" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "24px", fontWeight: 800, color: "#4a6cf7" }}>{stat}</span>
+              </a>
+            ))}
           </div>
 
           <div className="flex justify-center" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
