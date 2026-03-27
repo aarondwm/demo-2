@@ -1066,9 +1066,9 @@ export default function Home() {
 
       {/* ── 2. WHAT WE DO ────────────────────────────────────────────────── */}
       <section id="what-we-do" className="sys-section">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12 text-center lg:text-left">
 
-          <div className="flex items-center mb-5">
+          <div className="flex items-center justify-center lg:justify-start mb-5">
             <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}>
               <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
               <ScrambleOnView text="What We Do" delay={0} style={{ display: "inline" }} onDone={sec2Done} />
@@ -1145,7 +1145,7 @@ export default function Home() {
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
             {/* Left */}
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-8 text-center lg:text-left items-center lg:items-start">
               <div className="flex items-center mb-5">
                 <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Secured Media Placement" delay={0} style={{ display: "inline" }} onDone={sec3Done} /></span>
               </div>
@@ -1158,7 +1158,7 @@ export default function Home() {
               </h2>
 
               {/* Stat counters */}
-              <div className="flex items-stretch divide-x divide-white/[0.06]" style={{ opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
+              <div className="flex items-stretch justify-center lg:justify-start divide-x divide-white/[0.06]" style={{ opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
                 {[
                   { value: "100%", label: "Placement Rate" },
                   { value: "12+",  label: "Publications" },
