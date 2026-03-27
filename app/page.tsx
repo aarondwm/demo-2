@@ -1195,8 +1195,8 @@ export default function Home() {
       {/* ── 3b. AUDIENCE SELECTION MAP ───────────────────────────────────── */}
       <section id="audience-selection" className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
-          <div className="mb-14">
-            <div className="flex items-center mb-5">
+          <div className="mb-14 text-center lg:text-left">
+            <div className="flex items-center justify-center lg:justify-start mb-5">
               <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}>
                 <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
                 <ScrambleOnView text="Audience Selection" delay={0} style={{ display: "inline" }} onDone={secMapDone} />
@@ -1209,7 +1209,7 @@ export default function Home() {
               <ScrambleOnSignal text="Target Anyone." signal={secMapVisible} style={{ color: "#ffffff" }} />
               <ScrambleOnSignal text="Anywhere." signal={secMapVisible} style={{ color: "#4a6cf7" }} />
             </h2>
-            <p className="sys-body max-w-lg mt-6" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s" }}>
+            <p className="sys-body max-w-lg mt-6 mx-auto lg:mx-0" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s" }}>
               Our proprietary technology allows us to ensure anyone you want to read the story, reads it.
             </p>
           </div>
