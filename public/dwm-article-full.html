@@ -95,6 +95,7 @@ a{color:inherit;text-decoration:none}
   height:480px;
   overflow:hidden;
   margin-top:56px;
+  background:#0a0a0a;
 }
 .article-hero img{
   width:100%;height:100%;object-fit:cover;
@@ -274,7 +275,17 @@ a{color:inherit;text-decoration:none}
 </head>
 <body>
 
-<div class="page-wipe"><img src="/D*M website.png" alt="DWM"></div>
+<script>
+if (window.location.search.indexOf('embed=1') !== -1) {
+  document.documentElement.style.background = '#0a0a0a';
+}
+</script>
+<div class="page-wipe" id="pageWipe"><img src="/D*M website.png" alt="DWM"></div>
+<script>
+if (window.location.search.indexOf('embed=1') !== -1) {
+  document.getElementById('pageWipe').style.display = 'none';
+}
+</script>
 
 <nav class="nav">
   <a href="/" class="nav-brand" style="text-decoration:none">

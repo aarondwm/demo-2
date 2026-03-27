@@ -449,7 +449,7 @@ function CampaignDashboard() {
         {/* Article iframe bg */}
         <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
           <iframe
-            src="/dwm-article-full.html"
+            src="/dwm-article-full.html?embed=1"
             scrolling="no"
             loading="lazy"
             tabIndex={-1}
@@ -1082,7 +1082,7 @@ export default function Home() {
             <ScrambleOnSignal text="YOU SEE WHO ENGAGED." signal={sec2Visible} style={{ color: "#4a6cf7" }} />
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-[6px]" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-[6px] max-w-sm md:max-w-none mx-auto" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
             {[
               { n: "01", stat: "<24hr", statLabel: "DELIVERY GUARANTEED", title: "SECURED MEDIA PLACEMENT", desc: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches. Placements.", accent: false, href: "#media-placement" },
               { n: "02", stat: "44.7M+", statLabel: "REACHABLE AUDIENCE", title: "PRECISION DISTRIBUTION", desc: "6 GCC markets. 32 industries. Your content reaches the right audience. From the general population to the C-suite.", accent: false, href: "#audience-selection" },
@@ -1158,15 +1158,29 @@ export default function Home() {
               </h2>
 
               {/* Stat counters */}
-              <div className="flex items-stretch justify-center lg:justify-start divide-x divide-white/[0.06]" style={{ opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
+              {/* Desktop: inline stats */}
+              <div className="hidden lg:flex items-stretch divide-x divide-white/[0.06]" style={{ opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
                 {[
                   { value: "100%", label: "Placement Rate" },
                   { value: "12+",  label: "Publications" },
                   { value: "1-50+", label: "Articles Per Month" },
                 ].map(({ value, label }) => (
-                  <div key={label} className="flex flex-col gap-1 pr-4 md:pr-8 first:pl-0 pl-4 md:pl-8">
+                  <div key={label} className="flex flex-col gap-1 pr-8 first:pl-0 pl-8">
                     <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "28px", fontWeight: 800, color: "#e8e2d6" }}>{value}</span>
                     <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
+                  </div>
+                ))}
+              </div>
+              {/* Mobile: stat cards */}
+              <div className="grid grid-cols-3 gap-2 lg:hidden max-w-sm mx-auto w-full" style={{ opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
+                {[
+                  { value: "100%", label: "Placement Rate" },
+                  { value: "12+",  label: "Publications" },
+                  { value: "1-50+", label: "Articles / Mo" },
+                ].map(({ value, label }) => (
+                  <div key={label} className="flex flex-col items-center justify-center py-4 px-2" style={{ background: "rgba(74,108,247,0.06)", border: "1px solid rgba(74,108,247,0.12)", borderRadius: "8px" }}>
+                    <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "22px", fontWeight: 800, color: "#4a6cf7" }}>{value}</span>
+                    <span className="font-mono uppercase text-center" style={{ fontSize: "7px", letterSpacing: "0.14em", color: "rgba(255,255,255,0.45)", marginTop: "4px" }}>{label}</span>
                   </div>
                 ))}
               </div>
