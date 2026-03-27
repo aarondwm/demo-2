@@ -1162,7 +1162,7 @@ export default function Home() {
                 {[
                   { value: "100%", label: "Placement Rate" },
                   { value: "12+",  label: "Publications" },
-                  { value: "1-50+", label: "Articles Per Brief" },
+                  { value: "1-50+", label: "Articles Per Month" },
                 ].map(({ value, label }) => (
                   <div key={label} className="flex flex-col gap-1 pr-4 md:pr-8 first:pl-0 pl-4 md:pl-8">
                     <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "28px", fontWeight: 800, color: "#e8e2d6" }}>{value}</span>
