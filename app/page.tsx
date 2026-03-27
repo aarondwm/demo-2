@@ -1162,6 +1162,7 @@ export default function Home() {
                 {[
                   { value: "100%", label: "Placement Rate" },
                   { value: "12+",  label: "Publications" },
+                  { value: "1-50+", label: "Articles Per Brief" },
                 ].map(({ value, label }) => (
                   <div key={label} className="flex flex-col gap-1 pr-4 md:pr-8 first:pl-0 pl-4 md:pl-8">
                     <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "28px", fontWeight: 800, color: "#e8e2d6" }}>{value}</span>
@@ -1170,13 +1171,13 @@ export default function Home() {
                 ))}
               </div>
 
-              <p style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s" }}>
+              <p className="hidden lg:block" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s" }}>
                 We produce and place editorially-driven stories across a network of Gulf business and industry publications. Your content goes live as a confirmed placement.
               </p>
             </div>
 
-            {/* Right — 4 card rows */}
-            <div className="flex flex-col" style={{ gap: "0px" }}>
+            {/* Right — 4 card rows (desktop only) */}
+            <div className="hidden lg:flex flex-col" style={{ gap: "0px" }}>
               {[
                 { n: "01", title: "Confirmed Placement", body: "Your content is placed, not pitched. Every partner publication is pre-contracted. Your story runs." },
                 { n: "02", title: "Gulf-Wide Network",   body: "Kuwait, UAE, Saudi Arabia, Bahrain, Qatar, Oman. Every major GCC market covered." },
