@@ -1133,7 +1133,7 @@ export default function Home() {
                   <span className="font-mono uppercase" style={{ fontSize: "11px", letterSpacing: "0.14em", color: "#4a6cf7" }}>{statLabel}</span>
                   <span style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "13px", fontWeight: 700, textTransform: "uppercase", color: "rgba(255,255,255,0.6)", marginTop: "2px" }}>{title}</span>
                 </div>
-                <span className="font-bold flex-shrink-0 ml-4" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "24px", fontWeight: 800, color: "#4a6cf7" }}>{stat}</span>
+                <span className="font-bold flex-shrink-0 ml-4" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "24px", fontWeight: 800, color: "#ffffff" }}>{stat}</span>
               </a>
             ))}
           </div>
