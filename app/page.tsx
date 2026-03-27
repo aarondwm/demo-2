@@ -1076,13 +1076,13 @@ export default function Home() {
           </div>
 
           <h2
-            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(30px,5.5vw,72px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.02em", textTransform: "uppercase", marginBottom: "64px", color: "#e8e8e8" }}
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(30px,5.5vw,72px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.02em", textTransform: "uppercase", marginBottom: "40px", color: "#e8e8e8" }}
           >
             <ScrambleOnSignal text="WE RUN IT." signal={sec2Visible} style={{ color: "#e8e8e8" }} />
             <ScrambleOnSignal text="YOU SEE WHO ENGAGED." signal={sec2Visible} style={{ color: "#4a6cf7" }} />
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-[6px]" style={{ marginBottom: "56px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-[6px]" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
             {[
               { n: "01", stat: "<24hr", statLabel: "DELIVERY GUARANTEED", title: "SECURED MEDIA PLACEMENT", desc: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches. Placements.", accent: false, href: "#media-placement" },
               { n: "02", stat: "44.7M+", statLabel: "REACHABLE AUDIENCE", title: "PRECISION DISTRIBUTION", desc: "6 GCC markets. 32 industries. Your content reaches the right audience. From the general population to the C-suite.", accent: false, href: "#audience-selection" },
@@ -1116,7 +1116,7 @@ export default function Home() {
             })}
           </div>
 
-          <div className="flex justify-center" style={{ marginBottom: "56px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
+          <div className="flex justify-center" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
             <a
               href="/contact"
               className="group inline-flex items-center h-14 text-[13px] tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden"
@@ -1195,7 +1195,7 @@ export default function Home() {
       {/* ── 3b. AUDIENCE SELECTION MAP ───────────────────────────────────── */}
       <section id="audience-selection" className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
-          <div className="mb-14 text-center lg:text-left">
+          <div className="mb-10 text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start mb-5">
               <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}>
                 <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
@@ -1259,22 +1259,21 @@ export default function Home() {
       {/* ── Sample Insights ────────────────────────────────────────────────── */}
       <section id="sample-insights" className="sys-section">
         <div className="max-w-[1200px] mx-auto px-6 md:px-12">
-          <div className="flex items-center mb-5">
+          <div className="flex items-center justify-center lg:justify-start mb-5">
             <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}>
               <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
               Sample Insights
             </span>
           </div>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 text-center lg:text-left">
             <h2
-              className="font-bold uppercase text-left"
+              className="font-bold uppercase"
               style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(24px,4vw,48px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
-              <ScrambleOnView text="What We Know," delay={0} style={{ display: "inline", color: "#ffffff" }} />
-              {" "}
-              <ScrambleOnView text="They Don't." delay={200} style={{ display: "inline", color: "#4a6cf7" }} />
+              <ScrambleOnView text="What We Know," delay={0} style={{ display: "block", color: "#ffffff" }} />
+              <ScrambleOnView text="They Don't." delay={200} style={{ display: "block", color: "#4a6cf7" }} />
             </h2>
-            <p className="md:text-right md:max-w-xs" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "rgba(255,255,255,0.85)" }}>
+            <p className="md:text-right md:max-w-xs mx-auto lg:mx-0" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "rgba(255,255,255,0.85)" }}>
               We run your content and track exactly who reads it. You get a full intelligence report. No&nbsp;guesswork.
             </p>
           </div>
@@ -1285,7 +1284,7 @@ export default function Home() {
       {/* ── 4. WHO WE WORK WITH ──────────────────────────────────────────── */}
       <section id="reviews" className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
-          <div className="mb-14 text-center">
+          <div className="mb-10 text-center">
             <div className="flex items-center justify-center mb-5">
               <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Who We Work With" delay={0} style={{ display: "inline" }} onDone={sec5Done} /></span>
             </div>
