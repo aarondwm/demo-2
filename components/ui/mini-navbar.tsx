@@ -94,7 +94,7 @@ const NAV_GROUPS = [
   { label: "Home",       href: "/#home" },
   { label: "Placement",  href: "/#media-placement" },
   { label: "Targeting", href: "/#audience-selection" },
-  { label: "Insights",   href: "/#intelligence" },
+  { label: "Insights",   href: "/#sample-insights" },
   { label: "Reviews",    href: "/#reviews" },
 ];
 
