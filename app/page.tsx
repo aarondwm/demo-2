@@ -459,7 +459,7 @@ function CampaignDashboard() {
       {/* Hero Stat with article background */}
       <div className="relative overflow-hidden border-b border-white/[0.06]" style={{ minHeight: "200px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "36px 16px 28px" }}>
         {/* Article iframe bg */}
-        <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+        <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true" style={{ background: "#0a0a0a" }}>
           <iframe
             src="/dwm-article-full.html?embed=1"
             scrolling="no"
@@ -469,7 +469,7 @@ function CampaignDashboard() {
           />
         </div>
         {/* Blur overlay */}
-        <div className="absolute inset-0 z-[1]" style={{ backdropFilter: "blur(10px)", background: "rgba(0,0,0,0.65)" }} />
+        <div className="absolute inset-0 z-[1]" style={{ backdropFilter: "blur(10px)", background: "rgba(0,0,0,0.75)" }} />
         {/* Article title bar — unblurred */}
         <div className="absolute top-0 left-0 right-0 z-[6] flex items-center gap-2 px-3 md:px-5 py-2" style={{ background: "rgba(0,0,0,0.4)", borderBottom: "1px solid rgba(74,108,247,0.1)" }}>
           <span className="w-[5px] h-[5px] rounded-full flex-shrink-0" style={{ background: "#4a6cf7" }} />
@@ -1288,7 +1288,7 @@ export default function Home() {
           }}>
             <iframe
               id="slideshow-iframe"
-              src="/dwm-gcc-slideshow.html"
+              src={lang === "ar" ? "/dwm-gcc-slideshow-ar.html" : "/dwm-gcc-slideshow.html"}
               scrolling="no"
               loading="lazy"
               style={{ width: "100%", height: "clamp(380px, 70vh, 540px)", border: "none", display: "block" }}
