@@ -688,7 +688,7 @@ let arrowTimer;
 function showArrows(){
   navLeft.classList.add('visible');navRight.classList.add('visible');
   clearTimeout(arrowTimer);
-  arrowTimer=setTimeout(()=>{navLeft.classList.remove('visible');navRight.classList.remove('visible')},2000);
+  arrowTimer=setTimeout(()=>{navLeft.classList.remove('visible');navRight.classList.remove('visible')},800);
 }
 document.addEventListener('touchstart',showArrows,{passive:true});
 
