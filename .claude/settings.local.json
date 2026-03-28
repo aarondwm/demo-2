@@ -20,7 +20,10 @@
       "Bash(__NEW_LINE_23495ebd432f14a8__ python3:*)",
       "Bash(ls /Users/aaron/Desktop/demo-2/public/dwm-gcc-map-v2*)",
       "Bash(ls /Users/aaron/Desktop/demo-2/public/*.html)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3333/dwm-gcc-map-v4.html)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3333/dwm-gcc-map-v4.html)",
+      "Bash(ls /Users/aaron/Desktop/demo-2/public/trolley*)",
+      "Bash(ls /Users/aaron/Desktop/demo-2/public/*.jpg)",
+      "Bash(ls /Users/aaron/Desktop/demo-2/public/*.jpeg)"
     ]
   }
 }

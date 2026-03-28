@@ -461,7 +461,7 @@ function CampaignDashboard() {
         {/* Article title bar — unblurred */}
         <div className="absolute top-0 left-0 right-0 z-[6] flex items-center gap-2 px-3 md:px-5 py-2" style={{ background: "rgba(0,0,0,0.4)", borderBottom: "1px solid rgba(74,108,247,0.1)" }}>
           <span className="w-[5px] h-[5px] rounded-full flex-shrink-0" style={{ background: "#4a6cf7" }} />
-          <span className="truncate" style={{ fontSize: "clamp(9px, 2.5vw, 11px)", fontWeight: 600, color: "rgba(255,255,255,0.7)" }}>Saudi Aramco Reaches 70% Local Content Target Ahead of 2025 Iktva Deadline</span>
+          <span className="truncate" style={{ fontSize: "clamp(9px, 2.5vw, 11px)", fontWeight: 600, color: "rgba(255,255,255,0.7)" }}>Trolley General Trading Company Lists on Boursa Kuwait Premier Market</span>
         </div>
         {/* Content */}
         <div className="relative z-[5] flex flex-col items-center" style={{ marginTop: "16px" }}>
@@ -1138,7 +1138,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="flex justify-center" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
+          <div className="flex justify-center" style={{ marginBottom: "0px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
             <a
               href="/contact"
               className="group inline-flex items-center h-14 text-[13px] tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden"
@@ -1304,7 +1304,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 text-center lg:text-left">
             <h2
               className="font-bold uppercase"
-              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(30px,5.5vw,48px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(30px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
               <ScrambleOnView text="What We Know," delay={0} style={{ display: "block", color: "#ffffff" }} />
               <ScrambleOnView text="They Don't." delay={200} style={{ display: "block", color: "#4a6cf7" }} />
