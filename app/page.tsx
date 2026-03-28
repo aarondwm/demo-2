@@ -38,6 +38,11 @@ class TextScramble {
     const rtl = isArabicText(newText);
     this.chars = rtl ? ARABIC_CHARS : LATIN_CHARS;
 
+    // Arabic: slower, softer reveal
+    const step = rtl ? this.seqStep * 1.6 : this.seqStep;
+    const window = rtl ? this.seqWindow * 1.8 : this.seqWindow;
+    const speed = rtl ? this.speed * 1.5 : this.speed;
+
     const oldText = this.el.innerText;
     const length = Math.max(oldText.length, newText.length);
     const promise = new Promise<void>((r) => (this.resolve = r));
@@ -48,17 +53,16 @@ class TextScramble {
       let start: number, end: number;
       if (this.sequential) {
         if (rtl) {
-          // RTL: reveal from right to left
           const ri = length - 1 - i;
-          start = ri * this.seqStep;
-          end   = start + this.seqWindow;
+          start = ri * step;
+          end   = start + window;
         } else {
-          start = i * this.seqStep;
-          end   = start + this.seqWindow;
+          start = i * step;
+          end   = start + window;
         }
       } else {
-        start = Math.floor(Math.random() * this.speed);
-        end   = start + Math.floor(Math.random() * this.speed);
+        start = Math.floor(Math.random() * speed);
+        end   = start + Math.floor(Math.random() * speed);
       }
       this.queue.push({ from, to, start, end });
     }
@@ -78,7 +82,8 @@ class TextScramble {
         complete++;
         output += to;
       } else if (this.frame >= start) {
-        if (!char || Math.random() < 0.28) {
+        const flickerRate = this.chars === ARABIC_CHARS ? 0.15 : 0.28;
+        if (!char || Math.random() < flickerRate) {
           char = this.chars[Math.floor(Math.random() * this.chars.length)];
           item.char = char;
         }
@@ -1179,10 +1184,10 @@ export default function Home() {
               </div>
               <h2
                 className="font-bold uppercase"
-                style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+                style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05, textAlign: lang === "ar" ? "right" : undefined }}
               >
-                <ScrambleOnSignal text={t("yourStory", lang)} signal={sec3Visible} style={{ color: "#ffffff" }} />
-                <ScrambleOnSignal text={t("guaranteedPublishing", lang)} signal={sec3Visible} style={{ color: "#4a6cf7" }} />
+                <ScrambleOnSignal text={t("yourStory", lang)} signal={sec3Visible} style={{ color: "#ffffff", display: "block" }} />
+                <ScrambleOnSignal text={t("guaranteedPublishing", lang)} signal={sec3Visible} style={{ color: "#4a6cf7", display: "block" }} />
               </h2>
 
               {/* Stat counters */}
@@ -1251,7 +1256,7 @@ export default function Home() {
               <ScrambleOnSignal text={t("targetAnyone", lang)} signal={secMapVisible} style={{ color: "#ffffff" }} />
               <ScrambleOnSignal text={t("anywhere", lang)} signal={secMapVisible} style={{ color: "#4a6cf7" }} />
             </h2>
-            <p className="sys-body max-w-lg mt-6 mx-auto lg:mx-0" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s", textAlign: lang === "ar" ? "right" : undefined, direction: lang === "ar" ? "rtl" : undefined }}>
+            <p className="sys-body max-w-lg mt-6 mx-auto lg:mx-0" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s", fontSize: "16px", textAlign: lang === "ar" ? "right" : undefined, direction: lang === "ar" ? "rtl" : undefined }}>
               {t("audienceSelectionDescription", lang)}
             </p>
           </div>
@@ -1310,7 +1315,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 text-center lg:text-left">
             <h2
               className="font-bold uppercase"
-              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05, textAlign: lang === "ar" ? "right" : undefined }}
             >
               <ScrambleOnView text={t("whatWeKnow", lang)} delay={0} style={{ display: "block", color: "#ffffff" }} />
               <ScrambleOnView text={t("theyDont", lang)} delay={200} style={{ display: "block", color: "#4a6cf7" }} />
@@ -1386,7 +1391,7 @@ export default function Home() {
                 <ScrambleOnSignal text={t("aBriefing", lang)} signal={secCtaVisible} style={{ color: "#ffffff" }} />
                 <ScrambleOnSignal text={t("seeWhatReturns", lang)} signal={secCtaVisible} style={{ color: "#4a6cf7" }} />
               </h2>
-              <p className="sys-body max-w-lg mb-10 mx-auto text-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
+              <p className="sys-body max-w-lg mb-10 mx-auto text-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s", fontSize: "16px", direction: lang === "ar" ? "rtl" : undefined }}>
                 {t("bookBriefingDescription", lang)}
               </p>
               <div className="flex justify-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.32s" }}>
