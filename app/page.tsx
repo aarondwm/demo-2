@@ -386,16 +386,15 @@ function ScrambleNumber({ value, trigger }: { value: string; trigger: number }) 
 
 /* ── Campaign Dashboard ──────────────────────────────────────────────────── */
 const DASH_AUDIENCE = [
-  { rank: "01", name: "Saudi Aramco", views: 8740, avgRead: "5m 42s", roles: [{ role: "CEO", count: 1 }, { role: "Director", count: 14 }, { role: "Manager", count: 67 }, { role: "Analyst", count: 312 }] },
-  { rank: "02", name: "McKinsey & Company", views: 6320, avgRead: "7m 18s", roles: [{ role: "Partner", count: 5 }, { role: "Director", count: 19 }, { role: "Manager", count: 48 }, { role: "Analyst", count: 241 }] },
-  { rank: "03", name: "Goldman Sachs", views: 5180, avgRead: "4m 36s", roles: [{ role: "CEO", count: 1 }, { role: "VP", count: 11 }, { role: "Manager", count: 39 }, { role: "Analyst", count: 287 }] },
-  { rank: "04", name: "Qatar Energy", views: 4650, avgRead: "6m 14s", roles: [{ role: "Director", count: 7 }, { role: "Manager", count: 52 }, { role: "Engineer", count: 134 }, { role: "Analyst", count: 178 }] },
-  { rank: "05", name: "JPMorgan Chase", views: 3890, avgRead: "4m 03s", roles: [{ role: "VP", count: 4 }, { role: "Director", count: 12 }, { role: "Manager", count: 31 }, { role: "Analyst", count: 248 }] },
-  { rank: "06", name: "Deloitte", views: 3210, avgRead: "8m 27s", roles: [{ role: "Partner", count: 3 }, { role: "Director", count: 16 }, { role: "Manager", count: 42 }, { role: "Consultant", count: 196 }] },
+  { rank: "01", name: "Kuwait Finance House", views: 412, avgRead: "5m 18s", roles: [{ role: "CFO", count: 1 }, { role: "VP", count: 3 }, { role: "Relationship Mgr", count: 8 }, { role: "Credit Analyst", count: 5 }] },
+  { rank: "02", name: "National Bank of Kuwait", views: 367, avgRead: "4m 55s", roles: [{ role: "CIO", count: 1 }, { role: "Director", count: 3 }, { role: "Portfolio Mgr", count: 5 }, { role: "Investment Analyst", count: 7 }] },
+  { rank: "03", name: "National Investments Co.", views: 284, avgRead: "7m 42s", roles: [{ role: "Managing Director", count: 2 }, { role: "Portfolio Mgr", count: 4 }, { role: "Associate", count: 9 }, { role: "Research Analyst", count: 6 }] },
+  { rank: "04", name: "Alshaya Group", views: 203, avgRead: "8m 04s", roles: [{ role: "CFO", count: 1 }, { role: "Strategy Director", count: 1 }, { role: "Commercial Mgr", count: 4 }, { role: "Business Dev", count: 3 }] },
+  { rank: "05", name: "Boursa Kuwait", views: 158, avgRead: "6m 31s", roles: [{ role: "COO", count: 1 }, { role: "Listings Director", count: 1 }, { role: "Compliance Mgr", count: 3 }, { role: "Market Analyst", count: 4 }] },
 ];
 const DASH_DEMOGRAPHICS = {
   gender: [{ label: "Male", pct: 74 }, { label: "Female", pct: 26 }],
-  location: [{ name: "Kuwait City", pct: 32 }, { name: "Hawally", pct: 22 }, { name: "Salmiya", pct: 18 }, { name: "Jahra", pct: 12 }, { name: "Farwaniya", pct: 10 }, { name: "Ahmadi", pct: 6 }],
+  location: [{ name: "Kuwait City", pct: 32, count: "100,108" }, { name: "Hawally", pct: 22, count: "68,825" }, { name: "Salmiya", pct: 18, count: "56,311" }, { name: "Jahra", pct: 12, count: "37,541" }, { name: "Farwaniya", pct: 10, count: "31,284" }, { name: "Ahmadi", pct: 6, count: "18,771" }],
   age: [{ range: "25-34", pct: 34 }, { range: "35-44", pct: 36 }, { range: "45-54", pct: 19 }, { range: "55+", pct: 11 }],
 };
 const DASH_TABS = ["Overview", "Audience Breakdown"];
@@ -513,6 +512,7 @@ function CampaignDashboard() {
                     <div className="flex-1 h-[6px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
                       <div className="h-full rounded-full" style={{ width: visible ? `${loc.pct}%` : "0%", background: `rgba(74,108,247,${1 - i * 0.1})`, transition: `width 0.8s ease ${i * 0.08}s` }} />
                     </div>
+                    <span className="font-mono flex-shrink-0 text-right" style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)" }}>{loc.count}</span>
                     <span className="font-mono font-bold flex-shrink-0 w-[36px] text-right" style={{ fontSize: "11px", color: "#4a6cf7" }}>{loc.pct}%</span>
                   </div>
                 ))}
@@ -554,7 +554,7 @@ function CampaignDashboard() {
         {tab === 1 && (
           <div className="flex flex-col gap-0">
             <div className="flex items-center justify-between mb-3">
-              <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30">Top Companies</span>
+              <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30">Top Companies Your Viewers Work At</span>
               <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white/20">Avg. Read Time</span>
             </div>
             {DASH_AUDIENCE.map((c, i) => (
@@ -793,7 +793,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
         letterSpacing: "0.25em",
         flexShrink: 0,
         paddingTop: "2px",
-        color: hovered ? "#a0c4ff" : "#c8c0b0",
+        color: hovered ? "#a0c4ff" : "#ffffff",
         transition: "color 0.3s ease",
       }}>{n}</span>
       <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -803,7 +803,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
           textTransform: "uppercase",
           fontSize: hovered ? "15px" : "13px",
           letterSpacing: hovered ? "0.14em" : "0.1em",
-          color: hovered ? "#ffffff" : "#c8c0b0",
+          color: hovered ? "#ffffff" : "#ffffff",
           opacity: visible ? 1 : 0,
           transition: `opacity 0.35s ease ${0.05 + index * 0.08}s, color 0.3s ease, font-size 0.3s ease, letter-spacing 0.3s ease`,
         }}>{title}</span>
@@ -883,7 +883,7 @@ function FeatureCard({
         }}
       >
         <div className="p-8 md:p-10 flex flex-col gap-5">
-          <span className="font-mono text-[10px] tracking-[0.25em] font-light" style={{ color: "#c8c0b0" }}>{n}</span>
+          <span className="font-mono text-[10px] tracking-[0.25em] font-light" style={{ color: "#ffffff" }}>{n}</span>
           <h3
             className="font-bold uppercase"
             style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "16px", fontWeight: 700, letterSpacing: "0.03em", lineHeight: 1.35, color: "#e8e8e8", opacity: visible ? 1 : 0, transition: `opacity 0.35s ease ${0.05 + index * 0.08}s` }}
@@ -1188,7 +1188,7 @@ export default function Home() {
                   { value: "1-50+", label: "Articles Per Month" },
                 ].map(({ value, label }) => (
                   <div key={label} className="flex flex-col gap-1 pr-8 first:pl-0 pl-8">
-                    <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "28px", fontWeight: 800, color: "#e8e2d6" }}>{value}</span>
+                    <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "28px", fontWeight: 800, color: "#ffffff" }}>{value}</span>
                     <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
                   </div>
                 ))}

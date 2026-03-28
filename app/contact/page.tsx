@@ -29,8 +29,8 @@ export default function ContactPage() {
             Contact
           </span>
           <h1
-            className="font-display font-bold uppercase text-white mb-4"
-            style={{ fontSize: "clamp(28px, 5vw, 64px)", letterSpacing: "0.03em", lineHeight: "0.95" }}
+            className="font-bold uppercase text-white mb-4"
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(28px, 5vw, 64px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: "1.05" }}
           >
             Request a<br />
             <span style={{ color: "#4a6cf7" }}>Briefing.</span>
