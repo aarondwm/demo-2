@@ -479,7 +479,7 @@ function CampaignDashboard() {
             <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>
               <span className="text-white text-[12px] tracking-[0.15em] uppercase font-bold">Preview Article</span>
             </span>
-            <span className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0 z-20" style={{ color: "#000000" }}>
+            <span className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0 z-20 keep-black" style={{ color: "#000000" }}>
               Preview Article
             </span>
             <span className="invisible px-7">Preview Article</span>

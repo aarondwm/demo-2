@@ -377,6 +377,7 @@
   .sys-body { font-size: 17px !important; color: #ffffff !important; }
   .mobile-white-text span { color: #ffffff !important; }
   .mobile-white-text .keep-blue { color: #4a6cf7 !important; }
+  .mobile-white-text .keep-black { color: #000000 !important; }
 }
 
 /* ── Page transition wipe ─────────────────────────────────────────────── */
