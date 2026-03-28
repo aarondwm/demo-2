@@ -374,7 +374,7 @@
   .wwd-card-inner > div:nth-child(4) { font-size: 13px !important; margin-bottom: 6px !important; }
   .wwd-card-inner > div:nth-child(5) { font-size: 11px !important; }
   .sys-label { font-size: 11px !important; letter-spacing: 0.15em !important; }
-  .sys-body { font-size: 15px !important; }
+  .sys-body { font-size: 17px !important; color: #ffffff !important; }
 }
 
 /* ── Page transition wipe ─────────────────────────────────────────────── */
