@@ -375,6 +375,7 @@
   .wwd-card-inner > div:nth-child(5) { font-size: 11px !important; }
   .sys-label { font-size: 11px !important; letter-spacing: 0.15em !important; }
   .sys-body { font-size: 17px !important; color: #ffffff !important; }
+  .mobile-white-text span { color: #ffffff !important; }
 }
 
 /* ── Page transition wipe ─────────────────────────────────────────────── */

@@ -433,7 +433,7 @@ function CampaignDashboard() {
   }, []);
 
   return (
-    <div ref={ref} className="border border-white/[0.08] bg-black rounded-lg overflow-hidden dash-container">
+    <div ref={ref} className="border border-white/[0.08] bg-black rounded-lg overflow-hidden dash-container mobile-white-text">
       {/* Header */}
       <div className="flex items-center justify-between px-4 md:px-6 py-3 border-b border-white/[0.06]">
         <div className="flex items-center gap-2.5">
@@ -444,7 +444,7 @@ function CampaignDashboard() {
       </div>
 
       {/* Hero Stat with article background */}
-      <div className="relative overflow-hidden border-b border-white/[0.06]" style={{ minHeight: "160px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "28px 16px 20px" }}>
+      <div className="relative overflow-hidden border-b border-white/[0.06]" style={{ minHeight: "200px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "36px 16px 28px" }}>
         {/* Article iframe bg */}
         <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
           <iframe
@@ -465,19 +465,19 @@ function CampaignDashboard() {
         {/* Content */}
         <div className="relative z-[5] flex flex-col items-center" style={{ marginTop: "16px" }}>
           <div className="flex flex-col items-center gap-1">
-            <span style={{ fontFamily: "'Neue Montreal', sans-serif", fontSize: "clamp(28px, 7vw, 48px)", fontWeight: 800, color: "#4a6cf7", letterSpacing: "-0.03em", textShadow: "0 0 40px rgba(74,108,247,0.4), 0 0 12px rgba(74,108,247,0.2)" }}>
+            <span style={{ fontFamily: "'Neue Montreal', sans-serif", fontSize: "clamp(36px, 8vw, 48px)", fontWeight: 800, color: "#4a6cf7", letterSpacing: "-0.03em", textShadow: "0 0 40px rgba(74,108,247,0.4), 0 0 12px rgba(74,108,247,0.2)" }}>
               {visible ? <AnimatedViewCount value={312840} /> : "0"}
             </span>
-            <span className="font-mono uppercase" style={{ fontSize: "clamp(7px, 1.8vw, 9px)", letterSpacing: "0.22em", color: "rgba(255,255,255,0.5)" }}>Total Article Views</span>
+            <span className="font-mono uppercase" style={{ fontSize: "clamp(10px, 2.5vw, 11px)", letterSpacing: "0.22em", color: "rgba(255,255,255,0.5)" }}>Total Article Views</span>
           </div>
           <a
             href="/dwm-article-full.html"
-            className="group inline-flex items-center h-10 font-mono text-[10px] tracking-[0.15em] uppercase text-black font-bold relative overflow-hidden mt-3"
+            className="group inline-flex items-center h-11 font-mono text-[12px] tracking-[0.15em] uppercase text-black font-bold relative overflow-hidden mt-4"
             style={{ borderRadius: "8px", transform: "translateZ(0)" }}
           >
             <span className="absolute inset-0 bg-white" />
             <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>
-              <span className="text-white text-[10px] tracking-[0.15em] uppercase font-bold">Preview Article</span>
+              <span className="text-white text-[12px] tracking-[0.15em] uppercase font-bold">Preview Article</span>
             </span>
             <span className="absolute inset-0 flex items-center justify-center text-black transition-opacity duration-300 group-hover:opacity-0 z-20">
               Preview Article
@@ -1117,7 +1117,7 @@ export default function Home() {
             })}
           </div>
           {/* Mobile: inline stat strip */}
-          <div className="flex md:hidden items-stretch divide-x divide-white/[0.08] max-w-sm mx-auto w-full justify-center" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
+          <div className="flex md:hidden items-stretch divide-x divide-white/[0.08] max-w-sm mx-auto w-full justify-center mobile-white-text" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
             {[
               { stat: "<24hr", label: "Delivery" },
               { stat: "44.7M+", label: "Audience" },
@@ -1186,7 +1186,7 @@ export default function Home() {
                 ))}
               </div>
               {/* Mobile: stat cards */}
-              <div className="grid grid-cols-1 gap-3 lg:hidden max-w-sm mx-auto w-full" style={{ opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
+              <div className="grid grid-cols-1 gap-3 lg:hidden max-w-sm mx-auto w-full mobile-white-text" style={{ opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
                 {[
                   { value: "100%", label: "Placement Rate" },
                   { value: "12+",  label: "Publications" },
