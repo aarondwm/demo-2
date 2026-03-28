@@ -373,7 +373,7 @@
   .wwd-stat { font-size: clamp(24px, 7vw, 52px) !important; }
   .wwd-card-inner > div:nth-child(4) { font-size: 13px !important; margin-bottom: 6px !important; }
   .wwd-card-inner > div:nth-child(5) { font-size: 11px !important; }
-  .sys-label { font-size: 11px !important; letter-spacing: 0.15em !important; }
+  .sys-label { font-size: 18px !important; letter-spacing: 0.2em !important; }
 }
 
 /* ── Page transition wipe ─────────────────────────────────────────────── */

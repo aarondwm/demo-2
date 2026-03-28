@@ -24,7 +24,11 @@
       "Bash(ls /Users/aaron/Desktop/demo-2/public/trolley*)",
       "Bash(ls /Users/aaron/Desktop/demo-2/public/*.jpg)",
       "Bash(ls /Users/aaron/Desktop/demo-2/public/*.jpeg)",
-      "Bash(ls -la /Users/aaron/Desktop/demo-2/public/trolley*)"
+      "Bash(ls -la /Users/aaron/Desktop/demo-2/public/trolley*)",
+      "Bash(for i:*)",
+      "Bash(do cp:*)",
+      "Bash(done)",
+      "Bash(ipconfig getifaddr:*)"
     ]
   }
 }
