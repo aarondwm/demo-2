@@ -528,8 +528,8 @@ function CampaignDashboard() {
                   <div className="h-full" style={{ width: visible ? "26%" : "0%", background: "#7a9cff", transition: "width 0.8s ease 0.3s" }} />
                 </div>
                 <div className="flex justify-between mt-2">
-                  <span className="font-mono text-[13px] md:text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />74% Male</span>
-                  <span className="font-mono text-[13px] md:text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />26% Female</span>
+                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />74% Male</span>
+                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />26% Female</span>
                 </div>
               </div>
               <div>
@@ -537,11 +537,11 @@ function CampaignDashboard() {
                 <div className="flex flex-col gap-2">
                   {DASH_DEMOGRAPHICS.age.map((a, i) => (
                     <div key={a.range} className="flex items-center gap-2">
-                      <span className="font-mono flex-shrink-0 w-[36px]" style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)" }}>{a.range}</span>
+                      <span className="font-mono flex-shrink-0 w-[36px]" style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)" }}>{a.range}</span>
                       <div className="flex-1 h-[5px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
                         <div className="h-full rounded-full" style={{ width: visible ? `${a.pct}%` : "0%", background: `rgba(74,108,247,${0.9 - i * 0.15})`, transition: `width 0.8s ease ${0.3 + i * 0.08}s` }} />
                       </div>
-                      <span className="font-mono font-bold flex-shrink-0 w-[28px] text-right" style={{ fontSize: "13px", color: "#4a6cf7" }}>{a.pct}%</span>
+                      <span className="font-mono font-bold flex-shrink-0 w-[28px] text-right" style={{ fontSize: "11px", color: "#4a6cf7" }}>{a.pct}%</span>
                     </div>
                   ))}
                 </div>
