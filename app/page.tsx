@@ -508,12 +508,12 @@ function CampaignDashboard() {
               <div className="flex flex-col gap-2.5">
                 {DASH_DEMOGRAPHICS.location.map((loc, i) => (
                   <div key={loc.name} className="flex items-center gap-2 md:gap-3">
-                    <span className="font-mono w-[90px] md:w-[120px] flex-shrink-0 truncate" style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)" }}>{loc.name}</span>
+                    <span className="font-mono w-[90px] md:w-[120px] flex-shrink-0 truncate" style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)" }}>{loc.name}</span>
                     <div className="flex-1 h-[6px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
                       <div className="h-full rounded-full" style={{ width: visible ? `${loc.pct}%` : "0%", background: `rgba(74,108,247,${1 - i * 0.1})`, transition: `width 0.8s ease ${i * 0.08}s` }} />
                     </div>
-                    <span className="font-mono flex-shrink-0 text-right" style={{ fontSize: "10px", color: "#ffffff" }}>{loc.count}</span>
-                    <span className="font-mono font-bold flex-shrink-0 w-[36px] text-right" style={{ fontSize: "11px", color: "#4a6cf7" }}>{loc.pct}%</span>
+                    <span className="font-mono flex-shrink-0 text-right" style={{ fontSize: "13px", color: "#ffffff" }}>{loc.count}</span>
+                    <span className="font-mono font-bold flex-shrink-0 w-[36px] text-right" style={{ fontSize: "13px", color: "#4a6cf7" }}>{loc.pct}%</span>
                   </div>
                 ))}
               </div>
@@ -537,11 +537,11 @@ function CampaignDashboard() {
                 <div className="flex flex-col gap-2">
                   {DASH_DEMOGRAPHICS.age.map((a, i) => (
                     <div key={a.range} className="flex items-center gap-2">
-                      <span className="font-mono flex-shrink-0 w-[36px]" style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)" }}>{a.range}</span>
+                      <span className="font-mono flex-shrink-0 w-[36px]" style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)" }}>{a.range}</span>
                       <div className="flex-1 h-[5px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
                         <div className="h-full rounded-full" style={{ width: visible ? `${a.pct}%` : "0%", background: `rgba(74,108,247,${0.9 - i * 0.15})`, transition: `width 0.8s ease ${0.3 + i * 0.08}s` }} />
                       </div>
-                      <span className="font-mono font-bold flex-shrink-0 w-[28px] text-right" style={{ fontSize: "10px", color: "#4a6cf7" }}>{a.pct}%</span>
+                      <span className="font-mono font-bold flex-shrink-0 w-[28px] text-right" style={{ fontSize: "13px", color: "#4a6cf7" }}>{a.pct}%</span>
                     </div>
                   ))}
                 </div>
@@ -565,17 +565,17 @@ function CampaignDashboard() {
                   style={{ background: openCompany === i ? "rgba(74,108,247,0.04)" : "transparent", transition: "background 0.2s ease" }}
                 >
                   <span className="font-mono flex-shrink-0 w-[18px]" style={{ fontSize: "10px", color: openCompany === i ? "#4a6cf7" : "rgba(74,108,247,0.4)", letterSpacing: "0.1em" }}>{c.rank}</span>
-                  <span className="font-mono flex-1 truncate" style={{ fontSize: "12px", color: "rgba(255,255,255,0.85)" }}>{c.name}</span>
-                  <span className="font-mono flex-shrink-0" style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)" }}>{c.views.toLocaleString()} views</span>
-                  <span className="font-mono font-bold flex-shrink-0 w-[50px] md:w-[60px] text-right" style={{ fontSize: "11px", color: "#4a6cf7" }}>{c.avgRead}</span>
+                  <span className="font-mono flex-1 truncate" style={{ fontSize: "13px", color: "rgba(255,255,255,0.85)" }}>{c.name}</span>
+                  <span className="font-mono flex-shrink-0" style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)" }}>{c.views.toLocaleString()} views</span>
+                  <span className="font-mono font-bold flex-shrink-0 w-[50px] md:w-[60px] text-right" style={{ fontSize: "13px", color: "#4a6cf7" }}>{c.avgRead}</span>
                   <span style={{ fontSize: "9px", color: "rgba(255,255,255,0.25)", transform: openCompany === i ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s ease", flexShrink: 0 }}>▼</span>
                 </button>
                 <div style={{ maxHeight: openCompany === i ? "160px" : "0", overflow: "hidden", transition: "max-height 0.3s ease" }}>
                   <div className="px-4 md:px-6 py-2.5 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3" style={{ background: "rgba(74,108,247,0.02)" }}>
                     {c.roles.map((r) => (
                       <div key={r.role} className="flex items-center justify-between px-2 py-1.5 rounded" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.04)" }}>
-                        <span className="font-mono" style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)" }}>{r.role}</span>
-                        <span className="font-mono font-bold" style={{ fontSize: "11px", color: "#4a6cf7" }}>{r.count}</span>
+                        <span className="font-mono" style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)" }}>{r.role}</span>
+                        <span className="font-mono font-bold" style={{ fontSize: "13px", color: "#4a6cf7" }}>{r.count}</span>
                       </div>
                     ))}
                   </div>

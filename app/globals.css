@@ -375,7 +375,6 @@
   .wwd-card-inner > div:nth-child(5) { font-size: 11px !important; }
   .sys-label { font-size: 11px !important; letter-spacing: 0.15em !important; }
   .sys-body { font-size: 13px !important; }
-  .dash-container span[class*="font-mono"] { font-size: 13px !important; }
 }
 
 /* ── Page transition wipe ─────────────────────────────────────────────── */
