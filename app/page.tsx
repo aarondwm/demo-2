@@ -1125,7 +1125,7 @@ export default function Home() {
             ].map(({ stat, label }) => (
               <div key={label} className="flex flex-col items-center flex-1 py-3">
                 <span style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "22px", fontWeight: 800, color: "#ffffff", letterSpacing: "-0.02em" }}>{stat}</span>
-                <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.14em", color: "rgba(255,255,255,0.4)", marginTop: "4px" }}>{label}</span>
+                <span className="font-mono uppercase" style={{ fontSize: "12px", letterSpacing: "0.14em", color: "rgba(255,255,255,0.4)", marginTop: "4px" }}>{label}</span>
               </div>
             ))}
           </div>
@@ -1193,7 +1193,7 @@ export default function Home() {
                   { value: "1-50+", label: "Articles Per Month" },
                 ].map(({ value, label }) => (
                   <div key={label} className="flex items-center justify-between py-4 px-5" style={{ background: "rgba(74,108,247,0.06)", border: "1px solid rgba(74,108,247,0.12)", borderRadius: "8px" }}>
-                    <span className="font-mono uppercase" style={{ fontSize: "11px", letterSpacing: "0.14em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
+                    <span className="font-mono uppercase" style={{ fontSize: "15px", letterSpacing: "0.14em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
                     <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "24px", fontWeight: 800, color: "#ffffff" }}>{value}</span>
                   </div>
                 ))}
