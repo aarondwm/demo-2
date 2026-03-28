@@ -1086,15 +1086,15 @@ export default function Home() {
       <section id="what-we-do" className="sys-section">
         <div className="max-w-[1200px] mx-auto px-6 md:px-12 text-center lg:text-left">
 
-          <div className="flex items-center justify-center lg:justify-start mb-5">
+          <div className="flex items-center justify-center lg:justify-start mb-5" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
             <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}>
-              <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
+              <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginInlineEnd: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
               <ScrambleOnView text={t("whatWeDo", lang)} delay={0} style={{ display: "inline" }} onDone={sec2Done} />
             </span>
           </div>
 
           <h2
-            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.02em", textTransform: "uppercase", marginBottom: "40px", color: "#e8e8e8" }}
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.02em", textTransform: "uppercase", marginBottom: "40px", color: "#e8e8e8", textAlign: lang === "ar" ? "right" : undefined }}
           >
             <ScrambleOnSignal text={t("weRunIt", lang)} signal={sec2Visible} style={{ color: "#e8e8e8" }} />
             <ScrambleOnSignal text={t("youSeeWhoEngaged", lang)} signal={sec2Visible} style={{ color: "#4a6cf7" }} />
@@ -1103,9 +1103,9 @@ export default function Home() {
           {/* Desktop: original card layout */}
           <div className="hidden md:grid grid-cols-3 gap-[6px]" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
             {[
-              { n: "01", stat: t("under24hr", lang), statLabel: t("deliveryGuaranteed", lang), title: t("securedMediaPlacement", lang), desc: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches. Placements.", accent: false, href: "#media-placement" },
-              { n: "02", stat: t("reachableAudienceNumber", lang), statLabel: t("reachableAudience", lang), title: t("precisionDistribution", lang), desc: "6 GCC markets. 32 industries. Your content reaches the right audience. From the general population to the C-suite.", accent: false, href: "#audience-selection" },
-              { n: "03", stat: t("readerIdPercent", lang), statLabel: t("readerIdentification", lang), title: t("fullEngagementVisibility", lang), desc: "Who read it. Where they\u2019re from. What they do. Full audience breakdowns across every campaign. Delivered as a branded, exportable report.", accent: false, href: "#sample-insights" },
+              { n: "01", stat: t("under24hr", lang), statLabel: t("deliveryGuaranteed", lang), title: t("securedMediaPlacement", lang), desc: t("wwdDesc1", lang), accent: false, href: "#media-placement" },
+              { n: "02", stat: t("reachableAudienceNumber", lang), statLabel: t("reachableAudience", lang), title: t("precisionDistribution", lang), desc: t("wwdDesc2", lang), accent: false, href: "#audience-selection" },
+              { n: "03", stat: t("readerIdPercent", lang), statLabel: t("readerIdentification", lang), title: t("fullEngagementVisibility", lang), desc: t("wwdDesc3", lang), accent: false, href: "#sample-insights" },
             ].map(({ n, stat, statLabel, title, desc, accent, href }, i) => {
               const isActive = wwdHovered ? false : i === activeWwdCard;
               return (

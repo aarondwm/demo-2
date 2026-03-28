@@ -24,6 +24,9 @@ const translations: Record<Lang, Record<string, string>> = {
     readerIdentification: "READER IDENTIFICATION",
     fullEngagementVisibility: "FULL ENGAGEMENT VISIBILITY",
     getInTouch: "Get In Touch",
+    wwdDesc1: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches. Placements.",
+    wwdDesc2: "6 GCC markets. 32 industries. Your content reaches the right audience. From the general population to the C-suite.",
+    wwdDesc3: "Who read it. Where they\u2019re from. What they do. Full audience breakdowns across every campaign. Delivered as a branded, exportable report.",
 
     // Secured Media Placement
     securedMediaPlacementTitle: "Secured Media Placement",
@@ -133,8 +136,8 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // What We Do section
     whatWeDo: "ماذا نقدم",
-    weRunIt: "نحن ننشر.",
-    youSeeWhoEngaged: "أنت ترى من تفاعل.",
+    weRunIt: "نحن ننشر",
+    youSeeWhoEngaged: "أنت ترى من تفاعل",
     under24hr: "<٢٤ ساعة",
     deliveryGuaranteed: "نشر مضمون",
     securedMediaPlacement: "نشر إعلامي مؤكد",
@@ -145,6 +148,9 @@ const translations: Record<Lang, Record<string, string>> = {
     readerIdentification: "تحديد هوية القرّاء",
     fullEngagementVisibility: "رؤية كاملة للتفاعل",
     getInTouch: "تواصل معنا",
+    wwdDesc1: "نصوغ رسالتك، وندير حضورك الإعلامي، وننشر قصتك عبر أكثر المنشورات قراءةً في المنطقة. ليس عروضاً — بل نشر مؤكد.",
+    wwdDesc2: "٦ أسواق خليجية. ٣٢ قطاعاً. محتواك يصل للجمهور المناسب. من عامة الجمهور إلى كبار المسؤولين التنفيذيين.",
+    wwdDesc3: "من قرأه. من أين هم. ماذا يعملون. تحليلات كاملة للجمهور عبر كل حملة. تُسلّم كتقرير مُصدّر جاهز.",
 
     // Secured Media Placement
     securedMediaPlacementTitle: "النشر الإعلامي المؤكد",
