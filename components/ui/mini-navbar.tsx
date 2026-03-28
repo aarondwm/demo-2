@@ -7,6 +7,7 @@ import {
   Target, TrendingUp, Building2, Layers,
   Crosshair, Shield, Zap, Send, LucideIcon,
 } from "lucide-react";
+import { useLanguage } from "@/components/ui/language-context";
 
 /* ── useScroll hook (from header-3) ─────────────────────────────────────── */
 function useScroll(threshold: number) {
@@ -184,6 +185,7 @@ function MobileMenu({ open, children }: { open: boolean; children: React.ReactNo
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const scrolled = useScroll(10);
+  const { lang, setLang } = useLanguage();
 
   React.useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -240,8 +242,16 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* CTA + mobile toggle */}
+        {/* Lang toggle + CTA + mobile toggle */}
         <div className="flex items-center gap-3 flex-shrink-0">
+          {/* Language toggle */}
+          <button
+            onClick={() => setLang(lang === "en" ? "ar" : "en")}
+            className="font-mono text-[11px] tracking-[0.1em] uppercase text-white/50 hover:text-white border border-white/[0.08] hover:border-[#4a6cf7]/40 px-2.5 py-1.5 transition-colors"
+            style={{ borderRadius: "4px" }}
+          >
+            {lang === "en" ? "عربي" : "EN"}
+          </button>
           <a
             href="/contact"
             className="group hidden sm:inline-flex items-center h-9 font-mono text-[13px] tracking-[0.14em] uppercase text-black font-bold relative overflow-hidden"

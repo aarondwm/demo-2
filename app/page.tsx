@@ -5,11 +5,17 @@ import { Navbar }          from "@/components/ui/mini-navbar";
 import { Spotlight }       from "@/components/ui/spotlight";
 import { TestimonialsColumn, type Testimonial } from "@/components/ui/testimonials-columns-1";
 import { HoverActionButton } from "@/components/ui/hover-action-button";
+import { useLanguage } from "@/components/ui/language-context";
+import { t } from "@/lib/translations";
 
-/* ── TextScramble (from Heroeffect.txt — scrambled character reveal) ──────── */
+/* ── TextScramble (scrambled character reveal — supports Latin + Arabic) ──── */
+const LATIN_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const ARABIC_CHARS = "ابتثجحخدذرزسشصضطظعغفقكلمنهوي";
+function isArabicText(s: string) { return /[\u0600-\u06FF]/.test(s); }
+
 class TextScramble {
   private el: HTMLElement;
-  private chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  private chars = LATIN_CHARS;
   private queue: Array<{ from: string; to: string; start: number; end: number; char?: string }> = [];
   private frame = 0;
   private frameRequest = 0;
@@ -29,6 +35,9 @@ class TextScramble {
   }
 
   setText(newText: string) {
+    const rtl = isArabicText(newText);
+    this.chars = rtl ? ARABIC_CHARS : LATIN_CHARS;
+
     const oldText = this.el.innerText;
     const length = Math.max(oldText.length, newText.length);
     const promise = new Promise<void>((r) => (this.resolve = r));
@@ -38,9 +47,15 @@ class TextScramble {
       const to    = newText[i] || "";
       let start: number, end: number;
       if (this.sequential) {
-        // each letter starts after the previous one resolves: strict left-to-right
-        start = i * this.seqStep;
-        end   = start + this.seqWindow;
+        if (rtl) {
+          // RTL: reveal from right to left
+          const ri = length - 1 - i;
+          start = ri * this.seqStep;
+          end   = start + this.seqWindow;
+        } else {
+          start = i * this.seqStep;
+          end   = start + this.seqWindow;
+        }
       } else {
         start = Math.floor(Math.random() * this.speed);
         end   = start + Math.floor(Math.random() * this.speed);
@@ -132,6 +147,7 @@ function ScrambledLine({
 
 /* Randomly triggers one hero line at a time */
 function HeroScrambleGroup() {
+  const { lang } = useLanguage();
   const [triggers, setTriggers] = useState([0, 0, 0]);
 
   useEffect(() => {
@@ -153,19 +169,19 @@ function HeroScrambleGroup() {
   return (
     <>
       <ScrambledLine
-        text="RIGHT STORY."
+        text={t("heroLine1", lang)}
         delay={300}
         trigger={triggers[0]}
         className="text-white"
       />
       <ScrambledLine
-        text="RIGHT AUDIENCE."
+        text={t("heroLine2", lang)}
         delay={700}
         trigger={triggers[1]}
         style={{ color: "var(--accent)" }}
       />
       <ScrambledLine
-        text="REAL IMPACT."
+        text={t("heroLine3", lang)}
         delay={1100}
         trigger={triggers[2]}
         style={{ color: "#4a6cf7" }}
@@ -397,7 +413,7 @@ const DASH_DEMOGRAPHICS = {
   location: [{ name: "Kuwait City", pct: 32, count: "100,108" }, { name: "Hawally", pct: 22, count: "68,825" }, { name: "Salmiya", pct: 18, count: "56,311" }, { name: "Jahra", pct: 12, count: "37,541" }, { name: "Farwaniya", pct: 10, count: "31,284" }, { name: "Ahmadi", pct: 6, count: "18,771" }],
   age: [{ range: "25-34", pct: 34 }, { range: "35-44", pct: 36 }, { range: "45-54", pct: 19 }, { range: "55+", pct: 11 }],
 };
-const DASH_TABS = ["Overview", "Audience Breakdown"];
+const DASH_TABS_KEYS = ["overview", "audienceBreakdown"];
 
 function AnimatedViewCount({ value, duration = 1500 }: { value: number; duration?: number }) {
   const [display, setDisplay] = useState(0);
@@ -417,6 +433,7 @@ function AnimatedViewCount({ value, duration = 1500 }: { value: number; duration
 }
 
 function CampaignDashboard() {
+  const { lang } = useLanguage();
   const [tab, setTab] = useState(0);
   const [visible, setVisible] = useState(false);
   const [openCompany, setOpenCompany] = useState<number | null>(null);
@@ -438,9 +455,9 @@ function CampaignDashboard() {
       <div className="flex items-center justify-between px-4 md:px-6 py-3 border-b border-white/[0.06]">
         <div className="flex items-center gap-2.5">
           <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: "#4a6cf7", boxShadow: "0 0 6px #4a6cf7, 0 0 12px rgba(74,108,247,0.5)" }} />
-          <span className="font-mono font-bold tracking-[0.22em] uppercase" style={{ fontSize: "11px", color: "#e8e2d6" }}>Campaign Report</span>
+          <span className="font-mono font-bold tracking-[0.22em] uppercase" style={{ fontSize: "11px", color: "#e8e2d6" }}>{t("campaignReport", lang)}</span>
         </div>
-        <span className="font-mono text-[9px] tracking-[0.15em] uppercase" style={{ color: "rgba(255,255,255,0.25)" }}>SAMPLE</span>
+        <span className="font-mono text-[9px] tracking-[0.15em] uppercase" style={{ color: "rgba(255,255,255,0.25)" }}>{t("sample", lang)}</span>
       </div>
 
       {/* Hero Stat with article background */}
@@ -468,7 +485,7 @@ function CampaignDashboard() {
             <span className="keep-blue" style={{ fontFamily: "'Neue Montreal', sans-serif", fontSize: "clamp(36px, 8vw, 48px)", fontWeight: 800, color: "#4a6cf7", letterSpacing: "-0.03em", textShadow: "0 0 40px rgba(74,108,247,0.4), 0 0 12px rgba(74,108,247,0.2)" }}>
               {visible ? <AnimatedViewCount value={312840} /> : "0"}
             </span>
-            <span className="font-mono uppercase" style={{ fontSize: "clamp(10px, 2.5vw, 11px)", letterSpacing: "0.22em", color: "rgba(255,255,255,0.5)" }}>Total Article Views</span>
+            <span className="font-mono uppercase" style={{ fontSize: "clamp(10px, 2.5vw, 11px)", letterSpacing: "0.22em", color: "rgba(255,255,255,0.5)" }}>{t("totalArticleViews", lang)}</span>
           </div>
           <a
             href="/dwm-article-full.html"
@@ -477,22 +494,22 @@ function CampaignDashboard() {
           >
             <span className="absolute inset-0 bg-white" />
             <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>
-              <span className="text-white text-[12px] tracking-[0.15em] uppercase font-bold">Preview Article</span>
+              <span className="text-white text-[12px] tracking-[0.15em] uppercase font-bold">{t("previewArticle", lang)}</span>
             </span>
             <span className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0 z-20 keep-black" style={{ color: "#000000" }}>
-              Preview Article
+              {t("previewArticle", lang)}
             </span>
-            <span className="invisible px-7">Preview Article</span>
+            <span className="invisible px-7">{t("previewArticle", lang)}</span>
           </a>
         </div>
       </div>
 
       {/* Tabs */}
       <div className="flex border-b border-white/[0.06]">
-        {DASH_TABS.map((t, i) => (
-          <button key={t} onClick={() => setTab(i)} className="flex-1 py-3 font-mono text-[10px] tracking-[0.2em] uppercase text-center transition-colors duration-200"
+        {DASH_TABS_KEYS.map((key, i) => (
+          <button key={key} onClick={() => setTab(i)} className="flex-1 py-3 font-mono text-[10px] tracking-[0.2em] uppercase text-center transition-colors duration-200"
             style={{ color: tab === i ? "#4a6cf7" : "rgba(255,255,255,0.3)", borderBottom: tab === i ? "2px solid #4a6cf7" : "2px solid transparent", background: tab === i ? "rgba(74,108,247,0.04)" : "transparent" }}>
-            {t}
+            {t(key, lang)}
           </button>
         ))}
       </div>
@@ -504,7 +521,7 @@ function CampaignDashboard() {
           <div className="flex flex-col gap-6">
             {/* Location */}
             <div>
-              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30 mb-3">Location</div>
+              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30 mb-3">{t("location", lang)}</div>
               <div className="flex flex-col gap-2.5">
                 {DASH_DEMOGRAPHICS.location.map((loc, i) => (
                   <div key={loc.name} className="flex items-center gap-2 md:gap-3">
@@ -522,18 +539,18 @@ function CampaignDashboard() {
             {/* Gender + Age side by side */}
             <div className="grid grid-cols-2 gap-4 md:gap-6">
               <div>
-                <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30 mb-3">Gender</div>
+                <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30 mb-3">{t("gender", lang)}</div>
                 <div className="flex h-[8px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
                   <div className="h-full" style={{ width: visible ? "74%" : "0%", background: "#4a6cf7", transition: "width 0.8s ease 0.2s" }} />
                   <div className="h-full" style={{ width: visible ? "26%" : "0%", background: "#7a9cff", transition: "width 0.8s ease 0.3s" }} />
                 </div>
                 <div className="flex justify-between mt-2">
-                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />74% Male</span>
-                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />26% Female</span>
+                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />74% {t("male", lang)}</span>
+                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />26% {t("female", lang)}</span>
                 </div>
               </div>
               <div>
-                <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30 mb-3">Age Range</div>
+                <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30 mb-3">{t("ageRange", lang)}</div>
                 <div className="flex flex-col gap-2">
                   {DASH_DEMOGRAPHICS.age.map((a, i) => (
                     <div key={a.range} className="flex items-center gap-2">
@@ -554,8 +571,8 @@ function CampaignDashboard() {
         {tab === 1 && (
           <div className="flex flex-col gap-0">
             <div className="flex items-center justify-between mb-3">
-              <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30">Top Companies Your Viewers Work At</span>
-              <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white/20">Avg. Read Time</span>
+              <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30">{t("topCompanies", lang)}</span>
+              <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white/20">{t("avgReadTime", lang)}</span>
             </div>
             {DASH_AUDIENCE.map((c, i) => (
               <div key={c.rank}>
@@ -588,10 +605,10 @@ function CampaignDashboard() {
 
       {/* Footer */}
       <div className="flex items-center justify-between px-4 md:px-6 py-2.5 border-t border-white/[0.08]">
-        <span className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "clamp(7px, 2vw, 9px)", color: "rgba(255,255,255,0.35)" }}>DWM Audience Intelligence Platform</span>
+        <span className="font-mono tracking-[0.2em] uppercase" style={{ fontSize: "clamp(7px, 2vw, 9px)", color: "rgba(255,255,255,0.35)" }}>{t("dwmPlatform", lang)}</span>
         <div className="flex items-center gap-1.5">
           <span className="w-1 h-1 bg-[#4a6cf7]" />
-          <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/50">SAMPLE</span>
+          <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/50">{t("sample", lang)}</span>
         </div>
       </div>
     </div>
@@ -904,6 +921,7 @@ function FeatureCard({
 
 /* ── Page ────────────────────────────────────────────────────────────────── */
 export default function Home() {
+  const { lang } = useLanguage();
   const [activeWwdCard, setActiveWwdCard] = useState(0);
   const [wwdHovered, setWwdHovered] = useState(false);
   const [activeIntelItem, setActiveIntelItem] = useState(0);
@@ -1043,7 +1061,7 @@ export default function Home() {
             style={{ animation: "reveal-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards" }}
           >
             <div className="flex items-center justify-center w-full text-center">
-              <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em", textAlign: "center" }}><ScrambleOnView text="Proprietary GCC Media & Insight Technology" delay={0} style={{ display: "inline" }} /></span>
+              <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em", textAlign: "center" }}><ScrambleOnView text={t("heroLabel", lang)} delay={0} style={{ display: "inline" }} /></span>
             </div>
           </div>
 
@@ -1058,8 +1076,8 @@ export default function Home() {
             className="flex flex-col md:flex-row items-stretch md:items-center md:justify-center gap-4 md:gap-6 opacity-0 mt-10 md:mt-20 mb-10 md:mb-20 max-w-xs md:max-w-none mx-auto w-full"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
-            <HoverActionButton labelText="Request a Briefing" scramble href="/contact" variant="blue-fill" className="!flex md:!inline-flex text-[11px] md:text-[15px] font-bold w-full md:w-80 hero-btn" style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
-            <HoverActionButton labelText="How It Works" scramble scrambleStep={6.2} href="#what-we-do" variant="white" direction="vertical" className="!flex md:!inline-flex text-[11px] md:text-[15px] font-bold w-full md:w-80 hero-btn" style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
+            <HoverActionButton labelText={t("requestBriefing", lang)} scramble href="/contact" variant="blue-fill" className="!flex md:!inline-flex text-[11px] md:text-[15px] font-bold w-full md:w-80 hero-btn" style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
+            <HoverActionButton labelText={t("howItWorks", lang)} scramble scrambleStep={6.2} href="#what-we-do" variant="white" direction="vertical" className="!flex md:!inline-flex text-[11px] md:text-[15px] font-bold w-full md:w-80 hero-btn" style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
           </div>
         </div>
       </section>
@@ -1071,23 +1089,23 @@ export default function Home() {
           <div className="flex items-center justify-center lg:justify-start mb-5">
             <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}>
               <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
-              <ScrambleOnView text="What We Do" delay={0} style={{ display: "inline" }} onDone={sec2Done} />
+              <ScrambleOnView text={t("whatWeDo", lang)} delay={0} style={{ display: "inline" }} onDone={sec2Done} />
             </span>
           </div>
 
           <h2
             style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.02em", textTransform: "uppercase", marginBottom: "40px", color: "#e8e8e8" }}
           >
-            <ScrambleOnSignal text="WE RUN IT." signal={sec2Visible} style={{ color: "#e8e8e8" }} />
-            <ScrambleOnSignal text="YOU SEE WHO ENGAGED." signal={sec2Visible} style={{ color: "#4a6cf7" }} />
+            <ScrambleOnSignal text={t("weRunIt", lang)} signal={sec2Visible} style={{ color: "#e8e8e8" }} />
+            <ScrambleOnSignal text={t("youSeeWhoEngaged", lang)} signal={sec2Visible} style={{ color: "#4a6cf7" }} />
           </h2>
 
           {/* Desktop: original card layout */}
           <div className="hidden md:grid grid-cols-3 gap-[6px]" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
             {[
-              { n: "01", stat: "<24hr", statLabel: "DELIVERY GUARANTEED", title: "SECURED MEDIA PLACEMENT", desc: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches. Placements.", accent: false, href: "#media-placement" },
-              { n: "02", stat: "44.7M+", statLabel: "REACHABLE AUDIENCE", title: "PRECISION DISTRIBUTION", desc: "6 GCC markets. 32 industries. Your content reaches the right audience. From the general population to the C-suite.", accent: false, href: "#audience-selection" },
-              { n: "03", stat: "94%", statLabel: "READER IDENTIFICATION", title: "FULL ENGAGEMENT VISIBILITY", desc: "Who read it. Where they\u2019re from. What they do. Full audience breakdowns across every campaign. Delivered as a branded, exportable report.", accent: false, href: "#sample-insights" },
+              { n: "01", stat: t("under24hr", lang), statLabel: t("deliveryGuaranteed", lang), title: t("securedMediaPlacement", lang), desc: "We craft your messaging, manage your media presence, and place your story across the region\u2019s most-read publications. Not pitches. Placements.", accent: false, href: "#media-placement" },
+              { n: "02", stat: t("reachableAudienceNumber", lang), statLabel: t("reachableAudience", lang), title: t("precisionDistribution", lang), desc: "6 GCC markets. 32 industries. Your content reaches the right audience. From the general population to the C-suite.", accent: false, href: "#audience-selection" },
+              { n: "03", stat: t("readerIdPercent", lang), statLabel: t("readerIdentification", lang), title: t("fullEngagementVisibility", lang), desc: "Who read it. Where they\u2019re from. What they do. Full audience breakdowns across every campaign. Delivered as a branded, exportable report.", accent: false, href: "#sample-insights" },
             ].map(({ n, stat, statLabel, title, desc, accent, href }, i) => {
               const isActive = wwdHovered ? false : i === activeWwdCard;
               return (
@@ -1119,9 +1137,9 @@ export default function Home() {
           {/* Mobile: inline stat strip */}
           <div className="flex md:hidden items-stretch divide-x divide-white/[0.08] max-w-sm mx-auto w-full justify-center mobile-white-text" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
             {[
-              { stat: "<24hr", label: "Delivery" },
-              { stat: "44.7M+", label: "Audience" },
-              { stat: "94%", label: "Identified" },
+              { stat: t("under24hr", lang), label: t("delivery", lang) },
+              { stat: t("reachableAudienceNumber", lang), label: t("audience", lang) },
+              { stat: t("readerIdPercent", lang), label: t("identified", lang) },
             ].map(({ stat, label }) => (
               <div key={label} className="flex flex-col items-center flex-1 py-3">
                 <span style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "22px", fontWeight: 800, color: "#ffffff", letterSpacing: "-0.02em" }}>{stat}</span>
@@ -1141,9 +1159,9 @@ export default function Home() {
                 <img src="/D*M website.png" alt="DWM" className="h-7 w-auto" style={{ mixBlendMode: "screen" }} />
               </span>
               <span className="absolute inset-0 flex items-center justify-center text-black transition-opacity duration-300 group-hover:opacity-0 z-20">
-                Get In Touch
+                {t("getInTouch", lang)}
               </span>
-              <span className="invisible px-12">Get In Touch</span>
+              <span className="invisible px-12">{t("getInTouch", lang)}</span>
             </a>
           </div>
 
@@ -1161,23 +1179,23 @@ export default function Home() {
             {/* Left */}
             <div className="flex flex-col gap-4 lg:gap-8 text-center lg:text-left items-center lg:items-start">
               <div className="flex items-center mb-2 lg:mb-5">
-                <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Secured Media Placement" delay={0} style={{ display: "inline" }} onDone={sec3Done} /></span>
+                <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text={t("securedMediaPlacementTitle", lang)} delay={0} style={{ display: "inline" }} onDone={sec3Done} /></span>
               </div>
               <h2
                 className="font-bold uppercase"
                 style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
               >
-                <ScrambleOnSignal text="Your Story." signal={sec3Visible} style={{ color: "#ffffff" }} />
-                <ScrambleOnSignal text="Guaranteed Publishing." signal={sec3Visible} style={{ color: "#4a6cf7" }} />
+                <ScrambleOnSignal text={t("yourStory", lang)} signal={sec3Visible} style={{ color: "#ffffff" }} />
+                <ScrambleOnSignal text={t("guaranteedPublishing", lang)} signal={sec3Visible} style={{ color: "#4a6cf7" }} />
               </h2>
 
               {/* Stat counters */}
               {/* Desktop: inline stats */}
               <div className="hidden lg:flex items-stretch divide-x divide-white/[0.06]" style={{ opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
                 {[
-                  { value: "100%", label: "Placement Rate" },
-                  { value: "12+",  label: "Publications" },
-                  { value: "1-50+", label: "Articles Per Month" },
+                  { value: t("placementRateNumber", lang), label: t("placementRate", lang) },
+                  { value: t("publicationsNumber", lang),  label: t("publications", lang) },
+                  { value: t("articlesPerMonthNumber", lang), label: t("articlesPerMonth", lang) },
                 ].map(({ value, label }) => (
                   <div key={label} className="flex flex-col gap-1 pr-8 first:pl-0 pl-8">
                     <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "28px", fontWeight: 800, color: "#ffffff" }}>{value}</span>
@@ -1188,9 +1206,9 @@ export default function Home() {
               {/* Mobile: stat cards */}
               <div className="grid grid-cols-1 gap-3 lg:hidden max-w-sm mx-auto w-full mobile-white-text" style={{ opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.05s" }}>
                 {[
-                  { value: "100%", label: "Placement Rate" },
-                  { value: "12+",  label: "Publications" },
-                  { value: "1-50+", label: "Articles Per Month" },
+                  { value: t("placementRateNumber", lang), label: t("placementRate", lang) },
+                  { value: t("publicationsNumber", lang),  label: t("publications", lang) },
+                  { value: t("articlesPerMonthNumber", lang), label: t("articlesPerMonth", lang) },
                 ].map(({ value, label }) => (
                   <div key={label} className="flex items-center justify-between py-4 px-5" style={{ background: "rgba(74,108,247,0.06)", border: "1px solid rgba(74,108,247,0.12)", borderRadius: "8px" }}>
                     <span className="font-mono uppercase" style={{ fontSize: "13px", letterSpacing: "0.14em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
@@ -1200,17 +1218,17 @@ export default function Home() {
               </div>
 
               <p className="hidden lg:block" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s" }}>
-                We produce and place editorially-driven stories across a network of Gulf business and industry publications. Your content goes live as a confirmed placement.
+                {t("securedMediaDescription", lang)}
               </p>
             </div>
 
             {/* Right — 4 card rows (desktop only) */}
             <div className="hidden lg:flex flex-col" style={{ gap: "0px" }}>
               {[
-                { n: "01", title: "Confirmed Placement", body: "Your content is placed, not pitched. Every partner publication is pre-contracted. Your story runs." },
-                { n: "02", title: "Gulf-Wide Network",   body: "Kuwait, UAE, Saudi Arabia, Bahrain, Qatar, Oman. Every major GCC market covered." },
-                { n: "03", title: "Editorial Quality",   body: "Produced and formatted to editorial standard. It reads like news because it is." },
-                { n: "04", title: "Timed & Controlled",  body: "You choose when it runs. We coordinate across every publication simultaneously." },
+                { n: "01", title: t("confirmedPlacement", lang), body: t("confirmedPlacementDescription", lang) },
+                { n: "02", title: t("gulfWideNetwork", lang),   body: t("gulfWideNetworkDescription", lang) },
+                { n: "03", title: t("editorialQuality", lang),   body: t("editorialQualityDescription", lang) },
+                { n: "04", title: t("timedAndControlled", lang),  body: t("timedAndControlledDescription", lang) },
               ].map(({ n, title, body }, i) => (
                 <MediaCard key={n} n={n} title={title} body={body} index={i} visible={sec3Visible} />
               ))}
@@ -1227,18 +1245,18 @@ export default function Home() {
             <div className="flex items-center justify-center lg:justify-start mb-5">
               <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}>
                 <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
-                <ScrambleOnView text="Audience Selection" delay={0} style={{ display: "inline" }} onDone={secMapDone} />
+                <ScrambleOnView text={t("audienceSelection", lang)} delay={0} style={{ display: "inline" }} onDone={secMapDone} />
               </span>
             </div>
             <h2
               className="font-bold uppercase text-white"
               style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
-              <ScrambleOnSignal text="Target Anyone." signal={secMapVisible} style={{ color: "#ffffff" }} />
-              <ScrambleOnSignal text="Anywhere." signal={secMapVisible} style={{ color: "#4a6cf7" }} />
+              <ScrambleOnSignal text={t("targetAnyone", lang)} signal={secMapVisible} style={{ color: "#ffffff" }} />
+              <ScrambleOnSignal text={t("anywhere", lang)} signal={secMapVisible} style={{ color: "#4a6cf7" }} />
             </h2>
             <p className="sys-body max-w-lg mt-6 mx-auto lg:mx-0" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s" }}>
-              Our proprietary technology allows us to ensure anyone you want to read the story, reads it.
+              {t("audienceSelectionDescription", lang)}
             </p>
           </div>
           {/* Desktop: Interactive map */}
@@ -1290,7 +1308,7 @@ export default function Home() {
           <div className="flex items-center justify-center lg:justify-start mb-5">
             <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}>
               <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
-              Sample Insights
+              {t("sampleInsights", lang)}
             </span>
           </div>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 text-center lg:text-left">
@@ -1298,11 +1316,11 @@ export default function Home() {
               className="font-bold uppercase"
               style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
-              <ScrambleOnView text="What We Know," delay={0} style={{ display: "block", color: "#ffffff" }} />
-              <ScrambleOnView text="They Don't." delay={200} style={{ display: "block", color: "#4a6cf7" }} />
+              <ScrambleOnView text={t("whatWeKnow", lang)} delay={0} style={{ display: "block", color: "#ffffff" }} />
+              <ScrambleOnView text={t("theyDont", lang)} delay={200} style={{ display: "block", color: "#4a6cf7" }} />
             </h2>
             <p className="sys-body md:text-right md:max-w-xs mx-auto lg:mx-0" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "rgba(255,255,255,0.85)" }}>
-              We run your content and track exactly who reads it. You get a full intelligence report. No&nbsp;guesswork.
+              {t("sampleInsightsDescription", lang)}
             </p>
           </div>
           <CampaignDashboard />
@@ -1314,14 +1332,14 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="mb-10 text-center">
             <div className="flex items-center justify-center mb-5">
-              <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Who We Work With" delay={0} style={{ display: "inline" }} onDone={sec5Done} /></span>
+              <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text={t("whoWeWorkWith", lang)} delay={0} style={{ display: "inline" }} onDone={sec5Done} /></span>
             </div>
             <h2
               className="font-bold uppercase text-white"
               style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
-              <ScrambleOnSignal text="In Their" signal={sec5Visible} style={{ color: "#ffffff" }} />
-              <ScrambleOnSignal text="Own Words" signal={sec5Visible} onDone={sec5BodyDone} style={{ color: "#ffffff" }} />
+              <ScrambleOnSignal text={t("inTheir", lang)} signal={sec5Visible} style={{ color: "#ffffff" }} />
+              <ScrambleOnSignal text={t("ownWords", lang)} signal={sec5Visible} onDone={sec5BodyDone} style={{ color: "#ffffff" }} />
             </h2>
           </div>
 
@@ -1362,21 +1380,21 @@ export default function Home() {
 
             <div className="relative z-10">
               <div className="flex items-center mb-5">
-                <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Get Started" delay={0} style={{ display: "inline" }} onDone={secCtaDone} /></span>
+                <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text={t("getStarted", lang)} delay={0} style={{ display: "inline" }} onDone={secCtaDone} /></span>
               </div>
               <h2
                 className="font-bold uppercase text-white mb-5 text-center"
                 style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
               >
-                <ScrambleOnSignal text="Start with" signal={secCtaVisible} style={{ color: "#ffffff" }} />
-                <ScrambleOnSignal text="a Briefing." signal={secCtaVisible} style={{ color: "#ffffff" }} />
-                <ScrambleOnSignal text="See What Returns." signal={secCtaVisible} style={{ color: "#4a6cf7" }} />
+                <ScrambleOnSignal text={t("startWith", lang)} signal={secCtaVisible} style={{ color: "#ffffff" }} />
+                <ScrambleOnSignal text={t("aBriefing", lang)} signal={secCtaVisible} style={{ color: "#ffffff" }} />
+                <ScrambleOnSignal text={t("seeWhatReturns", lang)} signal={secCtaVisible} style={{ color: "#4a6cf7" }} />
               </h2>
               <p className="sys-body max-w-lg mb-10 mx-auto text-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s" }}>
-                Book a briefing. We&apos;ll walk you through what we&apos;d run, who we&apos;d reach, and whether you&apos;re eligible.
+                {t("bookBriefingDescription", lang)}
               </p>
               <div className="flex justify-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.32s" }}>
-                <HoverActionButton label="Request a Briefing" href="/contact" />
+                <HoverActionButton label={t("requestBriefing", lang)} href="/contact" />
               </div>
             </div>
           </div>
@@ -1391,25 +1409,25 @@ export default function Home() {
           <div className="flex flex-col gap-4">
             <img src="/D*M website.png" alt="DWM" className="h-9 w-auto self-start" />
             <p className="font-mono text-[11px] tracking-[0.08em] text-white/60 max-w-xs leading-relaxed">
-              Proprietary GCC Media &amp; Insight Technology
+              {t("footerTagline", lang)}
             </p>
           </div>
 
           {[
-            { heading: "Services", links: [
-              { label: "What We Do", href: "/#what-we-do" },
-              { label: "Media Placement", href: "/#media-placement" },
-              { label: "Audience Selection", href: "/#audience-selection" },
-              { label: "Insights", href: "/#sample-insights" },
+            { heading: t("services", lang), links: [
+              { label: t("whatWeDo", lang), href: "/#what-we-do" },
+              { label: t("mediaPlacement", lang), href: "/#media-placement" },
+              { label: t("audienceSelection", lang), href: "/#audience-selection" },
+              { label: t("insights", lang), href: "/#sample-insights" },
             ]},
-            { heading: "Company", links: [
-              { label: "Home", href: "/#home" },
-              { label: "Contact", href: "/contact" },
-              { label: "Reviews", href: "/#reviews" },
+            { heading: t("company", lang), links: [
+              { label: t("home", lang), href: "/#home" },
+              { label: t("contact", lang), href: "/contact" },
+              { label: t("reviews", lang), href: "/#reviews" },
             ]},
-            { heading: "Legal", links: [
-              { label: "Privacy Policy", href: "/privacy-policy" },
-              { label: "Terms & Conditions", href: "/terms-and-conditions" },
+            { heading: t("legal", lang), links: [
+              { label: t("privacyPolicy", lang), href: "/privacy-policy" },
+              { label: t("termsAndConditions", lang), href: "/terms-and-conditions" },
             ]},
           ].map((col) => (
             <div key={col.heading} className="flex flex-col gap-4">
@@ -1431,7 +1449,7 @@ export default function Home() {
           <div aria-hidden className="absolute top-0 left-[10%] right-[10%] h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0.08) 70%, transparent)" }} />
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/50">
-              © 2026 Diwaniya Media. All rights reserved.
+              {t("copyright", lang)}
             </span>
           </div>
         </div>

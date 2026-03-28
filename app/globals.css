@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -379,6 +381,24 @@
   .mobile-white-text .keep-blue { color: #4a6cf7 !important; }
   .mobile-white-text .keep-black { color: #000000 !important; }
 }
+
+/* ── RTL (Arabic) overrides ───────────────────────────────────────────── */
+[dir="rtl"] {
+  font-family: 'IBM Plex Sans Arabic', 'IBM Plex Sans', var(--font-body), sans-serif;
+}
+[dir="rtl"] .font-mono {
+  font-family: 'IBM Plex Sans Arabic', var(--font-mono), monospace;
+}
+[dir="rtl"] .divide-x > :not(:first-child) {
+  border-left-width: 0;
+  border-right-width: 1px;
+}
+[dir="rtl"] .divide-x > :first-child {
+  border-right-width: 0;
+}
+/* Flip transitions for RTL */
+[dir="rtl"] .group-hover\:translate-x-0 { --tw-translate-x: 0%; }
+[dir="rtl"] .-translate-x-full { --tw-translate-x: 100%; }
 
 /* ── Page transition wipe ─────────────────────────────────────────────── */
 @keyframes wipeIn {
