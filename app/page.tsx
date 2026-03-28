@@ -1178,8 +1178,8 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-4 lg:gap-16 items-start">
             {/* Left */}
             <div className="flex flex-col gap-4 lg:gap-8 text-center lg:text-left items-center lg:items-start">
-              <div className="flex items-center mb-2 lg:mb-5">
-                <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text={t("securedMediaPlacementTitle", lang)} delay={0} style={{ display: "inline" }} onDone={sec3Done} /></span>
+              <div className="flex items-center mb-2 lg:mb-5" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
+                <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginInlineEnd: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text={t("securedMediaPlacementTitle", lang)} delay={0} style={{ display: "inline" }} onDone={sec3Done} /></span>
               </div>
               <h2
                 className="font-bold uppercase"
@@ -1242,20 +1242,20 @@ export default function Home() {
       <section id="audience-selection" className="sys-section">
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="mb-10 text-center lg:text-left">
-            <div className="flex items-center justify-center lg:justify-start mb-5">
+            <div className="flex items-center justify-center lg:justify-start mb-5" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
               <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}>
-                <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
+                <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginInlineEnd: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
                 <ScrambleOnView text={t("audienceSelection", lang)} delay={0} style={{ display: "inline" }} onDone={secMapDone} />
               </span>
             </div>
             <h2
               className="font-bold uppercase text-white"
-              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05, textAlign: lang === "ar" ? "right" : undefined }}
             >
               <ScrambleOnSignal text={t("targetAnyone", lang)} signal={secMapVisible} style={{ color: "#ffffff" }} />
               <ScrambleOnSignal text={t("anywhere", lang)} signal={secMapVisible} style={{ color: "#4a6cf7" }} />
             </h2>
-            <p className="sys-body max-w-lg mt-6 mx-auto lg:mx-0" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s" }}>
+            <p className="sys-body max-w-lg mt-6 mx-auto lg:mx-0" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s", textAlign: lang === "ar" ? "right" : undefined, direction: lang === "ar" ? "rtl" : undefined }}>
               {t("audienceSelectionDescription", lang)}
             </p>
           </div>
@@ -1275,7 +1275,7 @@ export default function Home() {
               background: "radial-gradient(ellipse 55% 50% at 62% 52%, rgba(74,108,247,0.08) 0%, transparent 70%)",
             }} />
             <iframe
-              src="/dwm-gcc-map-v4.html"
+              src={lang === "ar" ? "/dwm-gcc-map-v4-ar.html" : "/dwm-gcc-map-v4.html"}
               scrolling="no"
               loading="lazy"
               style={{ width: "100%", height: "680px", border: "none", display: "block", position: "relative", zIndex: 0 }}
