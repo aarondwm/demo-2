@@ -91,12 +91,19 @@ const capabilitiesLinks: NavItem[] = [
   { title: "Precision Targeting",    href: "#capabilities", icon: Crosshair, description: "Company, seniority, and industry filters" },
 ];
 
-const NAV_GROUPS = [
+const NAV_GROUPS_EN = [
   { label: "Home",       href: "/#home" },
   { label: "Placement",  href: "/#media-placement" },
-  { label: "Targeting", href: "/#audience-selection" },
+  { label: "Targeting",  href: "/#audience-selection" },
   { label: "Insights",   href: "/#sample-insights" },
   { label: "Reviews",    href: "/#reviews" },
+];
+const NAV_GROUPS_AR = [
+  { label: "الرئيسية",   href: "/ar#home" },
+  { label: "النشر",      href: "/ar#media-placement" },
+  { label: "الاستهداف",  href: "/ar#audience-selection" },
+  { label: "التقارير",   href: "/ar#sample-insights" },
+  { label: "التقييمات",  href: "/ar#reviews" },
 ];
 
 /* ── ListItem (adapted from header-3 pattern) ────────────────────────────── */
@@ -185,7 +192,8 @@ function MobileMenu({ open, children }: { open: boolean; children: React.ReactNo
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const scrolled = useScroll(10);
-  const { lang, setLang } = useLanguage();
+  const { lang } = useLanguage();
+  const NAV_GROUPS = lang === "ar" ? NAV_GROUPS_AR : NAV_GROUPS_EN;
 
   React.useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -226,7 +234,7 @@ export function Navbar() {
               clipPath: "circle(38% at 50% 50%)",
             }}
           />
-          <span className="ml-2 font-bold uppercase tracking-[0.08em]" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(10px, 2.5vw, 15px)", color: "#e8e8e8" }}>Diwaniya Media</span>
+          <span className="ml-2 font-bold uppercase tracking-[0.08em]" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(10px, 2.5vw, 15px)", color: "#e8e8e8" }}>{lang === "ar" ? "ديوانية ميديا" : "Diwaniya Media"}</span>
         </a>
 
         {/* Desktop nav */}
@@ -242,33 +250,29 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* Lang toggle + CTA + mobile toggle */}
+        {/* CTA + Lang toggle + mobile toggle */}
         <div className="flex items-center gap-3 flex-shrink-0">
-          {/* Language toggle */}
-          <button
-            onClick={() => setLang(lang === "en" ? "ar" : "en")}
-            className="font-mono text-[11px] tracking-[0.1em] uppercase text-white/50 hover:text-white border border-white/[0.08] hover:border-[#4a6cf7]/40 px-2.5 py-1.5 transition-colors"
-            style={{ borderRadius: "4px" }}
-          >
-            {lang === "en" ? "عربي" : "EN"}
-          </button>
           <a
-            href="/contact"
+            href={lang === "ar" ? "/ar/contact" : "/contact"}
             className="group hidden sm:inline-flex items-center h-9 font-mono text-[13px] tracking-[0.14em] uppercase text-black font-bold relative overflow-hidden"
             style={{ borderRadius: "12px", transform: "translateZ(0)" }}
           >
-            {/* Static white background */}
             <span className="absolute inset-0 bg-white" />
-            {/* Blue overlay slides in on hover */}
             <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>
               <img src="/D*M website.png" alt="DWM" className="h-6 w-auto" style={{ mixBlendMode: "screen" }} />
             </span>
-            {/* Text — fades out on hover, stays centered */}
             <span className="absolute inset-0 flex items-center justify-center text-black transition-opacity duration-300 group-hover:opacity-0 z-20">
-              Check Eligibility
+              {lang === "ar" ? "تحقق من الأهلية" : "Check Eligibility"}
             </span>
-            {/* Invisible sizer keeps button width stable */}
-            <span className="invisible px-7">Check Eligibility</span>
+            <span className="invisible px-7">{lang === "ar" ? "تحقق من الأهلية" : "Check Eligibility"}</span>
+          </a>
+          {/* Language switch */}
+          <a
+            href={lang === "en" ? "/ar" : "/"}
+            className="inline-flex items-center justify-center h-9 px-4 font-bold text-[13px] tracking-[0.08em] uppercase text-white bg-[#4a6cf7]/20 hover:bg-[#4a6cf7]/40 border border-[#4a6cf7]/40 hover:border-[#4a6cf7] transition-all"
+            style={{ borderRadius: "8px", textDecoration: "none" }}
+          >
+            {lang === "en" ? "عربي" : "EN"}
           </a>
 
           {/* Animated toggle (header-3 MenuToggleIcon) */}
@@ -300,11 +304,11 @@ export function Navbar() {
 
           <div className="px-6 py-6">
             <a
-              href="/contact"
+              href={lang === "ar" ? "/ar/contact" : "/contact"}
               className="flex items-center justify-center gap-2 h-12 font-mono text-[12px] tracking-[0.18em] uppercase bg-[#4a6cf7] text-[#04060c] font-bold"
               onClick={() => setMobileOpen(false)}
             >
-              Request a Briefing
+              {lang === "ar" ? "اطلب جلسة تعريفية" : "Request a Briefing"}
             </a>
           </div>
         </nav>

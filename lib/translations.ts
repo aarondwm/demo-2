@@ -125,9 +125,9 @@ const translations: Record<Lang, Record<string, string>> = {
   ar: {
     // Hero section
     heroLabel: "تقنية إعلامية واستخباراتية خاصة لدول الخليج",
-    heroLine1: "القصة الصحيحة.",
-    heroLine2: "الجمهور المناسب.",
-    heroLine3: "تأثير حقيقي.",
+    heroLine1: "القصة الصحيحة",
+    heroLine2: "الجمهور المناسب",
+    heroLine3: "تأثير حقيقي",
     requestBriefing: "اطلب جلسة تعريفية",
     howItWorks: "كيف نعمل",
 
@@ -148,8 +148,8 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Secured Media Placement
     securedMediaPlacementTitle: "النشر الإعلامي المؤكد",
-    yourStory: "قصتك.",
-    guaranteedPublishing: "نشر مضمون.",
+    yourStory: "قصتك",
+    guaranteedPublishing: "نشر مضمون",
     placementRateNumber: "١٠٠٪",
     placementRate: "نسبة النشر",
     publicationsNumber: "+١٢",
@@ -171,14 +171,14 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Audience Selection
     audienceSelection: "اختيار الجمهور",
-    targetAnyone: "استهدف أي شخص.",
-    anywhere: "في أي مكان.",
+    targetAnyone: "استهدف أي شخص",
+    anywhere: "في أي مكان",
     audienceSelectionDescription: "تقنيتنا الخاصة تضمن أن أي شخص تريده أن يقرأ القصة، سيقرأها.",
 
     // Sample Insights
     sampleInsights: "نماذج من التقارير",
     whatWeKnow: "ما نعرفه،",
-    theyDont: "هم لا يعرفونه.",
+    theyDont: "هم لا يعرفونه",
     sampleInsightsDescription: "ننشر محتواك ونتتبع بدقة من يقرأه. تحصل على تقرير استخباراتي كامل. بدون تخمين.",
     totalArticleViews: "إجمالي مشاهدات المقال",
     previewArticle: "معاينة المقال",
@@ -203,7 +203,7 @@ const translations: Record<Lang, Record<string, string>> = {
     // Get Started / CTA
     getStarted: "ابدأ الآن",
     startWith: "ابدأ بجلسة",
-    aBriefing: "تعريفية.",
+    aBriefing: "تعريفية",
     seeWhatReturns: "وشاهد النتائج.",
     bookBriefingDescription: "احجز جلسة تعريفية. سنوضح لك ما سننشره، ومن سنصل إليه، وما إذا كنت مؤهلاً.",
 

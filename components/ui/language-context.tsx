@@ -1,28 +1,20 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, { createContext, useContext, useEffect, ReactNode } from "react";
+import { usePathname } from "next/navigation";
 
 type Lang = "en" | "ar";
 
 interface LanguageContextType {
   lang: Lang;
-  setLang: (lang: Lang) => void;
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextType>({ lang: "en" });
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("en");
+  const pathname = usePathname();
+  const lang: Lang = pathname.startsWith("/ar") ? "ar" : "en";
 
-  // Load persisted language on mount
-  useEffect(() => {
-    const stored = localStorage.getItem("lang");
-    if (stored === "en" || stored === "ar") {
-      setLangState(stored);
-    }
-  }, []);
-
-  // Apply dir and lang attributes to <html> and persist choice
   useEffect(() => {
     const root = document.documentElement;
     if (lang === "ar") {
@@ -32,24 +24,15 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       root.setAttribute("dir", "ltr");
       root.setAttribute("lang", "en");
     }
-    localStorage.setItem("lang", lang);
   }, [lang]);
 
-  const setLang = (newLang: Lang) => {
-    setLangState(newLang);
-  };
-
   return (
-    <LanguageContext.Provider value={{ lang, setLang }}>
+    <LanguageContext.Provider value={{ lang }}>
       {children}
     </LanguageContext.Provider>
   );
 }
 
 export function useLanguage() {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error("useLanguage must be used within a LanguageProvider");
-  }
-  return context;
+  return useContext(LanguageContext);
 }
