@@ -26,6 +26,7 @@ export default function ContactPage() {
       <div className="pt-20 md:pt-32 pb-24 px-6 md:px-10">
         <div className="max-w-2xl mx-auto">
           <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#4a6cf7]/70 mb-4 block">
+            <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
             Contact
           </span>
           <h1
