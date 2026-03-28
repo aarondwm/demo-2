@@ -433,7 +433,7 @@ function CampaignDashboard() {
   }, []);
 
   return (
-    <div ref={ref} className="border border-white/[0.08] bg-black rounded-lg overflow-hidden">
+    <div ref={ref} className="border border-white/[0.08] bg-black rounded-lg overflow-hidden dash-container">
       {/* Header */}
       <div className="flex items-center justify-between px-4 md:px-6 py-3 border-b border-white/[0.06]">
         <div className="flex items-center gap-2.5">
