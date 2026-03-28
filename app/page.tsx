@@ -1116,25 +1116,17 @@ export default function Home() {
               );
             })}
           </div>
-          {/* Mobile: horizontal row layout (label left, stat right) */}
-          <div className="grid grid-cols-1 gap-3 md:hidden max-w-sm mx-auto w-full" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
+          {/* Mobile: inline stat strip */}
+          <div className="flex md:hidden items-stretch divide-x divide-white/[0.08] max-w-sm mx-auto w-full justify-center" style={{ marginBottom: "40px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
             {[
-              { n: "01", stat: "<24hr", statLabel: "DELIVERY GUARANTEED", title: "SECURED MEDIA PLACEMENT", href: "#media-placement" },
-              { n: "02", stat: "44.7M+", statLabel: "REACHABLE AUDIENCE", title: "PRECISION DISTRIBUTION", href: "#audience-selection" },
-              { n: "03", stat: "94%", statLabel: "READER IDENTIFICATION", title: "FULL ENGAGEMENT VISIBILITY", href: "#sample-insights" },
-            ].map(({ n, stat, statLabel, title, href }) => (
-              <a
-                key={n}
-                href={href}
-                className="flex items-center justify-between py-4 px-5"
-                style={{ background: "rgba(74,108,247,0.06)", border: "1px solid rgba(74,108,247,0.12)", borderRadius: "8px", textDecoration: "none" }}
-              >
-                <div className="flex flex-col">
-                  <span className="font-mono uppercase" style={{ fontSize: "11px", letterSpacing: "0.14em", color: "#4a6cf7" }}>{statLabel}</span>
-                  <span style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "13px", fontWeight: 700, textTransform: "uppercase", color: "rgba(255,255,255,0.6)", marginTop: "2px" }}>{title}</span>
-                </div>
-                <span className="font-bold flex-shrink-0 ml-4" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "24px", fontWeight: 800, color: "#ffffff" }}>{stat}</span>
-              </a>
+              { stat: "<24hr", label: "Delivery" },
+              { stat: "44.7M+", label: "Audience" },
+              { stat: "94%", label: "Identified" },
+            ].map(({ stat, label }) => (
+              <div key={label} className="flex flex-col items-center flex-1 py-3">
+                <span style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "22px", fontWeight: 800, color: "#4a6cf7", letterSpacing: "-0.02em" }}>{stat}</span>
+                <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.14em", color: "rgba(255,255,255,0.4)", marginTop: "4px" }}>{label}</span>
+              </div>
             ))}
           </div>
 
