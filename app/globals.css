@@ -366,7 +366,7 @@
 .wwd-stat { font-size: 52px; }
 
 @media (max-width: 767px) {
-  .hero-btn { padding: 14px 0 !important; }
+  .hero-btn { padding: 16px 0 !important; font-size: 13px !important; }
   .wwd-card-inner { padding: 12px 12px 14px !important; }
   .wwd-card-inner .wwd-stat + div { padding-bottom: 8px !important; margin-bottom: 8px !important; }
   .wwd-card-inner > div:first-child { margin-bottom: 8px !important; }
@@ -376,6 +376,7 @@
   .sys-label { font-size: 11px !important; letter-spacing: 0.15em !important; }
   .sys-body { font-size: 17px !important; color: #ffffff !important; }
   .mobile-white-text span { color: #ffffff !important; }
+  .mobile-white-text .keep-blue { color: #4a6cf7 !important; }
 }
 
 /* ── Page transition wipe ─────────────────────────────────────────────── */

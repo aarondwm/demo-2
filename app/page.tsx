@@ -465,7 +465,7 @@ function CampaignDashboard() {
         {/* Content */}
         <div className="relative z-[5] flex flex-col items-center" style={{ marginTop: "16px" }}>
           <div className="flex flex-col items-center gap-1">
-            <span style={{ fontFamily: "'Neue Montreal', sans-serif", fontSize: "clamp(36px, 8vw, 48px)", fontWeight: 800, color: "#4a6cf7", letterSpacing: "-0.03em", textShadow: "0 0 40px rgba(74,108,247,0.4), 0 0 12px rgba(74,108,247,0.2)" }}>
+            <span className="keep-blue" style={{ fontFamily: "'Neue Montreal', sans-serif", fontSize: "clamp(36px, 8vw, 48px)", fontWeight: 800, color: "#4a6cf7", letterSpacing: "-0.03em", textShadow: "0 0 40px rgba(74,108,247,0.4), 0 0 12px rgba(74,108,247,0.2)" }}>
               {visible ? <AnimatedViewCount value={312840} /> : "0"}
             </span>
             <span className="font-mono uppercase" style={{ fontSize: "clamp(10px, 2.5vw, 11px)", letterSpacing: "0.22em", color: "rgba(255,255,255,0.5)" }}>Total Article Views</span>
@@ -479,10 +479,10 @@ function CampaignDashboard() {
             <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>
               <span className="text-white text-[12px] tracking-[0.15em] uppercase font-bold">Preview Article</span>
             </span>
-            <span className="absolute inset-0 flex items-center justify-center text-black transition-opacity duration-300 group-hover:opacity-0 z-20">
+            <span className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0 z-20" style={{ color: "#000000" }}>
               Preview Article
             </span>
-            <span className="invisible px-6">Preview Article</span>
+            <span className="invisible px-7">Preview Article</span>
           </a>
         </div>
       </div>
@@ -513,7 +513,7 @@ function CampaignDashboard() {
                       <div className="h-full rounded-full" style={{ width: visible ? `${loc.pct}%` : "0%", background: `rgba(74,108,247,${1 - i * 0.1})`, transition: `width 0.8s ease ${i * 0.08}s` }} />
                     </div>
                     <span className="font-mono flex-shrink-0 text-right" style={{ fontSize: "13px", color: "#ffffff" }}>{loc.count}</span>
-                    <span className="font-mono font-bold flex-shrink-0 w-[36px] text-right" style={{ fontSize: "13px", color: "#4a6cf7" }}>{loc.pct}%</span>
+                    <span className="font-mono font-bold flex-shrink-0 w-[36px] text-right keep-blue" style={{ fontSize: "13px", color: "#4a6cf7" }}>{loc.pct}%</span>
                   </div>
                 ))}
               </div>
@@ -1397,14 +1397,14 @@ export default function Home() {
 
           {[
             { heading: "Services", links: [
-              { label: "Our Aim", href: "/#what-we-do" },
+              { label: "What We Do", href: "/#what-we-do" },
               { label: "Media Placement", href: "/#media-placement" },
-              { label: "Targeting", href: "/#audience-selection" },
-              { label: "Audience Insights", href: "/#intelligence" },
+              { label: "Audience Selection", href: "/#audience-selection" },
+              { label: "Insights", href: "/#sample-insights" },
             ]},
             { heading: "Company", links: [
               { label: "Home", href: "/#home" },
-              { label: "Contact", href: "/#get-started" },
+              { label: "Contact", href: "/contact" },
               { label: "Reviews", href: "/#reviews" },
             ]},
             { heading: "Legal", links: [
