@@ -512,7 +512,7 @@ function CampaignDashboard() {
                     <div className="flex-1 h-[6px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
                       <div className="h-full rounded-full" style={{ width: visible ? `${loc.pct}%` : "0%", background: `rgba(74,108,247,${1 - i * 0.1})`, transition: `width 0.8s ease ${i * 0.08}s` }} />
                     </div>
-                    <span className="font-mono flex-shrink-0 text-right" style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)" }}>{loc.count}</span>
+                    <span className="font-mono flex-shrink-0 text-right" style={{ fontSize: "10px", color: "#ffffff" }}>{loc.count}</span>
                     <span className="font-mono font-bold flex-shrink-0 w-[36px] text-right" style={{ fontSize: "11px", color: "#4a6cf7" }}>{loc.pct}%</span>
                   </div>
                 ))}
