@@ -210,7 +210,7 @@ const translations: Record<Lang, Record<string, string>> = {
     getStarted: "ابدأ الآن",
     startWith: "ابدأ بجلسة",
     aBriefing: "تعريفية",
-    seeWhatReturns: "وشاهد النتائج.",
+    seeWhatReturns: "وشاهد النتائج",
     bookBriefingDescription: "احجز جلسة تعريفية. سنوضح لك ما سننشره، ومن سنصل إليه، وما إذا كنت مؤهلاً.",
 
     // Footer

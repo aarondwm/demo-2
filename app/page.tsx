@@ -310,60 +310,35 @@ function HeroVideoBackground() {
 }
 
 /* ── Testimonials ────────────────────────────────────────────────────────── */
-const testimonials: Testimonial[] = [
-  {
-    text: "I genuinely didn't believe it at first. They sent us a link to our article live on a real news site. Not a sponsored post, not a banner. An actual editorial piece. I forwarded it to the whole company.",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-    name: "CEO",
-    role: "Kuwait Real Estate Development",
-  },
-  {
-    text: "We've been trying to get press coverage for two years. DWM got us into three publications in one week. The calls we got after that were from people we'd been trying to reach for months.",
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
-    name: "CFO",
-    role: "GCC Telecommunications",
-  },
-  {
-    text: "The reporting is what sold us. We don't just know our content ran. We know exactly who read it, what they do, and where they work. That's what we needed to make the right decisions.",
-    image: "https://randomuser.me/api/portraits/men/58.jpg",
-    name: "Head of Marketing",
-    role: "Kuwait Investment Management",
-  },
-  {
-    text: "We put the audience report in front of our board. It changed the conversation about where we actually stand in the market. We hadn't had that clarity before.",
-    image: "https://randomuser.me/api/portraits/women/61.jpg",
-    name: "Managing Director",
-    role: "Regional Energy & Infrastructure",
-  },
-  {
-    text: "My PR agency had been pitching journalists for months with nothing. DWM confirmed our placement before we even signed. That kind of certainty is rare.",
-    image: "https://randomuser.me/api/portraits/men/71.jpg",
-    name: "Founder",
-    role: "Gulf Technology Startup",
-  },
-  {
-    text: "Our story ran in four outlets simultaneously. We saw website traffic spike that same afternoon. People were reaching out saying they'd read about us. It felt like we'd actually arrived.",
-    image: "https://randomuser.me/api/portraits/women/29.jpg",
-    name: "Head of Communications",
-    role: "Saudi Arabia Financial Services",
-  },
-  {
-    text: "Other campaigns gave us impression numbers. DWM gave us names. After the first campaign we knew exactly which firms had read our content. That changes how you follow up completely.",
-    image: "https://randomuser.me/api/portraits/men/45.jpg",
-    name: "Business Development Director",
-    role: "UAE Infrastructure Group",
-  },
-  {
-    text: "I was sceptical. I'd heard 'guaranteed media' before and it always meant something small or obscure. These were real publications. People in our industry actually read them.",
-    image: "https://randomuser.me/api/portraits/women/53.jpg",
-    name: "Chief Marketing Officer",
-    role: "Bahrain Logistics & Trade",
-  },
+const testimonials_en: Testimonial[] = [
+  { text: "I genuinely didn't believe it at first. They sent us a link to our article live on a real news site. Not a sponsored post, not a banner. An actual editorial piece. I forwarded it to the whole company.", image: "https://randomuser.me/api/portraits/men/32.jpg", name: "CEO", role: "Kuwait Real Estate Development" },
+  { text: "We've been trying to get press coverage for two years. DWM got us into three publications in one week. The calls we got after that were from people we'd been trying to reach for months.", image: "https://randomuser.me/api/portraits/women/44.jpg", name: "CFO", role: "GCC Telecommunications" },
+  { text: "The reporting is what sold us. We don't just know our content ran. We know exactly who read it, what they do, and where they work. That's what we needed to make the right decisions.", image: "https://randomuser.me/api/portraits/men/58.jpg", name: "Head of Marketing", role: "Kuwait Investment Management" },
+  { text: "We put the audience report in front of our board. It changed the conversation about where we actually stand in the market. We hadn't had that clarity before.", image: "https://randomuser.me/api/portraits/women/61.jpg", name: "Managing Director", role: "Regional Energy & Infrastructure" },
+  { text: "My PR agency had been pitching journalists for months with nothing. DWM confirmed our placement before we even signed. That kind of certainty is rare.", image: "https://randomuser.me/api/portraits/men/71.jpg", name: "Founder", role: "Gulf Technology Startup" },
+  { text: "Our story ran in four outlets simultaneously. We saw website traffic spike that same afternoon. People were reaching out saying they'd read about us. It felt like we'd actually arrived.", image: "https://randomuser.me/api/portraits/women/29.jpg", name: "Head of Communications", role: "Saudi Arabia Financial Services" },
+  { text: "Other campaigns gave us impression numbers. DWM gave us names. After the first campaign we knew exactly which firms had read our content. That changes how you follow up completely.", image: "https://randomuser.me/api/portraits/men/45.jpg", name: "Business Development Director", role: "UAE Infrastructure Group" },
+  { text: "I was sceptical. I'd heard 'guaranteed media' before and it always meant something small or obscure. These were real publications. People in our industry actually read them.", image: "https://randomuser.me/api/portraits/women/53.jpg", name: "Chief Marketing Officer", role: "Bahrain Logistics & Trade" },
+];
+const testimonials_ar: Testimonial[] = [
+  { text: "بصراحة ما صدقت بالبداية. أرسلوا لنا رابط مقالنا منشور على موقع إخباري حقيقي. مو إعلان ممول ولا بانر. مقال تحريري فعلي. حولته لكل الشركة.", image: "https://randomuser.me/api/portraits/men/32.jpg", name: "رئيس تنفيذي", role: "تطوير عقاري — الكويت" },
+  { text: "كنا نحاول نحصل تغطية صحفية من سنتين. ديوانية ميديا وصلونا لثلاث منشورات بأسبوع واحد. الاتصالات اللي جتنا بعدها كانت من ناس نحاول نوصلهم من شهور.", image: "https://randomuser.me/api/portraits/women/44.jpg", name: "مدير مالي", role: "اتصالات — الخليج" },
+  { text: "التقارير هي اللي أقنعتنا. مو بس نعرف إن المحتوى انتشر. نعرف بالضبط من قرأه، شنو يسوي، ووين يشتغل. هذا اللي كنا نحتاجه نتخذ القرارات الصح.", image: "https://randomuser.me/api/portraits/men/58.jpg", name: "مدير تسويق", role: "إدارة استثمارات — الكويت" },
+  { text: "حطينا تقرير الجمهور قدام مجلس الإدارة. غيّر المحادثة كاملة عن وين موقعنا الفعلي بالسوق. ما كانت عندنا هالوضوح من قبل.", image: "https://randomuser.me/api/portraits/women/61.jpg", name: "مدير عام", role: "طاقة وبنية تحتية — المنطقة" },
+  { text: "وكالة العلاقات العامة كانت تراسل صحفيين من شهور بدون نتيجة. ديوانية ميديا أكدوا النشر قبل لا حتى نوقع. هالنوع من اليقين نادر.", image: "https://randomuser.me/api/portraits/men/71.jpg", name: "مؤسس", role: "شركة تكنولوجيا ناشئة — الخليج" },
+  { text: "قصتنا انتشرت بأربع منصات بنفس الوقت. شفنا زيارات الموقع ترتفع نفس اليوم. ناس تتواصل معنا يقولون قرأوا عننا. حسينا إننا فعلاً وصلنا.", image: "https://randomuser.me/api/portraits/women/29.jpg", name: "مدير اتصالات", role: "خدمات مالية — السعودية" },
+  { text: "حملات ثانية عطتنا أرقام انطباعات. ديوانية ميديا عطتنا أسماء. بعد أول حملة عرفنا بالضبط أي شركات قرأت محتوانا. هالشي يغير طريقة المتابعة كلياً.", image: "https://randomuser.me/api/portraits/men/45.jpg", name: "مدير تطوير أعمال", role: "مجموعة بنية تحتية — الإمارات" },
+  { text: "كنت متشكك. سمعت 'إعلام مضمون' قبل وكل مرة يطلع شي صغير أو مجهول. هذي كانت منشورات حقيقية. ناس بمجالنا فعلاً يقرأونها.", image: "https://randomuser.me/api/portraits/women/53.jpg", name: "مدير تسويق أول", role: "خدمات لوجستية — البحرين" },
 ];
 
-const firstColumn  = [testimonials[0], testimonials[1], testimonials[4], testimonials[5]];
-const secondColumn = [testimonials[2], testimonials[3], testimonials[6]];
-const thirdColumn  = [testimonials[5], testimonials[7], testimonials[0], testimonials[3]];
+function getTestimonialColumns(lang: string) {
+  const ts = lang === "ar" ? testimonials_ar : testimonials_en;
+  return {
+    first:  [ts[0], ts[1], ts[4], ts[5]],
+    second: [ts[2], ts[3], ts[6]],
+    third:  [ts[5], ts[7], ts[0], ts[3]],
+  };
+}
 
 /* ── Dashboard card (inside ContainerScroll) ─────────────────────────────── */
 function ScrambleNumber({ value, trigger }: { value: string; trigger: number }) {
@@ -427,7 +402,13 @@ const DASH_DEMOGRAPHICS_AR = {
 };
 const DASH_TABS_KEYS = ["overview", "audienceBreakdown"];
 
+function toArabicNumerals(n: number | string): string {
+  const digits = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];
+  return String(n).replace(/[0-9]/g, (d) => digits[parseInt(d)]);
+}
+
 function AnimatedViewCount({ value, duration = 1500 }: { value: number; duration?: number }) {
+  const { lang } = useLanguage();
   const [display, setDisplay] = useState(0);
   const hasRun = useRef(false);
   useEffect(() => {
@@ -441,7 +422,8 @@ function AnimatedViewCount({ value, duration = 1500 }: { value: number; duration
     };
     requestAnimationFrame(tick);
   }, [value, duration]);
-  return <>{display.toLocaleString()}</>;
+  const formatted = display.toLocaleString();
+  return <>{lang === "ar" ? toArabicNumerals(formatted) : formatted}</>;
 }
 
 function CampaignDashboard() {
@@ -544,7 +526,7 @@ function CampaignDashboard() {
                       <div className="h-full rounded-full" style={{ width: visible ? `${loc.pct}%` : "0%", background: `rgba(74,108,247,${1 - i * 0.1})`, transition: `width 0.8s ease ${i * 0.08}s` }} />
                     </div>
                     <span className="font-mono flex-shrink-0 text-right" style={{ fontSize: "13px", color: "#ffffff" }}>{loc.count}</span>
-                    <span className="font-mono font-bold flex-shrink-0 w-[36px] text-right keep-blue" style={{ fontSize: "13px", color: "#4a6cf7" }}>{loc.pct}%</span>
+                    <span className="font-mono font-bold flex-shrink-0 w-[36px] text-right keep-blue" style={{ fontSize: "13px", color: "#4a6cf7" }}>{lang === "ar" ? "٪" + toArabicNumerals(loc.pct) : loc.pct + "%"}</span>
                   </div>
                 ))}
               </div>
@@ -559,8 +541,8 @@ function CampaignDashboard() {
                   <div className="h-full" style={{ width: visible ? "26%" : "0%", background: "#7a9cff", transition: "width 0.8s ease 0.3s" }} />
                 </div>
                 <div className="flex justify-between mt-2">
-                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />74% {t("male", lang)}</span>
-                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />26% {t("female", lang)}</span>
+                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />{lang === "ar" ? "٪٧٤ " + t("male", lang) : "74% " + t("male", lang)}</span>
+                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />{lang === "ar" ? "٪٢٦ " + t("female", lang) : "26% " + t("female", lang)}</span>
                 </div>
               </div>
               <div>
@@ -572,7 +554,7 @@ function CampaignDashboard() {
                       <div className="flex-1 h-[5px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
                         <div className="h-full rounded-full" style={{ width: visible ? `${a.pct}%` : "0%", background: `rgba(74,108,247,${0.9 - i * 0.15})`, transition: `width 0.8s ease ${0.3 + i * 0.08}s` }} />
                       </div>
-                      <span className="font-mono font-bold flex-shrink-0 w-[28px] text-right" style={{ fontSize: "11px", color: "#4a6cf7" }}>{a.pct}%</span>
+                      <span className="font-mono font-bold flex-shrink-0 w-[28px] text-right" style={{ fontSize: "11px", color: "#4a6cf7" }}>{lang === "ar" ? "٪" + toArabicNumerals(a.pct) : a.pct + "%"}</span>
                     </div>
                   ))}
                 </div>
@@ -597,7 +579,7 @@ function CampaignDashboard() {
                 >
                   <span className="font-mono flex-shrink-0 w-[18px]" style={{ fontSize: "9px", color: openCompany === i ? "#4a6cf7" : "rgba(74,108,247,0.4)", letterSpacing: "0.1em" }}>{c.rank}</span>
                   <span className="font-mono flex-1 truncate" style={{ fontSize: "12px", color: "rgba(255,255,255,0.85)" }}>{c.name}</span>
-                  <span className="font-mono flex-shrink-0" style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)" }}>{c.views.toLocaleString()} views</span>
+                  <span className="font-mono flex-shrink-0" style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)" }}>{lang === "ar" ? toArabicNumerals(c.views.toLocaleString()) + " مشاهدة" : c.views.toLocaleString() + " views"}</span>
                   <span className="font-mono font-bold flex-shrink-0 w-[50px] md:w-[60px] text-right" style={{ fontSize: "11px", color: "#4a6cf7" }}>{c.avgRead}</span>
                   <span style={{ fontSize: "9px", color: "rgba(255,255,255,0.25)", transform: openCompany === i ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s ease", flexShrink: 0 }}>▼</span>
                 </button>
@@ -606,7 +588,7 @@ function CampaignDashboard() {
                     {c.roles.map((r) => (
                       <div key={r.role} className="flex items-center justify-between px-2 py-1.5 rounded" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.04)" }}>
                         <span className="font-mono" style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)" }}>{r.role}</span>
-                        <span className="font-mono font-bold" style={{ fontSize: "11px", color: "#4a6cf7" }}>{r.count}</span>
+                        <span className="font-mono font-bold" style={{ fontSize: "11px", color: "#4a6cf7" }}>{lang === "ar" ? toArabicNumerals(r.count) : r.count}</span>
                       </div>
                     ))}
                   </div>
@@ -1368,9 +1350,9 @@ export default function Home() {
               transition: "opacity 0.5s ease",
             }}
           >
-            <TestimonialsColumn testimonials={firstColumn}  duration={14} />
-            <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={17} />
-            <TestimonialsColumn testimonials={thirdColumn}  className="hidden lg:block" duration={15} />
+            <TestimonialsColumn testimonials={getTestimonialColumns(lang).first}  duration={14} />
+            <TestimonialsColumn testimonials={getTestimonialColumns(lang).second} className="hidden md:block" duration={17} />
+            <TestimonialsColumn testimonials={getTestimonialColumns(lang).third}  className="hidden lg:block" duration={15} />
           </div>
           </div>
         </div>
