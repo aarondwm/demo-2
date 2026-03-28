@@ -1165,10 +1165,10 @@ export default function Home() {
 
         <div className="max-w-6xl mx-auto px-6 md:px-10">
 
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-4 lg:gap-16 items-start">
             {/* Left */}
-            <div className="flex flex-col gap-8 text-center lg:text-left items-center lg:items-start">
-              <div className="flex items-center mb-5">
+            <div className="flex flex-col gap-4 lg:gap-8 text-center lg:text-left items-center lg:items-start">
+              <div className="flex items-center mb-2 lg:mb-5">
                 <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text="Secured Media Placement" delay={0} style={{ display: "inline" }} onDone={sec3Done} /></span>
               </div>
               <h2
