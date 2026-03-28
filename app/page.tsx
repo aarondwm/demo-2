@@ -413,6 +413,18 @@ const DASH_DEMOGRAPHICS = {
   location: [{ name: "Kuwait City", pct: 32, count: "100,108" }, { name: "Hawally", pct: 22, count: "68,825" }, { name: "Salmiya", pct: 18, count: "56,311" }, { name: "Jahra", pct: 12, count: "37,541" }, { name: "Farwaniya", pct: 10, count: "31,284" }, { name: "Ahmadi", pct: 6, count: "18,771" }],
   age: [{ range: "25-34", pct: 34 }, { range: "35-44", pct: 36 }, { range: "45-54", pct: 19 }, { range: "55+", pct: 11 }],
 };
+const DASH_AUDIENCE_AR = [
+  { rank: "٠١", name: "بيت التمويل الكويتي", views: 412, avgRead: "٥د ١٨ث", roles: [{ role: "مدير مالي", count: 1 }, { role: "نائب رئيس", count: 3 }, { role: "مدير علاقات", count: 8 }, { role: "محلل ائتمان", count: 5 }] },
+  { rank: "٠٢", name: "بنك الكويت الوطني", views: 367, avgRead: "٤د ٥٥ث", roles: [{ role: "مدير استثمار", count: 1 }, { role: "مدير", count: 3 }, { role: "مدير محافظ", count: 5 }, { role: "محلل استثمار", count: 7 }] },
+  { rank: "٠٣", name: "شركة الاستثمارات الوطنية", views: 284, avgRead: "٧د ٤٢ث", roles: [{ role: "مدير عام", count: 2 }, { role: "مدير محافظ", count: 4 }, { role: "مساعد", count: 9 }, { role: "محلل أبحاث", count: 6 }] },
+  { rank: "٠٤", name: "مجموعة الشايع", views: 203, avgRead: "٨د ٠٤ث", roles: [{ role: "مدير مالي", count: 1 }, { role: "مدير استراتيجية", count: 1 }, { role: "مدير تجاري", count: 4 }, { role: "تطوير أعمال", count: 3 }] },
+  { rank: "٠٥", name: "بورصة الكويت", views: 158, avgRead: "٦د ٣١ث", roles: [{ role: "مدير عمليات", count: 1 }, { role: "مدير إدراج", count: 1 }, { role: "مدير امتثال", count: 3 }, { role: "محلل سوق", count: 4 }] },
+];
+const DASH_DEMOGRAPHICS_AR = {
+  gender: [{ label: "ذكر", pct: 74 }, { label: "أنثى", pct: 26 }],
+  location: [{ name: "مدينة الكويت", pct: 32, count: "١٠٠,١٠٨" }, { name: "حولي", pct: 22, count: "٦٨,٨٢٥" }, { name: "السالمية", pct: 18, count: "٥٦,٣١١" }, { name: "الجهراء", pct: 12, count: "٣٧,٥٤١" }, { name: "الفروانية", pct: 10, count: "٣١,٢٨٤" }, { name: "الأحمدي", pct: 6, count: "١٨,٧٧١" }],
+  age: [{ range: "٢٥-٣٤", pct: 34 }, { range: "٣٥-٤٤", pct: 36 }, { range: "٤٥-٥٤", pct: 19 }, { range: "+٥٥", pct: 11 }],
+};
 const DASH_TABS_KEYS = ["overview", "audienceBreakdown"];
 
 function AnimatedViewCount({ value, duration = 1500 }: { value: number; duration?: number }) {
@@ -437,6 +449,8 @@ function CampaignDashboard() {
   const [tab, setTab] = useState(0);
   const [visible, setVisible] = useState(false);
   const [openCompany, setOpenCompany] = useState<number | null>(null);
+  const dashAudience = lang === "ar" ? DASH_AUDIENCE_AR : DASH_AUDIENCE;
+  const dashDemographics = lang === "ar" ? DASH_DEMOGRAPHICS_AR : DASH_DEMOGRAPHICS;
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -450,7 +464,7 @@ function CampaignDashboard() {
   }, []);
 
   return (
-    <div ref={ref} className="border border-white/[0.08] bg-black rounded-lg overflow-hidden dash-container mobile-white-text">
+    <div ref={ref} className="border border-white/[0.08] bg-black rounded-lg overflow-hidden dash-container mobile-white-text" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
       {/* Header */}
       <div className="flex items-center justify-between px-4 md:px-6 py-3 border-b border-white/[0.06]">
         <div className="flex items-center gap-2.5">
@@ -523,7 +537,7 @@ function CampaignDashboard() {
             <div>
               <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30 mb-3">{t("location", lang)}</div>
               <div className="flex flex-col gap-2.5">
-                {DASH_DEMOGRAPHICS.location.map((loc, i) => (
+                {dashDemographics.location.map((loc, i) => (
                   <div key={loc.name} className="flex items-center gap-2 md:gap-3">
                     <span className="font-mono w-[90px] md:w-[120px] flex-shrink-0 truncate" style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)" }}>{loc.name}</span>
                     <div className="flex-1 h-[6px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
@@ -552,7 +566,7 @@ function CampaignDashboard() {
               <div>
                 <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30 mb-3">{t("ageRange", lang)}</div>
                 <div className="flex flex-col gap-2">
-                  {DASH_DEMOGRAPHICS.age.map((a, i) => (
+                  {dashDemographics.age.map((a, i) => (
                     <div key={a.range} className="flex items-center gap-2">
                       <span className="font-mono flex-shrink-0 w-[36px]" style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)" }}>{a.range}</span>
                       <div className="flex-1 h-[5px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
@@ -574,7 +588,7 @@ function CampaignDashboard() {
               <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30">{t("topCompanies", lang)}</span>
               <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white/20">{t("avgReadTime", lang)}</span>
             </div>
-            {DASH_AUDIENCE.map((c, i) => (
+            {dashAudience.map((c, i) => (
               <div key={c.rank}>
                 <button
                   onClick={() => setOpenCompany(openCompany === i ? null : i)}
@@ -1305,9 +1319,9 @@ export default function Home() {
       {/* ── Sample Insights ────────────────────────────────────────────────── */}
       <section id="sample-insights" className="sys-section">
         <div className="max-w-[1200px] mx-auto px-6 md:px-12">
-          <div className="flex items-center justify-center lg:justify-start mb-5">
+          <div className="flex items-center justify-center lg:justify-start mb-5" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
             <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}>
-              <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
+              <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginInlineEnd: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
               {t("sampleInsights", lang)}
             </span>
           </div>
@@ -1319,7 +1333,7 @@ export default function Home() {
               <ScrambleOnView text={t("whatWeKnow", lang)} delay={0} style={{ display: "block", color: "#ffffff" }} />
               <ScrambleOnView text={t("theyDont", lang)} delay={200} style={{ display: "block", color: "#4a6cf7" }} />
             </h2>
-            <p className="sys-body md:text-right md:max-w-xs mx-auto lg:mx-0" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "rgba(255,255,255,0.85)" }}>
+            <p className="sys-body md:text-right md:max-w-xs mx-auto lg:mx-0" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.85)", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>
               {t("sampleInsightsDescription", lang)}
             </p>
           </div>
