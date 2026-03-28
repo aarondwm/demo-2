@@ -228,12 +228,12 @@ export function Navbar() {
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center flex-1 justify-evenly">
+        <nav className="hidden lg:flex items-center flex-1 justify-end gap-8">
           {NAV_GROUPS.map((group) => (
             <a
               key={group.label}
               href={group.href}
-              className="py-5 font-mono font-bold text-[15px] tracking-[0.18em] uppercase text-white hover:text-white/70 transition-colors duration-150 whitespace-nowrap"
+              className="py-5 font-mono font-normal text-[12px] tracking-[0.22em] uppercase text-white/70 hover:text-white transition-colors duration-150 whitespace-nowrap"
             >
               {group.label}
             </a>
