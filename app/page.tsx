@@ -1375,8 +1375,8 @@ export default function Home() {
             <span className="absolute bottom-2 right-2 md:bottom-3 md:right-3 w-3 h-3 md:w-5 md:h-5 border-b border-r border-[#4a6cf7]" />
 
             <div className="relative z-10">
-              <div className="flex items-center mb-5">
-                <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text={t("getStarted", lang)} delay={0} style={{ display: "inline" }} onDone={secCtaDone} /></span>
+              <div className="flex items-center mb-5" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
+                <span className="sys-label" style={{ fontSize: "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginInlineEnd: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text={t("getStarted", lang)} delay={0} style={{ display: "inline" }} onDone={secCtaDone} /></span>
               </div>
               <h2
                 className="font-bold uppercase text-white mb-5 text-center"
