@@ -490,12 +490,12 @@ function CampaignDashboard() {
           </div>
           <a
             href={lang === "ar" ? "/dwm-article-full-ar.html" : "/dwm-article-full.html"}
-            className={`group inline-flex items-center h-11 ${lang === "ar" ? "text-[18px]" : "text-[13px]"} tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden mt-4`}
+            className={`group inline-flex items-center h-14 ${lang === "ar" ? "text-[17px]" : "text-[13px]"} tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden mt-4`}
             style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", borderRadius: "12px", transform: "translateZ(0)" }}
           >
             <span className="absolute inset-0 bg-white" />
             <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>
-              <span className={`text-white ${lang === "ar" ? "text-[18px]" : "text-[13px]"} tracking-[0.12em] uppercase font-bold`}>{t("previewArticle", lang)}</span>
+              <span className={`text-white ${lang === "ar" ? "text-[17px]" : "text-[13px]"} tracking-[0.12em] uppercase font-bold`}>{t("previewArticle", lang)}</span>
             </span>
             <span className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0 z-20 keep-black" style={{ color: "#000000" }}>
               {t("previewArticle", lang)}
@@ -1342,8 +1342,8 @@ export default function Home() {
               className="font-bold uppercase text-white"
               style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
-              <ScrambleOnSignal text={t("inTheir", lang)} signal={sec5Visible} style={{ color: "#ffffff" }} />
-              <ScrambleOnSignal text={t("ownWords", lang) || " "} signal={sec5Visible} onDone={sec5BodyDone} style={{ color: "#ffffff", display: t("ownWords", lang) ? "block" : "none" }} />
+              <ScrambleOnSignal text={t("inTheir", lang)} signal={sec5Visible} onDone={lang === "ar" ? sec5BodyDone : undefined} style={{ color: "#ffffff" }} />
+              {lang !== "ar" && <ScrambleOnSignal text={t("ownWords", lang)} signal={sec5Visible} onDone={sec5BodyDone} style={{ color: "#ffffff" }} />}
             </h2>
           </div>
 
