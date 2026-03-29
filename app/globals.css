@@ -381,8 +381,12 @@
   .mobile-white-text span { color: #ffffff !important; }
   .mobile-white-text .keep-blue { color: #4a6cf7 !important; }
   .mobile-white-text .keep-black { color: #000000 !important; }
-  /* Arabic dashboard location text smaller on mobile */
-  [dir="rtl"] .dash-container .loc-text { font-size: 11px !important; }
+  /* Arabic mobile reductions -2px across the board */
+  [dir="rtl"] .cta-desc { font-size: 16px !important; }
+  [dir="rtl"] .sys-label { font-size: 16px !important; }
+  [dir="rtl"] .sys-body { font-size: 15px !important; }
+  [dir="rtl"] h1 { font-size: clamp(38px,10vw,100px) !important; }
+  [dir="rtl"] h2 { font-size: clamp(38px,5vw,72px) !important; }
 }
 
 /* ── RTL (Arabic) overrides ───────────────────────────────────────────── */
