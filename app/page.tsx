@@ -490,12 +490,12 @@ function CampaignDashboard() {
           </div>
           <a
             href={lang === "ar" ? "/dwm-article-full-ar.html" : "/dwm-article-full.html"}
-            className="group inline-flex items-center h-11 font-mono text-[12px] tracking-[0.15em] uppercase text-black font-bold relative overflow-hidden mt-4"
-            style={{ borderRadius: "8px", transform: "translateZ(0)" }}
+            className={`group inline-flex items-center h-11 ${lang === "ar" ? "text-[18px]" : "text-[13px]"} tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden mt-4`}
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", borderRadius: "12px", transform: "translateZ(0)" }}
           >
             <span className="absolute inset-0 bg-white" />
             <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>
-              <span className="text-white text-[12px] tracking-[0.15em] uppercase font-bold">{t("previewArticle", lang)}</span>
+              <span className={`text-white ${lang === "ar" ? "text-[18px]" : "text-[13px]"} tracking-[0.12em] uppercase font-bold`}>{t("previewArticle", lang)}</span>
             </span>
             <span className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0 z-20 keep-black" style={{ color: "#000000" }}>
               {t("previewArticle", lang)}
@@ -573,7 +573,7 @@ function CampaignDashboard() {
           <div className="flex flex-col gap-0">
             <div className="flex items-center justify-between mb-3" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
               <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30">{t("topCompanies", lang)}</span>
-              <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white/20">{t("avgReadTime", lang)}</span>
+              <span className="font-mono text-[8px] tracking-[0.15em] uppercase" style={{ color: "#4a6cf7" }}>{t("avgReadTime", lang)}</span>
             </div>
             {dashAudience.map((c, i) => (
               <div key={c.rank}>
@@ -1343,7 +1343,7 @@ export default function Home() {
               style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
               <ScrambleOnSignal text={t("inTheir", lang)} signal={sec5Visible} style={{ color: "#ffffff" }} />
-              <ScrambleOnSignal text={t("ownWords", lang)} signal={sec5Visible} onDone={sec5BodyDone} style={{ color: "#ffffff" }} />
+              <ScrambleOnSignal text={t("ownWords", lang) || " "} signal={sec5Visible} onDone={sec5BodyDone} style={{ color: "#ffffff", display: t("ownWords", lang) ? "block" : "none" }} />
             </h2>
           </div>
 
@@ -1358,9 +1358,9 @@ export default function Home() {
               transition: "opacity 0.5s ease",
             }}
           >
-            <TestimonialsColumn testimonials={getTestimonialColumns(lang).first}  duration={14} />
-            <TestimonialsColumn testimonials={getTestimonialColumns(lang).second} className="hidden md:block" duration={17} />
-            <TestimonialsColumn testimonials={getTestimonialColumns(lang).third}  className="hidden lg:block" duration={15} />
+            <TestimonialsColumn testimonials={getTestimonialColumns(lang).first}  duration={28} />
+            <TestimonialsColumn testimonials={getTestimonialColumns(lang).second} className="hidden md:block" duration={34} />
+            <TestimonialsColumn testimonials={getTestimonialColumns(lang).third}  className="hidden lg:block" duration={30} />
           </div>
           </div>
         </div>

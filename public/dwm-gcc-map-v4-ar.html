@@ -451,6 +451,7 @@ setInterval(updateClock, 80);
 updateClock();
 
 // ===== ANIMATED COUNTERS =====
+function toAr(n){var d=["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];return String(n).replace(/[0-9]/g,function(c){return d[parseInt(c)]})}
 function animateCounter(el, target, duration){
   const start = 0;
   const startTime = performance.now();
@@ -460,7 +461,7 @@ function animateCounter(el, target, duration){
     const progress = Math.min(elapsed / duration, 1);
     const eased = 1 - Math.pow(1 - progress, 3);
     const current = Math.floor(numTarget * eased);
-    el.textContent = current.toLocaleString();
+    el.textContent = toAr(current.toLocaleString());
     if(progress < 1) requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
@@ -713,7 +714,7 @@ function renderCard(country) {
     `<div class="hc-ind-row">
       <span class="hc-ind-name">${name}</span>
       <div class="hc-ind-bar-bg"><div class="hc-ind-bar" data-width="${pct}"></div></div>
-      <span class="hc-ind-count">${count}</span>
+      <span class="hc-ind-count">${toAr(count)}</span>
     </div>`
   ).join('');
 
@@ -733,7 +734,7 @@ function renderCard(country) {
       <div class="hc-stat-block">
         <div class="hc-stat-label">إجمالي الجمهور</div>
         <div class="hc-stat-value" id="hcCounter">0</div>
-        <div class="hc-stat-sub">${d.popPct}٪ من السكان</div>
+        <div class="hc-stat-sub">${toAr(d.popPct)}٪ من السكان</div>
       </div>
     </div>
     <div class="hc-section" style="direction:rtl">
