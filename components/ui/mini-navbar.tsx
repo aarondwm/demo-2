@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { createPortal } from "react-dom";
+import { usePathname } from "next/navigation";
 import {
   FileText, Users, Globe, BarChart2,
   Target, TrendingUp, Building2, Layers,
@@ -193,7 +194,19 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const scrolled = useScroll(10);
   const { lang } = useLanguage();
+  const pathname = usePathname();
   const NAV_GROUPS = lang === "ar" ? NAV_GROUPS_AR : NAV_GROUPS_EN;
+
+  // Compute language switch URL — stay on same page
+  const getLangSwitchHref = () => {
+    if (lang === "en") {
+      // Switch to Arabic: prepend /ar
+      return "/ar" + pathname;
+    } else {
+      // Switch to English: remove /ar prefix
+      return pathname.replace(/^\/ar/, "") || "/";
+    }
+  };
 
   React.useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -268,7 +281,7 @@ export function Navbar() {
           </a>
           {/* Language switch — same style as CTA */}
           <a
-            href={lang === "en" ? "/ar" : "/"}
+            href={getLangSwitchHref()}
             className={`group inline-flex items-center h-9 font-mono ${lang === "ar" ? "text-[15px]" : "text-[13px]"} tracking-[0.14em] uppercase font-bold relative overflow-hidden`}
             style={{ borderRadius: "12px", transform: "translateZ(0)", textDecoration: "none" }}
           >
