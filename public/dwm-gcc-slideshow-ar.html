@@ -148,14 +148,14 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
   border:1px solid var(--border);
   max-width:50%;
 }
-.slide-total-label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--white-30)}
+.slide-total-label{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--white-30)}
 .slide-total-value{
   font-family:var(--mono);font-size:18px;font-weight:700;
   color:var(--accent);margin-top:4px;
   text-shadow:0 0 20px rgba(74,108,247,0.3);
 }
 .slide-total-value.redacted{font-size:11px;letter-spacing:0.14em;text-shadow:none}
-.slide-total-sub{font-size:8px;color:var(--white-30);margin-top:2px;letter-spacing:0.06em}
+.slide-total-sub{font-size:10px;color:var(--white-30);margin-top:2px;letter-spacing:0.06em}
 
 /* Per-country map positioning */
 [data-index="0"] .slide-map{height:100px;top:50px;right:10px}   /* Kuwait — lowered */
@@ -168,17 +168,17 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 /* Demographics */
 .slide-section{margin-top:8px}
 .slide-section-title{
-  font-size:9px;letter-spacing:0.14em;text-transform:uppercase;
+  font-size:11px;letter-spacing:0.14em;text-transform:uppercase;
   color:var(--accent-2);margin-bottom:10px;
   display:flex;align-items:center;gap:6px;
 }
-.slide-section-title::before{content:'▸';font-size:7px}
+.slide-section-title::before{content:'▸';font-size:9px}
 
 /* Split bars */
 .split-row{display:flex;gap:2px;height:8px;border-radius:4px;overflow:hidden;margin-top:6px}
 .split-bar{transition:width 0.8s cubic-bezier(0.16,1,0.3,1)}
 .split-labels{display:flex;justify-content:space-between;margin-top:6px}
-.split-label{font-size:10px;color:var(--white-50);display:flex;align-items:center;gap:4px}
+.split-label{font-size:12px;color:var(--white-50);display:flex;align-items:center;gap:4px}
 .split-dot{width:6px;height:6px;border-radius:50%}
 
 /* Data rows */
@@ -187,8 +187,8 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
   padding:5px 0;border-bottom:1px solid rgba(74,108,247,0.04);
 }
 .data-row:last-child{border-bottom:none}
-.data-label{font-size:10px;color:var(--white-50);flex:1}
-.data-val{font-size:11px;font-weight:600;color:var(--accent);min-width:50px;text-align:right;font-variant-numeric:tabular-nums}
+.data-label{font-size:12px;color:var(--white-50);flex:1}
+.data-val{font-size:13px;font-weight:600;color:var(--accent);min-width:50px;text-align:right;font-variant-numeric:tabular-nums}
 .data-val.redacted{color:var(--white-15);background:rgba(255,59,59,0.04);padding:0 4px}
 .data-bar-bg{width:40px;height:3px;background:var(--white-15);border-radius:2px;overflow:hidden;flex-shrink:0}
 .data-bar-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 0.8s cubic-bezier(0.16,1,0.3,1)}
@@ -236,13 +236,13 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 
 @media(max-width:400px){
   .slide{padding:8px 10px}
-  .slide-header{font-size:18px}
-  .slide-sub{font-size:8px}
-  .slide-total-value{font-size:22px}
-  .slide-total-label,.slide-total-sub{font-size:7px}
-  .section-title{font-size:7px}
-  .data-label{font-size:8px}
-  .data-val{font-size:8px}
+  .slide-header{font-size:20px}
+  .slide-sub{font-size:10px}
+  .slide-total-value{font-size:24px}
+  .slide-total-label,.slide-total-sub{font-size:9px}
+  .section-title{font-size:9px}
+  .data-label{font-size:10px}
+  .data-val{font-size:10px}
   .nav-arrow{width:40px;height:40px;font-size:16px}
   .bottom-bar{padding:6px 12px;font-size:7px}
   .slide-map{height:100px;right:10px}
@@ -296,14 +296,14 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
       <div class="slide-section">
         <div class="slide-section-title">المناصب المهنية</div>
         <div class="data-row"><span class="data-label">رئيس تنفيذي</span><span class="data-val">18,200</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
-        <div class="data-row"><span class="data-label">CFO</span><span class="data-val">12,400</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="68"></div></div></div>
-        <div class="data-row"><span class="data-label">Director</span><span class="data-val">48,600</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="92"></div></div></div>
+        <div class="data-row"><span class="data-label">مدير مالي</span><span class="data-val">12,400</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="68"></div></div></div>
+        <div class="data-row"><span class="data-label">مدير</span><span class="data-val">48,600</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="92"></div></div></div>
       </div>
 
       <div class="slide-section">
         <div class="slide-section-title">أبرز الشركات</div>
         <div class="data-row"><span class="data-label">Kuwait Finance House</span><span class="data-val">4,210</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
-        <div class="data-row"><span class="data-label">Zain Group</span><span class="data-val">3,840</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="91"></div></div></div>
+        <div class="data-row"><span class="data-label">مجموعة زين</span><span class="data-val">3,840</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="91"></div></div></div>
         <div class="data-row"><span class="data-label">KNPC</span><span class="data-val">2,190</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="52"></div></div></div>
         <div class="data-row"><span class="data-label">Agility Logistics</span><span class="data-val">1,870</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="44"></div></div></div>
       </div>
@@ -353,16 +353,16 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
       <div class="slide-section">
         <div class="slide-section-title">المناصب المهنية</div>
         <div class="data-row"><span class="data-label">رئيس تنفيذي</span><span class="data-val">42,100</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
-        <div class="data-row"><span class="data-label">CFO</span><span class="data-val">28,400</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="67"></div></div></div>
-        <div class="data-row"><span class="data-label">Director</span><span class="data-val">124,000</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="95"></div></div></div>
+        <div class="data-row"><span class="data-label">مدير مالي</span><span class="data-val">28,400</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="67"></div></div></div>
+        <div class="data-row"><span class="data-label">مدير</span><span class="data-val">124,000</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="95"></div></div></div>
       </div>
 
       <div class="slide-section">
         <div class="slide-section-title">أبرز الشركات</div>
-        <div class="data-row"><span class="data-label">Saudi Aramco</span><span class="data-val">18,400</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
-        <div class="data-row"><span class="data-label">SABIC</span><span class="data-val">12,600</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="68"></div></div></div>
+        <div class="data-row"><span class="data-label">أرامكو السعودية</span><span class="data-val">18,400</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
+        <div class="data-row"><span class="data-label">سابك</span><span class="data-val">12,600</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="68"></div></div></div>
         <div class="data-row"><span class="data-label">Al Rajhi Bank</span><span class="data-val">8,940</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="49"></div></div></div>
-        <div class="data-row"><span class="data-label">STC</span><span class="data-val">7,210</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="39"></div></div></div>
+        <div class="data-row"><span class="data-label">الاتصالات السعودية</span><span class="data-val">7,210</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="39"></div></div></div>
       </div>
 
     </div>
@@ -410,16 +410,16 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
       <div class="slide-section">
         <div class="slide-section-title">المناصب المهنية</div>
         <div class="data-row"><span class="data-label">رئيس تنفيذي</span><span class="data-val">31,200</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
-        <div class="data-row"><span class="data-label">CFO</span><span class="data-val">22,800</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="73"></div></div></div>
-        <div class="data-row"><span class="data-label">Director</span><span class="data-val">98,400</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="94"></div></div></div>
+        <div class="data-row"><span class="data-label">مدير مالي</span><span class="data-val">22,800</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="73"></div></div></div>
+        <div class="data-row"><span class="data-label">مدير</span><span class="data-val">98,400</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="94"></div></div></div>
       </div>
 
       <div class="slide-section">
         <div class="slide-section-title">أبرز الشركات</div>
-        <div class="data-row"><span class="data-label">Emirates NBD</span><span class="data-val">9,120</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
-        <div class="data-row"><span class="data-label">Etisalat</span><span class="data-val">7,840</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="86"></div></div></div>
-        <div class="data-row"><span class="data-label">DP World</span><span class="data-val">6,430</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="71"></div></div></div>
-        <div class="data-row"><span class="data-label">Emaar</span><span class="data-val">5,210</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="57"></div></div></div>
+        <div class="data-row"><span class="data-label">الإمارات دبي الوطني</span><span class="data-val">9,120</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
+        <div class="data-row"><span class="data-label">اتصالات</span><span class="data-val">7,840</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="86"></div></div></div>
+        <div class="data-row"><span class="data-label">موانئ دبي العالمية</span><span class="data-val">6,430</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="71"></div></div></div>
+        <div class="data-row"><span class="data-label">إعمار</span><span class="data-val">5,210</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="57"></div></div></div>
       </div>
 
     </div>
@@ -467,15 +467,15 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
       <div class="slide-section">
         <div class="slide-section-title">المناصب المهنية</div>
         <div class="data-row"><span class="data-label">رئيس تنفيذي</span><span class="data-val">9,400</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
-        <div class="data-row"><span class="data-label">CFO</span><span class="data-val">6,200</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="66"></div></div></div>
-        <div class="data-row"><span class="data-label">Director</span><span class="data-val">28,100</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="91"></div></div></div>
+        <div class="data-row"><span class="data-label">مدير مالي</span><span class="data-val">6,200</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="66"></div></div></div>
+        <div class="data-row"><span class="data-label">مدير</span><span class="data-val">28,100</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="91"></div></div></div>
       </div>
 
       <div class="slide-section">
         <div class="slide-section-title">أبرز الشركات</div>
         <div class="data-row"><span class="data-label">Qatar Energy</span><span class="data-val">3,840</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
-        <div class="data-row"><span class="data-label">QNB Group</span><span class="data-val">2,960</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="77"></div></div></div>
-        <div class="data-row"><span class="data-label">Ooredoo</span><span class="data-val">2,140</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="56"></div></div></div>
+        <div class="data-row"><span class="data-label">مجموعة QNB</span><span class="data-val">2,960</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="77"></div></div></div>
+        <div class="data-row"><span class="data-label">أوريدو</span><span class="data-val">2,140</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="56"></div></div></div>
         <div class="data-row"><span class="data-label">Qatar Airways</span><span class="data-val">1,870</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="49"></div></div></div>
       </div>
 
@@ -524,16 +524,16 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
       <div class="slide-section">
         <div class="slide-section-title">المناصب المهنية</div>
         <div class="data-row"><span class="data-label">رئيس تنفيذي</span><span class="data-val">7,800</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
-        <div class="data-row"><span class="data-label">CFO</span><span class="data-val">5,400</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="69"></div></div></div>
-        <div class="data-row"><span class="data-label">Director</span><span class="data-val">21,600</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="88"></div></div></div>
+        <div class="data-row"><span class="data-label">مدير مالي</span><span class="data-val">5,400</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="69"></div></div></div>
+        <div class="data-row"><span class="data-label">مدير</span><span class="data-val">21,600</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="88"></div></div></div>
       </div>
 
       <div class="slide-section">
         <div class="slide-section-title">أبرز الشركات</div>
-        <div class="data-row"><span class="data-label">KFH Bahrain</span><span class="data-val">1,640</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
-        <div class="data-row"><span class="data-label">BEYON</span><span class="data-val">1,280</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="78"></div></div></div>
-        <div class="data-row"><span class="data-label">ALBA</span><span class="data-val">980</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="60"></div></div></div>
-        <div class="data-row"><span class="data-label">Gulf Air</span><span class="data-val">740</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="45"></div></div></div>
+        <div class="data-row"><span class="data-label">بيت التمويل البحرين</span><span class="data-val">1,640</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
+        <div class="data-row"><span class="data-label">بيون</span><span class="data-val">1,280</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="78"></div></div></div>
+        <div class="data-row"><span class="data-label">ألبا</span><span class="data-val">980</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="60"></div></div></div>
+        <div class="data-row"><span class="data-label">طيران الخليج</span><span class="data-val">740</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="45"></div></div></div>
       </div>
 
     </div>
@@ -581,15 +581,15 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
       <div class="slide-section">
         <div class="slide-section-title">المناصب المهنية</div>
         <div class="data-row"><span class="data-label">رئيس تنفيذي</span><span class="data-val">14,200</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
-        <div class="data-row"><span class="data-label">CFO</span><span class="data-val">9,800</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="69"></div></div></div>
-        <div class="data-row"><span class="data-label">Director</span><span class="data-val">42,800</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="92"></div></div></div>
+        <div class="data-row"><span class="data-label">مدير مالي</span><span class="data-val">9,800</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="69"></div></div></div>
+        <div class="data-row"><span class="data-label">مدير</span><span class="data-val">42,800</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="92"></div></div></div>
       </div>
 
       <div class="slide-section">
         <div class="slide-section-title">أبرز الشركات</div>
         <div class="data-row"><span class="data-label">PDO</span><span class="data-val">4,680</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="100"></div></div></div>
-        <div class="data-row"><span class="data-label">Omantel</span><span class="data-val">3,210</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="69"></div></div></div>
-        <div class="data-row"><span class="data-label">Bank Muscat</span><span class="data-val">2,870</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="61"></div></div></div>
+        <div class="data-row"><span class="data-label">عمانتل</span><span class="data-val">3,210</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="69"></div></div></div>
+        <div class="data-row"><span class="data-label">بنك مسقط</span><span class="data-val">2,870</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="61"></div></div></div>
         <div class="data-row"><span class="data-label">OQ Group</span><span class="data-val">2,140</span><div class="data-bar-bg"><div class="data-bar-fill" data-w="46"></div></div></div>
       </div>
 
