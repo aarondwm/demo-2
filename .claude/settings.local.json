@@ -30,7 +30,8 @@
       "Bash(done)",
       "Bash(ipconfig getifaddr:*)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3333/demo-bg-1.html)",
-      "Bash(find /Users/aaron/Desktop/demo-2/app /Users/aaron/Desktop/demo-2/public -type f \\\\\\( -name \"*.tsx\" -o -name \"*.html\" \\\\\\) -exec sed -i '' 's/eisa@diwaniyamedia\\\\.com/info@diwaniyamedia.com/g' {} +)"
+      "Bash(find /Users/aaron/Desktop/demo-2/app /Users/aaron/Desktop/demo-2/public -type f \\\\\\( -name \"*.tsx\" -o -name \"*.html\" \\\\\\) -exec sed -i '' 's/eisa@diwaniyamedia\\\\.com/info@diwaniyamedia.com/g' {} +)",
+      "Bash(grep -c 'fontSize: lang === \"\"ar\"\" ? \"\"18px\"\" : \"\"16px\"\", letterSpacing: \"\"0.3em\"\"' /Users/aaron/Desktop/demo-2/app/page.tsx)"
     ]
   }
 }

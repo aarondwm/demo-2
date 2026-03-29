@@ -1065,7 +1065,7 @@ export default function Home() {
             style={{ animation: "reveal-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards" }}
           >
             <div className="flex items-center justify-center w-full text-center">
-              <span className="sys-label" style={{ fontSize: lang === "ar" ? "18px" : "16px", letterSpacing: "0.3em", textAlign: "center" }}><ScrambleOnView text={t("heroLabel", lang)} delay={0} style={{ display: "inline" }} /></span>
+              <span className="sys-label" style={{ fontSize: lang === "ar" ? "20px" : "16px", letterSpacing: "0.3em", textAlign: "center" }}><ScrambleOnView text={t("heroLabel", lang)} delay={0} style={{ display: "inline" }} /></span>
             </div>
           </div>
 
@@ -1091,7 +1091,7 @@ export default function Home() {
         <div className="max-w-[1200px] mx-auto px-6 md:px-12 text-center lg:text-left">
 
           <div className="flex items-center justify-center lg:justify-start mb-5" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
-            <span className="sys-label" style={{ fontSize: lang === "ar" ? "18px" : "16px", letterSpacing: "0.3em" }}>
+            <span className="sys-label" style={{ fontSize: lang === "ar" ? "20px" : "16px", letterSpacing: "0.3em" }}>
               <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginInlineEnd: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
               <ScrambleOnView text={t("whatWeDo", lang)} delay={0} style={{ display: "inline" }} onDone={sec2Done} />
             </span>
@@ -1184,7 +1184,7 @@ export default function Home() {
             {/* Left */}
             <div className="flex flex-col gap-4 lg:gap-8 text-center lg:text-left items-center lg:items-start">
               <div className="flex items-center mb-2 lg:mb-5" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
-                <span className="sys-label" style={{ fontSize: lang === "ar" ? "18px" : "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginInlineEnd: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text={t("securedMediaPlacementTitle", lang)} delay={0} style={{ display: "inline" }} onDone={sec3Done} /></span>
+                <span className="sys-label" style={{ fontSize: lang === "ar" ? "20px" : "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginInlineEnd: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text={t("securedMediaPlacementTitle", lang)} delay={0} style={{ display: "inline" }} onDone={sec3Done} /></span>
               </div>
               <h2
                 className="font-bold uppercase"
@@ -1248,7 +1248,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="mb-10 text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start mb-5" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
-              <span className="sys-label" style={{ fontSize: lang === "ar" ? "18px" : "16px", letterSpacing: "0.3em" }}>
+              <span className="sys-label" style={{ fontSize: lang === "ar" ? "20px" : "16px", letterSpacing: "0.3em" }}>
                 <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginInlineEnd: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
                 <ScrambleOnView text={t("audienceSelection", lang)} delay={0} style={{ display: "inline" }} onDone={secMapDone} />
               </span>
@@ -1311,7 +1311,7 @@ export default function Home() {
       <section id="sample-insights" className="sys-section">
         <div className="max-w-[1200px] mx-auto px-6 md:px-12">
           <div className="flex items-center justify-center lg:justify-start mb-5" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
-            <span className="sys-label" style={{ fontSize: lang === "ar" ? "18px" : "16px", letterSpacing: "0.3em" }}>
+            <span className="sys-label" style={{ fontSize: lang === "ar" ? "20px" : "16px", letterSpacing: "0.3em" }}>
               <img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginInlineEnd: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} />
               {t("sampleInsights", lang)}
             </span>
@@ -1324,7 +1324,7 @@ export default function Home() {
               <ScrambleOnView text={t("whatWeKnow", lang)} delay={0} style={{ display: "block", color: "#ffffff" }} />
               <ScrambleOnView text={t("theyDont", lang)} delay={200} style={{ display: "block", color: "#4a6cf7" }} />
             </h2>
-            <p className="sys-body md:text-right md:max-w-xs mx-auto lg:mx-0" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "18px" : "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.85)", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>
+            <p className="sys-body md:text-right md:max-w-xs mx-auto lg:mx-0" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "18px" : "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.7)", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>
               {t("sampleInsightsDescription", lang)}
             </p>
           </div>
@@ -1337,7 +1337,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="mb-10 text-center">
             <div className="flex items-center justify-center mb-5">
-              <span className="sys-label" style={{ fontSize: lang === "ar" ? "18px" : "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text={t("whoWeWorkWith", lang)} delay={0} style={{ display: "inline" }} onDone={sec5Done} /></span>
+              <span className="sys-label" style={{ fontSize: lang === "ar" ? "20px" : "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginRight: "8px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text={t("whoWeWorkWith", lang)} delay={0} style={{ display: "inline" }} onDone={sec5Done} /></span>
             </div>
             <h2
               className="font-bold uppercase text-white"
@@ -1385,7 +1385,7 @@ export default function Home() {
 
             <div className="relative z-10">
               <div className="flex items-center justify-center mb-5" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
-                <span className="sys-label" style={{ fontSize: lang === "ar" ? "18px" : "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginInlineEnd: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text={t("getStarted", lang)} delay={0} style={{ display: "inline" }} onDone={secCtaDone} /></span>
+                <span className="sys-label" style={{ fontSize: lang === "ar" ? "20px" : "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginInlineEnd: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text={t("getStarted", lang)} delay={0} style={{ display: "inline" }} onDone={secCtaDone} /></span>
               </div>
               <h2
                 className="font-bold uppercase text-white mb-5 text-center"

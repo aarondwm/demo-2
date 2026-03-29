@@ -148,14 +148,14 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
   border:1px solid var(--border);
   max-width:50%;
 }
-.slide-total-label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--white-30)}
+.slide-total-label{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#ffffff}
 .slide-total-value{
   font-family:var(--mono);font-size:18px;font-weight:700;
   color:var(--accent);margin-top:4px;
   text-shadow:0 0 20px rgba(74,108,247,0.3);
 }
 .slide-total-value.redacted{font-size:11px;letter-spacing:0.14em;text-shadow:none}
-.slide-total-sub{font-size:8px;color:var(--white-30);margin-top:2px;letter-spacing:0.06em}
+.slide-total-sub{font-size:10px;color:#ffffff;margin-top:2px;letter-spacing:0.06em}
 
 /* Per-country map positioning */
 [data-index="0"] .slide-map{height:100px;top:50px;right:10px}   /* Kuwait — lowered */
@@ -168,17 +168,19 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 /* Demographics */
 .slide-section{margin-top:8px}
 .slide-section-title{
-  font-size:9px;letter-spacing:0.14em;text-transform:uppercase;
+  font-size:11px;letter-spacing:0.14em;text-transform:uppercase;
   color:var(--accent-2);margin-bottom:10px;
   display:flex;align-items:center;gap:6px;
 }
-.slide-section-title::before{content:'▸';font-size:7px}
+.slide-section-title::before{content:'▸';font-size:9px}
+/* Hide companies section */
+.slide-section-title:last-of-type,.slide-section-title:last-of-type ~ .data-row{display:none}
 
 /* Split bars */
 .split-row{display:flex;gap:2px;height:8px;border-radius:4px;overflow:hidden;margin-top:6px}
 .split-bar{transition:width 0.8s cubic-bezier(0.16,1,0.3,1)}
 .split-labels{display:flex;justify-content:space-between;margin-top:6px}
-.split-label{font-size:10px;color:var(--white-50);display:flex;align-items:center;gap:4px}
+.split-label{font-size:12px;color:#ffffff;display:flex;align-items:center;gap:4px}
 .split-dot{width:6px;height:6px;border-radius:50%}
 
 /* Data rows */
@@ -187,8 +189,8 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
   padding:5px 0;border-bottom:1px solid rgba(74,108,247,0.04);
 }
 .data-row:last-child{border-bottom:none}
-.data-label{font-size:10px;color:var(--white-50);flex:1}
-.data-val{font-size:11px;font-weight:600;color:var(--accent);min-width:50px;text-align:right;font-variant-numeric:tabular-nums}
+.data-label{font-size:12px;color:#ffffff;flex:1}
+.data-val{font-size:13px;font-weight:600;color:var(--accent);min-width:50px;text-align:right;font-variant-numeric:tabular-nums}
 .data-val.redacted{color:var(--white-15);background:rgba(255,59,59,0.04);padding:0 4px}
 .data-bar-bg{width:40px;height:3px;background:var(--white-15);border-radius:2px;overflow:hidden;flex-shrink:0}
 .data-bar-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 0.8s cubic-bezier(0.16,1,0.3,1)}
@@ -236,13 +238,13 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--mono);
 
 @media(max-width:400px){
   .slide{padding:8px 10px}
-  .slide-header{font-size:18px}
-  .slide-sub{font-size:8px}
+  .slide-header{font-size:20px}
+  .slide-sub{font-size:10px}
   .slide-total-value{font-size:22px}
-  .slide-total-label,.slide-total-sub{font-size:7px}
+  .slide-total-label,.slide-total-sub{font-size:9px}
   .section-title{font-size:7px}
-  .data-label{font-size:8px}
-  .data-val{font-size:8px}
+  .data-label{font-size:10px}
+  .data-val{font-size:10px}
   .nav-arrow{width:40px;height:40px;font-size:16px}
   .bottom-bar{padding:6px 12px;font-size:7px}
   .slide-map{height:100px;right:10px}
