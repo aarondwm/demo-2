@@ -39,7 +39,7 @@ export default function ContactPage() {
             {t("requestA", lang)}<br />
             <span style={{ color: "#4a6cf7" }}>{t("briefingDot", lang)}</span>
           </h1>
-          <p className="font-mono text-[13px] tracking-[0.04em] text-white leading-relaxed max-w-md mb-12">
+          <p className={`font-mono ${lang === "ar" ? "text-[20px]" : "text-[13px]"} tracking-[0.04em] text-white leading-relaxed max-w-md mb-12`} style={{ direction: lang === "ar" ? "rtl" : undefined }}>
             {t("contactSubtitle", lang)}
           </p>
 
