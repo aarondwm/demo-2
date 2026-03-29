@@ -271,45 +271,72 @@ function ScrambleOnSignal({
 }
 
 const HERO_VIDEOS = [
-  "https://videos.files.wordpress.com/PG2Rvigf/5727833-uhd_3840_2160_30fps.mp4",
-  "https://videos.files.wordpress.com/hBSfaNz4/13153068_1440_2560_30fps.mp4",
-  "https://videos.files.wordpress.com/AEBAMyhY/5058333-uhd_2160_3840_25fps.mp4",
+  { src: "https://videos.files.wordpress.com/AEBAMyhY/5058333-uhd_2160_3840_25fps.mp4", speed: 1 },
+  { src: "https://videos.files.wordpress.com/PG2Rvigf/5727833-uhd_3840_2160_30fps.mp4", speed: 0.5 },
+  { src: "https://videos.files.wordpress.com/hBSfaNz4/13153068_1440_2560_30fps.mp4", speed: 0.5 },
 ];
 
 function HeroVideoBackground() {
   const [current, setCurrent] = useState(0);
-  const [fading, setFading]   = useState(false);
+  const [next, setNext] = useState(-1);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setFading(true);
-      setTimeout(() => {
-        setCurrent((c) => (c + 1) % HERO_VIDEOS.length);
-        setFading(false);
-      }, 800); // crossfade duration
-    }, 7000); // show each video for 7s
-    return () => clearInterval(interval);
+    // Set playback rates once videos load
+    videoRefs.current.forEach((v, i) => {
+      if (v) v.playbackRate = HERO_VIDEOS[i].speed;
+    });
   }, []);
+
+  useEffect(() => {
+    const DISPLAY_TIME = 8000;
+    const CROSSFADE = 1500;
+
+    const timer = setInterval(() => {
+      const upcoming = (current + 1) % HERO_VIDEOS.length;
+      // Start playing the next video before crossfade
+      const nextVid = videoRefs.current[upcoming];
+      if (nextVid) {
+        nextVid.currentTime = 0;
+        nextVid.playbackRate = HERO_VIDEOS[upcoming].speed;
+        nextVid.play().catch(() => {});
+      }
+      setNext(upcoming);
+      // After crossfade completes, swap current
+      setTimeout(() => {
+        setCurrent(upcoming);
+        setNext(-1);
+      }, CROSSFADE);
+    }, DISPLAY_TIME);
+
+    return () => clearInterval(timer);
+  }, [current]);
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden">
-      {HERO_VIDEOS.map((src, i) => (
-        <video
-          key={src}
-          src={src}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{
-            opacity: i === current ? (fading ? 0 : 1) : 0,
-            transition: "opacity 0.8s ease-in-out",
-          }}
-        />
-      ))}
+      {HERO_VIDEOS.map(({ src, speed }, i) => {
+        const isActive = i === current;
+        const isNext = i === next;
+        return (
+          <video
+            key={src}
+            ref={(el) => { videoRefs.current[i] = el; }}
+            src={src}
+            autoPlay={i === 0}
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              opacity: isActive ? 1 : isNext ? 1 : 0,
+              zIndex: isNext ? 2 : isActive ? 1 : 0,
+              transition: `opacity ${1.5}s ease-in-out`,
+            }}
+          />
+        );
+      })}
       {/* Dark overlay */}
-      <div className="absolute inset-0" style={{ backgroundColor: "rgba(6,10,20,0.80)" }} />
+      <div className="absolute inset-0 z-[3]" style={{ backgroundColor: "rgba(6,10,20,0.80)" }} />
     </div>
   );
 }
