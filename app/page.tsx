@@ -466,7 +466,7 @@ function CampaignDashboard() {
         {/* Article iframe bg */}
         <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true" style={{ background: "#0a0a0a" }}>
           <iframe
-            src="/dwm-article-full.html?embed=1"
+            src={lang === "ar" ? "/dwm-article-full-ar.html?embed=1" : "/dwm-article-full.html?embed=1"}
             scrolling="no"
             loading="lazy"
             tabIndex={-1}
@@ -478,7 +478,7 @@ function CampaignDashboard() {
         {/* Article title bar — unblurred */}
         <div className="absolute top-0 left-0 right-0 z-[6] flex items-center gap-2 px-3 md:px-5 py-2" style={{ background: "rgba(0,0,0,0.4)", borderBottom: "1px solid rgba(74,108,247,0.1)" }}>
           <span className="w-[5px] h-[5px] rounded-full flex-shrink-0" style={{ background: "#4a6cf7" }} />
-          <span className="truncate" style={{ fontSize: "clamp(9px, 2.5vw, 11px)", fontWeight: 600, color: "rgba(255,255,255,0.7)" }}>Trolley General Trading Company Lists on Boursa Kuwait Premier Market</span>
+          <span className="truncate" style={{ fontSize: "clamp(9px, 2.5vw, 11px)", fontWeight: 600, color: "rgba(255,255,255,0.7)" }}>{lang === "ar" ? "شركة ترولي للتجارة العامة تُدرج في السوق الأول لبورصة الكويت" : "Trolley General Trading Company Lists on Boursa Kuwait Premier Market"}</span>
         </div>
         {/* Content */}
         <div className="relative z-[5] flex flex-col items-center" style={{ marginTop: "16px" }}>
@@ -489,7 +489,7 @@ function CampaignDashboard() {
             <span className="font-mono uppercase" style={{ fontSize: "clamp(10px, 2.5vw, 11px)", letterSpacing: "0.22em", color: "rgba(255,255,255,0.5)" }}>{t("totalArticleViews", lang)}</span>
           </div>
           <a
-            href="/dwm-article-full.html"
+            href={lang === "ar" ? "/dwm-article-full-ar.html" : "/dwm-article-full.html"}
             className="group inline-flex items-center h-11 font-mono text-[12px] tracking-[0.15em] uppercase text-black font-bold relative overflow-hidden mt-4"
             style={{ borderRadius: "8px", transform: "translateZ(0)" }}
           >
@@ -1077,7 +1077,7 @@ export default function Home() {
             className="flex flex-col md:flex-row items-stretch md:items-center md:justify-center gap-4 md:gap-6 opacity-0 mt-10 md:mt-20 mb-10 md:mb-20 max-w-xs md:max-w-none mx-auto w-full"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
-            <HoverActionButton labelText={t("requestBriefing", lang)} scramble href="/contact" variant="blue-fill" className="!flex md:!inline-flex text-[11px] md:text-[15px] font-bold w-full md:w-80 hero-btn" style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
+            <HoverActionButton labelText={t("requestBriefing", lang)} scramble href={lang === "ar" ? "/ar/contact" : "/contact"} variant="blue-fill" className="!flex md:!inline-flex text-[11px] md:text-[15px] font-bold w-full md:w-80 hero-btn" style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
             <HoverActionButton labelText={t("howItWorks", lang)} scramble scrambleStep={6.2} href="#what-we-do" variant="white" direction="vertical" className="!flex md:!inline-flex text-[11px] md:text-[15px] font-bold w-full md:w-80 hero-btn" style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
           </div>
         </div>
@@ -1151,7 +1151,7 @@ export default function Home() {
 
           <div className="flex justify-center" style={{ marginBottom: "0px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
             <a
-              href="/contact"
+              href={lang === "ar" ? "/ar/contact" : "/contact"}
               className="group inline-flex items-center h-14 text-[13px] tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden"
               style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", borderRadius: "12px", transform: "translateZ(0)" }}
             >
@@ -1395,7 +1395,7 @@ export default function Home() {
                 {t("bookBriefingDescription", lang)}
               </p>
               <div className="flex justify-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.32s" }}>
-                <HoverActionButton label={t("requestBriefing", lang)} href="/contact" />
+                <HoverActionButton label={t("requestBriefing", lang)} href={lang === "ar" ? "/ar/contact" : "/contact"} />
               </div>
             </div>
           </div>
@@ -1423,7 +1423,7 @@ export default function Home() {
             ]},
             { heading: t("company", lang), links: [
               { label: t("home", lang), href: "/#home" },
-              { label: t("contact", lang), href: "/contact" },
+              { label: t("contact", lang), href: lang === "ar" ? "/ar/contact" : "/contact" },
               { label: t("reviews", lang), href: "/#reviews" },
             ]},
             { heading: t("legal", lang), links: [
