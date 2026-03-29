@@ -34,7 +34,7 @@ export default function ContactPage() {
           </span>
           <h1
             className="font-bold uppercase text-white mb-4"
-            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(30px, 5.5vw, 72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: "1.05" }}
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(30px, 5.5vw, 72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: lang === "ar" ? "1.3" : "1.05" }}
           >
             {t("requestA", lang)}<br />
             <span style={{ color: "#4a6cf7" }}>{t("briefingDot", lang)}</span>

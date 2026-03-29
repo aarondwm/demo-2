@@ -156,7 +156,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Secured Media Placement
     securedMediaPlacementTitle: "النشر الإعلامي المؤكد",
-    yourStory: "قصتك انت",
+    yourStory: "قصتك",
     guaranteedPublishing: "والنشر علينا",
     placementRateNumber: "١٠٠٪",
     placementRate: "نسبة النشر",
@@ -238,7 +238,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Contact page
     requestA: "اطلب",
-    briefingDot: "جلسة تعريفية.",
+    briefingDot: "جلسة تعريفية",
     contactSubtitle: "سنتواصل معك إذا كنت مؤهلاً.",
     name: "الاسم",
     email: "البريد الإلكتروني",
