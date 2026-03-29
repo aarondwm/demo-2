@@ -272,7 +272,7 @@ export function Navbar() {
         <div className="flex items-center gap-3 flex-shrink-0">
           <a
             href={lang === "ar" ? "/ar/contact" : "/contact"}
-            className={`group hidden sm:inline-flex items-center h-9 font-mono ${lang === "ar" ? "text-[15px]" : "text-[13px]"} tracking-[0.14em] uppercase text-black font-bold relative overflow-hidden`}
+            className={`group hidden sm:inline-flex items-center h-9 font-mono ${lang === "ar" ? "text-[15px]" : "text-[13px]"} ${lang === "ar" ? "tracking-normal" : "tracking-[0.14em]"} uppercase text-black font-bold relative overflow-hidden`}
             style={{ borderRadius: "12px", transform: "translateZ(0)" }}
           >
             <span className="absolute inset-0 bg-white" />
@@ -288,7 +288,7 @@ export function Navbar() {
           <a
             href={getLangSwitchHref()}
             onClick={(e) => { e.preventDefault(); window.location.href = getLangSwitchHref(); }}
-            className={`group inline-flex items-center h-9 font-mono ${lang === "ar" ? "text-[15px]" : "text-[13px]"} tracking-[0.14em] uppercase font-bold relative overflow-hidden`}
+            className={`group inline-flex items-center h-9 font-mono ${lang === "ar" ? "text-[15px]" : "text-[13px]"} ${lang === "ar" ? "tracking-normal" : "tracking-[0.14em]"} uppercase font-bold relative overflow-hidden`}
             style={{ borderRadius: "12px", transform: "translateZ(0)", textDecoration: "none" }}
           >
             <span className="absolute inset-0" style={{ background: "rgba(74,108,247,0.15)", border: "1px solid rgba(74,108,247,0.3)", borderRadius: "12px" }} />

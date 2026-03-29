@@ -584,8 +584,8 @@ function CampaignDashboard() {
                 >
                   <span className="font-mono flex-shrink-0 w-[18px]" style={{ fontSize: "9px", color: openCompany === i ? "#4a6cf7" : "rgba(74,108,247,0.4)", letterSpacing: "0.1em" }}>{c.rank}</span>
                   <span className="font-mono flex-1 truncate" style={{ fontSize: lang === "ar" ? "14px" : "12px", color: "#ffffff" }}>{c.name}</span>
-                  <span className="font-mono flex-shrink-0 text-[10px] md:text-[13px]" style={{ color: lang === "ar" ? "#ffffff" : "rgba(255,255,255,0.4)" }}>{lang === "ar" ? toArabicNumerals(c.views.toLocaleString()) + " مشاهدة" : c.views.toLocaleString() + " views"}</span>
-                  <span className="font-mono font-bold flex-shrink-0 w-[50px] md:w-[60px] text-right keep-blue text-[11px] md:text-[14px]" style={{ color: "#4a6cf7" }}>{c.avgRead}</span>
+                  <span className="font-mono flex-shrink-0 text-[12px] md:text-[13px]" style={{ color: lang === "ar" ? "#ffffff" : "rgba(255,255,255,0.4)" }}>{lang === "ar" ? toArabicNumerals(c.views.toLocaleString()) + " مشاهدة" : c.views.toLocaleString() + " views"}</span>
+                  <span className="font-mono font-bold flex-shrink-0 w-[50px] md:w-[60px] text-right keep-blue text-[13px] md:text-[14px]" style={{ color: "#4a6cf7" }}>{c.avgRead}</span>
                   <span style={{ fontSize: "9px", color: "rgba(255,255,255,0.25)", transform: openCompany === i ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s ease", flexShrink: 0 }}>▼</span>
                 </button>
                 <div style={{ maxHeight: openCompany === i ? "160px" : "0", overflow: "hidden", transition: "max-height 0.3s ease" }}>
