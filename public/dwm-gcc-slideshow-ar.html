@@ -7,8 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>*{font-family:'Noto Kufi Arabic',sans-serif!important;letter-spacing:0!important}
 .slide-total-label{color:#ffffff!important}
-/* Hide companies section to prevent cutoff */
-.slide .slide-section-title:last-of-type,.slide .slide-section-title:last-of-type ~ .data-row{display:none}
+/* Companies hidden via JS below */
 </style>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -741,6 +740,17 @@ window.addEventListener('message', e => {
 
 // Init
 goTo(0);
+// Hide companies sections
+document.querySelectorAll('.slide-section-title').forEach(el => {
+  if (el.textContent.includes('أبرز الشركات') || el.textContent.includes('Top Companies')) {
+    el.style.display = 'none';
+    let next = el.nextElementSibling;
+    while (next && next.classList.contains('data-row')) {
+      next.style.display = 'none';
+      next = next.nextElementSibling;
+    }
+  }
+});
 </script>
 </body>
 </html>
