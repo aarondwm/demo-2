@@ -571,7 +571,7 @@ function CampaignDashboard() {
         {/* Audience Breakdown */}
         {tab === 1 && (
           <div className="flex flex-col gap-0">
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center justify-between mb-3" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
               <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30">{t("topCompanies", lang)}</span>
               <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-white/20">{t("avgReadTime", lang)}</span>
             </div>
@@ -579,8 +579,8 @@ function CampaignDashboard() {
               <div key={c.rank}>
                 <button
                   onClick={() => setOpenCompany(openCompany === i ? null : i)}
-                  className="w-full flex items-center gap-2 md:gap-3 py-2.5 md:py-3 border-b border-white/[0.04] text-left"
-                  style={{ background: openCompany === i ? "rgba(74,108,247,0.04)" : "transparent", transition: "background 0.2s ease" }}
+                  className="w-full flex items-center gap-2 md:gap-3 py-2.5 md:py-3 border-b border-white/[0.04]"
+                  style={{ background: openCompany === i ? "rgba(74,108,247,0.04)" : "transparent", transition: "background 0.2s ease", direction: lang === "ar" ? "rtl" : "ltr", textAlign: lang === "ar" ? "right" : "left" }}
                 >
                   <span className="font-mono flex-shrink-0 w-[18px]" style={{ fontSize: "9px", color: openCompany === i ? "#4a6cf7" : "rgba(74,108,247,0.4)", letterSpacing: "0.1em" }}>{c.rank}</span>
                   <span className="font-mono flex-1 truncate" style={{ fontSize: "12px", color: "rgba(255,255,255,0.85)" }}>{c.name}</span>
@@ -591,7 +591,7 @@ function CampaignDashboard() {
                 <div style={{ maxHeight: openCompany === i ? "160px" : "0", overflow: "hidden", transition: "max-height 0.3s ease" }}>
                   <div className="px-4 md:px-6 py-2.5 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3" style={{ background: "rgba(74,108,247,0.02)" }}>
                     {c.roles.map((r) => (
-                      <div key={r.role} className="flex items-center justify-between px-2 py-1.5 rounded" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.04)" }}>
+                      <div key={r.role} className="flex items-center justify-between px-2 py-1.5 rounded" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.04)", direction: lang === "ar" ? "rtl" : "ltr" }}>
                         <span className="font-mono" style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)" }}>{r.role}</span>
                         <span className="font-mono font-bold" style={{ fontSize: "11px", color: "#4a6cf7" }}>{lang === "ar" ? toArabicNumerals(r.count) : r.count}</span>
                       </div>
@@ -1080,8 +1080,8 @@ export default function Home() {
             className="flex flex-col md:flex-row items-stretch md:items-center md:justify-center gap-4 md:gap-6 opacity-0 mt-10 md:mt-20 mb-10 md:mb-20 max-w-xs md:max-w-none mx-auto w-full"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
-            <HoverActionButton labelText={t("requestBriefing", lang)} scramble href={lang === "ar" ? "/ar/contact" : "/contact"} variant="blue-fill" className={`!flex md:!inline-flex ${lang === "ar" ? "text-[15px] md:text-[18px]" : "text-[11px] md:text-[15px]"} font-bold w-full md:w-80 hero-btn`} style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
-            <HoverActionButton labelText={t("howItWorks", lang)} scramble scrambleStep={6.2} href="#what-we-do" variant="white" direction="vertical" className={`!flex md:!inline-flex ${lang === "ar" ? "text-[15px] md:text-[18px]" : "text-[11px] md:text-[15px]"} font-bold w-full md:w-80 hero-btn`} style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
+            <HoverActionButton labelText={t("requestBriefing", lang)} scramble href={lang === "ar" ? "/ar/contact" : "/contact"} variant="blue-fill" className={`!flex md:!inline-flex ${lang === "ar" ? "text-[18px] md:text-[20px]" : "text-[11px] md:text-[15px]"} font-bold w-full md:w-80 hero-btn`} style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
+            <HoverActionButton labelText={t("howItWorks", lang)} scramble scrambleStep={6.2} href="#what-we-do" variant="white" direction="vertical" className={`!flex md:!inline-flex ${lang === "ar" ? "text-[18px] md:text-[20px]" : "text-[11px] md:text-[15px]"} font-bold w-full md:w-80 hero-btn`} style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
           </div>
         </div>
       </section>

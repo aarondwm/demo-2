@@ -234,7 +234,7 @@ export function Navbar() {
               clipPath: "circle(38% at 50% 50%)",
             }}
           />
-          <span className="ml-2 font-bold uppercase tracking-[0.08em]" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "clamp(14px, 3vw, 18px)" : "clamp(10px, 2.5vw, 15px)", color: "#e8e8e8" }}>{lang === "ar" ? "ديوانية ميديا" : "Diwaniya Media"}</span>
+          <span className="ml-2 font-bold uppercase tracking-[0.08em]" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "clamp(16px, 3.5vw, 20px)" : "clamp(10px, 2.5vw, 15px)", color: "#e8e8e8" }}>{lang === "ar" ? "ديوانية ميديا" : "Diwaniya Media"}</span>
         </a>
 
         {/* Desktop nav */}
@@ -254,7 +254,7 @@ export function Navbar() {
         <div className="flex items-center gap-3 flex-shrink-0">
           <a
             href={lang === "ar" ? "/ar/contact" : "/contact"}
-            className="group hidden sm:inline-flex items-center h-9 font-mono text-[13px] tracking-[0.14em] uppercase text-black font-bold relative overflow-hidden"
+            className={`group hidden sm:inline-flex items-center h-9 font-mono ${lang === "ar" ? "text-[15px]" : "text-[13px]"} tracking-[0.14em] uppercase text-black font-bold relative overflow-hidden`}
             style={{ borderRadius: "12px", transform: "translateZ(0)" }}
           >
             <span className="absolute inset-0 bg-white" />
@@ -269,7 +269,7 @@ export function Navbar() {
           {/* Language switch — same style as CTA */}
           <a
             href={lang === "en" ? "/ar" : "/"}
-            className="group inline-flex items-center h-9 font-mono text-[13px] tracking-[0.14em] uppercase font-bold relative overflow-hidden"
+            className={`group inline-flex items-center h-9 font-mono ${lang === "ar" ? "text-[15px]" : "text-[13px]"} tracking-[0.14em] uppercase font-bold relative overflow-hidden`}
             style={{ borderRadius: "12px", transform: "translateZ(0)", textDecoration: "none" }}
           >
             <span className="absolute inset-0" style={{ background: "rgba(74,108,247,0.15)", border: "1px solid rgba(74,108,247,0.3)", borderRadius: "12px" }} />
