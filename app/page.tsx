@@ -522,7 +522,7 @@ function CampaignDashboard() {
           <div className="flex flex-col gap-6">
             {/* Location */}
             <div>
-              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-white/30 mb-3">{t("location", lang)}</div>
+              <div className="font-mono text-[9px] tracking-[0.15em] uppercase mb-3" style={{ color: "#ffffff" }}>{t("location", lang)}</div>
               <div className="flex flex-col gap-2.5">
                 {dashDemographics.location.map((loc, i) => (
                   <div key={loc.name} className="flex items-center gap-2 md:gap-3">
@@ -546,8 +546,8 @@ function CampaignDashboard() {
                   <div className="h-full" style={{ width: visible ? "26%" : "0%", background: "#7a9cff", transition: "width 0.8s ease 0.3s" }} />
                 </div>
                 <div className="flex justify-between mt-2">
-                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: lang === "ar" ? "#ffffff" : "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />{lang === "ar" ? "٪٧٤ " + t("male", lang) : "74% " + t("male", lang)}</span>
-                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: lang === "ar" ? "#ffffff" : "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />{lang === "ar" ? "٪٢٦ " + t("female", lang) : "26% " + t("female", lang)}</span>
+                  <span className="font-mono text-[11px] md:text-[12px]" style={{ color: lang === "ar" ? "#ffffff" : "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />{lang === "ar" ? "٪٧٤ " + t("male", lang) : "74% " + t("male", lang)}</span>
+                  <span className="font-mono text-[11px] md:text-[12px]" style={{ color: lang === "ar" ? "#ffffff" : "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />{lang === "ar" ? "٪٢٦ " + t("female", lang) : "26% " + t("female", lang)}</span>
                 </div>
               </div>
               <div>
@@ -555,11 +555,11 @@ function CampaignDashboard() {
                 <div className="flex flex-col gap-2">
                   {dashDemographics.age.map((a, i) => (
                     <div key={a.range} className="flex items-center gap-2">
-                      <span className="font-mono flex-shrink-0 w-[36px]" style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)" }}>{a.range}</span>
+                      <span className="font-mono flex-shrink-0 w-[36px] text-[11px] md:text-[13px]" style={{ color: "rgba(255,255,255,0.5)" }}>{a.range}</span>
                       <div className="flex-1 h-[5px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
                         <div className="h-full rounded-full" style={{ width: visible ? `${a.pct}%` : "0%", background: `rgba(74,108,247,${0.9 - i * 0.15})`, transition: `width 0.8s ease ${0.3 + i * 0.08}s` }} />
                       </div>
-                      <span className="font-mono font-bold flex-shrink-0 w-[28px] text-right" style={{ fontSize: "11px", color: "#4a6cf7" }}>{lang === "ar" ? "٪" + toArabicNumerals(a.pct) : a.pct + "%"}</span>
+                      <span className="font-mono font-bold flex-shrink-0 w-[28px] text-right text-[11px] md:text-[13px]" style={{ color: "#4a6cf7" }}>{lang === "ar" ? "٪" + toArabicNumerals(a.pct) : a.pct + "%"}</span>
                     </div>
                   ))}
                 </div>
@@ -1071,7 +1071,7 @@ export default function Home() {
 
           <h1
             className="font-bold uppercase text-center"
-            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "clamp(40px,10vw,102px)" : "clamp(48px,12vw,110px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05, minHeight: "3.2em" }}
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "clamp(40px,10vw,102px)" : "clamp(48px,12vw,110px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: lang === "ar" ? 1.3 : 1.05, minHeight: "3.2em" }}
           >
             <HeroScrambleGroup />
           </h1>
@@ -1098,7 +1098,7 @@ export default function Home() {
           </div>
 
           <h2
-            className="text-center lg:text-left"
+            className={`text-center ${lang === "ar" ? "lg:text-right" : "lg:text-left"}`}
             style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, lineHeight: lang === "ar" ? 1.3 : 1.05, letterSpacing: "-0.02em", textTransform: "uppercase", marginBottom: "40px", color: "#e8e8e8" }}
           >
             <ScrambleOnSignal text={t("weRunIt", lang)} signal={sec2Visible} style={{ color: "#e8e8e8" }} />
@@ -1188,7 +1188,7 @@ export default function Home() {
               </div>
               <h2
                 className="font-bold uppercase"
-                style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05, textAlign: lang === "ar" ? "right" : undefined }}
+                style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: lang === "ar" ? 1.3 : 1.05, textAlign: lang === "ar" ? "right" : undefined }}
               >
                 <ScrambleOnSignal text={t("yourStory", lang)} signal={sec3Visible} style={{ color: "#ffffff", display: "block" }} />
                 <ScrambleOnSignal text={t("guaranteedPublishing", lang)} signal={sec3Visible} style={{ color: "#4a6cf7", display: "block" }} />
@@ -1254,8 +1254,8 @@ export default function Home() {
               </span>
             </div>
             <h2
-              className="font-bold uppercase text-white text-center lg:text-left"
-              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+              className={`font-bold uppercase text-white text-center ${lang === "ar" ? "lg:text-right" : "lg:text-left"}`}
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: lang === "ar" ? 1.3 : 1.05 }}
             >
               <ScrambleOnSignal text={t("targetAnyone", lang)} signal={secMapVisible} style={{ color: "#ffffff" }} />
               <ScrambleOnSignal text={t("anywhere", lang)} signal={secMapVisible} style={{ color: "#4a6cf7" }} />
@@ -1318,8 +1318,8 @@ export default function Home() {
           </div>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 text-center lg:text-left">
             <h2
-              className="font-bold uppercase text-center lg:text-left"
-              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+              className={`font-bold uppercase text-center ${lang === "ar" ? "lg:text-right" : "lg:text-left"}`}
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: lang === "ar" ? 1.3 : 1.05 }}
             >
               <ScrambleOnView text={t("whatWeKnow", lang)} delay={0} style={{ display: "block", color: "#ffffff" }} />
               <ScrambleOnView text={t("theyDont", lang)} delay={200} style={{ display: "block", color: "#4a6cf7" }} />
@@ -1341,7 +1341,7 @@ export default function Home() {
             </div>
             <h2
               className="font-bold uppercase text-white"
-              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: lang === "ar" ? 1.3 : 1.05 }}
             >
               <ScrambleOnSignal text={t("inTheir", lang)} signal={sec5Visible} onDone={lang === "ar" ? sec5BodyDone : undefined} style={{ color: "#ffffff" }} />
               {lang !== "ar" && <ScrambleOnSignal text={t("ownWords", lang)} signal={sec5Visible} onDone={sec5BodyDone} style={{ color: "#ffffff" }} />}
@@ -1389,7 +1389,7 @@ export default function Home() {
               </div>
               <h2
                 className="font-bold uppercase text-white mb-5 text-center"
-                style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
+                style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: lang === "ar" ? 1.3 : 1.05 }}
               >
                 <ScrambleOnSignal text={t("startWith", lang)} signal={secCtaVisible} style={{ color: "#ffffff" }} />
                 <ScrambleOnSignal text={t("aBriefing", lang)} signal={secCtaVisible} style={{ color: "#ffffff" }} />
