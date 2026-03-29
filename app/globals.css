@@ -394,9 +394,6 @@
 [dir="rtl"] {
   font-family: 'Noto Kufi Arabic', sans-serif;
 }
-[dir="rtl"] * {
-  font-family: inherit;
-}
 [dir="rtl"] .font-mono {
   font-family: 'Noto Kufi Arabic', sans-serif;
 }
