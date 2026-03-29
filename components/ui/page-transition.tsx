@@ -68,7 +68,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
 
       e.preventDefault();
       e.stopPropagation();
-      if (phase !== "idle") return;
+      if (phase === "wipe-in") return;
 
       pendingHref.current = href;
       setPhase("wipe-in");

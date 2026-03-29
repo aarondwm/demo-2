@@ -197,15 +197,20 @@ export function Navbar() {
   const pathname = usePathname();
   const NAV_GROUPS = lang === "ar" ? NAV_GROUPS_AR : NAV_GROUPS_EN;
 
-  // Compute language switch URL — stay on same page
+  // Compute language switch URL — stay on same page and section
   const getLangSwitchHref = () => {
-    if (lang === "en") {
-      // Switch to Arabic: prepend /ar
-      return "/ar" + pathname;
-    } else {
-      // Switch to English: remove /ar prefix
-      return pathname.replace(/^\/ar/, "") || "/";
+    const basePath = lang === "en" ? "/ar" + pathname : (pathname.replace(/^\/ar/, "") || "/");
+    // Find which section the user is currently viewing
+    if (typeof window !== "undefined" && (pathname === "/" || pathname === "/ar")) {
+      const sections = ["home", "what-we-do", "media-placement", "audience-selection", "sample-insights", "reviews", "get-started"];
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.getBoundingClientRect().top <= 200) {
+          return basePath + "#" + sections[i];
+        }
+      }
     }
+    return basePath;
   };
 
   React.useEffect(() => {
@@ -282,6 +287,7 @@ export function Navbar() {
           {/* Language switch — same style as CTA */}
           <a
             href={getLangSwitchHref()}
+            onClick={(e) => { e.preventDefault(); window.location.href = getLangSwitchHref(); }}
             className={`group inline-flex items-center h-9 font-mono ${lang === "ar" ? "text-[15px]" : "text-[13px]"} tracking-[0.14em] uppercase font-bold relative overflow-hidden`}
             style={{ borderRadius: "12px", transform: "translateZ(0)", textDecoration: "none" }}
           >

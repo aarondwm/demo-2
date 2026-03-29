@@ -490,12 +490,12 @@ function CampaignDashboard() {
           </div>
           <a
             href={lang === "ar" ? "/dwm-article-full-ar.html" : "/dwm-article-full.html"}
-            className={`group inline-flex items-center h-14 ${lang === "ar" ? "text-[17px]" : "text-[13px]"} tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden mt-4`}
+            className={`group inline-flex items-center h-14 ${lang === "ar" ? "text-[21px]" : "text-[13px]"} tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden mt-4`}
             style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", borderRadius: "12px", transform: "translateZ(0)" }}
           >
             <span className="absolute inset-0 bg-white" />
             <span className="absolute inset-0 flex items-center justify-center duration-700 ease-[cubic-bezier(0.50,0.20,0,1)] -translate-x-full group-hover:translate-x-0 z-10" style={{ background: "#4a6cf7" }}>
-              <span className={`text-white ${lang === "ar" ? "text-[17px]" : "text-[13px]"} tracking-[0.12em] uppercase font-bold`}>{t("previewArticle", lang)}</span>
+              <span className={`text-white ${lang === "ar" ? "text-[21px]" : "text-[13px]"} tracking-[0.12em] uppercase font-bold`}>{t("previewArticle", lang)}</span>
             </span>
             <span className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0 z-20 keep-black" style={{ color: "#000000" }}>
               {t("previewArticle", lang)}
@@ -1155,7 +1155,7 @@ export default function Home() {
           <div className="flex justify-center" style={{ marginBottom: "0px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
             <a
               href={lang === "ar" ? "/ar/contact" : "/contact"}
-              className={`group inline-flex items-center h-14 ${lang === "ar" ? "text-[17px]" : "text-[13px]"} tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden`}
+              className={`group inline-flex items-center h-14 ${lang === "ar" ? "text-[21px]" : "text-[13px]"} tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden`}
               style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", borderRadius: "12px", transform: "translateZ(0)" }}
             >
               <span className="absolute inset-0 bg-white" />
