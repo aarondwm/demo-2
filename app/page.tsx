@@ -810,7 +810,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
     >
       <span style={{
         fontFamily: "var(--font-mono), monospace",
-        fontSize: isAr ? "13px" : "11px",
+        fontSize: isAr ? "17px" : "11px",
         letterSpacing: "0.25em",
         flexShrink: 0,
         paddingTop: "2px",
@@ -822,7 +822,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
           fontFamily: "'Neue Montreal', var(--font-display), sans-serif",
           fontWeight: 700,
           textTransform: "uppercase",
-          fontSize: hovered ? (isAr ? "17px" : "15px") : (isAr ? "15px" : "13px"),
+          fontSize: hovered ? (isAr ? "21px" : "15px") : (isAr ? "19px" : "13px"),
           letterSpacing: hovered ? "0.14em" : "0.1em",
           color: hovered ? "#ffffff" : "#ffffff",
           opacity: visible ? 1 : 0,
@@ -830,7 +830,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
         }}>{title}</span>
         <span style={{
           fontFamily: "var(--font-body), sans-serif",
-          fontSize: hovered ? (isAr ? "16px" : "14px") : (isAr ? "15px" : "13px"),
+          fontSize: hovered ? (isAr ? "20px" : "14px") : (isAr ? "19px" : "13px"),
           lineHeight: "1.75",
           color: hovered ? "rgba(255,255,255,0.88)" : "rgba(255,255,255,0.7)",
           opacity: visible ? 1 : 0,
@@ -1202,8 +1202,8 @@ export default function Home() {
                   { value: t("articlesPerMonthNumber", lang), label: t("articlesPerMonth", lang) },
                 ].map(({ value, label }) => (
                   <div key={label} className="flex flex-col gap-1 pr-8 first:pl-0 pl-8">
-                    <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "32px" : "28px", fontWeight: 800, color: "#ffffff" }}>{value}</span>
-                    <span className="font-mono uppercase" style={{ fontSize: lang === "ar" ? "11px" : "8px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
+                    <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "36px" : "28px", fontWeight: 800, color: "#ffffff" }}>{value}</span>
+                    <span className="font-mono uppercase" style={{ fontSize: lang === "ar" ? "15px" : "8px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
                   </div>
                 ))}
               </div>
@@ -1215,13 +1215,13 @@ export default function Home() {
                   { value: t("articlesPerMonthNumber", lang), label: t("articlesPerMonth", lang) },
                 ].map(({ value, label }) => (
                   <div key={label} className="flex items-center justify-between py-4 px-5" style={{ background: "rgba(74,108,247,0.06)", border: "1px solid rgba(74,108,247,0.12)", borderRadius: "8px", direction: lang === "ar" ? "rtl" : undefined }}>
-                    <span className="font-mono uppercase" style={{ fontSize: lang === "ar" ? "15px" : "13px", letterSpacing: "0.14em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
-                    <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "26px" : "24px", fontWeight: 800, color: "#ffffff" }}>{value}</span>
+                    <span className="font-mono uppercase" style={{ fontSize: lang === "ar" ? "17px" : "13px", letterSpacing: "0.14em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
+                    <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "28px" : "24px", fontWeight: 800, color: "#ffffff" }}>{value}</span>
                   </div>
                 ))}
               </div>
 
-              <p className="hidden lg:block" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "16px" : "13.5px", lineHeight: 1.7, opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>
+              <p className="hidden lg:block" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "20px" : "13.5px", lineHeight: 1.7, opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>
                 {t("securedMediaDescription", lang)}
               </p>
             </div>

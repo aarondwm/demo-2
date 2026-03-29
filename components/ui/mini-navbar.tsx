@@ -234,7 +234,7 @@ export function Navbar() {
               clipPath: "circle(38% at 50% 50%)",
             }}
           />
-          <span className="ml-2 font-bold uppercase tracking-[0.08em]" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "clamp(16px, 3.5vw, 20px)" : "clamp(10px, 2.5vw, 15px)", color: "#e8e8e8" }}>{lang === "ar" ? "ديوانية ميديا" : "Diwaniya Media"}</span>
+          <span className="ml-2 font-bold uppercase tracking-[0.08em]" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "clamp(20px, 4vw, 24px)" : "clamp(10px, 2.5vw, 15px)", color: "#e8e8e8" }}>{lang === "ar" ? "ديوانية ميديا" : "Diwaniya Media"}</span>
         </a>
 
         {/* Desktop nav */}
