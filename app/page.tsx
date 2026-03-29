@@ -810,7 +810,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
     >
       <span style={{
         fontFamily: "var(--font-mono), monospace",
-        fontSize: isAr ? "17px" : "11px",
+        fontSize: isAr ? "15px" : "11px",
         letterSpacing: "0.25em",
         flexShrink: 0,
         paddingTop: "2px",
@@ -822,7 +822,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
           fontFamily: "'Neue Montreal', var(--font-display), sans-serif",
           fontWeight: 700,
           textTransform: "uppercase",
-          fontSize: hovered ? (isAr ? "21px" : "15px") : (isAr ? "19px" : "13px"),
+          fontSize: hovered ? (isAr ? "19px" : "15px") : (isAr ? "17px" : "13px"),
           letterSpacing: hovered ? "0.14em" : "0.1em",
           color: hovered ? "#ffffff" : "#ffffff",
           opacity: visible ? 1 : 0,
@@ -830,7 +830,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
         }}>{title}</span>
         <span style={{
           fontFamily: "var(--font-body), sans-serif",
-          fontSize: hovered ? (isAr ? "20px" : "14px") : (isAr ? "19px" : "13px"),
+          fontSize: hovered ? (isAr ? "18px" : "14px") : (isAr ? "17px" : "13px"),
           lineHeight: "1.75",
           color: hovered ? "rgba(255,255,255,0.88)" : "rgba(255,255,255,0.7)",
           opacity: visible ? 1 : 0,
@@ -1071,7 +1071,7 @@ export default function Home() {
 
           <h1
             className="font-bold uppercase text-center"
-            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(48px,12vw,110px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05, minHeight: "3.2em" }}
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "clamp(44px,11vw,106px)" : "clamp(48px,12vw,110px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05, minHeight: "3.2em" }}
           >
             <HeroScrambleGroup />
           </h1>
@@ -1129,11 +1129,11 @@ export default function Home() {
                   transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
                 }}
               >
-                <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: lang === "ar" ? "15px" : "11px", color: "rgba(74,108,247,0.4)", letterSpacing: "0.15em", marginBottom: "32px", direction: lang === "ar" ? "rtl" : undefined }}>{n}</div>
+                <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: lang === "ar" ? "13px" : "11px", color: "rgba(74,108,247,0.4)", letterSpacing: "0.15em", marginBottom: "32px", direction: lang === "ar" ? "rtl" : undefined }}>{n}</div>
                 <div className="wwd-stat" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontWeight: 800, letterSpacing: "-0.03em", color: "#e8e8e8", lineHeight: 1 }}>{stat}</div>
-                <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: lang === "ar" ? "14px" : "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4a6cf7", marginTop: "8px", paddingBottom: "28px", marginBottom: "28px", borderBottom: "1px solid rgba(255,255,255,0.05)", direction: lang === "ar" ? "rtl" : undefined }}>{statLabel}</div>
-                <div style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "20px" : "16px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.35, color: "#e8e8e8", marginBottom: "16px", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>{title}</div>
-                <div style={{ fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "17px" : "13.5px", lineHeight: 1.7, color: lang === "ar" ? "rgba(255,255,255,0.7)" : "#6b7080", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>{desc}</div>
+                <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: lang === "ar" ? "12px" : "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4a6cf7", marginTop: "8px", paddingBottom: "28px", marginBottom: "28px", borderBottom: "1px solid rgba(255,255,255,0.05)", direction: lang === "ar" ? "rtl" : undefined }}>{statLabel}</div>
+                <div style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "18px" : "16px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.35, color: "#e8e8e8", marginBottom: "16px", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>{title}</div>
+                <div style={{ fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "15px" : "13.5px", lineHeight: 1.7, color: lang === "ar" ? "rgba(255,255,255,0.7)" : "#6b7080", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>{desc}</div>
               </a>
               );
             })}
@@ -1221,7 +1221,7 @@ export default function Home() {
                 ))}
               </div>
 
-              <p className="hidden lg:block" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "20px" : "13.5px", lineHeight: 1.7, opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>
+              <p className="hidden lg:block" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "18px" : "13.5px", lineHeight: 1.7, opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>
                 {t("securedMediaDescription", lang)}
               </p>
             </div>
@@ -1259,7 +1259,7 @@ export default function Home() {
               <ScrambleOnSignal text={t("targetAnyone", lang)} signal={secMapVisible} style={{ color: "#ffffff" }} />
               <ScrambleOnSignal text={t("anywhere", lang)} signal={secMapVisible} style={{ color: "#4a6cf7" }} />
             </h2>
-            <p className="sys-body max-w-lg mt-6 mx-auto lg:mx-0" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s", fontSize: lang === "ar" ? "20px" : "16px", textAlign: lang === "ar" ? "right" : undefined, direction: lang === "ar" ? "rtl" : undefined }}>
+            <p className="sys-body max-w-lg mt-6 mx-auto lg:mx-0" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s", fontSize: lang === "ar" ? "18px" : "16px", textAlign: lang === "ar" ? "right" : undefined, direction: lang === "ar" ? "rtl" : undefined }}>
               {t("audienceSelectionDescription", lang)}
             </p>
           </div>
@@ -1323,7 +1323,7 @@ export default function Home() {
               <ScrambleOnView text={t("whatWeKnow", lang)} delay={0} style={{ display: "block", color: "#ffffff" }} />
               <ScrambleOnView text={t("theyDont", lang)} delay={200} style={{ display: "block", color: "#4a6cf7" }} />
             </h2>
-            <p className="sys-body md:text-right md:max-w-xs mx-auto lg:mx-0" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "20px" : "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.85)", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>
+            <p className="sys-body md:text-right md:max-w-xs mx-auto lg:mx-0" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "18px" : "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.85)", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>
               {t("sampleInsightsDescription", lang)}
             </p>
           </div>
@@ -1394,7 +1394,7 @@ export default function Home() {
                 <ScrambleOnSignal text={t("aBriefing", lang)} signal={secCtaVisible} style={{ color: "#ffffff" }} />
                 <ScrambleOnSignal text={t("seeWhatReturns", lang)} signal={secCtaVisible} style={{ color: "#4a6cf7" }} />
               </h2>
-              <p className="sys-body max-w-lg mb-10 mx-auto text-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s", fontSize: lang === "ar" ? "20px" : "16px", direction: lang === "ar" ? "rtl" : undefined }}>
+              <p className="sys-body max-w-lg mb-10 mx-auto text-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s", fontSize: lang === "ar" ? "18px" : "16px", direction: lang === "ar" ? "rtl" : undefined }}>
                 {t("bookBriefingDescription", lang)}
               </p>
               <div className="flex justify-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.32s" }}>
