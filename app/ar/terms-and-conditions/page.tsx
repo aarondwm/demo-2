@@ -2,7 +2,7 @@ import { Navbar } from "@/components/ui/mini-navbar";
 
 export default function TermsPageAr() {
   return (
-    <main className="min-h-screen bg-[#04060c] text-white" dir="rtl" lang="ar" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
+    <main className="min-h-screen bg-[#04060c] text-white" dir="rtl" lang="ar" style={{ fontFamily: "'Noto Kufi Arabic', sans-serif, sans-serif" }}>
       <Navbar />
 
       <div className="pt-32 pb-24 px-6 md:px-10">

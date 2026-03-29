@@ -385,10 +385,23 @@
 
 /* ── RTL (Arabic) overrides ───────────────────────────────────────────── */
 [dir="rtl"] {
-  font-family: 'Noto Kufi Arabic', 'IBM Plex Sans', var(--font-body), sans-serif;
+  font-family: 'Noto Kufi Arabic', sans-serif;
+}
+[dir="rtl"] * {
+  font-family: inherit;
 }
 [dir="rtl"] .font-mono {
-  font-family: 'Noto Kufi Arabic', var(--font-mono), monospace;
+  font-family: 'Noto Kufi Arabic', sans-serif;
+}
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3,
+[dir="rtl"] span, [dir="rtl"] p, [dir="rtl"] a,
+[dir="rtl"] button, [dir="rtl"] div, [dir="rtl"] label,
+[dir="rtl"] input, [dir="rtl"] textarea {
+  font-family: 'Noto Kufi Arabic', sans-serif !important;
+}
+/* Exclude footer from Noto Kufi */
+[dir="rtl"] footer * {
+  font-family: var(--font-mono), monospace !important;
 }
 [dir="rtl"] .divide-x > :not(:first-child) {
   border-left-width: 0;
