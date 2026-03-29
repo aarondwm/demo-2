@@ -31,7 +31,10 @@
       "Bash(ipconfig getifaddr:*)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3333/demo-bg-1.html)",
       "Bash(find /Users/aaron/Desktop/demo-2/app /Users/aaron/Desktop/demo-2/public -type f \\\\\\( -name \"*.tsx\" -o -name \"*.html\" \\\\\\) -exec sed -i '' 's/eisa@diwaniyamedia\\\\.com/info@diwaniyamedia.com/g' {} +)",
-      "Bash(grep -c 'fontSize: lang === \"\"ar\"\" ? \"\"18px\"\" : \"\"16px\"\", letterSpacing: \"\"0.3em\"\"' /Users/aaron/Desktop/demo-2/app/page.tsx)"
+      "Bash(grep -c 'fontSize: lang === \"\"ar\"\" ? \"\"18px\"\" : \"\"16px\"\", letterSpacing: \"\"0.3em\"\"' /Users/aaron/Desktop/demo-2/app/page.tsx)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://videos.files.wordpress.com/PG2Rvigf/5727833-uhd_3840_2160_30fps.mp4\" -H \"Range: bytes=0-1\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://videos.files.wordpress.com/hBSfaNz4/13153068_1440_2560_30fps.mp4\" -H \"Range: bytes=0-1\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://videos.files.wordpress.com/AEBAMyhY/5058333-uhd_2160_3840_25fps.mp4\" -H \"Range: bytes=0-1\")"
     ]
   }
 }
