@@ -789,6 +789,8 @@ function LiveFeedTicker() {
 
 /* ── MediaCard (secured media placement rows) ───────────────────────────── */
 function MediaCard({ n, title, body, index, visible }: { n: string; title: string; body: string; index: number; visible: boolean }) {
+  const { lang } = useLanguage();
+  const isAr = lang === "ar";
   const [hovered, setHovered] = useState(false);
   return (
     <div
@@ -803,11 +805,12 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
         display: "flex",
         alignItems: "flex-start",
         gap: "16px",
+        direction: isAr ? "rtl" : "ltr",
       }}
     >
       <span style={{
         fontFamily: "var(--font-mono), monospace",
-        fontSize: "11px",
+        fontSize: isAr ? "13px" : "11px",
         letterSpacing: "0.25em",
         flexShrink: 0,
         paddingTop: "2px",
@@ -819,7 +822,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
           fontFamily: "'Neue Montreal', var(--font-display), sans-serif",
           fontWeight: 700,
           textTransform: "uppercase",
-          fontSize: hovered ? "15px" : "13px",
+          fontSize: hovered ? (isAr ? "17px" : "15px") : (isAr ? "15px" : "13px"),
           letterSpacing: hovered ? "0.14em" : "0.1em",
           color: hovered ? "#ffffff" : "#ffffff",
           opacity: visible ? 1 : 0,
@@ -827,7 +830,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
         }}>{title}</span>
         <span style={{
           fontFamily: "var(--font-body), sans-serif",
-          fontSize: hovered ? "14px" : "13px",
+          fontSize: hovered ? (isAr ? "16px" : "14px") : (isAr ? "15px" : "13px"),
           lineHeight: "1.75",
           color: hovered ? "rgba(255,255,255,0.88)" : "rgba(255,255,255,0.7)",
           opacity: visible ? 1 : 0,
@@ -1077,8 +1080,8 @@ export default function Home() {
             className="flex flex-col md:flex-row items-stretch md:items-center md:justify-center gap-4 md:gap-6 opacity-0 mt-10 md:mt-20 mb-10 md:mb-20 max-w-xs md:max-w-none mx-auto w-full"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
-            <HoverActionButton labelText={t("requestBriefing", lang)} scramble href={lang === "ar" ? "/ar/contact" : "/contact"} variant="blue-fill" className="!flex md:!inline-flex text-[11px] md:text-[15px] font-bold w-full md:w-80 hero-btn" style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
-            <HoverActionButton labelText={t("howItWorks", lang)} scramble scrambleStep={6.2} href="#what-we-do" variant="white" direction="vertical" className="!flex md:!inline-flex text-[11px] md:text-[15px] font-bold w-full md:w-80 hero-btn" style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
+            <HoverActionButton labelText={t("requestBriefing", lang)} scramble href={lang === "ar" ? "/ar/contact" : "/contact"} variant="blue-fill" className={`!flex md:!inline-flex ${lang === "ar" ? "text-[15px] md:text-[18px]" : "text-[11px] md:text-[15px]"} font-bold w-full md:w-80 hero-btn`} style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
+            <HoverActionButton labelText={t("howItWorks", lang)} scramble scrambleStep={6.2} href="#what-we-do" variant="white" direction="vertical" className={`!flex md:!inline-flex ${lang === "ar" ? "text-[15px] md:text-[18px]" : "text-[11px] md:text-[15px]"} font-bold w-full md:w-80 hero-btn`} style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
           </div>
         </div>
       </section>
@@ -1199,8 +1202,8 @@ export default function Home() {
                   { value: t("articlesPerMonthNumber", lang), label: t("articlesPerMonth", lang) },
                 ].map(({ value, label }) => (
                   <div key={label} className="flex flex-col gap-1 pr-8 first:pl-0 pl-8">
-                    <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "28px", fontWeight: 800, color: "#ffffff" }}>{value}</span>
-                    <span className="font-mono uppercase" style={{ fontSize: "8px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
+                    <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "32px" : "28px", fontWeight: 800, color: "#ffffff" }}>{value}</span>
+                    <span className="font-mono uppercase" style={{ fontSize: lang === "ar" ? "11px" : "8px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
                   </div>
                 ))}
               </div>
@@ -1211,14 +1214,14 @@ export default function Home() {
                   { value: t("publicationsNumber", lang),  label: t("publications", lang) },
                   { value: t("articlesPerMonthNumber", lang), label: t("articlesPerMonth", lang) },
                 ].map(({ value, label }) => (
-                  <div key={label} className="flex items-center justify-between py-4 px-5" style={{ background: "rgba(74,108,247,0.06)", border: "1px solid rgba(74,108,247,0.12)", borderRadius: "8px" }}>
-                    <span className="font-mono uppercase" style={{ fontSize: "13px", letterSpacing: "0.14em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
-                    <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "24px", fontWeight: 800, color: "#ffffff" }}>{value}</span>
+                  <div key={label} className="flex items-center justify-between py-4 px-5" style={{ background: "rgba(74,108,247,0.06)", border: "1px solid rgba(74,108,247,0.12)", borderRadius: "8px", direction: lang === "ar" ? "rtl" : undefined }}>
+                    <span className="font-mono uppercase" style={{ fontSize: lang === "ar" ? "15px" : "13px", letterSpacing: "0.14em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
+                    <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "26px" : "24px", fontWeight: 800, color: "#ffffff" }}>{value}</span>
                   </div>
                 ))}
               </div>
 
-              <p className="hidden lg:block" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s" }}>
+              <p className="hidden lg:block" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "16px" : "13.5px", lineHeight: 1.7, opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>
                 {t("securedMediaDescription", lang)}
               </p>
             </div>

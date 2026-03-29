@@ -234,7 +234,7 @@ export function Navbar() {
               clipPath: "circle(38% at 50% 50%)",
             }}
           />
-          <span className="ml-2 font-bold uppercase tracking-[0.08em]" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(10px, 2.5vw, 15px)", color: "#e8e8e8" }}>{lang === "ar" ? "ديوانية ميديا" : "Diwaniya Media"}</span>
+          <span className="ml-2 font-bold uppercase tracking-[0.08em]" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "clamp(14px, 3vw, 18px)" : "clamp(10px, 2.5vw, 15px)", color: "#e8e8e8" }}>{lang === "ar" ? "ديوانية ميديا" : "Diwaniya Media"}</span>
         </a>
 
         {/* Desktop nav */}
@@ -243,7 +243,7 @@ export function Navbar() {
             <a
               key={group.label}
               href={group.href}
-              className="py-5 font-mono font-normal text-[12px] tracking-[0.22em] uppercase text-white/70 hover:text-white transition-colors duration-150 whitespace-nowrap"
+              className={`py-5 font-mono font-normal ${lang === "ar" ? "text-[15px]" : "text-[12px]"} tracking-[0.22em] uppercase text-white/70 hover:text-white transition-colors duration-150 whitespace-nowrap`}
             >
               {group.label}
             </a>
@@ -302,7 +302,7 @@ export function Navbar() {
             <a
               key={group.label}
               href={group.href}
-              className="px-6 py-5 font-mono font-bold text-[15px] tracking-[0.18em] uppercase text-white hover:text-white/80 hover:bg-white/[0.02] transition-colors"
+              className={`px-6 py-5 font-mono font-bold ${lang === "ar" ? "text-[18px]" : "text-[15px]"} tracking-[0.18em] uppercase text-white hover:text-white/80 hover:bg-white/[0.02] transition-colors`}
               onClick={() => setMobileOpen(false)}
             >
               {group.label}
