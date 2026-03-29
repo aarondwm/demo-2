@@ -4,11 +4,24 @@ import React, { useEffect, useRef, useCallback } from "react";
 import { ArrowRight, ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-/* Inline sequential scrambler — same algorithm as TextScramble in page.tsx */
+/* Inline sequential scrambler — supports Latin + Arabic */
+const LATIN = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const ARABIC = "ابتثجحخدذرزسشصضطظعغفقكلمنهوي";
+function isAr(s: string) { return /[\u0600-\u06FF]/.test(s); }
+
 function runScramble(el: HTMLElement, text: string, step = 4) {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const rtl = isAr(text);
+  const chars = rtl ? ARABIC : LATIN;
+  const charLen = chars.length;
+  const flickerRate = rtl ? 0.15 : 0.28;
+  const arStep = rtl ? step * 1.6 : step;
+  const arWindow = rtl ? 9 : 6;
   type Q = { to: string; start: number; end: number; char?: string };
-  const queue: Q[] = Array.from(text).map((to, i) => ({ to, start: Math.round(i * step), end: Math.round(i * step) + 6 }));
+  const length = text.length;
+  const queue: Q[] = Array.from(text).map((to, i) => {
+    const idx = rtl ? length - 1 - i : i;
+    return { to, start: Math.round(idx * arStep), end: Math.round(idx * arStep) + arWindow };
+  });
   let frame = 0;
   let raf = 0;
   const tick = () => {
@@ -19,8 +32,8 @@ function runScramble(el: HTMLElement, text: string, step = 4) {
         done++;
         out += item.to === " " ? " " : item.to;
       } else if (frame >= item.start) {
-        if (!item.char || Math.random() < 0.28)
-          item.char = chars[Math.floor(Math.random() * 26)];
+        if (!item.char || Math.random() < flickerRate)
+          item.char = chars[Math.floor(Math.random() * charLen)];
         out += `<span class="dud">${item.char}</span>`;
       } else {
         out += item.to === " " ? " " : "";

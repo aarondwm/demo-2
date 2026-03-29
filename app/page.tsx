@@ -468,9 +468,9 @@ function CampaignDashboard() {
           <iframe
             src={lang === "ar" ? "/dwm-article-full-ar.html?embed=1" : "/dwm-article-full.html?embed=1"}
             scrolling="no"
-            loading="lazy"
+            loading="eager"
             tabIndex={-1}
-            style={{ width: "200%", height: "200%", border: "none", transform: "scale(0.5)", transformOrigin: "top left", pointerEvents: "none" }}
+            style={{ width: "200%", height: "200%", border: "none", transform: "scale(0.5)", transformOrigin: lang === "ar" ? "top right" : "top left", pointerEvents: "none" }}
           />
         </div>
         {/* Blur overlay */}
@@ -1080,8 +1080,8 @@ export default function Home() {
             className="flex flex-col md:flex-row items-stretch md:items-center md:justify-center gap-4 md:gap-6 opacity-0 mt-10 md:mt-20 mb-10 md:mb-20 max-w-xs md:max-w-none mx-auto w-full"
             style={{ animation: "reveal-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s forwards" }}
           >
-            <HoverActionButton labelText={t("requestBriefing", lang)} scramble href={lang === "ar" ? "/ar/contact" : "/contact"} variant="blue-fill" className={`!flex md:!inline-flex ${lang === "ar" ? "text-[24px] md:text-[28px]" : "text-[11px] md:text-[15px]"} font-bold w-full md:w-80 hero-btn`} style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
-            <HoverActionButton labelText={t("howItWorks", lang)} scramble scrambleStep={6.2} href={lang === "ar" ? "/ar#what-we-do" : "#what-we-do"} variant="white" direction="vertical" className={`!flex md:!inline-flex ${lang === "ar" ? "text-[24px] md:text-[28px]" : "text-[11px] md:text-[15px]"} font-bold w-full md:w-80 hero-btn`} style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
+            <HoverActionButton labelText={t("requestBriefing", lang)} scramble href={lang === "ar" ? "/ar/contact" : "/contact"} variant="blue-fill" className={`!flex md:!inline-flex ${lang === "ar" ? "text-[30px] md:text-[34px]" : "text-[11px] md:text-[15px]"} font-bold w-full md:w-80 hero-btn`} style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
+            <HoverActionButton labelText={t("howItWorks", lang)} scramble scrambleStep={6.2} href={lang === "ar" ? "/ar#what-we-do" : "#what-we-do"} variant="white" direction="vertical" className={`!flex md:!inline-flex ${lang === "ar" ? "text-[30px] md:text-[34px]" : "text-[11px] md:text-[15px]"} font-bold w-full md:w-80 hero-btn`} style={{ borderRadius: "999px", padding: "28px 0", background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)", backdropFilter: "blur(48px) saturate(200%) brightness(1.2)", WebkitBackdropFilter: "blur(48px) saturate(200%) brightness(1.2)", borderColor: "rgba(255,255,255,0.30)", boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 0 0 rgba(255,255,255,0.20) inset, 0 -1px 0 0 rgba(255,255,255,0.05) inset, 0 4px 30px rgba(255,255,255,0.06) inset, 0 16px 48px rgba(0,0,0,0.4)" }} />
           </div>
         </div>
       </section>

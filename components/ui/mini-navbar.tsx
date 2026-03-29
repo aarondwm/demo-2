@@ -103,7 +103,7 @@ const NAV_GROUPS_AR = [
   { label: "النشر",      href: "/ar#media-placement" },
   { label: "الاستهداف",  href: "/ar#audience-selection" },
   { label: "التقارير",   href: "/ar#sample-insights" },
-  { label: "التقييمات",  href: "/ar#reviews" },
+  { label: "التقاييم",  href: "/ar#reviews" },
 ];
 
 /* ── ListItem (adapted from header-3 pattern) ────────────────────────────── */
@@ -262,9 +262,9 @@ export function Navbar() {
               <img src="/D*M website.png" alt="DWM" className="h-6 w-auto" style={{ mixBlendMode: "screen" }} />
             </span>
             <span className="absolute inset-0 flex items-center justify-center text-black transition-opacity duration-300 group-hover:opacity-0 z-20">
-              {lang === "ar" ? "تحقق من الأهلية" : "Check Eligibility"}
+              {lang === "ar" ? "التحقق من الأهلية" : "Check Eligibility"}
             </span>
-            <span className="invisible px-7">{lang === "ar" ? "تحقق من الأهلية" : "Check Eligibility"}</span>
+            <span className="invisible px-7">{lang === "ar" ? "التحقق من الأهلية" : "Check Eligibility"}</span>
           </a>
           {/* Language switch — same style as CTA */}
           <a
