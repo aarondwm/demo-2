@@ -508,7 +508,7 @@ function CampaignDashboard() {
       {/* Tabs */}
       <div className="flex border-b border-white/[0.06]">
         {DASH_TABS_KEYS.map((key, i) => (
-          <button key={key} onClick={() => setTab(i)} className="flex-1 py-3 font-mono text-[10px] tracking-[0.2em] uppercase text-center transition-colors duration-200"
+          <button key={key} onClick={() => setTab(i)} className="flex-1 py-3 font-mono text-[10px] md:text-[14px] tracking-[0.2em] uppercase text-center transition-colors duration-200"
             style={{ color: tab === i ? "#4a6cf7" : "rgba(255,255,255,0.3)", borderBottom: tab === i ? "2px solid #4a6cf7" : "2px solid transparent", background: tab === i ? "rgba(74,108,247,0.04)" : "transparent" }}>
             {t(key, lang)}
           </button>
@@ -573,7 +573,7 @@ function CampaignDashboard() {
           <div className="flex flex-col gap-0">
             <div className="flex items-center justify-between mb-3" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
               <span className="font-mono text-[11px] tracking-[0.15em] uppercase" style={{ color: "#ffffff" }}>{t("topCompanies", lang)}</span>
-              <span className="font-mono text-[8px] tracking-[0.15em] uppercase keep-blue" style={{ color: "#4a6cf7" }}>{t("avgReadTime", lang)}</span>
+              <span className="font-mono text-[8px] md:text-[12px] tracking-[0.15em] uppercase keep-blue" style={{ color: "#4a6cf7" }}>{t("avgReadTime", lang)}</span>
             </div>
             {dashAudience.map((c, i) => (
               <div key={c.rank}>
@@ -584,8 +584,8 @@ function CampaignDashboard() {
                 >
                   <span className="font-mono flex-shrink-0 w-[18px]" style={{ fontSize: "9px", color: openCompany === i ? "#4a6cf7" : "rgba(74,108,247,0.4)", letterSpacing: "0.1em" }}>{c.rank}</span>
                   <span className="font-mono flex-1 truncate" style={{ fontSize: lang === "ar" ? "14px" : "12px", color: "#ffffff" }}>{c.name}</span>
-                  <span className="font-mono flex-shrink-0" style={{ fontSize: lang === "ar" ? "12px" : "10px", color: lang === "ar" ? "#ffffff" : "rgba(255,255,255,0.4)" }}>{lang === "ar" ? toArabicNumerals(c.views.toLocaleString()) + " مشاهدة" : c.views.toLocaleString() + " views"}</span>
-                  <span className="font-mono font-bold flex-shrink-0 w-[50px] md:w-[60px] text-right keep-blue" style={{ fontSize: lang === "ar" ? "13px" : "11px", color: "#4a6cf7" }}>{c.avgRead}</span>
+                  <span className="font-mono flex-shrink-0 text-[10px] md:text-[13px]" style={{ color: lang === "ar" ? "#ffffff" : "rgba(255,255,255,0.4)" }}>{lang === "ar" ? toArabicNumerals(c.views.toLocaleString()) + " مشاهدة" : c.views.toLocaleString() + " views"}</span>
+                  <span className="font-mono font-bold flex-shrink-0 w-[50px] md:w-[60px] text-right keep-blue text-[11px] md:text-[14px]" style={{ color: "#4a6cf7" }}>{c.avgRead}</span>
                   <span style={{ fontSize: "9px", color: "rgba(255,255,255,0.25)", transform: openCompany === i ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s ease", flexShrink: 0 }}>▼</span>
                 </button>
                 <div style={{ maxHeight: openCompany === i ? "160px" : "0", overflow: "hidden", transition: "max-height 0.3s ease" }}>
@@ -810,7 +810,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
     >
       <span style={{
         fontFamily: "var(--font-mono), monospace",
-        fontSize: isAr ? "15px" : "11px",
+        fontSize: isAr ? "15px" : "13px",
         letterSpacing: "0.25em",
         flexShrink: 0,
         paddingTop: "2px",
@@ -822,7 +822,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
           fontFamily: "'Neue Montreal', var(--font-display), sans-serif",
           fontWeight: 700,
           textTransform: "uppercase",
-          fontSize: hovered ? (isAr ? "19px" : "15px") : (isAr ? "17px" : "13px"),
+          fontSize: hovered ? (isAr ? "19px" : "17px") : (isAr ? "17px" : "15px"),
           letterSpacing: hovered ? "0.14em" : "0.1em",
           color: hovered ? "#ffffff" : "#ffffff",
           opacity: visible ? 1 : 0,
@@ -830,7 +830,7 @@ function MediaCard({ n, title, body, index, visible }: { n: string; title: strin
         }}>{title}</span>
         <span style={{
           fontFamily: "var(--font-body), sans-serif",
-          fontSize: hovered ? (isAr ? "18px" : "14px") : (isAr ? "17px" : "13px"),
+          fontSize: hovered ? (isAr ? "18px" : "16px") : (isAr ? "17px" : "15px"),
           lineHeight: "1.75",
           color: hovered ? "rgba(255,255,255,0.88)" : "rgba(255,255,255,0.7)",
           opacity: visible ? 1 : 0,
@@ -1098,7 +1098,8 @@ export default function Home() {
           </div>
 
           <h2
-            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.02em", textTransform: "uppercase", marginBottom: "40px", color: "#e8e8e8", textAlign: lang === "ar" ? "right" : undefined }}
+            className="text-center lg:text-left"
+            style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, lineHeight: lang === "ar" ? 1.3 : 1.05, letterSpacing: "-0.02em", textTransform: "uppercase", marginBottom: "40px", color: "#e8e8e8" }}
           >
             <ScrambleOnSignal text={t("weRunIt", lang)} signal={sec2Visible} style={{ color: "#e8e8e8" }} />
             <ScrambleOnSignal text={t("youSeeWhoEngaged", lang)} signal={sec2Visible} style={{ color: "#4a6cf7" }} />
@@ -1221,7 +1222,7 @@ export default function Home() {
                 ))}
               </div>
 
-              <p className="hidden lg:block" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "18px" : "13.5px", lineHeight: 1.7, opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>
+              <p className="hidden lg:block" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "18px" : "16px", lineHeight: 1.7, opacity: sec3Visible ? 1 : 0, transition: "opacity 0.35s ease 0.15s", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>
                 {t("securedMediaDescription", lang)}
               </p>
             </div>
@@ -1253,8 +1254,8 @@ export default function Home() {
               </span>
             </div>
             <h2
-              className="font-bold uppercase text-white"
-              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05, textAlign: lang === "ar" ? "right" : undefined }}
+              className="font-bold uppercase text-white text-center lg:text-left"
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
               <ScrambleOnSignal text={t("targetAnyone", lang)} signal={secMapVisible} style={{ color: "#ffffff" }} />
               <ScrambleOnSignal text={t("anywhere", lang)} signal={secMapVisible} style={{ color: "#4a6cf7" }} />
@@ -1317,8 +1318,8 @@ export default function Home() {
           </div>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 text-center lg:text-left">
             <h2
-              className="font-bold uppercase"
-              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05, textAlign: lang === "ar" ? "right" : undefined }}
+              className="font-bold uppercase text-center lg:text-left"
+              style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
               <ScrambleOnView text={t("whatWeKnow", lang)} delay={0} style={{ display: "block", color: "#ffffff" }} />
               <ScrambleOnView text={t("theyDont", lang)} delay={200} style={{ display: "block", color: "#4a6cf7" }} />
@@ -1383,7 +1384,7 @@ export default function Home() {
             <span className="absolute bottom-2 right-2 md:bottom-3 md:right-3 w-3 h-3 md:w-5 md:h-5 border-b border-r border-[#4a6cf7]" />
 
             <div className="relative z-10">
-              <div className="flex items-center mb-5" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
+              <div className="flex items-center justify-center mb-5" style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
                 <span className="sys-label" style={{ fontSize: lang === "ar" ? "18px" : "16px", letterSpacing: "0.3em" }}><img src="/Untitled design.png" alt="" style={{ width: "18px", height: "18px", marginInlineEnd: "12px", display: "inline-block", verticalAlign: "middle", mixBlendMode: "screen" }} /><ScrambleOnView text={t("getStarted", lang)} delay={0} style={{ display: "inline" }} onDone={secCtaDone} /></span>
               </div>
               <h2
