@@ -1131,7 +1131,7 @@ export default function Home() {
               >
                 <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: lang === "ar" ? "13px" : "11px", color: "rgba(74,108,247,0.4)", letterSpacing: "0.15em", marginBottom: "32px", direction: lang === "ar" ? "rtl" : undefined }}>{n}</div>
                 <div className="wwd-stat" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontWeight: 800, letterSpacing: "-0.03em", color: "#e8e8e8", lineHeight: 1 }}>{stat}</div>
-                <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: lang === "ar" ? "12px" : "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4a6cf7", marginTop: "8px", paddingBottom: "28px", marginBottom: "28px", borderBottom: "1px solid rgba(255,255,255,0.05)", direction: lang === "ar" ? "rtl" : undefined }}>{statLabel}</div>
+                <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: lang === "ar" ? "12px" : "14px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4a6cf7", marginTop: "8px", paddingBottom: "28px", marginBottom: "28px", borderBottom: "1px solid rgba(255,255,255,0.05)", direction: lang === "ar" ? "rtl" : undefined }}>{statLabel}</div>
                 <div style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "18px" : "16px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.35, color: "#e8e8e8", marginBottom: "16px", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>{title}</div>
                 <div style={{ fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "15px" : "13.5px", lineHeight: 1.7, color: lang === "ar" ? "rgba(255,255,255,0.7)" : "#6b7080", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>{desc}</div>
               </a>
@@ -1203,7 +1203,7 @@ export default function Home() {
                 ].map(({ value, label }) => (
                   <div key={label} className="flex flex-col gap-1 pr-8 first:pl-0 pl-8">
                     <span className="font-bold" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "36px" : "28px", fontWeight: 800, color: "#ffffff" }}>{value}</span>
-                    <span className="font-mono uppercase" style={{ fontSize: lang === "ar" ? "15px" : "8px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.5)" }}>{label}</span>
+                    <span className="font-mono uppercase" style={{ fontSize: lang === "ar" ? "15px" : "12px", letterSpacing: "0.2em", color: "#4a6cf7" }}>{label}</span>
                   </div>
                 ))}
               </div>
@@ -1229,9 +1229,9 @@ export default function Home() {
             {/* Right — 4 card rows (desktop only) */}
             <div className="hidden lg:flex flex-col" style={{ gap: "0px" }}>
               {[
-                { n: "01", title: t("confirmedPlacement", lang), body: t("confirmedPlacementDescription", lang) },
-                { n: "02", title: t("gulfWideNetwork", lang),   body: t("gulfWideNetworkDescription", lang) },
-                { n: "03", title: t("editorialQuality", lang),   body: t("editorialQualityDescription", lang) },
+                { n: "01", title: t("tailoredStorytelling", lang), body: t("tailoredStorytellingDescription", lang) },
+                { n: "02", title: t("confirmedPlacement", lang), body: t("confirmedPlacementDescription", lang) },
+                { n: "03", title: t("gulfWideNetwork", lang),   body: t("gulfWideNetworkDescription", lang) },
                 { n: "04", title: t("timedAndControlled", lang),  body: t("timedAndControlledDescription", lang) },
               ].map(({ n, title, body }, i) => (
                 <MediaCard key={n} n={n} title={title} body={body} index={i} visible={sec3Visible} />

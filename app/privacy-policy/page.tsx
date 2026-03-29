@@ -26,7 +26,7 @@ export default function PrivacyPolicyPage() {
               </h2>
               <div className="flex flex-col gap-3 font-mono text-[13px] tracking-[0.04em] text-white/70 leading-relaxed">
                 <p>Diwaniya Media W.L.L. (&ldquo;DWM&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) is a media intelligence and precision advertising company registered in Kuwait, operating across the Gulf Cooperation Council (GCC) region. Our website is diwaniyamedia.com.</p>
-                <p>For privacy-related enquiries, you can reach us at <a href="mailto:eisa@diwaniyamedia.com" className="text-[#4a6cf7] hover:text-white transition-colors">eisa@diwaniyamedia.com</a>.</p>
+                <p>For privacy-related enquiries, you can reach us at <a href="mailto:info@diwaniyamedia.com" className="text-[#4a6cf7] hover:text-white transition-colors">info@diwaniyamedia.com</a>.</p>
               </div>
             </div>
 
@@ -123,7 +123,7 @@ export default function PrivacyPolicyPage() {
                   <li>Object to or restrict certain processing</li>
                   <li>Withdraw consent where processing is based on consent</li>
                 </ul>
-                <p>To exercise any of these rights, please contact us at <a href="mailto:eisa@diwaniyamedia.com" className="text-[#4a6cf7] hover:text-white transition-colors">eisa@diwaniyamedia.com</a>.</p>
+                <p>To exercise any of these rights, please contact us at <a href="mailto:info@diwaniyamedia.com" className="text-[#4a6cf7] hover:text-white transition-colors">info@diwaniyamedia.com</a>.</p>
               </div>
             </div>
 
@@ -140,7 +140,7 @@ export default function PrivacyPolicyPage() {
               <h2 className="font-mono text-[13px] tracking-[0.14em] uppercase text-[#4a6cf7] mb-4 flex items-center gap-3">
                 <span className="text-[#4a6cf7]/40">10</span> Contact
               </h2>
-              <p className="font-mono text-[13px] tracking-[0.04em] text-white/70 leading-relaxed">If you have any questions about this Privacy Policy, please contact us at <a href="mailto:eisa@diwaniyamedia.com" className="text-[#4a6cf7] hover:text-white transition-colors">eisa@diwaniyamedia.com</a>.</p>
+              <p className="font-mono text-[13px] tracking-[0.04em] text-white/70 leading-relaxed">If you have any questions about this Privacy Policy, please contact us at <a href="mailto:info@diwaniyamedia.com" className="text-[#4a6cf7] hover:text-white transition-colors">info@diwaniyamedia.com</a>.</p>
             </div>
 
             <p className="text-white/30 text-[11px] font-mono tracking-[0.1em] pt-6 border-t border-white/[0.06]">

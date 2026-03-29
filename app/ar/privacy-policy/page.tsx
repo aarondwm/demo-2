@@ -25,7 +25,7 @@ export default function PrivacyPolicyPageAr() {
               </h2>
               <div className="flex flex-col gap-3 text-[15px] text-white/70 leading-relaxed">
                 <p>ديوانية ميديا ذ.م.م (&ldquo;DWM&rdquo;، &ldquo;نحن&rdquo;، &ldquo;لنا&rdquo;) هي شركة استخبارات إعلامية وإعلانات دقيقة مسجلة في الكويت، تعمل في منطقة مجلس التعاون الخليجي. موقعنا الإلكتروني هو diwaniyamedia.com.</p>
-                <p>للاستفسارات المتعلقة بالخصوصية، يمكنكم التواصل معنا على <a href="mailto:eisa@diwaniyamedia.com" className="text-[#4a6cf7] hover:text-white transition-colors">eisa@diwaniyamedia.com</a>.</p>
+                <p>للاستفسارات المتعلقة بالخصوصية، يمكنكم التواصل معنا على <a href="mailto:info@diwaniyamedia.com" className="text-[#4a6cf7] hover:text-white transition-colors">info@diwaniyamedia.com</a>.</p>
               </div>
             </div>
 
@@ -114,7 +114,7 @@ export default function PrivacyPolicyPageAr() {
                   <li>الاعتراض على معالجة معينة أو تقييدها</li>
                   <li>سحب الموافقة حيث تستند المعالجة إلى الموافقة</li>
                 </ul>
-                <p>لممارسة أي من هذه الحقوق، يرجى الاتصال بنا على <a href="mailto:eisa@diwaniyamedia.com" className="text-[#4a6cf7] hover:text-white transition-colors">eisa@diwaniyamedia.com</a>.</p>
+                <p>لممارسة أي من هذه الحقوق، يرجى الاتصال بنا على <a href="mailto:info@diwaniyamedia.com" className="text-[#4a6cf7] hover:text-white transition-colors">info@diwaniyamedia.com</a>.</p>
               </div>
             </div>
 
@@ -122,7 +122,7 @@ export default function PrivacyPolicyPageAr() {
               <h2 className="font-mono text-[13px] tracking-[0.14em] uppercase text-[#4a6cf7] mb-4 flex items-center gap-3">
                 <span className="text-[#4a6cf7]/40">٠٩</span> التواصل
               </h2>
-              <p className="text-[15px] text-white/70 leading-relaxed">إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال بنا على <a href="mailto:eisa@diwaniyamedia.com" className="text-[#4a6cf7] hover:text-white transition-colors">eisa@diwaniyamedia.com</a>.</p>
+              <p className="text-[15px] text-white/70 leading-relaxed">إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال بنا على <a href="mailto:info@diwaniyamedia.com" className="text-[#4a6cf7] hover:text-white transition-colors">info@diwaniyamedia.com</a>.</p>
             </div>
 
             <p className="text-white/30 text-[11px] font-mono tracking-[0.1em] pt-6 border-t border-white/[0.06]">
