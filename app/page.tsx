@@ -526,12 +526,12 @@ function CampaignDashboard() {
               <div className="flex flex-col gap-2.5">
                 {dashDemographics.location.map((loc, i) => (
                   <div key={loc.name} className="flex items-center gap-2 md:gap-3">
-                    <span className="font-mono w-[90px] md:w-[120px] flex-shrink-0 truncate" style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)" }}>{loc.name}</span>
+                    <span className="font-mono w-[90px] md:w-[120px] flex-shrink-0 truncate" style={{ fontSize: lang === "ar" ? "15px" : "13px", color: "rgba(255,255,255,0.6)" }}>{loc.name}</span>
                     <div className="flex-1 h-[6px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
                       <div className="h-full rounded-full" style={{ width: visible ? `${loc.pct}%` : "0%", background: `rgba(74,108,247,${1 - i * 0.1})`, transition: `width 0.8s ease ${i * 0.08}s` }} />
                     </div>
-                    <span className="font-mono flex-shrink-0 text-right" style={{ fontSize: "13px", color: "#ffffff" }}>{loc.count}</span>
-                    <span className="font-mono font-bold flex-shrink-0 w-[36px] text-right keep-blue" style={{ fontSize: "13px", color: "#4a6cf7" }}>{lang === "ar" ? "٪" + toArabicNumerals(loc.pct) : loc.pct + "%"}</span>
+                    <span className="font-mono flex-shrink-0 text-right" style={{ fontSize: lang === "ar" ? "15px" : "13px", color: "#ffffff" }}>{loc.count}</span>
+                    <span className="font-mono font-bold flex-shrink-0 w-[36px] text-right keep-blue" style={{ fontSize: lang === "ar" ? "15px" : "13px", color: "#4a6cf7" }}>{lang === "ar" ? "٪" + toArabicNumerals(loc.pct) : loc.pct + "%"}</span>
                   </div>
                 ))}
               </div>
@@ -583,17 +583,17 @@ function CampaignDashboard() {
                   style={{ background: openCompany === i ? "rgba(74,108,247,0.04)" : "transparent", transition: "background 0.2s ease", direction: lang === "ar" ? "rtl" : "ltr", textAlign: lang === "ar" ? "right" : "left" }}
                 >
                   <span className="font-mono flex-shrink-0 w-[18px]" style={{ fontSize: "9px", color: openCompany === i ? "#4a6cf7" : "rgba(74,108,247,0.4)", letterSpacing: "0.1em" }}>{c.rank}</span>
-                  <span className="font-mono flex-1 truncate" style={{ fontSize: "12px", color: "rgba(255,255,255,0.85)" }}>{c.name}</span>
-                  <span className="font-mono flex-shrink-0" style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)" }}>{lang === "ar" ? toArabicNumerals(c.views.toLocaleString()) + " مشاهدة" : c.views.toLocaleString() + " views"}</span>
-                  <span className="font-mono font-bold flex-shrink-0 w-[50px] md:w-[60px] text-right" style={{ fontSize: "11px", color: "#4a6cf7" }}>{c.avgRead}</span>
+                  <span className="font-mono flex-1 truncate" style={{ fontSize: lang === "ar" ? "14px" : "12px", color: "rgba(255,255,255,0.85)" }}>{c.name}</span>
+                  <span className="font-mono flex-shrink-0" style={{ fontSize: lang === "ar" ? "12px" : "10px", color: "rgba(255,255,255,0.4)" }}>{lang === "ar" ? toArabicNumerals(c.views.toLocaleString()) + " مشاهدة" : c.views.toLocaleString() + " views"}</span>
+                  <span className="font-mono font-bold flex-shrink-0 w-[50px] md:w-[60px] text-right" style={{ fontSize: lang === "ar" ? "13px" : "11px", color: "#4a6cf7" }}>{c.avgRead}</span>
                   <span style={{ fontSize: "9px", color: "rgba(255,255,255,0.25)", transform: openCompany === i ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s ease", flexShrink: 0 }}>▼</span>
                 </button>
                 <div style={{ maxHeight: openCompany === i ? "160px" : "0", overflow: "hidden", transition: "max-height 0.3s ease" }}>
                   <div className="px-4 md:px-6 py-2.5 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3" style={{ background: "rgba(74,108,247,0.02)" }}>
                     {c.roles.map((r) => (
                       <div key={r.role} className="flex items-center justify-between px-2 py-1.5 rounded" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.04)", direction: lang === "ar" ? "rtl" : "ltr" }}>
-                        <span className="font-mono" style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)" }}>{r.role}</span>
-                        <span className="font-mono font-bold" style={{ fontSize: "11px", color: "#4a6cf7" }}>{lang === "ar" ? toArabicNumerals(r.count) : r.count}</span>
+                        <span className="font-mono" style={{ fontSize: lang === "ar" ? "12px" : "10px", color: "rgba(255,255,255,0.5)" }}>{r.role}</span>
+                        <span className="font-mono font-bold" style={{ fontSize: lang === "ar" ? "13px" : "11px", color: "#4a6cf7" }}>{lang === "ar" ? toArabicNumerals(r.count) : r.count}</span>
                       </div>
                     ))}
                   </div>
@@ -1129,11 +1129,11 @@ export default function Home() {
                   transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
                 }}
               >
-                <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: "11px", color: "rgba(74,108,247,0.4)", letterSpacing: "0.15em", marginBottom: "32px" }}>{n}</div>
+                <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: lang === "ar" ? "15px" : "11px", color: "rgba(74,108,247,0.4)", letterSpacing: "0.15em", marginBottom: "32px", direction: lang === "ar" ? "rtl" : undefined }}>{n}</div>
                 <div className="wwd-stat" style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontWeight: 800, letterSpacing: "-0.03em", color: "#e8e8e8", lineHeight: 1 }}>{stat}</div>
-                <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4a6cf7", marginTop: "8px", paddingBottom: "28px", marginBottom: "28px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>{statLabel}</div>
-                <div style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: "16px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.35, color: "#e8e8e8", marginBottom: "16px" }}>{title}</div>
-                <div style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "13.5px", lineHeight: 1.7, color: "#6b7080" }}>{desc}</div>
+                <div style={{ fontFamily: "var(--font-mono), monospace", fontSize: lang === "ar" ? "14px" : "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4a6cf7", marginTop: "8px", paddingBottom: "28px", marginBottom: "28px", borderBottom: "1px solid rgba(255,255,255,0.05)", direction: lang === "ar" ? "rtl" : undefined }}>{statLabel}</div>
+                <div style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", fontSize: lang === "ar" ? "20px" : "16px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.35, color: "#e8e8e8", marginBottom: "16px", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>{title}</div>
+                <div style={{ fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "17px" : "13.5px", lineHeight: 1.7, color: lang === "ar" ? "rgba(255,255,255,0.7)" : "#6b7080", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>{desc}</div>
               </a>
               );
             })}
@@ -1155,7 +1155,7 @@ export default function Home() {
           <div className="flex justify-center" style={{ marginBottom: "0px", opacity: sec2Visible ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
             <a
               href={lang === "ar" ? "/ar/contact" : "/contact"}
-              className="group inline-flex items-center h-14 text-[13px] tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden"
+              className={`group inline-flex items-center h-14 ${lang === "ar" ? "text-[17px]" : "text-[13px]"} tracking-[0.12em] uppercase text-black font-bold relative overflow-hidden`}
               style={{ fontFamily: "'Neue Montreal', var(--font-display), sans-serif", borderRadius: "12px", transform: "translateZ(0)" }}
             >
               <span className="absolute inset-0 bg-white" />
@@ -1259,7 +1259,7 @@ export default function Home() {
               <ScrambleOnSignal text={t("targetAnyone", lang)} signal={secMapVisible} style={{ color: "#ffffff" }} />
               <ScrambleOnSignal text={t("anywhere", lang)} signal={secMapVisible} style={{ color: "#4a6cf7" }} />
             </h2>
-            <p className="sys-body max-w-lg mt-6 mx-auto lg:mx-0" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s", fontSize: "16px", textAlign: lang === "ar" ? "right" : undefined, direction: lang === "ar" ? "rtl" : undefined }}>
+            <p className="sys-body max-w-lg mt-6 mx-auto lg:mx-0" style={{ opacity: secMapVisible ? 1 : 0, transition: "opacity 0.35s ease 0.2s", fontSize: lang === "ar" ? "20px" : "16px", textAlign: lang === "ar" ? "right" : undefined, direction: lang === "ar" ? "rtl" : undefined }}>
               {t("audienceSelectionDescription", lang)}
             </p>
           </div>
@@ -1323,7 +1323,7 @@ export default function Home() {
               <ScrambleOnView text={t("whatWeKnow", lang)} delay={0} style={{ display: "block", color: "#ffffff" }} />
               <ScrambleOnView text={t("theyDont", lang)} delay={200} style={{ display: "block", color: "#4a6cf7" }} />
             </h2>
-            <p className="sys-body md:text-right md:max-w-xs mx-auto lg:mx-0" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.85)", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>
+            <p className="sys-body md:text-right md:max-w-xs mx-auto lg:mx-0" style={{ fontFamily: "var(--font-body), sans-serif", fontSize: lang === "ar" ? "20px" : "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.85)", direction: lang === "ar" ? "rtl" : undefined, textAlign: lang === "ar" ? "right" : undefined }}>
               {t("sampleInsightsDescription", lang)}
             </p>
           </div>
@@ -1394,7 +1394,7 @@ export default function Home() {
                 <ScrambleOnSignal text={t("aBriefing", lang)} signal={secCtaVisible} style={{ color: "#ffffff" }} />
                 <ScrambleOnSignal text={t("seeWhatReturns", lang)} signal={secCtaVisible} style={{ color: "#4a6cf7" }} />
               </h2>
-              <p className="sys-body max-w-lg mb-10 mx-auto text-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s", fontSize: "16px", direction: lang === "ar" ? "rtl" : undefined }}>
+              <p className="sys-body max-w-lg mb-10 mx-auto text-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.25s", fontSize: lang === "ar" ? "20px" : "16px", direction: lang === "ar" ? "rtl" : undefined }}>
                 {t("bookBriefingDescription", lang)}
               </p>
               <div className="flex justify-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.32s" }}>
@@ -1419,19 +1419,19 @@ export default function Home() {
 
           {[
             { heading: t("services", lang), links: [
-              { label: t("whatWeDo", lang), href: "/#what-we-do" },
-              { label: t("mediaPlacement", lang), href: "/#media-placement" },
-              { label: t("audienceSelection", lang), href: "/#audience-selection" },
-              { label: t("insights", lang), href: "/#sample-insights" },
+              { label: t("whatWeDo", lang), href: lang === "ar" ? "/ar#what-we-do" : "/#what-we-do" },
+              { label: t("mediaPlacement", lang), href: lang === "ar" ? "/ar#media-placement" : "/#media-placement" },
+              { label: t("audienceSelection", lang), href: lang === "ar" ? "/ar#audience-selection" : "/#audience-selection" },
+              { label: t("insights", lang), href: lang === "ar" ? "/ar#sample-insights" : "/#sample-insights" },
             ]},
             { heading: t("company", lang), links: [
-              { label: t("home", lang), href: "/#home" },
+              { label: t("home", lang), href: lang === "ar" ? "/ar#home" : "/#home" },
               { label: t("contact", lang), href: lang === "ar" ? "/ar/contact" : "/contact" },
-              { label: t("reviews", lang), href: "/#reviews" },
+              { label: t("reviews", lang), href: lang === "ar" ? "/ar#reviews" : "/#reviews" },
             ]},
             { heading: t("legal", lang), links: [
-              { label: t("privacyPolicy", lang), href: "/privacy-policy" },
-              { label: t("termsAndConditions", lang), href: "/terms-and-conditions" },
+              { label: t("privacyPolicy", lang), href: lang === "ar" ? "/ar/privacy-policy" : "/privacy-policy" },
+              { label: t("termsAndConditions", lang), href: lang === "ar" ? "/ar/terms-and-conditions" : "/terms-and-conditions" },
             ]},
           ].map((col) => (
             <div key={col.heading} className="flex flex-col gap-4">
