@@ -215,7 +215,7 @@ export function Navbar() {
 
         {/* Logo block */}
         <a
-          href="/"
+          href={lang === "ar" ? "/ar" : "/"}
           className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity"
         >
           <span
