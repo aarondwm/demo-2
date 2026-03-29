@@ -44,13 +44,6 @@ export const TestimonialsColumn = (props: {
 
                 {/* Attribution — centered column */}
                 <div className="flex flex-col items-center gap-2">
-                  <img
-                    width={32}
-                    height={32}
-                    src={image}
-                    alt={name}
-                    className="h-8 w-8 rounded-full object-cover grayscale opacity-60"
-                  />
                   <div className="flex flex-col items-center gap-0.5">
                     <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-white">
                       {name}
