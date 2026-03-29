@@ -526,12 +526,12 @@ function CampaignDashboard() {
               <div className="flex flex-col gap-2.5">
                 {dashDemographics.location.map((loc, i) => (
                   <div key={loc.name} className="flex items-center gap-2 md:gap-3">
-                    <span className="font-mono w-[90px] md:w-[120px] flex-shrink-0 truncate" style={{ fontSize: lang === "ar" ? "15px" : "13px", color: "rgba(255,255,255,0.6)" }}>{loc.name}</span>
+                    <span className="font-mono w-[90px] md:w-[120px] flex-shrink-0 truncate" style={{ fontSize: lang === "ar" ? "17px" : "13px", color: lang === "ar" ? "#ffffff" : "rgba(255,255,255,0.6)" }}>{loc.name}</span>
                     <div className="flex-1 h-[6px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
                       <div className="h-full rounded-full" style={{ width: visible ? `${loc.pct}%` : "0%", background: `rgba(74,108,247,${1 - i * 0.1})`, transition: `width 0.8s ease ${i * 0.08}s` }} />
                     </div>
-                    <span className="font-mono flex-shrink-0 text-right" style={{ fontSize: lang === "ar" ? "15px" : "13px", color: "#ffffff" }}>{loc.count}</span>
-                    <span className="font-mono font-bold flex-shrink-0 w-[36px] text-right keep-blue" style={{ fontSize: lang === "ar" ? "15px" : "13px", color: "#4a6cf7" }}>{lang === "ar" ? "٪" + toArabicNumerals(loc.pct) : loc.pct + "%"}</span>
+                    <span className="font-mono flex-shrink-0 text-right" style={{ fontSize: lang === "ar" ? "17px" : "13px", color: "#ffffff" }}>{loc.count}</span>
+                    <span className="font-mono font-bold flex-shrink-0 w-[36px] text-right keep-blue" style={{ fontSize: lang === "ar" ? "17px" : "13px", color: "#4a6cf7" }}>{lang === "ar" ? "٪" + toArabicNumerals(loc.pct) : loc.pct + "%"}</span>
                   </div>
                 ))}
               </div>
@@ -546,8 +546,8 @@ function CampaignDashboard() {
                   <div className="h-full" style={{ width: visible ? "26%" : "0%", background: "#7a9cff", transition: "width 0.8s ease 0.3s" }} />
                 </div>
                 <div className="flex justify-between mt-2">
-                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />{lang === "ar" ? "٪٧٤ " + t("male", lang) : "74% " + t("male", lang)}</span>
-                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />{lang === "ar" ? "٪٢٦ " + t("female", lang) : "26% " + t("female", lang)}</span>
+                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: lang === "ar" ? "#ffffff" : "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#4a6cf7", marginRight: 4 }} />{lang === "ar" ? "٪٧٤ " + t("male", lang) : "74% " + t("male", lang)}</span>
+                  <span className="font-mono text-[11px] md:text-[10px]" style={{ color: lang === "ar" ? "#ffffff" : "rgba(255,255,255,0.5)" }}><span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#7a9cff", marginRight: 4 }} />{lang === "ar" ? "٪٢٦ " + t("female", lang) : "26% " + t("female", lang)}</span>
                 </div>
               </div>
               <div>
@@ -583,17 +583,17 @@ function CampaignDashboard() {
                   style={{ background: openCompany === i ? "rgba(74,108,247,0.04)" : "transparent", transition: "background 0.2s ease", direction: lang === "ar" ? "rtl" : "ltr", textAlign: lang === "ar" ? "right" : "left" }}
                 >
                   <span className="font-mono flex-shrink-0 w-[18px]" style={{ fontSize: "9px", color: openCompany === i ? "#4a6cf7" : "rgba(74,108,247,0.4)", letterSpacing: "0.1em" }}>{c.rank}</span>
-                  <span className="font-mono flex-1 truncate" style={{ fontSize: lang === "ar" ? "14px" : "12px", color: "rgba(255,255,255,0.85)" }}>{c.name}</span>
-                  <span className="font-mono flex-shrink-0" style={{ fontSize: lang === "ar" ? "12px" : "10px", color: "rgba(255,255,255,0.4)" }}>{lang === "ar" ? toArabicNumerals(c.views.toLocaleString()) + " مشاهدة" : c.views.toLocaleString() + " views"}</span>
-                  <span className="font-mono font-bold flex-shrink-0 w-[50px] md:w-[60px] text-right" style={{ fontSize: lang === "ar" ? "13px" : "11px", color: "#4a6cf7" }}>{c.avgRead}</span>
+                  <span className="font-mono flex-1 truncate" style={{ fontSize: lang === "ar" ? "16px" : "12px", color: "#ffffff" }}>{c.name}</span>
+                  <span className="font-mono flex-shrink-0" style={{ fontSize: lang === "ar" ? "14px" : "10px", color: lang === "ar" ? "#ffffff" : "rgba(255,255,255,0.4)" }}>{lang === "ar" ? toArabicNumerals(c.views.toLocaleString()) + " مشاهدة" : c.views.toLocaleString() + " views"}</span>
+                  <span className="font-mono font-bold flex-shrink-0 w-[50px] md:w-[60px] text-right" style={{ fontSize: lang === "ar" ? "15px" : "11px", color: "#4a6cf7" }}>{c.avgRead}</span>
                   <span style={{ fontSize: "9px", color: "rgba(255,255,255,0.25)", transform: openCompany === i ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s ease", flexShrink: 0 }}>▼</span>
                 </button>
                 <div style={{ maxHeight: openCompany === i ? "160px" : "0", overflow: "hidden", transition: "max-height 0.3s ease" }}>
                   <div className="px-4 md:px-6 py-2.5 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3" style={{ background: "rgba(74,108,247,0.02)" }}>
                     {c.roles.map((r) => (
                       <div key={r.role} className="flex items-center justify-between px-2 py-1.5 rounded" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.04)", direction: lang === "ar" ? "rtl" : "ltr" }}>
-                        <span className="font-mono" style={{ fontSize: lang === "ar" ? "12px" : "10px", color: "rgba(255,255,255,0.5)" }}>{r.role}</span>
-                        <span className="font-mono font-bold" style={{ fontSize: lang === "ar" ? "13px" : "11px", color: "#4a6cf7" }}>{lang === "ar" ? toArabicNumerals(r.count) : r.count}</span>
+                        <span className="font-mono" style={{ fontSize: lang === "ar" ? "14px" : "10px", color: lang === "ar" ? "#ffffff" : "rgba(255,255,255,0.5)" }}>{r.role}</span>
+                        <span className="font-mono font-bold" style={{ fontSize: lang === "ar" ? "15px" : "11px", color: "#4a6cf7" }}>{lang === "ar" ? toArabicNumerals(r.count) : r.count}</span>
                       </div>
                     ))}
                   </div>
@@ -1398,7 +1398,7 @@ export default function Home() {
                 {t("bookBriefingDescription", lang)}
               </p>
               <div className="flex justify-center" style={{ opacity: secCtaVisible ? 1 : 0, transition: "opacity 0.35s ease 0.32s" }}>
-                <HoverActionButton label={t("requestBriefing", lang)} href={lang === "ar" ? "/ar/contact" : "/contact"} />
+                <HoverActionButton label={t("requestBriefing", lang)} href={lang === "ar" ? "/ar/contact" : "/contact"} className={lang === "ar" ? "!text-[20px] !h-16" : ""} />
               </div>
             </div>
           </div>

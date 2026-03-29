@@ -204,7 +204,7 @@ const translations: Record<Lang, Record<string, string>> = {
     // Who We Work With
     whoWeWorkWith: "مع من نعمل",
     inTheir: "بكلامهم",
-    ownWords: "هم",
+    ownWords: "",
 
     // Get Started / CTA
     getStarted: "ابدأ الآن",
