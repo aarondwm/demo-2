@@ -368,27 +368,27 @@
 .wwd-stat { font-size: 52px; }
 
 @media (max-width: 767px) {
-  .hero-btn { padding: 16px 0 !important; font-size: 13px !important; }
+  .hero-btn { padding: 16px 0 !important; font-size: clamp(13px, 3.3vw, 15px) !important; }
   .wwd-card-inner { padding: 12px 12px 14px !important; }
   .wwd-card-inner .wwd-stat + div { padding-bottom: 8px !important; margin-bottom: 8px !important; }
   .wwd-card-inner > div:first-child { margin-bottom: 8px !important; }
   .wwd-stat { font-size: clamp(24px, 7vw, 52px) !important; }
-  .wwd-card-inner > div:nth-child(4) { font-size: 13px !important; margin-bottom: 6px !important; }
-  .wwd-card-inner > div:nth-child(5) { font-size: 11px !important; }
-  .sys-label { font-size: 13px !important; letter-spacing: 0.15em !important; }
-  [dir="rtl"] .sys-label { font-size: 18px !important; letter-spacing: 0 !important; }
-  .sys-body { font-size: 17px !important; color: #ffffff !important; }
+  .wwd-card-inner > div:nth-child(4) { font-size: clamp(13px, 3.3vw, 15px) !important; margin-bottom: 6px !important; }
+  .wwd-card-inner > div:nth-child(5) { font-size: clamp(11px, 2.8vw, 13px) !important; }
+  .sys-label { font-size: clamp(13px, 3.3vw, 15px) !important; letter-spacing: 0.15em !important; }
+  [dir="rtl"] .sys-label { font-size: clamp(18px, 4.6vw, 21px) !important; letter-spacing: 0 !important; }
+  .sys-body { font-size: clamp(17px, 4.3vw, 20px) !important; color: #ffffff !important; }
   .mobile-white-text span { color: #ffffff !important; }
   .mobile-white-text .keep-blue { color: #4a6cf7 !important; }
   .mobile-white-text .keep-black { color: #000000 !important; }
-  /* Arabic mobile reductions -2px across the board */
-  [dir="rtl"] .cta-desc { font-size: 16px !important; }
-  [dir="rtl"] .sys-label { font-size: 16px !important; }
-  [dir="rtl"] .sys-body { font-size: 15px !important; }
+  /* Arabic mobile — vw-scaled */
+  [dir="rtl"] .cta-desc { font-size: clamp(16px, 4.1vw, 19px) !important; }
+  [dir="rtl"] .sys-label { font-size: clamp(16px, 4.1vw, 19px) !important; }
+  [dir="rtl"] .sys-body { font-size: clamp(15px, 3.8vw, 18px) !important; }
   [dir="rtl"] h1 { font-size: clamp(38px,10vw,100px) !important; }
   [dir="rtl"] h2 { font-size: clamp(38px,5vw,72px) !important; }
-  [dir="rtl"] .dash-container button span { font-size: 10px !important; }
-  [dir="rtl"] footer * { font-size: 15px !important; }
+  [dir="rtl"] .dash-container button span { font-size: clamp(10px, 2.6vw, 12px) !important; }
+  [dir="rtl"] footer * { font-size: clamp(15px, 3.8vw, 18px) !important; }
 }
 
 /* ── RTL (Arabic) overrides ───────────────────────────────────────────── */
